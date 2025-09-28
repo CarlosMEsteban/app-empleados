@@ -1,0 +1,27 @@
+<div class="container">
+  <h1 class="text-center">{{title}}</h1>
+  <div class="row">
+    <div>
+      <button (click)="altaEmpleado()">Nuevo</button>
+      <h2 *ngIf="bAlta()">Agregar Empleado</h2>
+      <h2 *ngIf="bModif()">MOdificar Empleado</h2>
+      <div *ngIf="bMostrarDetalle()" class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" [(ngModel)]="nuevoEmpleado.nombre" class="form-control">
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" [(ngModel)]="nuevoEmpleado.apellido" class="form-control">
+        <label for="salario">Salario:</label>   
+        <input type="number" id="salario" [(ngModel)]="nuevoEmpleado.salario" class="form-control">
+        <label for="cargo">Cargo:</label>
+        <input type="text" id="cargo" [(ngModel)]="nuevoEmpleado.cargo" class="form-control">
+        <button (click)="guardarEmpleado()" class="btn btn-success btn-sm">Guardar</button>
+        <button (click)="cancelar()" class="btn btn-danger btn-sm">Cancelar</button>
+      </div>
+    </div>
+    <app-empleado-hijo-c *ngFor="let empleado of empleados; let i = index" [empleadoDeLista] = "empleado" [indice] = i>
+    </app-empleado-hijo-c>
+    
+
+
+
+</div>

@@ -1,0 +1,11 @@
+    <div class="col-md-4" id="listaDeEmpleados" style="border: 2px solid #007bff; padding: 15px; border-radius: 8px;">
+      
+        <p>{{indice+1}}.-{{ empleadoDeLista.nombre }} {{ empleadoDeLista.apellido }} - salario: {{ empleadoDeLista.salario }} - Cargo: {{ empleadoDeLista.cargo }}</p>
+        <!--<button (click)="editarEmpleado(i)" class="btn btn-primary btn-sm">Editar</button>
+        <button (click)="eliminarEmpleado(i)">Eliminar</button>        -->
+        <app-caracteristicas-empleado-c (caracteristicasEmpleados)="agregarCaracteristica($event)"></app-caracteristicas-empleado-c>
+        <ul style="list-style: none;">
+          <li *ngFor="let caracteristica of arrayCaracteristicas">{{caracteristica}}</li>
+        </ul>
+        <hr>
+    </div>
