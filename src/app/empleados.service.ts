@@ -30,5 +30,9 @@ empleados: Empleado[] = [
     this.empleados.push(empleado);    
   }
 
+  encontrarEmpleado(indice: number): Empleado {
+    return this.empleados[indice];
+  }
+
 
 }

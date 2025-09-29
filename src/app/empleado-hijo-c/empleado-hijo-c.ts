@@ -3,10 +3,11 @@ import { Empleado } from '../empleado.model';
 import { CaracteristicasEmpleadoC } from "../caracteristicas-empleado-c/caracteristicas-empleado-c";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-empleado-hijo-c',  
-  imports: [CaracteristicasEmpleadoC, FormsModule, CommonModule],
+  imports: [CaracteristicasEmpleadoC, FormsModule, CommonModule, RouterLink],
   templateUrl: './empleado-hijo-c.html',
   styleUrl: './empleado-hijo-c.css'
 })

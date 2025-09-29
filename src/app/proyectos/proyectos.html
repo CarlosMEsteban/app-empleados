@@ -1,1 +1,27 @@
 <p>proyectos works!</p>
+
+<div class="container">
+  <div class="row">
+    <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" [(ngModel)]="nuevoEmpleado.nombre" class="form-control">
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" [(ngModel)]="nuevoEmpleado.apellido" class="form-control">
+        <label for="salario">Salario:</label>   
+        <input type="number" id="salario" [(ngModel)]="nuevoEmpleado.salario" class="form-control">
+        <label for="cargo">Cargo:</label>
+        <input type="text" id="cargo" [(ngModel)]="nuevoEmpleado.cargo" class="form-control">
+        <button (click)="guardarEmpleado()" class="btn btn-success btn-sm">Guardar</button>
+      </div>
+    </div>
+    
+
+
+
+</div>
+
+<div style="text-align: center;">
+  <button mat-raised-button color="primary" routerLink="/nuevo-proyecto" class="mat-elevation-z8" (click)="volver()">
+    Nuevo Proyecto
+  </button>
+</div>

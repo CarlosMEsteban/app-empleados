@@ -7,10 +7,12 @@ import { Home } from './home/home';
 import { Contacto } from './contacto/contacto';
 import { Proyectos } from './proyectos/proyectos';
 import { QuienesSomos } from './quienes-somos/quienes-somos';
+import { Actualiza } from './actualiza/actualiza';
 
 export const routes: Routes = [
   {path:'', component: Home},
   {path:'contacto', component: Contacto}, 
   {path:'proyectos', component: Proyectos}, 
-  {path:'quienesSomos', component: QuienesSomos}
+  {path:'quienesSomos', component: QuienesSomos},
+  {path:'actualiza/:id', component: Actualiza},
 ];
