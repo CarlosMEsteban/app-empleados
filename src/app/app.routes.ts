@@ -8,6 +8,8 @@ import { Contacto } from './contacto/contacto';
 import { Proyectos } from './proyectos/proyectos';
 import { QuienesSomos } from './quienes-somos/quienes-somos';
 import { Actualiza } from './actualiza/actualiza';
+import { ErrorPersonalizado } from './error-personalizado/error-personalizado';
+
 
 export const routes: Routes = [
   {path:'', component: Home},
@@ -15,4 +17,5 @@ export const routes: Routes = [
   {path:'proyectos', component: Proyectos}, 
   {path:'quienesSomos', component: QuienesSomos},
   {path:'actualiza/:id', component: Actualiza},
+  {path:'**', component: ErrorPersonalizado}
 ];

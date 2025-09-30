@@ -1,6 +1,11 @@
     <div class="col-md-4" id="listaDeEmpleados" style="border: 2px solid #007bff; padding: 15px; border-radius: 8px;">
-      <a [routerLink]="['/actualiza', indice]" >
-        <p>{{indice+1}}.-{{ empleadoDeLista.nombre }} {{ empleadoDeLista.apellido }} - salario: {{ empleadoDeLista.salario }} - Cargo: {{ empleadoDeLista.cargo }}</p>
+      <p>{{indice+1}}.-{{ empleadoDeLista.nombre }} {{ empleadoDeLista.apellido }} - salario: {{ empleadoDeLista.salario }} - Cargo: {{ empleadoDeLista.cargo }}</p>
+       <a [routerLink]="['/actualiza', indice]" [queryParams]="{accion: 'M'}">
+          Editar
+      </a>
+      &nbsp;|&nbsp;
+       <a [routerLink]="['/actualiza', indice]" [queryParams]="{accion: 'E'}">
+          Eliminar
       </a>
         <!--<button (click)="editarEmpleado(i)" class="btn btn-primary btn-sm">Editar</button>
         <button (click)="eliminarEmpleado(i)">Eliminar</button>        -->
