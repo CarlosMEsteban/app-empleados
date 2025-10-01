@@ -15,6 +15,8 @@ import { HomeComponent } from './home-component/home-component';
 import { ProyectosComponent } from './proyectos-component/proyectos-component';
 import { ContactoComponent } from './contacto-component/contacto-component';
 import { QuienesComponent } from './quienes-component/quienes-component';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -24,8 +26,8 @@ import { QuienesComponent } from './quienes-component/quienes-component';
   imports: [RouterOutlet, 
             FormsModule, 
             NgFor, 
-            NgIf
-          ],
+            NgIf, HttpClientModule       
+            ],
   templateUrl: './app.html',
   styleUrl: './app.css'  
 })

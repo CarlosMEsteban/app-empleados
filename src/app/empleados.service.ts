@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Empleado } from './empleado.model';
+import { DataServicesService } from './DataServices.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,8 @@ empleados: Empleado[] = [
     new Empleado("Laura", "Pérez", "Diseñadora", 26000)
   ];  
 
+  constructor(private dataServicio: DataServicesService) { }
+
   modificarEmpleadoServicio(empleado: Empleado) {
     let indice = this.empleados.findIndex(e => e.nombre === empleado.nombre && e.apellido === empleado.apellido); 
     if (indice !== -1) {
@@ -28,6 +31,7 @@ empleados: Empleado[] = [
 
   agregarEmpleado(empleado: Empleado) {
     this.empleados.push(empleado);    
+    this.dataServicio.guardarEmpleados(this.empleados);
   }
 
   encontrarEmpleado(indice: number): Empleado {
