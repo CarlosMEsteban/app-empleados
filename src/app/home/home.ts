@@ -11,7 +11,7 @@ import { EmpleadosService } from '../empleados.service';
 import { Contacto } from '../contacto/contacto';
 import { Proyectos } from '../proyectos/proyectos';
 import { QuienesSomos } from '../quienes-somos/quienes-somos';
-import { anadirEmpleado, cambiarEmpleado, db, getEmpleados, quitarEmpleado } from '../DataServices.service';
+import { anadirEmpleado, buscarEmpleadoPorNombre, cambiarEmpleado, db, getEmpleados, quitarEmpleado } from '../DataServices.service';
 
 @Component({
   selector: 'app-home',
@@ -107,7 +107,10 @@ quitarEmpleado("KZyALec7pOPDpKRWj3tL");
 
 this.nuevoNombreModif = "Modificado desde Angular " + this.numeroAleatorio;
 this.nuevoApellidoModif = "Modificado desde Angular " + this.numeroAleatorio;
-cambiarEmpleado("JRBgs4F5W0xhBDH6NCWs", {nombre: this.nuevoNombreModif, apellido: this.nuevoApellidoModif});
+cambiarEmpleado("K77KADAp5d5CNzVM8ftd", {nombre: this.nuevoNombreModif, apellido: this.nuevoApellidoModif});
+
+
+buscarEmpleadoPorNombre(db, "Insertado desde Angular 544");
 
 
   }

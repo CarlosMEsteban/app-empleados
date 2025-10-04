@@ -24,7 +24,7 @@ export const empleadoConverter: FirestoreDataConverter<Empleado> = {
     return {
       nombre: empleado.nombre,
       apellido: empleado.apellido,
-      puesto: empleado.cargo,
+      cargo: empleado.cargo,
       salario: empleado.salario,
     };
   },

@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore, collection, getDocs, Firestore, addDoc, deleteDoc, doc, updateDoc } from 'firebase/firestore/lite';
+import { getFirestore, collection, getDocs, Firestore, addDoc, deleteDoc, doc, updateDoc, query, where } from 'firebase/firestore/lite';
 import { Empleado, empleadoConverter } from "./empleado.model";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -92,6 +92,69 @@ export async function quitarEmpleado(id: string) {
       console.error('Error al actualizar el documento del empleado:', error);
 
     }
-  } 
+  }
+  
+  
+/**
+
+ * Busca empleados en Firestore por un nombre exacto.
+
+ * @param db La instancia de Firestore.
+
+ * @param nombreEmpleado El nombre exacto del empleado a buscar.
+
+ * @returns Una Promesa que resuelve en un array de objetos Empleado.
+
+ */
+
+export async function buscarEmpleadoPorNombre(db: Firestore, nombreEmpleado: string): Promise<Empleado[]> {
+
+  try {
+
+    const empleadosCol = collection(db, 'empleados').withConverter(empleadoConverter);
+
+    // Creamos una consulta: seleccionamos la colección 'empleados' y filtramos
+
+    // donde el campo 'nombre' sea igual a 'nombreEmpleado'.
+
+    const q = query(empleadosCol, where('nombre', '==', nombreEmpleado));
+
+
+    const querySnapshot = await getDocs(q);
+
+
+    const empleadosEncontrados: Empleado[] = [];
+
+    if (querySnapshot.empty) {
+
+      console.log(`No se encontraron empleados con el nombre: "${nombreEmpleado}"`);
+
+    } else {
+
+      querySnapshot.forEach(doc => {
+
+        // Con el converter, doc.data() ya nos devuelve un objeto Empleado
+console.log("Hemos encontrado al menos 1");
+console.log(doc.data());
+console.log("Hemos encontrado al menos 1 1 1");
+        //empleadosEncontrados.push(doc.data());
+
+      });
+
+      console.log(`Se encontraron ${empleadosEncontrados.length} empleados con el nombre: "${nombreEmpleado}"`);
+
+    }
+
+    return empleadosEncontrados;
+
+  } catch (error) {
+
+    console.error('Error al buscar empleados por nombre:', error);
+
+    throw error; // Re-lanza el error para que quien llame a la función pueda manejarlo
+
+  }
+
+}
 
 

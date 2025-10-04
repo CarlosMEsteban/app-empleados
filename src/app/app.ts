@@ -117,10 +117,6 @@ getEmpleados(db);
 console.log("Vamos a eliminar un empleado fijo.");
 quitarEmpleado("KZyALec7pOPDpKRWj3tL");
 console.log("Vamos a modificar nombre y apellidos");
-this.numeroAleatorio = Math.floor(Math.random() * 1000);
-this.nuevoNombre = "Modificado desde Angular ${this.numeroAleatorio}";
-this.nuevoApellido = "Modificado desde Angular ${this.numeroAleatorio}";
-cambiarEmpleado("JRBgs4F5W0xhBDH6NCWs", {nombre: this.nuevoNombre, apellido: this.nuevoApellido});
 
     
     
