@@ -20,7 +20,7 @@ export class Actualiza {
   constructor(private route: ActivatedRoute, private router: Router, private empleadosService: EmpleadosService) {
     this.empleados = this.empleadosService.empleados; 
     this.indice = this.route.snapshot.params['id'];
-    this.empleadoDetalle = this.empleadosService.encontrarEmpleado(this.indice);
+    //this.empleadoDetalle = this.empleadosService.encontrarEmpleado(this.indice);
     this.accion = this.route.snapshot.queryParams['accion'];
 
   }

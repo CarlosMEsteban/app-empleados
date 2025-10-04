@@ -11,6 +11,7 @@ import { EmpleadosService } from '../empleados.service';
 import { Contacto } from '../contacto/contacto';
 import { Proyectos } from '../proyectos/proyectos';
 import { QuienesSomos } from '../quienes-somos/quienes-somos';
+import { anadirEmpleado, cambiarEmpleado, db, getEmpleados, quitarEmpleado } from '../DataServices.service';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +30,7 @@ export class Home {
 
   constructor(private miServicio: ServicioEmpleados, private empleadosService: EmpleadosService) {
     this.empleados = this.empleadosService.empleados;
+    console.log("ldwsjngvrhbgh");
    }
 
   
@@ -82,10 +84,32 @@ export class Home {
   bModif(): boolean {
     return this.operacion == this.editar;
   }
+numeroAleatorio: number = 0;
+nuevoNombreInsert: string = "";
+nuevoApellidoInsert: string = "";
+nuevoNombreModif: string = "";
+nuevoApellidoModif: string = "";
 
   agregarEmpleado(empleado: Empleado) {
+      console.error("Vamos a llamar a getEmpleados");
+this.numeroAleatorio = Math.floor(Math.random() * 1000);
+this.nuevoNombreInsert = "Insertado desde Angular " + this.numeroAleatorio;
+this.nuevoApellidoInsert = "Insertado desde Angular " + this.numeroAleatorio;
+anadirEmpleado(new Empleado(this.nuevoNombreInsert, this.nuevoApellidoInsert, "Carguete", 1), db);      
+    getEmpleados(db);
+
     this.miServicio.mostarMensaje("Alta de empleado: " + empleado.nombre + " " + empleado.apellido);
     this.empleadosService.agregarEmpleado(empleado);    
+
+console.log("Vamos a eliminar un empleado fijo.");
+quitarEmpleado("KZyALec7pOPDpKRWj3tL");
+
+
+this.nuevoNombreModif = "Modificado desde Angular " + this.numeroAleatorio;
+this.nuevoApellidoModif = "Modificado desde Angular " + this.numeroAleatorio;
+cambiarEmpleado("JRBgs4F5W0xhBDH6NCWs", {nombre: this.nuevoNombreModif, apellido: this.nuevoApellidoModif});
+
+
   }
 
   bMostrarDetalle(): boolean {

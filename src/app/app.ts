@@ -17,6 +17,7 @@ import { ContactoComponent } from './contacto-component/contacto-component';
 import { QuienesComponent } from './quienes-component/quienes-component';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { anadirEmpleado, db, getEmpleados, quitarEmpleado } from './DataServices.service';
 
 
 
@@ -44,6 +45,8 @@ export class App {
 
   constructor(private miServicio: ServicioEmpleados, private empleadosService: EmpleadosService) 
   {
+    console.log("App component cargado.");
+    console.error("Prueba error");
      this.empleados = this.empleadosService.empleados;
    }
 
@@ -53,7 +56,9 @@ export class App {
 
   altaEmpleado() {
     this.operacion = "A";
-    this.nuevoEmpleado = new Empleado("", "", "", 0);
+    this.nuevoEmpleado = new Empleado("Añadido desde ANGULAR", "EFEWDF", "EQFEF", 0);
+anadirEmpleado(this.nuevoEmpleado, db);
+    getEmpleados(db);
   }
 
   guardarEmpleado() {
@@ -100,10 +105,25 @@ export class App {
   bModif(): boolean {
     return this.operacion == this.editar;
   }
-
+numeroAleatorio: number = 0;
+nuevoNombre: string = "";
+nuevoApellido: string = "";
   agregarEmpleado(empleado: Empleado) {
+    console.error("Hola.");
     this.miServicio.mostarMensaje("Alta de empleado: " + empleado.nombre + " " + empleado.apellido);
-    this.empleadosService.agregarEmpleado(empleado);    
+
+this.empleadosService.agregarEmpleado(empleado); 
+getEmpleados(db);   
+console.log("Vamos a eliminar un empleado fijo.");
+quitarEmpleado("KZyALec7pOPDpKRWj3tL");
+console.log("Vamos a modificar nombre y apellidos");
+this.numeroAleatorio = Math.floor(Math.random() * 1000);
+this.nuevoNombre = "Modificado desde Angular ${this.numeroAleatorio}";
+this.nuevoApellido = "Modificado desde Angular ${this.numeroAleatorio}";
+cambiarEmpleado("JRBgs4F5W0xhBDH6NCWs", {nombre: this.nuevoNombre, apellido: this.nuevoApellido});
+
+    
+    
   }
 
   bMostrarDetalle(): boolean {
@@ -111,3 +131,7 @@ export class App {
   }
 
 }
+function cambiarEmpleado(arg0: string, arg1: { nombre: string; apellido: string; }) {
+  throw new Error('Function not implemented.');
+}
+

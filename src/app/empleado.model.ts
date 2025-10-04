@@ -1,3 +1,5 @@
+import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions } from "firebase/firestore";
+
 export class Empleado {
     public nombre: string = "";
     public apellido: string = "";
@@ -14,3 +16,30 @@ export class Empleado {
         this.salario = salario;
     }
 }
+
+// 2. Create a FirestoreDataConverter for your Empleado class
+export const empleadoConverter: FirestoreDataConverter<Empleado> = {
+  // Converts an Empleado object to a plain JavaScript object for Firestore
+  toFirestore: (empleado: Empleado): DocumentData => {
+    return {
+      nombre: empleado.nombre,
+      apellido: empleado.apellido,
+      puesto: empleado.cargo,
+      salario: empleado.salario,
+    };
+  },
+
+  // Converts a Firestore DocumentData snapshot back into an Empleado object
+  fromFirestore: (
+    snapshot: QueryDocumentSnapshot,
+    options: SnapshotOptions
+  ): Empleado => {
+    const data = snapshot.data(options);
+    return new Empleado(
+      data['nombre'],
+      data['apellido'],
+      data['cargo'],
+      data['salario']      
+    );
+  }
+};

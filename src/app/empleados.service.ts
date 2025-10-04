@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Empleado } from './empleado.model';
-import { DataServicesService } from './DataServices.service';
+import { Empleado, empleadoConverter } from './empleado.model';
+//import { DataServicesService } from './DataServices.service';
+import { getCities, db, anadirEmpleado } from './DataServices.service';
+import { addDoc, collection, getFirestore } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,7 @@ empleados: Empleado[] = [
     new Empleado("Laura", "Pérez", "Diseñadora", 26000)
   ];  
 
-  constructor(private dataServicio: DataServicesService) { }
+  /*constructor(private dataServicio: DataServicesService) { }*/
 
   modificarEmpleadoServicio(empleado: Empleado) {
     let indice = this.empleados.findIndex(e => e.nombre === empleado.nombre && e.apellido === empleado.apellido); 
@@ -31,10 +33,39 @@ empleados: Empleado[] = [
 
   agregarEmpleado(empleado: Empleado) {
     this.empleados.push(empleado);    
-    this.dataServicio.guardarEmpleados(this.empleados);
+    //guardarEmpleado(empleado, db);
+
+// 3. How to use it to add a document to Firestore
+const db = getFirestore();
+const empleadosCollectionRef = collection(db, 'empleados').withConverter(empleadoConverter);
+
+async function agregarNuevoEmpleado() {
+  const nuevoEmpleado = new Empleado(
+                              'Juan',
+                              'Pérez',
+                              'Desarrollador Senior',
+                              12
+  );
+
+  try {
+    //const docRef = await addDoc(empleadosCollectionRef, nuevoEmpleado);
+    const docRef = await anadirEmpleado(nuevoEmpleado, db);    
+    console.log("Documento escrito con ID:");
+  } catch (e) {
+    console.error("Error al agregar documento: ", e);
+  }
+}    
+    
+    //this.dataServicio.guardarEmpleados(this.empleados)
+    /*.subscribe(
+      response => console.log("Se ha guardado correctamente"),
+      error => console.log("Error al guardar: " + error)
+    );*/
   }
 
   encontrarEmpleado(indice: number): Empleado {
+
+
     return this.empleados[indice];
   }
 
