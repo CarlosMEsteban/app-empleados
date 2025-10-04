@@ -137,7 +137,7 @@ export async function buscarEmpleadoPorNombre(db: Firestore, nombreEmpleado: str
 console.log("Hemos encontrado al menos 1");
 console.log(doc.data());
 console.log("Hemos encontrado al menos 1 1 1");
-        //empleadosEncontrados.push(doc.data());
+        empleadosEncontrados.push(doc.data() as Empleado);
 
       });
 
