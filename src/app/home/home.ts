@@ -30,7 +30,7 @@ export class Home {
 
   constructor(private miServicio: ServicioEmpleados, private empleadosService: EmpleadosService) {
     this.empleados = this.empleadosService.empleados;
-    console.log("ldwsjngvrhbgh");
+    
    }
 
   

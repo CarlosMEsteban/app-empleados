@@ -46,7 +46,7 @@ export class App {
   constructor(private miServicio: ServicioEmpleados, private empleadosService: EmpleadosService) 
   {
     console.log("App component cargado.");
-    console.error("Prueba error");
+    
      this.empleados = this.empleadosService.empleados;
    }
 

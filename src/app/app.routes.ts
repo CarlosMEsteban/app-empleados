@@ -9,6 +9,7 @@ import { Proyectos } from './proyectos/proyectos';
 import { QuienesSomos } from './quienes-somos/quienes-somos';
 import { Actualiza } from './actualiza/actualiza';
 import { ErrorPersonalizado } from './error-personalizado/error-personalizado';
+import { Login } from './login/login';
 
 
 export const routes: Routes = [
@@ -17,5 +18,6 @@ export const routes: Routes = [
   {path:'proyectos', component: Proyectos}, 
   {path:'quienesSomos', component: QuienesSomos},
   {path:'actualiza/:id', component: Actualiza},
+  {path:'login', component: Login},
   {path:'**', component: ErrorPersonalizado}
 ];
