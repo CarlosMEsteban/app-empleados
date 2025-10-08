@@ -10,6 +10,7 @@ import { QuienesSomos } from './quienes-somos/quienes-somos';
 import { Actualiza } from './actualiza/actualiza';
 import { ErrorPersonalizado } from './error-personalizado/error-personalizado';
 import { Login } from './login/login';
+import { Producto } from './producto/producto';
 
 
 export const routes: Routes = [
@@ -17,6 +18,7 @@ export const routes: Routes = [
   {path:'contacto', component: Contacto}, 
   {path:'proyectos', component: Proyectos}, 
   {path:'quienesSomos', component: QuienesSomos},
+  {path:'productos', component: Producto}, 
   {path:'actualiza/:id', component: Actualiza},
   {path:'login', component: Login},
   {path:'**', component: ErrorPersonalizado}

@@ -1,0 +1,388 @@
+"Id";"NombreProducto";"Coste";"Tengo";"Almacén";"MateriaPrima";"CantidadInicial";"Fabrica"
+1;"Azúcar Moreno";17;1;;;;"Azucarera"
+2;"pan";4;0;;;;
+3;"Nata";17;0;;;;
+4;"Mantequilla";25;;;;;
+5;"Zanahorias";10;9;"SILO";"S";9;
+6;"Soja";20;9;"SILO";"S";9;
+7;"Trigo";2;9;"SILO";"S";9;
+8;"Tortitas";25;;;;;
+9;"Galleta";51;2;;;;"Panadería"
+10;"Bacon";240;9;;"S";9;
+11;"Huevos";20;9;;"S";9;
+12;"Azúcar blanco";34;0;;;;"Azucarera"
+13;"Añil";120;9;"SILO";"S";9;
+14;"maíz";5;9;"SILO";"S";9;
+15;"Palomitas";25;0;;;;
+16;"Queso";51;0;;;;
+17;"Caña de Azúcar";30;9;"SILO";"S";9;"Azucarera"
+18;"Leche";60;9;;"S";9;
+19;"Tarta de Zanahoria";51;0;;;;
+20;"Huevos con bacon";51;;;;;
+22;"Manzana";840;9;"SILO";"S";9;
+23;"Calabaza";5;9;"SILO";"S";9;
+24;"Pan de maíz";25;;;;;
+25;"Lana";420;9;"SILO";"S";9;
+26;"Tarta de calabaza";102;;;;;
+27;"Jersey";102;;;;;
+28;"Hamburguesa";102;;;;;
+29;"Tarta de Bacon";153;0;;;;
+30;"Jersey azul";153;;;;;
+32;"Gorro azul de lana";51;4;;;;
+33;"Almíbar";76;0;;;;"Azucarera"
+34;"Pastel de Zanahoria";76;;;;;
+35;"Palomitas con mantequilla";51;;;;;
+36;"Frambuesa";1080;9;"SILO";"S";9;
+37;"Pastel de nata";153;;;;;
+38;"Cereza";1620;9;"SILO";"S";9;
+39;"Pastel de bayas";51;;;;;
+40;"Lingote de plata";480;0;;;;
+41;"Pastel de Queso";204;;;;;
+42;"Palomitas con chile";102;0;;;;
+43;"Chile";240;9;"SILO";"S";9;
+44;"Lingote de platino";960;;;;;
+45;"Zumo de Zanahoria";25;;;;;
+46;"Magdalena de mora";38;;;;;
+47;"Magdalena de frambuesa";38;;;;;
+48;"Lingote de oro";720;;;;;
+49;"Hamburguesa de pescado";102;;;;;
+50;"Pescado";120;9;;"S";9;
+51;"Zumo de manzana";102;0;;;;
+52;"Gratinado de pescado";102;;;;;
+53;"Tarta de manzana";127;;;;;
+54;"Mora";2040;9;"SILO";"S";9;
+55;"Zumo de cereza";127;2;;;;
+56;"Tomate";360;9;"SILO";"S";9;
+57;"Helado de vainilla";102;0;;;;
+58;"Zumo de tomate";76;;;;;
+59;"Leche de cabra";480;9;;"S";9;
+60;"Queso de cabra";76;7;;;;
+61;"Polo de Cereza";153;;;;;
+62;"Pizza";12;0;;;;
+63;"Tomates asados";76;0;;;;
+64;"Fresa";480;9;"SILO";"S";9;
+65;"Helado de fresa";204;;;;;
+66;"Tarta de feta";76;;;;;
+67;"Mermelada de manzana";306;1;;;;
+68;"Patata";220;9;"SILO";"S";9;
+69;"Patata asada";29;;;;;
+70;"Pastel de chocolate";102;;;;;
+71;"Gratinado de bacon";102;;;;;
+72;"Carbón refinado";360;0;;;;
+73;"Cacao";1800;9;"SILO";"S";9;
+74;"Lingote de hierro";420;0;;;;
+75;"Pastel de fresas";153;;;;;
+76;"Zumo de bayas";153;;;;;
+77;"Mermelada de Frambuesa";357;;;;;
+78;"Pizza picante";15;;;;;
+79;"Mermelada de cereza";357;;;;;
+80;"Pastelitos de patata";102;;;;;
+81;"Gratinado de carne";85;;;;;
+82;"Pan de patata";38;;;;;
+83;"Mermelada de mora";348;2;;;;
+84;"Helado de chocolate";127;;;;;
+85;"Pulsera";102;;;;;
+86;"Collar";153;;;;;
+87;"Pescado y patatas";76;;;;;
+88;"café Expreso";5;;;;;"Cafetería"
+89;"Tela de algodón";25;0;;;;
+90;"Chaparreras de lana";76;;;;;"Coser"
+92;"Camisa de algodón";38;;;;;"Coser"
+93;"Granos de café";2500;9;"SILO";"S";9;
+94;"café con leche";10;;;;;"Cafetería"
+95;"Pulsera metálica";76;0;;;;
+96;"Vestido violeta";114;0;;;;
+97;"Palomitas con chocolate";127;;;;;
+98;"café Moca";15;0;;;;"Cafetería"
+99;"Langosta";500;11;;;;
+100;"Moca con frambuesa";30;;;;;
+101;"Pizza de Marisco";12;;;;;
+102;"Sopa de langosta";127;;;;;
+103;"Sopa de tomate";76;;;;;
+104;"Chocolate caliente";25;0;;;;"Cafetería"
+105;"Miel";17;8;;;;
+106;"Tarta de manzana y miel";200;;;;;
+108;"Brocheta de langosta";34;;;;;"Barbacoa"
+109;"Panal";30;9;;"S";9;
+110;"Pastel de manzana y miel";170;;;;;
+112;"Bufanda roja";127;;;;;"Telar"
+113;"Sopa de calabaza";102;;;;;
+114;"Palomitas con miel";76;;;;;
+115;"algodón";150;9;"SILO";"S";9;
+116;"Mermelada de fresa";382;1;;;;
+119;"Cera de abejas";45;1;;;;"Miel"
+121;"Vela de fresa";102;;;;;
+123;"Vela de frambuesa";89;;;;;
+124;"Manzana caramelizada";102;3;;;;
+125;"Caramelos";76;;;;;"Caramelos"
+127;"Sopa de pescado";153;;;;;
+128;"Almohada";155;;;;;"Coser"
+129;"Pluma de pato";180;0;;;;
+131;"Salsa de soja";153;1;;;;
+132;"Makis";60;0;;;;
+133;"Arroz";45;9;"SILO";"S";9;
+134;"Aceitunas";1500;9;"SILO";"S";9;
+135;"Piruleta";612;;;;;
+136;"Lechuga";200;9;"SILO";"S";9;
+137;"Ensalada griega";76;;;;;"Ensaladas"
+138;"Manta";178;;;;;
+139;"Sushi de langosta";60;;;;;
+140;"Aceite de oliva";38;0;;;;"Salsas"
+141;"Gominolas";1224;;;;;
+142;"S.vegetal";34;;;;;
+143;"Ensalada con bacon";89;0;;;;"Ensaladas"
+144;"Mayonesa";12;0;;;;
+146;"Sushi de huevo";120;;;;;
+147;"Cóctel de marisco";102;0;;;;"Ensaladas"
+148;"S.de Bacon";85;0;;;;
+149;"Smoothie de bayas";63;;;;;
+150;"S.de huevo";68;;;;;
+151;"Smoothie verde";38;16;;;;
+152;"Limón";1440;9;"SILO";"S";9;
+154;"Cuajada de limón";21;;;;;"Salsas"
+156;"Pasta fresca";15;1;;;;
+157;"Ensalada de pasta";127;;;;;"Ensaladas"
+158;"Tarta de limón";114;;;;;
+159;"Salsa de tomate";25;0;;;;
+160;"Tostada con miel";51;;;;;
+161;"Pastel de limón";127;;;;;
+162;"Smoothie de Yogur";51;0;;;;
+164;"Sombrero de Cloch�";102;;;;;
+165;"Vela de limón";114;;;;;
+166;"Sombrero de copa";178;;;;;
+167;"�oquis";80;;;;;
+168;"Fideo de arroz";20;1;;;;"Pasta M�quina"
+169;"Sopa de fideos";102;;;;;
+170;"Sombrero de playa";127;0;;;;
+171;"Mermelada de Naranja";433;;;;;
+172;"Naranja";1920;9;"SILO";"S";9;
+173;"Zumo de naranja";102;;;;;
+174;"Perrito caliente";30;;;;;
+175;"Cebolla a la parrilla";51;;;;;"Barbacoa"
+176;"Cebolla";300;9;"SILO";"S";9;
+177;"Sopa de cebolla";127;;;;;
+178;"Lasa�a";100;;;;;
+179;"Tarta de melocot�n";127;;;;;
+180;"Melocot�n";1920;9;"SILO";"S";9;
+182;"Perrito de maíz";60;;;;;
+183;"Sorbete de naranja";178;;;;;
+184;"Salsa picante";17;;;;;
+185;"Sopa de patata";127;;;;;
+186;"Taco";45;;;;;
+187;"Taco de pescado";90;3;;;;
+188;"Sopa de langosta";120;;;;;
+189;"Mermelada de melocot�n";408;;;;;
+190;"Pasta con langosta";120;;;;;
+191;"Perrito con cebolla";75;;;;;
+192;"T� verde";30;;;;;
+194;"Hojas de t�";390;9;"SILO";"S";9;
+195;"T� con leche";45;0;;;;
+196;"Ensalada de frutas";102;;;;;"Ensaladas"
+197;"Quesudilla";60;;;;;
+198;"T� con miel";40;;;;;
+199;"Helado de melocot�n";153;;;;;
+200;"Olivada";38;;;;;
+201;"Ramo r�stico";45;;;;;
+202;"Rollito de verano";51;;;;;
+203;"Perrito vegetariano";45;;;;;
+204;"Chal de flores";76;;;;;"Telar"
+205;"Girasoles";90;9;"SILO";"S";9;
+206;"Pasta carbonara";150;;;;;
+207;"Uva";150;9;"SILO";"S";9;
+208;"Zumo de uva";127;;;;;
+209;"Helado de melocot�n";153;;;;;
+210;"Ensalada veraniega";153;;;;;"Ensaladas"
+211;"Mermelada de uva";331;;;;;
+212;"Corona de flores";102;;;;;"Sombrerer�a"
+213;"Peon�as";240;9;"SILO";"S";9;
+214;"T� con limón";20;;;;;
+216;"Nachos";75;6;;;;
+217;"Batido mixto";25;;;;;"Licuadora"
+218;"Helado de menta";114;;;;;
+219;"Menta";180;9;"SILO";"S";9;
+220;"Maki grande";90;;;;;
+221;"Crudit�s";102;;;;;"Ensaladas"
+222;"Pimiento";270;9;"SILO";"S";9;
+223;"S.de cebolla y queso";76;;;;;
+224;"Latte Caramelo";15;;;;;
+225;"café helado de pl�tano";20;0;;;;"Cafetería"
+226;"Pl�tano";1620;9;"SILO";"S";9;
+227;"Pasta picante";90;;;;;
+228;"Pastel de frutas";153;;;;;
+229;"T� con naranja";40;;;;;
+230;"Sopa de pimiento";51;;;;;
+231;"Bizcocho de pi�a";63;0;;;;"Pasteler�a"
+232;"Pi�a";30;9;"SILO";"S";9;
+233;"Zumo de pi�a";38;;;;;
+234;"S.de pepino";35;;;;;
+235;"Pepino";35;9;"SILO";"S";9;
+236;"Ramo de caramelos";20;;;;;
+237;"Pan de pl�tano";25;;;;;
+238;"Berenjena asada";34;;;;;"Barbacoa"
+239;"Berenjena";40;9;"SILO";"S";9;
+240;"Batido de pepino";34;;;;;"Licuadora"
+241;"Sopa de brocol�";63;;;;;
+242;"Pasta con brocol�";60;;;;;
+243;"Brocol�";80;9;"SILO";"S";9;
+245;"Zumo de sand�a";51;;;;;
+246;"Sand�a";300;9;"SILO";"S";9;
+247;"T� helado";30;;;;;
+248;"Tostada de queso de cabra";42;;;;;
+249;"Ramo delicado";30;;;;;
+250;"Tortitas de pl�tano";51;;;;;
+251;"Vela floral";102;;;;;
+252;"Mermelada de ciruela";255;;;;;
+253;"Ciruela";1920;9;"SILO";"S";9;
+254;"Banana split";178;;;;;"Helader�a"
+255;"T� de menta";35;;;;;
+257;"Crocante de s�samo";51;;;;;"Caramelos"
+259;"Pastel de berenjena";38;0;;;;
+260;"Fondue de Chocolate";25;;;;;"Fondue"
+261;"Chocolate";1020;8;;;;"Caramelos"
+262;"T� de manzana y jengibre";30;;;;;
+263;"Jengibre";150;9;"SILO";"S";9;
+265;"Fondue de bacon";30;;;;;"Fondue"
+266;"Pan de ajo";12;;;;;
+267;"Ensalada de remolacha";38;;;;;"Ensaladas"
+268;"Remolacha";40;9;"SILO";"S";9;
+269;"Chiles fritos";40;;;;;"Freidur�a"
+270;"Salteado de tofu";75;;;;;
+271;"S�samo";60;9;"SILO";"S";9;
+272;"Ensalada con setas";51;;;;;"Ensaladas"
+273;"Setas";20;9;"SILO";"S";9;
+274;"Brocheta de pescado";25;;;;;"Barbacoa"
+275;"Fondue de Queso";20;;;;;"Fondue"
+276;"Batido de cacao";34;0;;;;"Licuadora"
+277;"Empanadas de manzana";20;;;;;"Freidur�a"
+278;"Patatas con bacon";25;0;;;;
+279;"S. Cacahuete y Mermelada";21;;;;;
+280;"Verduras asadas";21;;;;;
+281;"Pasta con setas";75;;;;;
+283;"Pescado picante";90;;;;;
+284;"Arroz frito";60;0;;;;"Wok"
+285;"D�nut Cl�sico";15;0;;;;"Donuter�a"
+286;"D�nut crocanti";30;;;;;"Donuter�a"
+287;"D�nut con crema";25;;;;;"Donuter�a"
+288;"D�nut con bacon";30;;;;;"Donuter�a"
+289;"D�nut con virutas";20;0;;;;"Donuter�a"
+290;"Mascarilla de miel";90;;;;;
+292;"Jab�n exfoliante";60;;;;;
+293;"Loci�n de limón";75;0;;;;
+294;"Jab�n de miel";60;;;;;
+295;"Batido de ciruela";29;;;;;"Licuadora"
+296;"Pastel de setas";51;;;;;
+297;"Col";45;9;"SILO";"S";9;
+298;"Ramo de aniversario";20;5;;;;
+299;"Sopa de col";76;;;;;
+300;"Lirios";90;9;"Silo";"S";9;
+301;"Galleta de jengibre";25;;;;;"Panadería"
+302;"D�nut relleno";35;;;;;"Donuter�a"
+303;"Rollo de chocolate";76;0;;;;
+304;"Cacahuetes garrapi�ados";34;;;;;"Caramelos"
+305;"Kinchi";255;;;;;
+306;"Velas coloridas";93;;;;;
+307;"Aperitvo salado";38;;;;;"Palomitera"
+308;"Pescado en lata";187;;;;;
+309;"Batido de cacahuete";85;;;;;"Helader�a"
+310;"Cacahuetes";420;9;"SILO";"S";9;
+312;"Fruta deshidratada";153;;;;;"Conservas"
+313;"Zumo de maracuy�";38;;;;;
+314;"Ensalada de col";63;;;;;"Ensaladas"
+315;"Mermelada de maracuy�";272;;;;;
+316;"Tarta de chocolate";63;;;;;
+317;"Chocolatinas fritas";15;;;;;"Freidur�a"
+318;"Pimientos rellenos";17;;;;;
+319;"Vinagreta de maracuy�";25;;;;;
+320;"Ramo de verduras";15;;;;;
+321;"Pepinillos";204;;;;;
+322;"Batido de s�samo negro";38;;;;;"Licuadora"
+323;"algodón de Azúcar";25;;;;;"Caramelos"
+324;"Fideos con salsa de cacahuete";45;;;;;"Wok"
+325;"Sopa de setas";68;;;;;
+326;"Tarta de maracuy�";42;0;;;;
+327;"Helado de s�samo";102;;;;;
+328;"Helado de coco";12;;;;;
+329;"Zumo de mango";42;;;;;
+330;"Batido tropical";34;;;;;"Licuadora"
+331;"Wrap de humus";25;;;;;
+332;"Humus";25;2;;;;
+333;"Zumo de guayaba";46;;;;;
+334;"Pastel de granada";108;;;;;
+335;"Fudge de menta";150;;;;;"Fudge"
+336;"Fudge de chocolate";120;;;;;"Fudge"
+337;"Bolas de arroz";45;;;;;"Sushi"
+338;"Yogur tropical";60;;;;;
+339;"Yogur";120;;;;;
+340;"Affogato";17;;;;;"Helader�a"
+341;"Estofado de chile";120;;;;;"Estofados"
+342;"Falafel";55;;;;;"Freidur�a"
+343;"Fondue tropical";35;;;;;"Fondue"
+344;"Tetera";240;;;;;
+345;"Compota de Guayaba";221;;;;;"Conservas"
+346;"Fudge de chile";170;;;;;"Fudge"
+347;"Bolitas de coco";25;;;;;"Panadería"
+348;"Sorbete de frutas";51;0;;;;
+349;"Samosa";75;;;;;
+350;"Maceta con flor";220;0;;;;
+351;"Taza de arcilla";200;;;;;
+352;"Fudge de cacahuete";90;;;;;"Fudge"
+353;"Quich� de esp�rragos";102;;;;;
+354;"Esp�rragos a a la parrilla";63;;;;;"Barbacoa"
+355;"T� de granada";35;;;;;
+356;"Tortilla de queso";90;0;;;;
+358;"Haz de trigo";26;;;;;
+359;"Comida de cerdos";17;;;;;
+360;"Yogur de fresa";40;;;;;
+361;"Tortilla colorida";60;;;;;
+362;"Sopa de esp�rragos";60;;;;;
+363;"Fudge de limón";110;;;;;"Fudge"
+364;"Tortilla de primavera";40;;;;;
+365;"Estofado de invierno";140;;;;;"Estofados"
+368;"Colgante floral";51;;;;;
+369;"Estofado de garbanzos";90;1;;;;"Estofados"
+370;"Tortilla de arroz";120;;;;;
+371;"Cupcake";40;0;;;;"Cupcakes"
+372;"C.de guayaba";70;;;;;"Cupcakes"
+373;"C.Tropical";90;;;;;"Cupcakes"
+374;"C.de galleta";120;;;;;"Cupcakes"
+375;"Tortilla de patata";75;0;;;;
+376;"Gofres normales";25;0;;;;
+377;"G.con frutos rojos";35;0;;;;"Gofrera"
+378;"Ramo colorido";20;;;;;
+379;"Gofres con chocolate";40;;;;;"Gofrera"
+380;"Gofres frutos rojos";35;;;;;
+381;"Ensalada de naranja";38;;;;;"Ensaladas"
+384;"Cerdo de chocolate";60;;;;;
+385;"Cabra de chocolate";90;;;;;
+386;"G.de huevos con bacon";45;;;;;"Gofrera"
+387;"Aceite esencial de limón";10;;;;;"Aceites esenciales"
+388;"Aceite esencial de menta";15;;;;;"Aceites esenciales"
+389;"Bol de desayuno";50;;;;;"Gachas"
+390;"Avena";6;9;"SILO";"S";9;
+391;"Esp�rragos";360;9;"SILO";"S";9;
+392;"Coco";1440;9;"SILO";"S";9;
+393;"Guayaba";1440;9;"SILO";"S";9;
+394;"Garbanzos";60;9;"SILO";"S";9;
+395;"Mango";1920;9;"SILO";"S";9;
+396;"Maracuy�";60;9;"SILO";"S";9;
+397;"Granada";1620;9;"SILO";"S";9;
+398;"Ajos";30;9;"SILO";"S";9;
+399;"Arcilla";110;9;"SILO";"S";9;
+400;"Barritas de pi�a y coco";34;0;;;;"Panadería"
+401;"Gachas con manzana";20;;;;;"Gachas"
+402;"Gachas dulces";45;;;;;"Gachas"
+403;"Gachas reci�n hechas";35;;;;;
+404;"Aceite esencial de jengibre";20;;;;;
+405;"Jab�n lujoso";70;;;;;
+406;"Batido de vainilla";45;;;;;
+407;"Batido de moca";30;;;;;
+409;"Batido de frutas";35;;;;;
+415;"Aceite esencial de manzanilla";10;;;;;
+416;"T� de manzanilla";20;0;;;;
+417;"Manzanilla";20;9;;"S";9;
+418;"Difusor fresco";20;;;;;
+419;"Almohada relajante";51;;;;;
+420;"Difusor relajante";25;;;;;
+421;"Perfume c�trico";15;;;;;
+422;"Ar�ndanos";840;9;;"S";9;
+423;"G.de Ar�ndanos";42;;;;;
