@@ -1,1 +1,6 @@
-<button (click)="cargarProductos()">Cargar productos</button>
+<button (click)="cargarTodosProdutos()">Cargar inicial de productos</button>
+
+<button (click)="listarProductos()">Listar productos</button>
+
+<app-producto-hijo *ngFor="let producto of lProductos; let i = index" [productoDeLista] = "producto" [indice] = i>
+    </app-producto-hijo>

@@ -6,6 +6,6 @@ import { Injectable } from '@angular/core';
 export class ServicioEmpleados {
   constructor() { }
   mostarMensaje(mensaje: string){
-    alert('->' + mensaje);
+  //  alert('->' + mensaje);
   }
 }

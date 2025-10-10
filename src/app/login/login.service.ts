@@ -31,6 +31,7 @@ export class loginService
 
     login(eMail: string, password: string)
     {
+console.log("firebase config: " + this.firebaseConfig.projectId);
         const app = initializeApp(this.firebaseConfig);  
         const auth = getAuth(app);
         console.log("Auth: " + auth);
@@ -39,7 +40,8 @@ export class loginService
                         auth.currentUser?.getIdToken().then(
                             token=>{
                                 this.token=token;
-                                console.log(this.token);
+                                console.log("Token: " + this.token);
+                                console.log("Id de usuario: " + auth.currentUser?.uid);
                                 this.router.navigate(['/']);
                             }
                         )
