@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { getAnalytics } from 'firebase/analytics';
 import { initializeApp } from 'firebase/app';
-import { addDoc, collection, DocumentSnapshot, getDocs, getFirestore, QuerySnapshot } from 'firebase/firestore';
+import { addDoc, collection, doc, DocumentSnapshot, getDocs, getFirestore, query, QuerySnapshot, updateDoc, where } from 'firebase/firestore';
 import { productoConverter, ProductoModel } from './producto.model';
 import { Producto } from './producto';
 import {firebaseConfig} from '../CONSTANTES';
@@ -439,5 +439,26 @@ console.log("S'acabó");
                         });
     return resultado;
   }
-  
+
+  async modificarTengo(nombre: string, nuevoTengo: number)
+  {
+    console.log("Allá vamos");
+    const q = query(this.productosCollectionRef, where('nombre', '==', nombre));
+
+    const querySnapshot = await getDocs(q);
+    
+    console.log("La query ha devuelto: " + querySnapshot.size);
+    for (const producto of querySnapshot.docs) 
+    {
+      console.log("Id del producto" + producto.id);
+      const docRef = doc(this.productosCollectionRef, producto.id);
+      console.log("docRef del producto" + docRef.id);
+      await updateDoc(docRef, {"tengo": nuevoTengo });
+    }
+    
+  }
+
+
 }
+
+  
