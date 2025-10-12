@@ -23,9 +23,6 @@ export class ProductoHijo {
 
   cambiarTengo()
   {
-    console.log(this.productoDeLista.getNombre());
-    console.log(this.productoDeLista.getTengo());
     this.productoServicio.modificarTengo(this.productoDeLista.getNombre(), this.productoDeLista.getTengo());
-    console.log("Despuñés de la llamada")
   }
 }

@@ -68,6 +68,7 @@ export const productoConverter: FirestoreDataConverter<ProductoModel> = {
     options: SnapshotOptions
   ): ProductoModel => {
     const data = snapshot.data(options);
+console.log("fromFirestore producto", data);
     return new ProductoModel(
       {
                  'id':       data['id'],

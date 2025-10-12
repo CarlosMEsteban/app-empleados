@@ -3,6 +3,7 @@ import { NgFor } from '@angular/common';
 import { ProductoModel } from './producto.model';
 import { ProductoService } from './producto.service';
 import { ProductoHijo } from '../producto-hijo/producto-hijo';
+import { IngredienteService } from '../ingrediente/ingrediente-service';
 
 @Component({
   selector: 'app-producto',
@@ -12,11 +13,12 @@ import { ProductoHijo } from '../producto-hijo/producto-hijo';
 })
 export class Producto {
   productoService: ProductoService;
-
+  ingredienteService: IngredienteService;
   lProductos : ProductoModel[] = [];
-  constructor(productoService: ProductoService)
+  constructor(productoService: ProductoService, ingredienteService: IngredienteService)
   { 
     this.productoService = productoService;
+    this.ingredienteService = ingredienteService;
   }
 
   
@@ -89,4 +91,19 @@ export class Producto {
     console.log("lProductos2: " + this.lProductos.length);
   }
       
+
+  tengoANull()
+  {
+    this.productoService.tengoANull();
+  }
+  materiasPrimasANueve()
+  {
+    this.productoService.materiasPrimasANueve();
+  }  
+
+  anadirTodosIngredientes()
+  {
+    
+    this.ingredienteService.anadirTodoIngredientes();
+  }
 }
