@@ -7,7 +7,6 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ProductoService } from '../producto/producto.service';
-import { Producto } from '../producto/producto';
 import { ProductoModel } from '../producto/producto.model';
 
 
@@ -30,14 +29,15 @@ export class PruebaMaterial {
   productosFiltrados!: Observable<string[]>;
 
   constructor(productoServicio: ProductoService) {   
-    console.log(this.todosLosProductos);
+    console.log("->" + this.todosLosProductos + "<-");
     productoServicio.listarProductos(new ProductoModel({})).then(lTodos => {
       lTodos.forEach((prod: ProductoModel) => {
         this.mProductos.set(prod.nombre, prod.cProductoId);
         this.todosLosProductos.push(prod.nombre);
     });
+    });
     
-  });
+  
     console.log(this.todosLosProductos);
   }
 

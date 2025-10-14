@@ -1,5 +1,8 @@
-<mat-form-field style="width: 100%;">
-  <input type="text" matInput [formControl]="productoNombreControl" [matAutocomplete]="auto" placeholder="Nombre del producto" (optionSelected)="mostrarProducto($event)" />
+<mat-form-field style="width: 80%;">
+  <input type="text" matInput [formControl]="productoNombreControl" 
+                              [matAutocomplete]="auto" 
+                              placeholder="Nombre del producto" 
+                              (optionSelected)="mostrarProducto($event)"/>
   <mat-autocomplete #auto="matAutocomplete">
     <mat-option *ngFor="let opcion of productosFiltrados | async" [value]="opcion">
       {{ opcion }}

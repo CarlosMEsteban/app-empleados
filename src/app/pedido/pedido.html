@@ -43,16 +43,17 @@
 
     <button (click)="mostrarProductosDePedido()">Mostrar productos</button>
     
-    <div *ngIf="bMostrarListaProductos">
+ <div *ngIf="bMostrarListaProductos">
       
       <!--<app-productos-de-pedido *ngFor="let producto of lProductos" [producto]="producto"></app-productos-de-pedido>-->
         <app-productos-de-pedido
-    *ngFor="let producto of lProductos"
-    [producto]="producto">
-  </app-productos-de-pedido>
+              *ngFor="let producto of lProductos"
+                [producto]="producto">
+        </app-productos-de-pedido>
       
       <!--<app-productos-de-pedido></app-productos-de-pedido>-->
-    </div>
+    </div>  
+   
   </div>
 
 </body>
