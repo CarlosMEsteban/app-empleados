@@ -1,0 +1,11 @@
+<mat-form-field style="width: 100%;">
+  <input type="text" matInput [formControl]="productoNombreControl" [matAutocomplete]="auto" placeholder="Nombre del producto" (optionSelected)="mostrarProducto($event)" />
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let opcion of productosFiltrados | async" [value]="opcion">
+      {{ opcion }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+<p>Producto seleccionado: <input id="pp" type="pp"/></p>
+
+<p>Producto seleccionado: {{ productoNombreControl.value }}</p>
