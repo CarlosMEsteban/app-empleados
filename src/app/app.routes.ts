@@ -12,6 +12,7 @@ import { ErrorPersonalizado } from './error-personalizado/error-personalizado';
 import { Login } from './login/login';
 import { Producto } from './producto/producto';
 import { Pedido } from './pedido/pedido';
+import { PruebaMaterial } from './prueba-material/prueba-material';
 
 
 export const routes: Routes = [
@@ -23,5 +24,6 @@ export const routes: Routes = [
   {path:'pedido', component: Pedido}, 
   {path:'actualiza/:id', component: Actualiza},
   {path:'login', component: Login},
+  {path:'pruebaMaterial', component: PruebaMaterial},
   {path:'**', component: ErrorPersonalizado}
 ];

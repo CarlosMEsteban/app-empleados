@@ -1,6 +1,7 @@
 import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions } from "firebase/firestore";
 
 export class ProductoModel {
+    cProductoId: string = "";
     id: number = -1;
     nombre: string = "";
     coste: number = -1;
@@ -14,6 +15,7 @@ export class ProductoModel {
     //constructor(id: number = -1, nombre: string, coste: number, tengo: number, almacen: string, materiaPrima: boolean, cantidadInicial: number, fabrica: string ) 
     constructor(datos: Partial<ProductoModel>) 
     {
+      this.cProductoId = datos.cProductoId ?? "";
        this.id = datos.id ?? -1;
         this.nombre = datos.nombre ?? "";
         this.coste = datos.coste ?? -1;
@@ -68,7 +70,7 @@ export const productoConverter: FirestoreDataConverter<ProductoModel> = {
     options: SnapshotOptions
   ): ProductoModel => {
     const data = snapshot.data(options);
-console.log("fromFirestore producto", data);
+//console.log("fromFirestore producto", data);
     return new ProductoModel(
       {
                  'id':       data['id'],

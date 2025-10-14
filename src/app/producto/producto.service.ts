@@ -434,7 +434,9 @@ console.log("S'acabó");
                           console.log(datosProducto.getNombre());*/
                           
                           const datosProducto = doc.data() as ProductoModel;
+                          datosProducto.cProductoId = doc.id; // Asignar el ID del documento al campo cProductoId
                           resultado.push(datosProducto);
+                          //console.log(resultado[0].cProductoId);
 
                         });
     return resultado;
@@ -494,7 +496,6 @@ console.log("S'acabó");
     
   }  
 
-  
 }
 
   
