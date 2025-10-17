@@ -1,0 +1,13 @@
+    .productoAl {
+      background-color: #c07c7c;
+      border: 2px solid #007bff;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 5000x;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .pedido h2 {
+      color: #1de677;
+      margin-bottom: 10px;
+    }

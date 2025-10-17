@@ -1,3 +1,5 @@
+<div class="productoAl">
+    <h2>Alta de producto</h2>
 Producto:
 <mat-form-field style="width: 100%;">
   <input type="text" matInput [formControl]="productoNombreControl" 
@@ -12,3 +14,6 @@ Producto:
 Cantidad: <input type="number" [(ngModel)]="producto.cantidad" class="form-control" style="width: 100px; display: inline-block;" />
 Tengo: <input type="number" [(ngModel)]="producto.tengo" class="form-control" style="width: 100px; display: inline-block;" />
 
+<button (click)="altaProductoDePedido()">Alta producto de pedido</button>
+
+</div>

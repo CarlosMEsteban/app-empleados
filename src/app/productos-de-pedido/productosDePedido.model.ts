@@ -3,6 +3,7 @@ import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOp
 export class ProductosDePedidoModel {
     poductoId: string = ""
     cantidad: number = -1;
+    tengo: number = -1;
 
     //constructor(id: number = -1, nombre: string, coste: number, tengo: number, almacen: string, materiaPrima: boolean, cantidadInicial: number, fabrica: string ) 
     constructor(datos: Partial<ProductosDePedidoModel>) 

@@ -1,4 +1,5 @@
 import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions } from "firebase/firestore";
+import { productosDePedidoConverter } from "../productos-de-pedido/productosDePedido.model";
 
 export class PedidoModel {
     id: string = "";
@@ -14,7 +15,7 @@ export class PedidoModel {
         this.orden = datos.orden ?? -1;
         this.estrellas = datos.estrellas ?? -1;
         this.oro = datos.oro ?? -1;
-        
+        this.productos = datos.productos ?? [];
     }
 
 }
@@ -27,7 +28,8 @@ export const pedidoConverter: FirestoreDataConverter<PedidoModel> = {
             id:pedido.id,
             orden: pedido.orden,
             estrellas : pedido.estrellas,
-            oro : pedido.oro
+            oro : pedido.oro,
+            productos: pedido.productos
     };
   },
 

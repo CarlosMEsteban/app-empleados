@@ -3,48 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <title>Resumen del Pedido</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      padding: 20px;
-    }
-    .pedido {
-      background-color: #fff;
-      border: 2px solid #007bff;
-      border-radius: 10px;
-      padding: 20px;
-      max-width: 400px;
-      margin: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .pedido h2 {
-      color: #007bff;
-      margin-bottom: 15px;
-    }
-    .dato {
-      font-size: 18px;
-      margin: 10px 0;
-    }
-    .icono {
-      font-size: 24px;
-      margin-left: 10px;
-    }
-  </style>
+
 </head>
 <body>
 
   <div class="pedido">
     <h2>Resumen del Pedido</h2>
-    <input type="text" [(ngModel)]="pedido.id" />
-    <div class="dato">Orden: <input type="number" [(ngModel)]="pedido.orden" class="form-control" style="width: 100px; display: inline-block;" /></div>
-    <div class="dato">Oro: <input type="number" [(ngModel)]="pedido.oro" class="form-control" style="width: 100px; display: inline-block;" /></div>
-    <div class="dato">Estrellas: <input type="number" [(ngModel)]="pedido.estrellas" class="form-control" style="width: 100px; display: inline-block;" /></div>
+    <input type="text" readonly="true" [(ngModel)]="pedido.id" />
+    Orden: <input type="number" [(ngModel)]="pedido.orden" class="form-control" style="width: 100px; display: inline-block;" />
+    Oro: <input type="number" [(ngModel)]="pedido.oro" class="form-control" style="width: 100px; display: inline-block;" />
+    Estrellas: <input type="number" [(ngModel)]="pedido.estrellas" class="form-control" style="width: 100px; display: inline-block;" />
+    <br/>
 
     <button (click)="mostrarProductosDePedido()">Mostrar productos</button>
+
+    <app-producto-de-pedido-al> </app-producto-de-pedido-al>
     
- <div *ngIf="bMostrarListaProductos">
-      
+    <div *ngIf="bMostrarListaProductos">
+      Aquí van los productos del pedido:
       <!--<app-productos-de-pedido *ngFor="let producto of lProductos" [producto]="producto"></app-productos-de-pedido>-->
         <app-productos-de-pedido
               *ngFor="let producto of lProductos"
@@ -52,7 +28,9 @@
         </app-productos-de-pedido>
       
       <!--<app-productos-de-pedido></app-productos-de-pedido>-->
-    </div>  
+    </div> 
+    
+    
    
   </div>
 

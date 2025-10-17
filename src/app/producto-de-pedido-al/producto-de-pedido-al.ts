@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { ProductosDePedidoModel } from './productosDePedido.model';
+import { Component , Input } from '@angular/core';
+import { ProductosDePedidoModel } from '../productos-de-pedido/productosDePedido.model';
 import { FormsModule } from '@angular/forms';
 import { ProductoModel } from '../producto/producto.model';
 import { ProductoService } from '../producto/producto.service';
@@ -10,30 +10,30 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ProductoDePedidoService } from '../producto-de-pedido/producto-de-pedido.service';
 
 @Component({
-  selector: 'app-productos-de-pedido',
+  selector: 'app-producto-de-pedido-al',
   imports: [FormsModule, MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule, CommonModule],
-  templateUrl: './productos-de-pedido.html',
-  styleUrl: './productos-de-pedido.css'
+  templateUrl: './producto-de-pedido-al.html',
+  styleUrl: './producto-de-pedido-al.css'
 })
-export class ProductosDePedido {
-  productosDePedido: any[] = [];
-  @Input() producto!: ProductosDePedidoModel;
+export class ProductoDePedidoAl {
+  producto: ProductosDePedidoModel = new ProductosDePedidoModel({poductoId: "", cantidad: -1});
   @Input() aaaa!: ProductosDePedidoModel;
   @Input() todosLosProductos: string[] = [];
   mProductos: Map<string, string> = new Map<string, string>();
 
   productoNombreControl = new FormControl('');
   productosFiltrados!: Observable<string[]>;
-
+  productoDePedidoServicio: ProductoDePedidoService;
   
-  constructor(productoServicio: ProductoService)
+  constructor(productoServicio: ProductoService, productoDePedidoServicio: ProductoDePedidoService)
   {
-    console.log("Constructor ProductosDePedido");
+    this.productoDePedidoServicio = productoDePedidoServicio;
     productoServicio.listarProductos(new ProductoModel({})).then(lTodos =>
       {
         console.log("Tamaño de la lista  de productos: " + lTodos.length);
@@ -55,6 +55,30 @@ export class ProductosDePedido {
   private _filtrar(valor: string): string[] {
     const filtro = valor.toLowerCase();
     return this.todosLosProductos.filter(p => p.toLowerCase().includes(filtro));
+  }
+
+  altaProductoDePedido() 
+  {
+    if (this.productoNombreControl.value == "" || this.producto.cantidad <= 0)
+    {
+      alert("Debe indicar un producto y una cantidad válida");
+      return;
+    }
+    else
+    {
+      console.log("Alta producto de pedido: " + this.productoNombreControl.value + ", cantidad: " + this.producto.cantidad);
+      this.producto.poductoId = this.mProductos.get(this.productoNombreControl.value ?? "") || "";
+      if (this.producto.poductoId == "")
+      {
+        alert("Debe indicar un producto válido");
+        return;
+      }
+      else
+      {
+        console.log("ID del producto: " + this.producto.poductoId);
+        this.productoDePedidoServicio.anadirProductoDePedido("Fv8Gx2EJBqMkXHCYxWKU", this.producto);
+      }
+    }
   }
 
 }

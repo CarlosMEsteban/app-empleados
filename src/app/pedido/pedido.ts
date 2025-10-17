@@ -6,10 +6,12 @@ import { ProductosDePedido } from "../productos-de-pedido/productos-de-pedido";
 import { PedidoService } from './pedido-service';
 import { ProductosDePedidoModel } from '../productos-de-pedido/productosDePedido.model';
 import { Producto } from "../producto/producto";
+import { ProductoDePedidoAl } from "../producto-de-pedido-al/producto-de-pedido-al";
+
 
 @Component({
   selector: 'app-pedido',
-  imports: [FormsModule, NgIf, ProductosDePedido, Producto, CommonModule],
+  imports: [FormsModule, NgIf, ProductosDePedido, Producto, CommonModule, ProductoDePedidoAl],
   templateUrl: './pedido.html',
   styleUrl: './pedido.css'
 })
@@ -26,11 +28,11 @@ export class Pedido {
     this.pedidoServicio.obtenerPedidos().then((pedidos: PedidoModel[]) => {
       this.lPedidos = pedidos as PedidoModel[];
       if (this.lPedidos.length > 0)
-      { console.log("Hay pedidos"); 
+      { 
         this.pedido = this.lPedidos[0];
         this.pedido.productos = this.lProductos;
         this.lProductos = new Array<ProductosDePedidoModel>() ;
-        this.lProductos.push(new ProductosDePedidoModel({poductoId: "producto1", cantidad: 2}));
+        //this.lProductos.push(new ProductosDePedidoModel({poductoId: "Cabra de chocolate", cantidad: 2}));
       }
       else
       { console.log("No hay pedidos"); }
@@ -62,7 +64,7 @@ export class Pedido {
         this.pedido.productos = this.pedido.productos;
       }
 
-
+console.log("Mostrando productos de pedido para el pedido con id: " + this.pedido.id);
       this.bMostrarListaProductos = true;
     }
   }

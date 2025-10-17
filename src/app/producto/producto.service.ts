@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { getAnalytics } from 'firebase/analytics';
 import { initializeApp } from 'firebase/app';
-import { addDoc, collection, doc, DocumentSnapshot, getDocs, getFirestore, query, QuerySnapshot, updateDoc, where } from 'firebase/firestore';
+import { addDoc, collection, doc, DocumentSnapshot, getDocs, getFirestore, or, orderBy, query, QuerySnapshot, updateDoc, where } from 'firebase/firestore';
 import { productoConverter, ProductoModel } from './producto.model';
 import { Producto } from './producto';
 import {firebaseConfig} from '../CONSTANTES';
@@ -428,7 +428,8 @@ console.log("S'acabó");
   async listarProductos(filtro: ProductoModel): Promise<ProductoModel[]>
   {
     const resultado: ProductoModel[] = [];
-    const qS: QuerySnapshot= await getDocs(this.productosCollectionRef)
+    const q = query(this.productosCollectionRef, orderBy("nombre"));
+    const qS: QuerySnapshot= await getDocs(q);
     qS.forEach((doc: DocumentSnapshot) => {  
                           /*const datosProducto = doc.data() as ProductoModel; // <-- ¡Aquí está la clave!
                           console.log(datosProducto.getNombre());*/
