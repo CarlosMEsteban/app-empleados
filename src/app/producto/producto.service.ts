@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { getAnalytics } from 'firebase/analytics';
 import { initializeApp } from 'firebase/app';
-import { addDoc, collection, doc, DocumentSnapshot, getDocs, getFirestore, or, orderBy, query, QuerySnapshot, updateDoc, where } from 'firebase/firestore';
+import { addDoc, collection, doc, DocumentSnapshot, getDoc, getDocs, getFirestore, or, orderBy, query, QuerySnapshot, updateDoc, where } from 'firebase/firestore';
 import { productoConverter, ProductoModel } from './producto.model';
 import { Producto } from './producto';
 import {firebaseConfig} from '../CONSTANTES';
@@ -445,7 +445,7 @@ console.log("S'acabó");
 
   async modificarTengo(nombre: string, nuevoTengo: number)
   {
-    console.log("Allá vamos");
+    console.log("*******************************Buscamos productos con nombre: ************" + nombre);
     const q = query(this.productosCollectionRef, where('nombre', '==', nombre));
 
     const querySnapshot = await getDocs(q);
@@ -459,6 +459,12 @@ console.log("S'acabó");
       await updateDoc(docRef, {"tengo": nuevoTengo });
     }
     
+  }
+  async modificarTengoPorId(id: string, nuevoTengo: number)
+  {
+    console.log("*******************************Buscamos productos con id: ************" + id);
+    const docRef = doc(this.productosCollectionRef, id);
+    await updateDoc(docRef, {"tengo": nuevoTengo });
   }
 
   async tengoANull()
@@ -496,6 +502,19 @@ console.log("S'acabó");
     }
     
   }  
+
+  async obtenerNombreProductoPorId(id: string): Promise<ProductoModel>
+  {
+    const docRef = doc(this.productosCollectionRef, id);
+    const docSnap = await getDoc(docRef); 
+    if (docSnap.exists()) {
+      const datosProducto = docSnap.data() as ProductoModel;
+      return datosProducto;
+    } else {
+      console.log("No such document!");
+      return new ProductoModel({id: 0, nombre: 'No existe', coste: 0, almacen: '', materiaPrima: '', fabrica: ''});
+    }
+  }
 
 }
 

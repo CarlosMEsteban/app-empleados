@@ -30,10 +30,12 @@ export class ProductoDePedidoAl {
   productoNombreControl = new FormControl('');
   productosFiltrados!: Observable<string[]>;
   productoDePedidoServicio: ProductoDePedidoService;
+  productoServicio: ProductoService;
   
   constructor(productoServicio: ProductoService, productoDePedidoServicio: ProductoDePedidoService)
   {
     this.productoDePedidoServicio = productoDePedidoServicio;
+    this.productoServicio = productoServicio;
     productoServicio.listarProductos(new ProductoModel({})).then(lTodos =>
       {
         console.log("Tamaño de la lista  de productos: " + lTodos.length);
@@ -59,7 +61,7 @@ export class ProductoDePedidoAl {
 
   altaProductoDePedido() 
   {
-    if (this.productoNombreControl.value == "" || this.producto.cantidad <= 0)
+    if (this.productoNombreControl.value == "" || this.producto.cantidad <= 0 || this.producto.tengo < 0)
     {
       alert("Debe indicar un producto y una cantidad válida");
       return;
@@ -77,6 +79,7 @@ export class ProductoDePedidoAl {
       {
         console.log("ID del producto: " + this.producto.poductoId);
         this.productoDePedidoServicio.anadirProductoDePedido("Fv8Gx2EJBqMkXHCYxWKU", this.producto);
+        this.productoServicio.modificarTengoPorId(this.producto.poductoId, this.producto.tengo);
       }
     }
   }

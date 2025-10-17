@@ -1,14 +1,7 @@
-Producto:
-<mat-form-field style="width: 100%;">
-  <input type="text" matInput [formControl]="productoNombreControl" 
-                              [matAutocomplete]="auto" 
-                              placeholder="Nombre del producto"/>
-  <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let opcion of productosFiltrados | async" [value]="opcion">
-      {{ opcion }}
-    </mat-option>
-  </mat-autocomplete>
-</mat-form-field>
+<p>
+Producto:<input type="string" [(ngModel)]="producto.poductoId" class="form-control" style="width: 100px; display: inline-block;" />
+Producto:<input type="string" [(ngModel)]="producto.nombreProducto" class="form-control" style="width: 100px; display: inline-block;" />
 Cantidad: <input type="number" [(ngModel)]="producto.cantidad" class="form-control" style="width: 100px; display: inline-block;" />
 Tengo: <input type="number" [(ngModel)]="producto.tengo" class="form-control" style="width: 100px; display: inline-block;" />
+</p>
 

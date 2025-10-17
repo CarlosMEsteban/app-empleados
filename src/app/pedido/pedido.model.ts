@@ -39,7 +39,7 @@ export const pedidoConverter: FirestoreDataConverter<PedidoModel> = {
     options: SnapshotOptions
   ): PedidoModel => {
     const data = snapshot.data(options);
-console.log("fromFirestore pedido", data);
+//console.log("fromFirestore pedido", data);
     return new PedidoModel(
       {
                  'id':       snapshot.id,

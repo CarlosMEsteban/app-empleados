@@ -2,6 +2,7 @@ import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOp
 
 export class ProductosDePedidoModel {
     poductoId: string = ""
+    nombreProducto: string = "";
     cantidad: number = -1;
     tengo: number = -1;
 

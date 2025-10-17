@@ -7,6 +7,9 @@ import { PedidoService } from './pedido-service';
 import { ProductosDePedidoModel } from '../productos-de-pedido/productosDePedido.model';
 import { Producto } from "../producto/producto";
 import { ProductoDePedidoAl } from "../producto-de-pedido-al/producto-de-pedido-al";
+import { ProductoDePedidoService } from '../producto-de-pedido/producto-de-pedido.service';
+import { ProductoService } from '../producto/producto.service';
+import { ProductoModel } from '../producto/producto.model';
 
 
 @Component({
@@ -20,28 +23,54 @@ export class Pedido {
   bMostrarListaProductos: boolean = false;
   lPedidos: PedidoModel[] = [];
   lProductos: ProductosDePedidoModel[] = [];
+  indicePedidoActual: number = 0;
 
-  pedidoServicio: PedidoService
+  pedidoServicio: PedidoService;
+  productoServicio: ProductoService;
+  productosDePedidoServicio: ProductoDePedidoService;
 
-  constructor(pedidoServicio: PedidoService){
+  constructor(pedidoServicio: PedidoService, 
+              productosDePedidoServicio: ProductoDePedidoService, 
+              productoServicio: ProductoService)
+  {
     this.pedidoServicio = pedidoServicio;
+    this.productosDePedidoServicio = productosDePedidoServicio;
+    this.productoServicio = productoServicio;
+
     this.pedidoServicio.obtenerPedidos().then((pedidos: PedidoModel[]) => {
       this.lPedidos = pedidos as PedidoModel[];
-      if (this.lPedidos.length > 0)
-      { 
-        this.pedido = this.lPedidos[0];
-        this.pedido.productos = this.lProductos;
-        this.lProductos = new Array<ProductosDePedidoModel>() ;
-        //this.lProductos.push(new ProductosDePedidoModel({poductoId: "Cabra de chocolate", cantidad: 2}));
-      }
-      else
-      { console.log("No hay pedidos"); }
+      this.mostrarPedidoActual();
+
     });
   }
 
   onInit() {
     console.log("OnInit Pedido");
   }
+
+  siguientePedido() 
+  {
+    console.clear();
+    console.log("lPedidos.length: " + this.lPedidos.length);
+    console.log("indicePedidoActual: " + this.indicePedidoActual);
+    if (this.indicePedidoActual < this.lPedidos.length - 1) 
+    {
+      this.indicePedidoActual++;
+      this.mostrarPedidoActual();
+      //this.pedido = this.lPedidos[this.indicePedidoActual];
+      console.log("Pedido actual id: " + this.pedido.id);
+    }
+  }
+
+  anteriorPedido() {
+    if (this.indicePedidoActual > 0) 
+    {
+      this.indicePedidoActual--;
+      this.mostrarPedidoActual();
+      //this.pedido = this.lPedidos[this.indicePedidoActual];
+    }
+  }
+
 
   mostrarProductosDePedido() 
   {
@@ -68,5 +97,37 @@ console.log("Mostrando productos de pedido para el pedido con id: " + this.pedid
       this.bMostrarListaProductos = true;
     }
   }
+
+  private async mostrarPedidoActual() 
+  {
+      if (this.lPedidos.length > 0)
+      { 
+        this.pedido = this.lPedidos[this.indicePedidoActual];
+        this.productosDePedidoServicio.obtenerProductosDePedidoPorPedidoId(this.pedido.id).then((productos: ProductosDePedidoModel[]) =>
+        {
+          console.log("Productos de pedido obtenidos desde el servicio: ", productos);
+          this.lProductos = productos as ProductosDePedidoModel[];
+          this.lProductos.forEach((producto) => 
+          {
+            console.log("Producto de pedido ID: ", producto.poductoId);
+            this.productoServicio.obtenerNombreProductoPorId(producto.poductoId).then((productoConTodosLosDatos: ProductoModel) => {
+              producto.nombreProducto = productoConTodosLosDatos.nombre;
+              producto.tengo = productoConTodosLosDatos.tengo;
+            });
+          });
+            
+          console.log("Productos de pedido cargados: ", this.lProductos);
+        });
+        
+        console.log("Pedido cargado: ", this.pedido.productos);
+        console.log("lProductos: ", this.lProductos);
+        //this.pedido.productos = this.lProductos;
+
+        //this.lProductos = new Array<ProductosDePedidoModel>() ;
+        //this.lProductos.push(new ProductosDePedidoModel({poductoId: "Cabra de chocolate", cantidad: 2}));
+      }
+      else
+      { console.log("No hay pedidos"); }
+  }    
 
 }

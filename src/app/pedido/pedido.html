@@ -15,11 +15,12 @@
     Estrellas: <input type="number" [(ngModel)]="pedido.estrellas" class="form-control" style="width: 100px; display: inline-block;" />
     <br/>
 
-    <button (click)="mostrarProductosDePedido()">Mostrar productos</button>
+    <img src="/anterior.png" alt="Pedido Image" height="20" width="20" (click)="anteriorPedido()"/>
+    <img src="/siguiente.png" alt="Pedido Image" height="20" width="20"(click)="siguientePedido()"/>
+    <br/>
 
     <app-producto-de-pedido-al> </app-producto-de-pedido-al>
     
-    <div *ngIf="bMostrarListaProductos">
       Aquí van los productos del pedido:
       <!--<app-productos-de-pedido *ngFor="let producto of lProductos" [producto]="producto"></app-productos-de-pedido>-->
         <app-productos-de-pedido
@@ -27,10 +28,6 @@
                 [producto]="producto">
         </app-productos-de-pedido>
       
-      <!--<app-productos-de-pedido></app-productos-de-pedido>-->
-    </div> 
-    
-    
    
   </div>
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../CONSTANTES';
 import { getAnalytics } from 'firebase/analytics';
-import { addDoc, collection, doc, getFirestore } from 'firebase/firestore';
+import { addDoc, collection, doc, getDocs, getFirestore } from 'firebase/firestore';
 import { productoConverter } from '../producto/producto.model';
 import { pedidoConverter } from '../pedido/pedido.model';
 import { ProductosDePedidoModel } from '../productos-de-pedido/productosDePedido.model';
@@ -36,6 +36,24 @@ export class ProductoDePedidoService
       
           
       
+    }
+
+    async obtenerProductosDePedidoPorPedidoId(cPedidoId: string): Promise<ProductosDePedidoModel[]>
+    {
+      const pedidoRef = doc(this.db, "pedido", cPedidoId);
+      const productosSubcoleccionRef = collection(pedidoRef, "productos");
+      const querySnapshot = await getDocs(productosSubcoleccionRef);
+      const productos: ProductosDePedidoModel[] = []; 
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        
+        const producto = new ProductosDePedidoModel({
+          poductoId: data['cProductoId'],
+          cantidad: data['cantidad']
+        });
+        productos.push(producto);
+      });
+      return productos;
     }
 
 
