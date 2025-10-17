@@ -1,4 +1,4 @@
-import { Component , Input } from '@angular/core';
+import { Component , EventEmitter, Input, Output } from '@angular/core';
 import { ProductosDePedidoModel } from '../productos-de-pedido/productosDePedido.model';
 import { FormsModule } from '@angular/forms';
 import { ProductoModel } from '../producto/producto.model';
@@ -23,8 +23,9 @@ import { ProductoDePedidoService } from '../producto-de-pedido/producto-de-pedid
 })
 export class ProductoDePedidoAl {
   producto: ProductosDePedidoModel = new ProductosDePedidoModel({poductoId: "", cantidad: -1});
-  @Input() aaaa!: ProductosDePedidoModel;
+  @Input() pedidoId?: string = ''; // <-- recibe el id del pedido
   @Input() todosLosProductos: string[] = [];
+  @Output() pedidoActualizado = new EventEmitter<void>(); // Evento para notificar al componente padre que se ha añadido un producto 
   mProductos: Map<string, string> = new Map<string, string>();
 
   productoNombreControl = new FormControl('');
@@ -61,6 +62,8 @@ export class ProductoDePedidoAl {
 
   altaProductoDePedido() 
   {
+    console.clear();
+    console.log("Alta producto de pedido para pedidoId: " + this.pedidoId);
     if (this.productoNombreControl.value == "" || this.producto.cantidad <= 0 || this.producto.tengo < 0)
     {
       alert("Debe indicar un producto y una cantidad válida");
@@ -68,7 +71,7 @@ export class ProductoDePedidoAl {
     }
     else
     {
-      console.log("Alta producto de pedido: " + this.productoNombreControl.value + ", cantidad: " + this.producto.cantidad);
+      console.log("Alta producto : " + this.productoNombreControl.value + ", cantidad: " + this.producto.cantidad);
       this.producto.poductoId = this.mProductos.get(this.productoNombreControl.value ?? "") || "";
       if (this.producto.poductoId == "")
       {
@@ -78,8 +81,12 @@ export class ProductoDePedidoAl {
       else
       {
         console.log("ID del producto: " + this.producto.poductoId);
-        this.productoDePedidoServicio.anadirProductoDePedido("Fv8Gx2EJBqMkXHCYxWKU", this.producto);
+        
+        this.productoDePedidoServicio.anadirProductoDePedido(this.pedidoId ?? "", this.producto);
         this.productoServicio.modificarTengoPorId(this.producto.poductoId, this.producto.tengo);
+        this.pedidoActualizado.emit(); // Para actualizar el pedido en el componente padre
+        this.producto = new ProductosDePedidoModel({poductoId: "", cantidad: -1, tengo: -1});
+        this.productoNombreControl.setValue('');
       }
     }
   }

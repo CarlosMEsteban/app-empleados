@@ -70,7 +70,35 @@ export class Pedido {
       //this.pedido = this.lPedidos[this.indicePedidoActual];
     }
   }
+  
+  nuevoPedido() 
+  {
+    this.pedido = new PedidoModel({orden: -1, estrellas: -1, oro: -1  });
+    this.lProductos = [];
+  }
 
+  bNuevo(): boolean
+  {
+    return this.pedido.id === "";
+  }
+
+  insertarPedido()
+  {
+    if (this.pedido.estrellas < 0 || this.pedido.oro < 0 || this.pedido.orden < 0)  
+    {
+      alert("Debe rellenar los datos del pedido antes de insertarlo.");
+      return;
+    }
+    else
+    {
+      this.pedidoServicio.insertarPedido(this.pedido).then((id) => {
+        this.pedido.id = id;  
+        this.lPedidos.push(this.pedido);
+        this.indicePedidoActual = this.lPedidos.length - 1; 
+      }
+      );
+    }
+  }
 
   mostrarProductosDePedido() 
   {
@@ -98,7 +126,7 @@ console.log("Mostrando productos de pedido para el pedido con id: " + this.pedid
     }
   }
 
-  private async mostrarPedidoActual() 
+  async mostrarPedidoActual() 
   {
       if (this.lPedidos.length > 0)
       { 

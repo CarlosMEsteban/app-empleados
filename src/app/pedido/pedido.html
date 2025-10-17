@@ -13,13 +13,17 @@
     Orden: <input type="number" [(ngModel)]="pedido.orden" class="form-control" style="width: 100px; display: inline-block;" />
     Oro: <input type="number" [(ngModel)]="pedido.oro" class="form-control" style="width: 100px; display: inline-block;" />
     Estrellas: <input type="number" [(ngModel)]="pedido.estrellas" class="form-control" style="width: 100px; display: inline-block;" />
+    <img *ngIf="bNuevo()" src="/Ok.png" alt="Pedido Image" height="20" width="20"(click)="insertarPedido()"/>
     <br/>
 
-    <img src="/anterior.png" alt="Pedido Image" height="20" width="20" (click)="anteriorPedido()"/>
-    <img src="/siguiente.png" alt="Pedido Image" height="20" width="20"(click)="siguientePedido()"/>
+    <img src="/anterior.png" alt="Anterior" height="20" width="20" (click)="anteriorPedido()"/>
+    Registro {{indicePedidoActual + 1}} de {{lPedidos.length}}
+    <img src="/siguiente.png" alt="Siguiente" height="20" width="20"(click)="siguientePedido()"/>
+    <img src="/mas.png" alt="Pedido Image" height="20" width="20"(click)="nuevoPedido()"/>
     <br/>
 
-    <app-producto-de-pedido-al> </app-producto-de-pedido-al>
+    <!-- Nuevo producto-->
+    <app-producto-de-pedido-al [pedidoId]="pedido?.id" (pedidoActualizado)="mostrarPedidoActual()"> </app-producto-de-pedido-al>
     
       Aquí van los productos del pedido:
       <!--<app-productos-de-pedido *ngFor="let producto of lProductos" [producto]="producto"></app-productos-de-pedido>-->
