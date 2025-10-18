@@ -1,4 +1,5 @@
 import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions } from "firebase/firestore";
+import { IngredienteModel } from "../ingrediente/ingrediente.model";
 
 export class ProductoModel {
     cProductoId: string = "";
@@ -10,9 +11,10 @@ export class ProductoModel {
     materiaPrima: string = "";
     cantidadInicial: number = -1;
     fabrica: string = "";
+    ingrediente: IngredienteModel[] = [];
 
 
-    //constructor(id: number = -1, nombre: string, coste: number, tengo: number, almacen: string, materiaPrima: boolean, cantidadInicial: number, fabrica: string ) 
+    
     constructor(datos: Partial<ProductoModel>) 
     {
       this.cProductoId = datos.cProductoId ?? "";
@@ -24,8 +26,8 @@ export class ProductoModel {
         this.materiaPrima = datos.materiaPrima ?? "";
         this.cantidadInicial = datos.cantidadInicial ?? -1;
         this.fabrica = datos.fabrica ?? "";
+        this.ingrediente = datos.ingrediente ?? [];
     }
-
 
 
     getId(): number{return this.id;}
@@ -46,6 +48,10 @@ export class ProductoModel {
     setCantidadInicial(cantidadInicial: number){this.cantidadInicial = cantidadInicial;}
     setFabrica(fabrica: string){this.fabrica = fabrica;}
 
+    esMateriaPrima(): boolean {
+      return this.materiaPrima == "true";
+    }
+
 }
 
 // 2. Create a FirestoreDataConverter for your Producto class
@@ -60,7 +66,8 @@ export const productoConverter: FirestoreDataConverter<ProductoModel> = {
             almacen : producto.getAlmacen(),
             materiaPrima : producto.getMateriaPrima() === "S",
             cantidadInicial : producto.getCantidadInicial(),
-            fabrica : producto.getFabrica()
+            fabrica : producto.getFabrica(), 
+            // ingrediente: producto.ingrediente Firebase no recoge las subcolecciones automáticamente
     };
   },
 
@@ -78,10 +85,13 @@ export const productoConverter: FirestoreDataConverter<ProductoModel> = {
                  'coste':       data['coste'],
                  'tengo':       data['tengo'],
                  'almacen':       data['almacen'],
-                 'materiaPrima':       data['materiaPrima '],
+                 'materiaPrima':       data['materiaPrima'],
                  'cantidadInicial':        data['cantidadInicial'],
-                 'fabrica':       data['fabrica']
+                 'fabrica':       data['fabrica'],
+                 //'ingrediente':      data['ingrediente'] Firebase no recoge las subcolecciones automáticamente
       }
     );
   }
+
+
 };

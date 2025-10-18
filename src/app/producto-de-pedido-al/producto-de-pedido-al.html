@@ -5,14 +5,14 @@ Producto:
   <input type="text" matInput [formControl]="productoNombreControl" 
                               [matAutocomplete]="auto" 
                               placeholder="Nombre del producto"/>
-  <mat-autocomplete #auto="matAutocomplete">
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onProductoSeleccionado($event)">
     <mat-option *ngFor="let opcion of productosFiltrados | async" [value]="opcion">
       {{ opcion }}
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>
-Cantidad: <input type="number" [(ngModel)]="producto.cantidad" class="form-control" style="width: 100px; display: inline-block;" />
 Tengo: <input type="number" [(ngModel)]="producto.tengo" class="form-control" style="width: 100px; display: inline-block;" />
+Cantidad: <input type="number" [(ngModel)]="producto.cantidad" class="form-control" style="width: 100px; display: inline-block;" />
 
 <button (click)="altaProductoDePedido()">Alta producto de pedido</button>
 

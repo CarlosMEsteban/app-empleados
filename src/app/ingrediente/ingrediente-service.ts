@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../CONSTANTES';
 import { getAnalytics } from 'firebase/analytics';
-import { addDoc, collection, doc, getDocs, getFirestore, query, where } from 'firebase/firestore';
-import { productoConverter } from '../producto/producto.model';
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore';
+import { productoConverter, ProductoModel } from '../producto/producto.model';
 import { IngredienteModel } from './ingrediente.model';
 import { ProductoService } from '../producto/producto.service';
 
@@ -978,5 +978,36 @@ new IngredienteModel({cProductoNecesitaId: "Zumo de uva", cProductoNecesitadoId:
 new IngredienteModel({cProductoNecesitaId: "Zumo de Zanahoria", cProductoNecesitadoId: "Zanahorias", cantidad: 3}),
 
   ];
+
+
+  async ingredientesDeProducto(cProductoNecesitaId: string): Promise<IngredienteModel[]>
+  {
+    const ingredientesRef = collection(this.db, 'producto', cProductoNecesitaId, 'ingrediente');
+    const ingSnap = await getDocs(ingredientesRef);
+    let ingredientes = ingSnap.docs.map(d => d.data());
+
+      return ingredientes as IngredienteModel[];    
+    /*//console.log("************************************************");
+    //console.log("ingredientesDeProducto:" + cProductoNecesitaId);
+    const docRef = doc(this.productosCollectionRef, cProductoNecesitaId);
+    const docSnap = await getDoc(docRef); 
+    if (docSnap.exists()) 
+    {
+      //console.log("Hemos encontrado el documento de producto solicitado.");
+      const datosProducto = docSnap.data() as ProductoModel;
+      //console.log("Ingredientes:", datosProducto.ingredientes);
+      //console.log("************************************************");
+      return datosProducto.ingrediente;
+    } 
+    else 
+    {
+      //console.log("No such document!");
+      //console.log("************************************************");
+      return [];
+    }*/
+    
+  }
+
+
   
 }

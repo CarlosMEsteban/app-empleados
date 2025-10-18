@@ -425,6 +425,7 @@ await addDoc(this.productosCollectionRef, new ProductoModel({"id": 423, "nombre"
 console.log("S'acabó");    
   }
 
+  /** Devuelve todos los productos */
   async listarProductos(filtro: ProductoModel): Promise<ProductoModel[]>
   {
     const resultado: ProductoModel[] = [];
@@ -433,7 +434,7 @@ console.log("S'acabó");
     qS.forEach((doc: DocumentSnapshot) => {  
                           /*const datosProducto = doc.data() as ProductoModel; // <-- ¡Aquí está la clave!
                           console.log(datosProducto.getNombre());*/
-                          
+                          console.log("Documento ID: " + doc.data());
                           const datosProducto = doc.data() as ProductoModel;
                           datosProducto.cProductoId = doc.id; // Asignar el ID del documento al campo cProductoId
                           resultado.push(datosProducto);
@@ -442,6 +443,9 @@ console.log("S'acabó");
                         });
     return resultado;
   }
+
+
+
 
   async modificarTengo(nombre: string, nuevoTengo: number)
   {
@@ -516,6 +520,19 @@ console.log("S'acabó");
     }
   }
 
+  async obtenerTengoPorId(id: string): Promise<number>
+  {
+    const docRef = doc(this.productosCollectionRef, id);
+    const docSnap = await getDoc(docRef); 
+    if (docSnap.exists()) {
+      const datosProducto = docSnap.data() as ProductoModel;
+      return datosProducto.tengo!;
+    } else {
+      console.log("No such document!");
+      return -1;
+    }
+
+ } 
 }
 
   

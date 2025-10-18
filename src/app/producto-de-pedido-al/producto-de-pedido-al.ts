@@ -5,7 +5,7 @@ import { ProductoModel } from '../producto/producto.model';
 import { ProductoService } from '../producto/producto.service';
 import { FormControl } from '@angular/forms';
 import { Observable, startWith, map, async } from 'rxjs';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -64,7 +64,7 @@ export class ProductoDePedidoAl {
   {
     console.clear();
     console.log("Alta producto de pedido para pedidoId: " + this.pedidoId);
-    if (this.productoNombreControl.value == "" || this.producto.cantidad <= 0 || this.producto.tengo < 0)
+    if (this.productoNombreControl.value == "" || this.producto.cantidad < 0 || this.producto.tengo < 0)
     {
       alert("Debe indicar un producto y una cantidad válida");
       return;
@@ -90,5 +90,18 @@ export class ProductoDePedidoAl {
       }
     }
   }
+
+ onProductoSeleccionado(event: MatAutocompleteSelectedEvent) {
+    const nombre = (event.option?.value ?? '') as string;
+    // guardar nombre en el control (ya lo hace el autocomplete pero asegura estado)
+    this.productoNombreControl.setValue(nombre);
+
+    // buscar id en el mapa mProductos (asegúrate de llenarlo al cargar productos)
+    const id = this.mProductos.get(nombre) ?? '';
+
+    this.productoServicio.obtenerTengoPorId(id).then(tengo => {
+      this.producto.tengo = tengo;
+    });
+  }  
 
 }
