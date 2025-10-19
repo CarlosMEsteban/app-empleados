@@ -14,6 +14,7 @@ import { Producto } from './producto/producto';
 import { Pedido } from './pedido/pedido';
 import { PruebaMaterial } from './prueba-material/prueba-material';
 import { ProductosDePedido } from './productos-de-pedido/productos-de-pedido';
+import { Exportar } from './exportar/exportar';
 
 
 export const routes: Routes = [
@@ -27,5 +28,6 @@ export const routes: Routes = [
   {path:'login', component: Login},
   {path:'pruebaMaterial', component: PruebaMaterial},
   {path:'productosDePedido', component: ProductosDePedido},
+  {path:'exportar', component: Exportar},
   {path:'**', component: ErrorPersonalizado}
 ];

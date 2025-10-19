@@ -1,12 +1,25 @@
-<button (click)="cargarTodosProdutos()">Cargar inicial de productos</button>
+<h2>{{titulo}}</h2>
+<img *ngIf="! bMostrarBotonesEspeciales" src="/mas.png" alt="Pedido Image" height="20" width="20"(click)="mostrarBotonesEspeciales()"/>
+<img *ngIf="bMostrarBotonesEspeciales" src="/menos.png" alt="Pedido Image" height="20" width="20"(click)="mostrarBotonesEspeciales()"/>
+<div *ngIf="bMostrarBotonesEspeciales" class="alert alert-info">
+    <button (click)="cargarTodosProdutos()">Cargar inicial de productos</button>
+    <button (click)="anadirTodosIngredientes()">Carga inicial ingredientes</button>
+    <!--<button (click)="tengoANull()">Tengo a Null</button>-->
+    <button (click)="iniciarTengo()">Iniciar el campo TENGO</button>
+    <!--<button (click)="materiasPrimasANueve()">Materias primas a 9</button>-->
+    <button (click)="eliminarTodosProductos()">Eliminar todos los productos</button>
+    <button (click)="comenzarElDia()">Comenzar el día</button>
+</div>
 
 <button (click)="listarProductos()">Listar productos</button>
 <button (click)="listarProductosNecesitados()">Productos necesitados</button>
-<button (click)="tengoANull()">Tengo a Null</button>
 
-<button (click)="materiasPrimasANueve()">Materias primas a 9</button>
 
-<button (click)="anadirTodosIngredientes()">Carga inicial ingredientes</button>
+
+
+
+
+
 
 <app-producto-hijo *ngFor="let producto of lProductos; let i = index" [productoDeLista] = "producto" [indice] = i>
     </app-producto-hijo>

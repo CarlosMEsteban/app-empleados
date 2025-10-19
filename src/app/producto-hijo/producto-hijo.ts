@@ -23,6 +23,7 @@ export class ProductoHijo {
 
   cambiarTengo()
   {
+    // TODO que se busque el producto por id en vez de por nombre
     this.productoServicio.modificarTengo(this.productoDeLista.getNombre(), this.productoDeLista.getTengo());
   }
 }

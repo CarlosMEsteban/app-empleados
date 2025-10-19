@@ -8,7 +8,7 @@ export class ProductoModel {
     coste: number = -1;
     tengo: number = -1;
     almacen: string = "";
-    materiaPrima: string = "";
+    materiaPrima: boolean = false;
     cantidadInicial: number = -1;
     fabrica: string = "";
     ingrediente: IngredienteModel[] = [];
@@ -23,7 +23,7 @@ export class ProductoModel {
         this.coste = datos.coste ?? -1;
         this.tengo = datos.tengo ?? -1;
         this.almacen = datos.almacen ?? "";
-        this.materiaPrima = datos.materiaPrima ?? "";
+        this.materiaPrima = datos.materiaPrima ?? false;
         this.cantidadInicial = datos.cantidadInicial ?? -1;
         this.fabrica = datos.fabrica ?? "";
         this.ingrediente = datos.ingrediente ?? [];
@@ -35,7 +35,7 @@ export class ProductoModel {
     getCoste(): number{return this.coste;}
     getTengo(): number{return this.tengo;}
     getAlmacen(): string{return this.almacen;}
-    getMateriaPrima(): string{return this.materiaPrima;}
+    getMateriaPrima(): boolean{return this.materiaPrima;}
     getCantidadInicial(): number{return this.cantidadInicial;}
     getFabrica(): string{return this.fabrica;}    
 
@@ -44,13 +44,10 @@ export class ProductoModel {
     setCoste(coste: number){this.coste = coste;}
     setTengo(tengo: number){this.tengo = tengo;}
     setAlmacen(almacen: string){this.almacen = almacen;}
-    setMateriaPrima(materiaPrima: string){this.materiaPrima = materiaPrima;}
+    setMateriaPrima(materiaPrima: boolean){this.materiaPrima = materiaPrima;}
     setCantidadInicial(cantidadInicial: number){this.cantidadInicial = cantidadInicial;}
     setFabrica(fabrica: string){this.fabrica = fabrica;}
 
-    esMateriaPrima(): boolean {
-      return this.materiaPrima == "true";
-    }
 
 }
 
@@ -64,7 +61,7 @@ export const productoConverter: FirestoreDataConverter<ProductoModel> = {
             coste : producto.getCoste(),
             tengo : producto.getTengo(),
             almacen : producto.getAlmacen(),
-            materiaPrima : producto.getMateriaPrima() === "S",
+            materiaPrima : producto.getMateriaPrima(),
             cantidadInicial : producto.getCantidadInicial(),
             fabrica : producto.getFabrica(), 
             // ingrediente: producto.ingrediente Firebase no recoge las subcolecciones automáticamente

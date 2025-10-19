@@ -10,6 +10,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { PedidoModel } from '../pedido/pedido.model';
+import { ProductoDePedidoService } from '../producto-de-pedido/producto-de-pedido.service';
 
 @Component({
   selector: 'app-productos-de-pedido',
@@ -25,15 +27,22 @@ export class ProductosDePedido {
   @Input() producto!: ProductosDePedidoModel;
   @Input() aaaa!: ProductosDePedidoModel;
   @Input() todosLosProductos: string[] = [];
+  @Input() pedidoId?: string = ''; // <-- recibe el id del pedido
+  
+  
   mProductos: Map<string, string> = new Map<string, string>();
 
   productoNombreControl = new FormControl('');
   productosFiltrados!: Observable<string[]>;
 
+  productoDePedidoServicio: ProductoDePedidoService
+
   
-  constructor(productoServicio: ProductoService)
+  constructor(productoServicio: ProductoService,
+              productoDePedidoServicio: ProductoDePedidoService)
   {
     console.log("Constructor ProductosDePedido");
+    this.productoDePedidoServicio = productoDePedidoServicio;
     productoServicio.listarProductos(new ProductoModel({})).then(lTodos =>
       {
         console.log("Tamaño de la lista  de productos: " + lTodos.length);
@@ -56,5 +65,18 @@ export class ProductosDePedido {
     const filtro = valor.toLowerCase();
     return this.todosLosProductos.filter(p => p.toLowerCase().includes(filtro));
   }
+
+  eliminar() 
+  {
+    console.clear();
+    console.log("Eliminar producto de pedido: " + this.pedidoId);
+    if (window.confirm("¿Está seguro de que desea eliminar este producto del pedido?"))
+    {
+      this.productoDePedidoServicio.eliminarProductoDePedido(this.pedidoId!, this.producto.poductoId)
+
+      
+    }
+    
+  } 
 
 }

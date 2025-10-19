@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../CONSTANTES';
 import { getAnalytics } from 'firebase/analytics';
-import { addDoc, collection, doc, getDocs, getFirestore } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore } from 'firebase/firestore';
 import { productoConverter } from '../producto/producto.model';
 import { pedidoConverter } from '../pedido/pedido.model';
 import { ProductosDePedidoModel } from '../productos-de-pedido/productosDePedido.model';
@@ -57,6 +57,20 @@ export class ProductoDePedidoService
     }
 
 
-
+    async eliminarProductoDePedido(cPedidoId: string, cProductoId: string)
+    {
+      const pedidoRef = doc(this.db, "pedido", cPedidoId);
+      const productosSubcoleccionRef = collection(pedidoRef, "productos");
+      const querySnapshot = await getDocs(productosSubcoleccionRef);
+      querySnapshot.forEach(async (docu) => {
+        const data = docu.data(); 
+        if (data['cProductoId'] === cProductoId)
+        {
+          const docRef = doc(productosSubcoleccionRef, docu.id);
+          await deleteDoc(docRef);
+          console.log("Producto eliminado del pedido");
+        }
+      });
+    }
   
 }

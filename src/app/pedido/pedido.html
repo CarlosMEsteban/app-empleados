@@ -29,7 +29,7 @@
       <!--<app-productos-de-pedido *ngFor="let producto of lProductos" [producto]="producto"></app-productos-de-pedido>-->
         <app-productos-de-pedido
               *ngFor="let producto of lProductos"
-                [producto]="producto">
+                [producto]="producto" [pedidoId]="pedido?.id">
         </app-productos-de-pedido>
       
    

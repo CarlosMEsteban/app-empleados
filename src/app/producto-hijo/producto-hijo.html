@@ -1,13 +1,4 @@
     <div class="col-md-4" id="listaDeProductos" style="border: 2px solid #007bff; padding: 15px; border-radius: 8px;">
       <p>{{indice+1}}.-{{ productoDeLista.nombre }} Tengo: 
         <input type="number" [(ngModel)]="productoDeLista.tengo" class="form-control" style="width: 100px; display: inline-block;" (change)="cambiarTengo()"/></p>
-       <a [routerLink]="['/actualiza', indice]" [queryParams]="{accion: 'M'}">
-          Editar
-      </a>
-      &nbsp;|&nbsp;
-       <a [routerLink]="['/actualiza', indice]" [queryParams]="{accion: 'E'}">
-          Eliminar
-      </a>
-        <!--<button (click)="editarProducto(i)" class="btn btn-primary btn-sm">Editar</button>
-        <button (click)="eliminarProducto(i)">Eliminar</button>        -->
     </div>
