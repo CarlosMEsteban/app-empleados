@@ -1,4 +1,23 @@
 Se ha limpiado la consola. exportar.ts:31:13
+this.productoServicio.modificarTengo(ob7lCHp5cyhXfXTAF2wj, -1); exportar.ts:36:17
+this.productoServicio.modificarTengo(xcZxRi9hLAJUrxe03ooL, -1); exportar.ts:36:17
+this.productoServicio.modificarTengo(LiuIVQLYNuEBtgZ0KjF3, -1); exportar.ts:36:17
+this.productoServicio.modificarTengo(myLd5qV3RPfIgyg8xMaG, -1); exportar.ts:36:17
+this.productoServicio.modificarTengo(XUlEWmZWJQ407jDipNWL, -1); exportar.ts:36:17
+this.productoServicio.modificarTengo(1T6r7ncitKx3Dq5XKc8a, -1); exportar.ts:36:17
+this.productoServicio.modificarTengo(23tZYSf6MdsEd3bxl4U9, -1); exportar.ts:36:17
+this.productoServicio.modificarTengo(0LnDU32fl2WHaup16NQR, -1); exportar.ts:36:17
+this.productoServicio.modificarTengo(sG3mhw6VajxK8fVYfL0W, 0); exportar.ts:36:17
+this.productoServicio.modificarTengo(edIxK2KcVSGAb4h3evNo, -1); exportar.ts:36:17
+this.productoServicio.modificarTengo(Y6m37B5JqktZh2zNpuqV, 9); exportar.ts:36:17
+this.productoServicio.modificarTengo(TKJ2y9smBeF4CvwM0pfv, -1); exportar.ts:36:17
+this.productoServicio.modificarTengo(u4Gj9pdp5EePreKjGJD4, -1); exportar.ts:36:17
+this.productoServicio.modificarTengo(zwWQGEuD3e6IaiOZHFmG, -1); exportar.ts:36:17
+this.productoServicio.modificarTengo(BasyHEiCsbLhBd6s0pi9, -1); exportar.ts:36:17
+this.productoServicio.modificarTengo(n47pq05KAcLdG1vWssXN, -1); exportar.ts:36:17
+this.productoServicio.modificarTengo(3DE6AVSiaHBGiuu82FOq, -1); exportar.ts:36:17
+this.productoServicio.modificarTengo(dkPFJfALIfHAVuFxhiuJ, -1); exportar.ts:36:17
+this.productoServicio.modificarTengo(jydmBf8l8RbTMjLdsSE3, -1); exportar.ts:36:17
 this.productoServicio.modificarTengo(rhU8gE3cXbnYfIFSUVWX, -1); exportar.ts:36:17
 this.productoServicio.modificarTengo(vTepuOuMcwkhIFsFcYGT, 1); exportar.ts:36:17
 this.productoServicio.modificarTengo(iTA8wZ1pwwbgduJPzSSX, -1); exportar.ts:36:17
@@ -27,31 +46,12 @@ nuevoPedido = this.pedidoServicio.insertarPedido(new PedidoModel({ orden: 1, oro
 nuevoPedido = this.pedidoServicio.insertarPedido(new PedidoModel({ orden: 4, oro: 3793, estrellas: 2797})); exportar.ts:55:17
 nuevoPedido = this.pedidoServicio.insertarPedido(new PedidoModel({ orden: 8, oro: 2640, estrellas: 1940})); exportar.ts:55:17
 nuevoPedido = this.pedidoServicio.insertarPedido(new PedidoModel({ orden: 9, oro: 1900, estrellas: 1455})); exportar.ts:55:17
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: fmeE8TrXaNys0I0DQ8Eu, cantidad: 1})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: FJLm3pR7UbMDZzsvK5DF, cantidad: 1})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: BlWspNg8yVDOQeadNjS7, cantidad: 1})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: lBIlwlaesm5JBD3EA9H8, cantidad: 1})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: KtNL4tw0wVd6Ey1MwnPD, cantidad: 1})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: XmLGqqLRmJnkxjBEbPvP, cantidad: 3})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: eAisRLf3r2GrOhGfekt2, cantidad: 3})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: c9mFQfIQMPKXIQnClGnN, cantidad: 3})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: 0zZJjStLpCmRcUWqPFGS, cantidad: 2})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: VVNgdAl0AwSrBvNspkf0, cantidad: 2})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: mM0W0Ah1WrNY9JPn6IbN, cantidad: 2})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: j5jLd1tPJt3p8X8r5l1I, cantidad: 2})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: sG3mhw6VajxK8fVYfL0W, cantidad: 3})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: 1Xk1qmHpbFpSqS0UomOK, cantidad: 3})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: 0xkGcxvh7IOb5HGwh3yl, cantidad: 3})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: ny2MtgOv0C62MRQnChAj, cantidad: 3})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: Lkfvv7K6yE9fShy9lqPw, cantidad: 3})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: Jbtq0s0mdMnRTPF1lqKu, cantidad: 2})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: Blh8CENqbDD9nV2Ffixu, cantidad: 2})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: AVgAYdayBDB2J7F7w48s, cantidad: 2})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: 06ufFnzHixokEADF4RQP, cantidad: 2})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: lBIlwlaesm5JBD3EA9H8, cantidad: 2})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: CDMaosOl0mjyTCcxRuFL, cantidad: 3})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: ZHS2Vgc1Ax9p2RprRQ6c, cantidad: 3})); exportar.ts:58:25
-this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: ob9wGsduoHnNV34tnTNy, cantidad: 3})); exportar.ts:58:25
+this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: nuevoPedido, cantidad: 1})); 5 exportar.ts:58:25
+this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: nuevoPedido, cantidad: 3})); 3 exportar.ts:58:25
+this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: nuevoPedido, cantidad: 2})); 4 exportar.ts:58:25
+this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: nuevoPedido, cantidad: 3})); 5 exportar.ts:58:25
+this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: nuevoPedido, cantidad: 2})); 5 exportar.ts:58:25
+this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: nuevoPedido, cantidad: 3})); 3 exportar.ts:58:25
 Exportados los pedidos. exportar.ts:65:15
 
 ​

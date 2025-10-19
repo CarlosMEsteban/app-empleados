@@ -55,7 +55,7 @@ export class Exportar
         console.log("nuevoPedido = this.pedidoServicio.insertarPedido(new PedidoModel({ orden: " + pedido.orden + ", oro: " + pedido.oro + ", estrellas: " + pedido.estrellas + "}));");
         this.productoDePedidoServicio.obtenerProductosDePedidoPorPedidoId(pedido.id).then( productosDePedido => {
             productosDePedido.forEach( productoDePedido => {
-                console.log("this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: " + productoDePedido.poductoId + ", cantidad: " + productoDePedido.cantidad + "}));");
+                console.log("this.productoDePedidoServicio.anadirProductoDePedido(nuevoPedido, new ProductosDePedidoModel({ poductoId: nuevoPedido, cantidad: " + productoDePedido.cantidad + "}));");
             });
         });
 
