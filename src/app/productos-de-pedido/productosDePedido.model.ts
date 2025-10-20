@@ -1,7 +1,8 @@
 import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions } from "firebase/firestore";
 
 export class ProductosDePedidoModel {
-    poductoId: string = ""
+    poductoId: string = "";
+    pedidoId: string = "";
     nombreProducto: string = "";
     cantidad: number = -1;
     tengo: number = -1;
@@ -10,7 +11,8 @@ export class ProductosDePedidoModel {
     constructor(datos: Partial<ProductosDePedidoModel>) 
     {
       this.poductoId = datos.poductoId ?? "";
-      this.cantidad = datos.cantidad ?? -1;
+      this.pedidoId = datos.pedidoId ?? "";
+      this.cantidad = datos.cantidad ?? -1;      
     }
 
 }

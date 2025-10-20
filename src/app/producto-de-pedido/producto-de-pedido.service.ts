@@ -38,6 +38,16 @@ export class ProductoDePedidoService
       
     }
 
+    obtenerProductosDePedidoPorPedidoIdSinPromesa(cPedidoId: string): ProductosDePedidoModel[]
+    { 
+      let productos: ProductosDePedidoModel[] = [];
+      this.obtenerProductosDePedidoPorPedidoId(cPedidoId).then( prods =>
+      {
+        productos = prods;
+      });
+      return productos;
+    }
+
     async obtenerProductosDePedidoPorPedidoId(cPedidoId: string): Promise<ProductosDePedidoModel[]>
     {
       const pedidoRef = doc(this.db, "pedido", cPedidoId);
