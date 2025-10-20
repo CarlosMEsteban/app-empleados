@@ -6,6 +6,7 @@ import { ProductoModel } from '../producto/producto.model';
 import { ProductoDePedidoService } from '../producto-de-pedido/producto-de-pedido.service';
 import { ProductosDePedidoModel } from '../productos-de-pedido/productosDePedido.model';
 import { IngredienteService } from '../ingrediente/ingrediente-service';
+import { IngredienteModel } from '../ingrediente/ingrediente.model';
 
 @Component({
   selector: 'app-orden-pedidos',
@@ -23,6 +24,7 @@ export class OrdenPedidos
   pedidos: PedidoModel[] = [];
   productos: ProductoModel[] = [];
   productosDePedido: ProductosDePedidoModel[] = [];
+  ingredientes: IngredienteModel[] = [];
 
 
   constructor(pedidoServicio: PedidoService, 
@@ -42,6 +44,10 @@ export class OrdenPedidos
     console.clear();
     this.obtenerTodosLosDatos();
 
+    this.calcularBfo();
+
+    // Recuperamos todos los pedidos ordenados por Bfo
+
 
 
   }
@@ -52,6 +58,7 @@ export class OrdenPedidos
     // Todos los productos y los pedidos
     let pedidosProm = this.pedidoServicio.obtenerPedidos();
     let productosProm = this.productoServicio.listarProductos(new ProductoModel({}));
+    
     this.pedidos = await pedidosProm as PedidoModel[];
     console.log("Pedidos: " + this.pedidos.length);
     this.productos = await productosProm as ProductoModel[];
@@ -63,6 +70,8 @@ export class OrdenPedidos
     {
       console.log("Pedido ID: " + productoDePedido.pedidoId + " - Producto ID: " + productoDePedido.poductoId + " - Cantidad: " + productoDePedido.cantidad );
     });
+
+    await this.obtenerIngredientes()
 
   }
 
@@ -80,13 +89,113 @@ export class OrdenPedidos
             console.log("Añadido Pedido: " + pedido.id + " - Producto: " + productoDePedido.poductoId);
           });
         })
-    );
+     );
 
     await Promise.all(tareas);
     console.log("Ya tenemos todos los productos de pedido");
 
+  }
+
+
+  private async obtenerIngredientes()
+  {
+
+    console.log("Ingredientes")
+    const tareas = this.productos.map(producto =>
+      this.IngredienteServicio
+        .ingredientesDeProducto(producto.cProductoId)
+        .then(lIngredientes => {
+          lIngredientes.forEach(ingrediente => {
+            ingrediente.cProductoNecesitaId = producto.cProductoId;
+            this.ingredientes.push(ingrediente);
+            console.log("El producot : " + ingrediente.cProductoNecesitaId + " necesita: " + ingrediente.cProductoNecesitadoId);
+          });
+        })
+     );
+
+    await Promise.all(tareas);
+    console.log("Ya tenemos todos los ingredientes");
+
+  }
+
+  calcularBfo()
+  {
+    // Calculamos el coste para cada uno de los productos de pedido
+    this.productosDePedido.forEach(pdp=>
+      {
+        let producto: ProductoModel | undefined = this.productos.find(p => p.cProductoId == pdp.poductoId);
+        let falta = -1;
+        if (producto == undefined)
+          throw new Error("Producto no encontrado: '" + pdp.poductoId + "'");
+        else
+        {
+          falta = this.falta(producto.tengo, pdp.cantidad);
+          if (falta > 0)
+          {
+            pdp.coste = this.cuantoCuesta(pdp.poductoId, falta);
+            let pedido: PedidoModel | undefined = this.pedidos.find(pedido => pedido.id == pdp.pedidoId);
+            if (pedido == undefined)
+              throw new Error("Pedido no encontrado: '" + pdp.pedidoId + "'");
+            else
+              pedido.costeAcumulado += pdp.coste;
+          }
+          else
+            pdp.coste = 0;
+        }
+      });
+
+    // Para cada pedido calculamos el beneficio
+    this.pedidos.forEach(p=>
+    {
+      p.bfo = 1000 * (p.oro + p.estrellas * 1.2) / p.costeAcumulado;
+    });
+
+    // Grabamos el beneficio de cada pedido
+
     
 
+  }
+
+  // Devuelve cuanto cuesta fabricar 'cantidad' el 'cProductoId' con lo que hay ahora mismo
+  private cuantoCuesta(cProducoId: string, cantidad: number ): number
+  {
+    let resultado: number = 0;
+    const producto: ProductoModel | undefined = this.productos.find(p => p.cProductoId = cProducoId);
+    if (producto == undefined)
+      throw new Error("Se ha pedido el coste de producir el producto: " + cProducoId + " pero ese producto NO EXISTE");
+    else
+    {
+      resultado = cantidad * producto.coste; // Coste de producto el producto padre
+
+      // Calculamos el coste de los ingredientes
+      let ingredientesDeProducto: IngredienteModel[] = this.ingredientes.filter(i => i.cProductoNecesitaId = cProducoId);
+      ingredientesDeProducto.forEach(ingrediente => 
+        {
+          let falta = this.cuantoFaltaDeUnProducto(ingrediente.cProductoNecesitadoId, ingrediente.cantidad * cantidad);
+          if (falta > 0)
+            resultado +=this.cuantoCuesta(ingrediente.cProductoNecesitadoId, falta);
+        });      
+    }
+
+    return resultado;
+
+  }
+
+  private cuantoFaltaDeUnProducto(cProducoId: string, cantidad: number): number
+  {
+    const producto: ProductoModel | undefined = this.productos.find(p => p.cProductoId = cProducoId);
+    if (producto == undefined)
+      throw new Error ("Se ha pedido saber cuánto falta del producto: " + cProducoId + ", y resultao que NO EXISTE");
+    else
+      return this.falta(producto.tengo, cantidad);
+  }
+
+  private falta(tengo: number, cantidad: number): number
+  {
+    if (cantidad <= tengo)
+      return 0;
+    else
+      return cantidad - (tengo == -1 ? 0 : tengo);
   }
 
 }

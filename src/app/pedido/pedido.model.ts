@@ -7,6 +7,8 @@ export class PedidoModel {
     estrellas: number = -1;
     oro: number = -1;
     productos: any[] = [];
+    costeAcumulado: number = -1;
+    bfo: number = -1;
 
     //constructor(id: number = -1, nombre: string, coste: number, tengo: number, almacen: string, materiaPrima: boolean, cantidadInicial: number, fabrica: string ) 
     constructor(datos: Partial<PedidoModel>) 

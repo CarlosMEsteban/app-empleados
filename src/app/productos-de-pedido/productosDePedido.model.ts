@@ -6,6 +6,7 @@ export class ProductosDePedidoModel {
     nombreProducto: string = "";
     cantidad: number = -1;
     tengo: number = -1;
+    coste: number = -1; // alamcena cuánto cuesta producir este producto en la cantidad que se pide en este pedido y con los productos que hay.
 
     //constructor(id: number = -1, nombre: string, coste: number, tengo: number, almacen: string, materiaPrima: boolean, cantidadInicial: number, fabrica: string ) 
     constructor(datos: Partial<ProductosDePedidoModel>) 
