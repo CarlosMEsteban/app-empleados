@@ -55,7 +55,7 @@ export class OrdenPedidos
 
   private async obtenerTodosLosDatos()
   {
-    console.log("Empezamos");
+//    console.log("Empezamos");
     // Todos los productos y los pedidos
     let pedidosProm = this.pedidoServicio.obtenerPedidos();    
     let productosProm = this.productoServicio.listarProductos(new ProductoModel({}));
@@ -83,7 +83,7 @@ this.pedidos.push(unPedido);*/
   private async obtenerProductosDePedido()
   {
 
-    console.log("productos de pedido")
+    //console.log("productos de pedido")
     const tareas = this.pedidos.map(pedido =>
       this.productosDePedidoServicio
         .obtenerProductosDePedidoPorPedidoId(pedido.id)
@@ -149,7 +149,7 @@ this.pedidos.push(unPedido);*/
           {
             pdp.coste = 0;
           }
-          console.log("Producto: " + producto.nombre + " falta: " + falta + " coste: " + pdp.coste);
+          //console.log("Producto: " + producto.nombre + " falta: " + falta + " coste: " + pdp.coste);
         }
       });
 

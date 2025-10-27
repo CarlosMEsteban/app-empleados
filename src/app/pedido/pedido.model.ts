@@ -20,6 +20,18 @@ export class PedidoModel {
         this.productos = datos.productos ?? [];
     }
 
+    public getBfoTXT()
+    {
+    return new Intl.NumberFormat('es-ES', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      }).format(this.bfo);
+
+    }
+  
+
+
+
 }
 
 // 2. Create a FirestoreDataConverter for your Producto class
@@ -51,4 +63,5 @@ export const pedidoConverter: FirestoreDataConverter<PedidoModel> = {
       }
     );
   }
+
 };

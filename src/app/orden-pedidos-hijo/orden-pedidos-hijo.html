@@ -1,3 +1,11 @@
 <div class="col-md-4" id="listaDePedidos" style="border: 2px solid #007bff; padding: 15px; border-radius: 8px;">
-    <p>Id: {{ pedido.id }} - Orden: {{ pedido.orden }} - Estrellas: {{ pedido.estrellas }} - Oro: {{ pedido.oro }} - Bfo: {{ pedido.bfo }} 
+    <p>Orden: {{ pedido.orden }} - Estrellas: {{ pedido.estrellas }} - Oro: {{ pedido.oro }} - Bfo: {{ pedido.getBfoTXT() }} 
+
+<app-orden-pedidos-productos-hijo
+        *ngFor="let productoDePedido of lProductosDePedido" [productoDePedido]="productoDePedido">
+</app-orden-pedidos-productos-hijo>        
+    <!--<app-orden-pedidos-productos-hijo
+            *ngFor="let producto of lProductosDePedido"
+            >--><!--[producto]="producto" [pedidoId]="pedido?.id">-->
+    <!--</app-orden-pedidos-productos-hijo>    -->
 </div>
