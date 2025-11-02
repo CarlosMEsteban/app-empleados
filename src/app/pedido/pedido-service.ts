@@ -74,5 +74,6 @@ export class PedidoService {
     const docRef = doc(this.pedidoCollectionRef, cPedidoId);
     updateDoc(docRef, {"Bfo": bfo});
   }
-  
+
+
 }

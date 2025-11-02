@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { ProductosDePedidoModel } from '../productos-de-pedido/productosDePedido.model';
-import { PedidoModel } from '../pedido/pedido.model';
 
 @Component({
   selector: 'app-orden-pedidos-productos-hijo',
@@ -12,5 +11,14 @@ export class OrdenPedidosProductosHijo
 {
   @Input() productoDePedido!: ProductosDePedidoModel;
 
-
+  claseSegunFalta(): string
+  {
+    if (this.productoDePedido == undefined)
+      return "green";
+    else
+      if (this.productoDePedido.cantidad > this.productoDePedido.tengo)
+        return "coral";
+      else
+        return "aliceblue";
+  }
 }

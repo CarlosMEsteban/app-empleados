@@ -218,4 +218,7 @@ this.pedidos.push(unPedido);*/
       this.pedidos.sort((a, b) => b.bfo - a.bfo);
   }
 
+
+
+
 }

@@ -1,5 +1,6 @@
 <div class="col-md-4" id="listaDePedidos" style="border: 2px solid #007bff; padding: 15px; border-radius: 8px;">
     <p>Orden: {{ pedido.orden }} - Estrellas: {{ pedido.estrellas }} - Oro: {{ pedido.oro }} - Bfo: {{ pedido.getBfoTXT() }} 
+        <button (click)="tratarPedido()">Tratar Pedido</button>
 
 <app-orden-pedidos-productos-hijo
         *ngFor="let productoDePedido of lProductosDePedido" [productoDePedido]="productoDePedido">
