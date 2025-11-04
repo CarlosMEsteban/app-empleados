@@ -3,5 +3,8 @@
 
 <app-orden-pedidos-hijo
         *ngFor="let pedido of pedidos"
-        [pedido]="pedido" [lProductos]="productos" [lIngredientes] = "ingredientes">
+        [pedido]="pedido" 
+        [lProductos]="productos" 
+        [lIngredientes] = "ingredientes"
+        (calcularBfo)="calcularBfoDeTodosLosPedidos()">
 </app-orden-pedidos-hijo>

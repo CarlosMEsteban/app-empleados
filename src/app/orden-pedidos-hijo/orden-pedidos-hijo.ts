@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PedidoModel } from '../pedido/pedido.model';
 import { OrdenPedidosProductosHijo } from '../orden-pedidos-productos-hijo/orden-pedidos-productos-hijo';
 import { ProductosDePedidoModel } from '../productos-de-pedido/productosDePedido.model';
@@ -8,6 +8,7 @@ import { ProductoService } from '../producto/producto.service';
 import { ProductoModel } from '../producto/producto.model';
 import { IngredienteModel } from '../ingrediente/ingrediente.model';
 import { OrdenPedidos } from '../orden-pedidos/orden-pedidos';
+import { PedidoService } from '../pedido/pedido-service';
 
 @Component({
   selector: 'app-orden-pedidos-hijo',
@@ -17,6 +18,7 @@ import { OrdenPedidos } from '../orden-pedidos/orden-pedidos';
 })
 export class OrdenPedidosHijo 
 {
+  @Output() calcularBfo = new EventEmitter<void>();
   @Input() pedido!: PedidoModel;
   @Input() lProductos!: ProductoModel[];
   @Input() lIngredientes!: IngredienteModel[];
@@ -25,11 +27,15 @@ export class OrdenPedidosHijo
 
   productoDePedidoServicio: ProductoDePedidoService;
   productoServicio: ProductoService;
+  pedidoServicio: PedidoService;
 
-  constructor(productoDePedidoServicio: ProductoDePedidoService, productoServicio: ProductoService)
+  constructor(productoDePedidoServicio: ProductoDePedidoService, 
+              productoServicio: ProductoService,
+              pedidoServicio: PedidoService)
   {
     this.productoDePedidoServicio = productoDePedidoServicio;
     this.productoServicio = productoServicio;
+    this.pedidoServicio = pedidoServicio;
   }
 
   ngOnInit()
@@ -69,7 +75,7 @@ export class OrdenPedidosHijo
     console.log("Pedido: " + this.pedido.id+ " tiene "+  this.lProductosDePedido.length + " productos")
  }
 
-  tratarPedido()
+  async tratarPedido()
   {
     console.log(this.pedido.id);
     this.lProductosDePedido.forEach(pdp =>
@@ -77,9 +83,20 @@ export class OrdenPedidosHijo
       this.fabricar(pdp.poductoId, pdp.cantidad);
     }
     );
-    //calcularBfoDeTodosLosPedidos();
+
+    console.log("Aquítengo que poder llamar al método calcularBfoDeTodosLosPedidos")
+    this.calcularBfo.emit();
+    /*await this.obtenerTodosLosDatos();
+    this.pedidoServicio.calcularBfoDeTodosLosPedidos(this.pedidos, 
+                                                      this.productosDePedido, 
+                                                      this.ingredientes,
+                                                      this.productos);
+    await this.ordenarPorBfo();*/
+
 
   }
+
+ 
 
   private fabricar(cProductoId: string, cantidad: number)
   {
@@ -97,7 +114,7 @@ export class OrdenPedidosHijo
         // Tengo menos de lo que necesito
         {
           let hayQuefabricar = cantidad - producto.tengo;
-          let lIngredientesNecesarios: IngredienteModel[] | undefined = this.lIngredientes.filter(i => i.cProductoNecesitaId = cProductoId); // Obtenemos los ingredientes de este producto
+          let lIngredientesNecesarios: IngredienteModel[] | undefined = this.lIngredientes.filter(i => i.cProductoNecesitaId == cProductoId); // Obtenemos los ingredientes de este producto
           if (lIngredientesNecesarios != undefined)
           {
             lIngredientesNecesarios.forEach(ingrediente => 
