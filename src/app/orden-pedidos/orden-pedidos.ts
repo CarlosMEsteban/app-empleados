@@ -12,7 +12,7 @@ import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-orden-pedidos',
-  imports: [OrdenPedidosHijo, NgFor],
+  imports: [OrdenPedidosHijo, NgFor], 
   templateUrl: './orden-pedidos.html',
   styleUrl: './orden-pedidos.css'
 })
