@@ -18,7 +18,7 @@ import { NgFor } from '@angular/common';
 })
 export class OrdenPedidos 
 {
-  pedidoServicio: PedidoService;
+  pedidoServicio: PedidoService; 
   productoServicio: ProductoService;
   productosDePedidoServicio: ProductoDePedidoService;
   IngredienteServicio: IngredienteService;
