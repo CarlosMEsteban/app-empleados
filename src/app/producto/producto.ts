@@ -256,15 +256,17 @@ export class Producto {
 
   } 
 
-  comenzarElDia()
+  async comenzarElDia()
   {
     if (window.confirm("¿Desea comenzar un nuevo día?") )
       if (window.confirm("¿Estás seguro? Esta operación pondrá a -1 los tengo de los productos, a 9 las materias primas y eliinará todos los pedidos") )
       {
-        this.productoServicio.tengoANull();
-        this.productoServicio.materiasPrimasANueve();
-        this.pedidoServicio.eliminarTodosPedidos();
+        await this.productoServicio.tengoANull();
+        await this.productoServicio.materiasPrimasANueve();
+        await this.pedidoServicio.eliminarTodosPedidos();
       }
+
+    
 
   }   
 
