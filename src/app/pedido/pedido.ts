@@ -39,6 +39,7 @@ export class Pedido {
 
     this.pedidoServicio.obtenerPedidos().then((pedidos: PedidoModel[]) => {
       this.lPedidos = pedidos as PedidoModel[];
+      this.lPedidos.sort((a, b) => a.orden - b.orden);
       this.mostrarPedidoActual();
 
     });

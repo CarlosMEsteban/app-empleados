@@ -81,8 +81,9 @@ export class OrdenPedidosHijo
     this.lProductosDePedido.forEach(pdp =>
     {
       this.fabricar(pdp.poductoId, pdp.cantidad);
-    }
-    );
+    });
+
+  this.pedidoServicio.aMenosUno(this.pedido.id);
 
     console.log("Aquítengo que poder llamar al método calcularBfoDeTodosLosPedidos")
     this.calcularBfo.emit();

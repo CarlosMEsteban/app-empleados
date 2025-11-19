@@ -184,4 +184,11 @@ export class PedidoService {
       return cantidad - (tengo == -1 ? 0 : tengo);
   }
 
+  async aMenosUno(cPedidoId: string)
+  {
+    const docRef = doc(this.pedidoCollectionRef, cPedidoId);
+    updateDoc(docRef, {"estrellas": -1, "oro": -1});
+  }
+
+
 }
