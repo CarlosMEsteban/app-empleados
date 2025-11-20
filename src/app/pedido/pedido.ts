@@ -129,6 +129,13 @@ console.log("Mostrando productos de pedido para el pedido con id: " + this.pedid
 
   async mostrarPedidoActual() 
   {
+    if (this.pedido?.id) {
+    this.productosDePedidoServicio.obtenerProductosDePedidoPorPedidoId(this.pedido.id)
+      .then(pdp => {
+        this.lProductos = pdp;
+        console.log("Pedido refrescado con", pdp.length, "productos");
+      });
+  }
       if (this.lPedidos.length > 0)
       { 
         this.pedido = this.lPedidos[this.indicePedidoActual];

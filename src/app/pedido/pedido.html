@@ -29,7 +29,9 @@
       <!--<app-productos-de-pedido *ngFor="let producto of lProductos" [producto]="producto"></app-productos-de-pedido>-->
         <app-productos-de-pedido
               *ngFor="let producto of lProductos"
-                [producto]="producto" [pedidoId]="pedido?.id">
+                [producto]="producto" 
+                [pedidoId]="pedido?.id"
+                (productoEliminado)="mostrarPedidoActual()">
         </app-productos-de-pedido>
       
    

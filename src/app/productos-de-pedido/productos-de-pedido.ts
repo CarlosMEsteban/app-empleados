@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProductosDePedidoModel } from './productosDePedido.model';
 import { FormsModule } from '@angular/forms';
 import { ProductoModel } from '../producto/producto.model';
@@ -28,6 +28,8 @@ export class ProductosDePedido {
   @Input() aaaa!: ProductosDePedidoModel;
   @Input() todosLosProductos: string[] = [];
   @Input() pedidoId?: string = ''; // <-- recibe el id del pedido
+
+  @Output() productoEliminado = new EventEmitter<void>();
   
   
   mProductos: Map<string, string> = new Map<string, string>();
@@ -73,6 +75,10 @@ export class ProductosDePedido {
     if (window.confirm("¿Está seguro de que desea eliminar este producto del pedido?"))
     {
       this.productoDePedidoServicio.eliminarProductoDePedido(this.pedidoId!, this.producto.poductoId)
+        .then(() => {
+          console.log("Producto de pedido eliminado correctamente.");
+          this.productoEliminado.emit(); // Notificar al componente padre
+        })
 
       
     }
