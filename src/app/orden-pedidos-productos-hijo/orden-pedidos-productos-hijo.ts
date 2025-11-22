@@ -49,14 +49,18 @@ export class OrdenPedidosProductosHijo
         ingredientes.forEach( ingrediente => 
         {
           console.log("- Ingrediente:", ingrediente);
-          this.productoServicio.obtenerNombreProductoPorId(ingrediente.cProductoNecesitadoId).then((productoConTodosLosDatos: ProductoModel) => {
-            let iFM: IngredienteFaltaModel = new IngredienteFaltaModel();
-            iFM.cProductoId = ingrediente.cProductoNecesitadoId;
-            iFM.nombre = productoConTodosLosDatos.nombre;
-            iFM.cantidad = ingrediente.cantidad * this.productoDePedido.cantidad;
-            iFM.tengo = productoConTodosLosDatos.tengo;
-            this.lIngredientesFaltantes.push(iFM);
-            console.log("  - IngredienteFaltaModel añadido:", iFM);
+          this.productoServicio.obtenerNombreProductoPorId(ingrediente.cProductoNecesitadoId).then((productoConTodosLosDatos: ProductoModel) => 
+          {
+            if (!productoConTodosLosDatos.materiaPrima)
+            {
+              let iFM: IngredienteFaltaModel = new IngredienteFaltaModel();
+              iFM.cProductoId = ingrediente.cProductoNecesitadoId;
+              iFM.nombre = productoConTodosLosDatos.nombre;
+              iFM.cantidad = ingrediente.cantidad * this.productoDePedido.cantidad;
+              iFM.tengo = productoConTodosLosDatos.tengo;
+              this.lIngredientesFaltantes.push(iFM);
+              console.log("  - IngredienteFaltaModel añadido:", iFM);
+            }
           });
 
 
