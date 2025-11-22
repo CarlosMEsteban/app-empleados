@@ -191,4 +191,9 @@ export class PedidoService {
   }
 
 
+  async eliminarPedido(cPedidoId: string)
+  {
+    deleteDoc(doc(this.db, 'pedido', cPedidoId));
+  }
+
 }

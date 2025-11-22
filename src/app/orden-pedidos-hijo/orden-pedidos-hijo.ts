@@ -3,16 +3,15 @@ import { PedidoModel } from '../pedido/pedido.model';
 import { OrdenPedidosProductosHijo } from '../orden-pedidos-productos-hijo/orden-pedidos-productos-hijo';
 import { ProductosDePedidoModel } from '../productos-de-pedido/productosDePedido.model';
 import { ProductoDePedidoService } from '../producto-de-pedido/producto-de-pedido.service';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf, } from '@angular/common';
 import { ProductoService } from '../producto/producto.service';
 import { ProductoModel } from '../producto/producto.model';
 import { IngredienteModel } from '../ingrediente/ingrediente.model';
-import { OrdenPedidos } from '../orden-pedidos/orden-pedidos';
 import { PedidoService } from '../pedido/pedido-service';
-
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-orden-pedidos-hijo',
-  imports: [OrdenPedidosProductosHijo, NgFor],
+  imports: [OrdenPedidosProductosHijo, NgFor, FormsModule, NgIf],
   templateUrl: './orden-pedidos-hijo.html',
   styleUrl: './orden-pedidos-hijo.css'
 })
@@ -28,6 +27,8 @@ export class OrdenPedidosHijo
   productoDePedidoServicio: ProductoDePedidoService;
   productoServicio: ProductoService;
   pedidoServicio: PedidoService;
+
+  aEliminar: boolean = false;
 
   constructor(productoDePedidoServicio: ProductoDePedidoService, 
               productoServicio: ProductoService,
@@ -131,5 +132,14 @@ export class OrdenPedidosHijo
       }
 
   }
- 
+
+  async eliminarFase2()
+  {
+    if (window.confirm("¿Está seguro de que desea eliminar este pedido y todos sus productos?"))
+    {
+      await this.pedidoServicio.eliminarPedido(this.pedido.id);
+      this.calcularBfo.emit();
+    }
+    
+  }
 }
