@@ -1,0 +1,60 @@
+
+<!--<button (click)="crearTareasFijas()">
+  Crear Tareas Fijas
+</button>-->
+
+<div style="padding: 20px;">
+  <h2>Tareas</h2>
+    H.Inicio: <input type="time" [(ngModel)]="nuevaTarea.hInicio" />
+    H.Duración: <input type="time" [(ngModel)]="nuevaTarea.hDuracion" />
+    Descripción: <input type="text" [(ngModel)]="nuevaTarea.dTarea" />
+    Orden: <input type="number" [(ngModel)]="nuevaTarea.nOrden" />
+    Total: <input type="number" [(ngModel)]="nuevaTarea.nTotal" />
+    Para: <input type="text" [(ngModel)]="nuevaTarea.aPara" />
+    <button (click)="agregarTarea()">
+      Agregar Tarea
+    </button>
+</div>
+<button (click)="ordenarTareas()">
+  <img src="/ordenar.png" alt="Ordenar" width="24" height="24"/>
+</button>
+
+
+
+<div style="padding: 20px;">
+  <h2>Tareas</h2>
+  
+  <table style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;">
+    <thead>
+      <tr style="background-color: #007bff; color: white;">
+        <th class="casilla">Final</th>
+        <th class="casilla">Inicio</th>
+        <th class="casilla">Duración</th>
+        <th class="casilla">Descripción</th>
+        <th class="casilla">Orden</th>
+        <th class="casilla">Total</th>
+        <th class="casilla">Para</th>
+        <th class="casilla">Operación</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (tarea of lTareas; track tarea.id) {
+        <tr style="border: 1px solid #ddd;">
+          <td class="casilla"><input [class]="hFinal(tarea.hFinal)" size="10" type="text" readonly="true" [(ngModel)]="tarea.hFinal"/></td>
+          <td class="casilla"><input type="time" [(ngModel)]="tarea.hInicio" (ngModelChange)="calcularModifHFinal(tarea)"/></td>
+          <td class="casilla"><input type="time" [(ngModel)]="tarea.hDuracion" (ngModelChange)="calcularModifHFinal(tarea)"/></td>
+          <td class="casilla"><input type="text" [(ngModel)]="tarea.dTarea"/></td>
+          <td class="casilla"><input [class]="claseCantidades(tarea.nOrden)" type="number" [(ngModel)]="tarea.nOrden"/></td>
+          <td class="casilla"><input [class]="claseCantidades(tarea.nTotal)" type="number" [(ngModel)]="tarea.nTotal"/></td>
+          <td class="casilla"><input [class]="clasePara(tarea.aPara)" type="text" [(ngModel)]="tarea.aPara"/></td>
+          <td class="casilla"><img src="/equis.png" alt="Pedido Image" height="20" width="20"(click)="eliminar(tarea.id!)"/></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  @if (lTareas.length === 0) {
+    <p style="margin-top: 20px; color: #666;">No hay tareas disponibles.</p>
+  }
+</div>
+

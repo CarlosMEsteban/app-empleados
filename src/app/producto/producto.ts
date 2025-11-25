@@ -261,9 +261,11 @@ export class Producto {
     if (window.confirm("¿Desea comenzar un nuevo día?") )
       if (window.confirm("¿Estás seguro? Esta operación pondrá a -1 los tengo de los productos, a 9 las materias primas y eliinará todos los pedidos") )
       {
-        await this.productoServicio.tengoANull();
-        await this.productoServicio.materiasPrimasANueve();
-        await this.pedidoServicio.eliminarTodosPedidos();
+        await Promise.all([
+        this.productoServicio.tengoANull(),
+        this.productoServicio.materiasPrimasANueve(),
+        this.pedidoServicio.eliminarTodosPedidos()
+        ]);
       }
 
     

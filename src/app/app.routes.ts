@@ -16,6 +16,7 @@ import { PruebaMaterial } from './prueba-material/prueba-material';
 import { ProductosDePedido } from './productos-de-pedido/productos-de-pedido';
 import { Exportar } from './exportar/exportar';
 import { OrdenPedidos } from './orden-pedidos/orden-pedidos';
+import { Tarea } from './tarea/tarea';
 
 
 export const routes: Routes = [
@@ -31,5 +32,6 @@ export const routes: Routes = [
   {path:'productosDePedido', component: ProductosDePedido},
   {path:'exportar', component: Exportar},
   {path:'ordenPedidos', component: OrdenPedidos},
+  {path:'tarea', component: Tarea},
   {path:'**', component: ErrorPersonalizado}
 ];

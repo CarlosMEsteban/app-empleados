@@ -13,7 +13,10 @@
     Orden: <input type="number" [(ngModel)]="pedido.orden" class="form-control" style="width: 100px; display: inline-block;" />
     Oro: <input type="number" [(ngModel)]="pedido.oro" class="form-control" style="width: 100px; display: inline-block;" />
     Estrellas: <input type="number" [(ngModel)]="pedido.estrellas" class="form-control" style="width: 100px; display: inline-block;" />
-    <img *ngIf="bNuevo()" src="/Ok.png" alt="Pedido Image" height="20" width="20"(click)="insertarPedido()"/>
+    @if (bNuevo())
+    {
+      <button (click)="insertarPedido()">nuevo</button>
+    }
     <br/>
 
     <img src="/anterior.png" alt="Anterior" height="20" width="20" (click)="anteriorPedido()"/>

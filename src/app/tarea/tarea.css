@@ -1,0 +1,61 @@
+.input-bandas-v {
+  background-image: linear-gradient(
+    to right,
+    #ccc6a4 0%,
+    #FFD700 50%,
+    #c2a088 50%,
+    #c2a692 100%
+  );
+  background-size: 16px 100%; /* franjas de 8px + 8px verticales */
+}
+
+
+.charca {
+    background-color: #8FBC8F;
+}
+
+.trenVecindario {
+    color:aqua;
+}
+
+.greg  {
+  background: radial-gradient(circle, #0000FF 0%, #87CEFA 100%);
+  color: white; /* para que el texto contraste */
+  border: none;
+}
+
+.tommy  {
+  background: radial-gradient(circle, #00ff80 0%, #87CEFA 100%);
+  color: white; /* para que el texto contraste */
+  border: none;
+}
+
+.feria  {
+  background: radial-gradient(circle, #cf4d11 0%, #e0dd12 30%);
+  color: white; /* para que el texto contraste */
+  border: none;
+}
+.pase {
+    background-color: #d6f0d6;
+}
+
+.nada{
+    color:rgb(233, 226, 226)
+}
+
+.temprano{
+    background-color:#FFD700;
+}
+    
+
+.medio{
+    background-color: yellow;
+}
+
+.tarde{
+    background-color: red;
+}
+
+.casilla{
+    border: 1px solid #ddd; padding: 1px; text-align: left;
+}

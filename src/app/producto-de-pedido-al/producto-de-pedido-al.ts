@@ -1,4 +1,4 @@
-import { Component , EventEmitter, Input, Output } from '@angular/core';
+import { AfterViewInit, Component , ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { ProductosDePedidoModel } from '../productos-de-pedido/productosDePedido.model';
 import { FormsModule } from '@angular/forms';
 import { ProductoModel } from '../producto/producto.model';
@@ -21,12 +21,19 @@ import { ProductoDePedidoService } from '../producto-de-pedido/producto-de-pedid
   templateUrl: './producto-de-pedido-al.html',
   styleUrl: './producto-de-pedido-al.css'
 })
-export class ProductoDePedidoAl {
+export class ProductoDePedidoAl implements AfterViewInit {
   producto: ProductosDePedidoModel = new ProductosDePedidoModel({poductoId: "", cantidad: -1});
   @Input() pedidoId?: string = ''; // <-- recibe el id del pedido
   @Input() todosLosProductos: string[] = [];
   @Output() pedidoActualizado = new EventEmitter<void>(); // Evento para notificar al componente padre que se ha añadido un producto 
   mProductos: Map<string, string> = new Map<string, string>();
+
+  @ViewChild('nombreProducto') nombreProducto!: ElementRef<HTMLInputElement>;
+
+  ngAfterViewInit() {
+    // Se asegura que el elemento existe en el DOM
+    this.nombreProducto.nativeElement.focus();
+  }
 
   productoNombreControl = new FormControl('');
   productosFiltrados!: Observable<string[]>;
@@ -87,6 +94,7 @@ export class ProductoDePedidoAl {
         this.pedidoActualizado.emit(); // Para actualizar el pedido en el componente padre
         this.producto = new ProductosDePedidoModel({poductoId: "", cantidad: -1, tengo: -1});
         this.productoNombreControl.setValue('');
+        this.nombreProducto.nativeElement.focus();
       }
     }
   }
