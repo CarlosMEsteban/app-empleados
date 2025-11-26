@@ -12,6 +12,9 @@ export class TareaModel
     nTotal: number = -1;
     aPara: string = ""; // Para qué es la tarea Camioneta, barco... etc
 
+    palabrasLecheria = ["LECHE", "NATA", "QUESO", "MANTEQUILLA"];
+    palabrasMiel = ["MIEL", "CERA"];
+
     //constructor(id: number = -1, nombre: string, coste: number, tengo: number, almacen: string, materiaPrima: boolean, cantidadInicial: number, fabrica: string ) 
     constructor(datos: Partial<TareaModel>) 
     {
@@ -40,6 +43,21 @@ export class TareaModel
       return 0;
     }   
   }
+
+    public icono(): string
+    {
+      const productoMay: String = this.dTarea.toUpperCase();
+
+      if (this.palabrasLecheria.some(palabra => productoMay.includes(palabra)))
+        return "Lecheria.png";
+      if (this.palabrasMiel.some(palabra => productoMay.includes(palabra)))
+        return "Miel.png";
+      else if (productoMay.includes("SALE"))
+        return "Sale.png";
+      else
+        return "";
+
+    }
 
 
 }
@@ -80,6 +98,7 @@ export const tareaConverter: FirestoreDataConverter<TareaModel> =
                    }
     );
   }
+
 }
 
 

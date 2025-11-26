@@ -12,7 +12,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class Tarea 
 {
+  private _saveTimers: Map<string, any> = new Map<string, any>();
   lTareas: TareaModel[] = [];
+
+  bMostrarBotonesEspeciales: boolean = false;
 
   nuevaTarea: TareaModel = new TareaModel({bFija: false, hInicio: "", hDuracion: "", dTarea: "", aPara: ""});
 
@@ -67,21 +70,21 @@ export class Tarea
 
   clasePara(aPara: string): string
   {
-    switch (aPara)  
+    switch (aPara.toUpperCase())  
     {
-      case 'abejas':
+      case 'ABEJAS':
         return "input-bandas-v";
-      case 'charca':
+      case 'CHARCA':
         return 'charca';
-      case 'tren vecindario':
+      case 'TREN VECINDARIO':
         return 'trenVecindario';
-      case 'tren':
+      case 'TREN':
         return 'trenVecindario';
-      case 'Greg':
+      case 'GREG':
         return 'greg';
-      case "Tommy":
+      case "TOMMY":
         return 'tommy';
-      case 'pase':
+      case 'PASE':
         return 'pase';
       default:
         if (aPara.startsWith('80'))
@@ -90,6 +93,8 @@ export class Tarea
           return '';
     }
   }
+
+  
 
   claseCantidades(cantidad: number): string
   {
@@ -134,4 +139,39 @@ export class Tarea
       this.lTareas = this.lTareas.filter(tarea => tarea.id !== id); // Actualiza la lista local después de eliminar
     });
   }
+
+onTareaChanged(tarea: TareaModel, campo: string, valor: any) {
+    // el ngModel ya habrá actualizado tarea, pero aseguramos el valor si hace falta:
+    (tarea as any)[campo] = valor;
+
+    // recalcula hFinal si cambia inicio o duración
+    if (campo === 'hInicio' || campo === 'hDuracion') {
+      this.calcularModifHFinal(tarea);
+    }
+
+    // debounce para evitar muchas peticiones seguidas
+    const key = tarea.id ?? JSON.stringify(tarea);
+    if (this._saveTimers.has(key)) {
+      clearTimeout(this._saveTimers.get(key));
+    }
+    this._saveTimers.set(key, setTimeout(async () => {
+      try {
+        // llama al servicio que persiste la tarea (ajusta el método según tu servicio)
+        if (this.tareaServicio && typeof this.tareaServicio.modificarTarea === 'function') {
+          await this.tareaServicio.modificarTarea(tarea);
+          console.log('Tarea guardada', tarea.id);
+        }
+      } catch (err) {
+        console.error('Error guardando tarea', err);
+      } finally {
+        this._saveTimers.delete(key);
+      }
+    }, 600)); // 600 ms debounce
+  }
+
+  mostrarBotonesEspeciales()
+  {
+    this.bMostrarBotonesEspeciales = !this.bMostrarBotonesEspeciales;
+  }
+
 }
