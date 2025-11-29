@@ -66,9 +66,30 @@ export class TareaModel
 
     }
 
-    public tamanoLetra(): number
+    public pasadoOFuturo(): string
     {
-      return 10;
+      const partes = this.hFinal.split(':');
+      if (partes.length == 2)
+      {
+        const horas = parseInt(partes[0], 10);
+        if (horas < 8)
+          return "muyTemprano";
+        else
+        {
+          const minutos = parseInt(partes[1], 10);
+          const ahora = new Date();
+          const hAhora = ahora.getHours();
+          const mAhora = ahora.getMinutes();
+          if (horas < hAhora || (horas == hAhora && minutos < mAhora))
+            return "pasado";
+          else
+            return "futuro";
+        }
+      }
+      else 
+      {
+        return "";
+      }
     }
 
 
