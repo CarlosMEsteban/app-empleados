@@ -561,7 +561,21 @@ await addDoc(this.productosCollectionRef, new ProductoModel({"id": 423, "nombre"
 
  } 
 
- 
+ async obtenerCosteProductoPorId(id: string): Promise<number>
+  {
+    const docRef = doc(this.productosCollectionRef, id);
+    const docSnap = await getDoc(docRef); 
+    if (docSnap.exists()) 
+    {
+      const datosProducto = docSnap.data() as ProductoModel;
+      return datosProducto.coste;
+    }
+    else
+    {
+      console.log("No such document!");
+      return -1;
+    }
+  }
 }
 
   

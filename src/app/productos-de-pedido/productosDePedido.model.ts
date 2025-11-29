@@ -16,6 +16,19 @@ export class ProductosDePedidoModel {
       this.cantidad = datos.cantidad ?? -1;      
     }
 
+    public costeTXT(): string
+    {
+      if (this.coste == -1)
+        return "";
+      else
+      {
+        let horas: number = Math.floor(this.coste / 60);
+        let minutos: number = this.coste % 60;
+        return `${horas}h ${minutos}m`;
+      }
+
+    }
+
 }
 
 // 2. Create a FirestoreDataConverter for your Producto class
@@ -41,4 +54,6 @@ export const productosDePedidoConverter: FirestoreDataConverter<ProductosDePedid
       }
     );
   }
+
+
 };

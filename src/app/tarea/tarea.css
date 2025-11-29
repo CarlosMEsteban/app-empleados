@@ -18,6 +18,12 @@
     color:aqua;
 }
 
+.barco  {
+  background: radial-gradient(circle, #13658b 0%, #DEB887 100%);
+  color: white; /* para que el texto contraste */
+  border: none;
+}
+
 .greg  {
   background: radial-gradient(circle, #0000FF 0%, #87CEFA 100%);
   color: white; /* para que el texto contraste */
@@ -53,9 +59,13 @@
 }
 
 .tarde{
-    background-color: red;
+    background-color: rgba(255, 0, 0, 0.4); /* rojo con 50% opacidad */;
 }
 
 .casilla{
     border: 1px solid #ddd; padding: 1px; text-align: left;
+}
+
+.poner{
+  font-weight: bold;
 }

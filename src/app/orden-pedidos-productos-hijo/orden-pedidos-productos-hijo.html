@@ -1,5 +1,7 @@
 <div [style.backgroundColor]="claseSegunFalta()">
-    - Producto: {{ productoDePedido.nombreProducto }} - Tengo: {{productoDePedido.tengo }} - Necesito: {{ productoDePedido.cantidad }}
+    <p (mouseover)="mostrarCoste()" (mouseout)="ocultarCoste()">
+    - Producto: {{ productoDePedido.nombreProducto }} - Tengo: {{productoDePedido.tengo }} - Necesito: {{ productoDePedido.cantidad }} Coste({{productoDePedido.costeTXT()}})
+    </p>
     @if (productoDePedido.tengo < productoDePedido.cantidad) 
     {
         <img src="/Ok.png" alt="Pedido Image" height="20" width="20"(click)="mostrarIngredientes()"/>

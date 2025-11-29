@@ -14,6 +14,9 @@ export class TareaModel
 
     palabrasLecheria = ["LECHE", "NATA", "QUESO", "MANTEQUILLA"];
     palabrasMiel = ["MIEL", "CERA"];
+    palabrasPuestoSalsas = ["ACEITE", "SALSA", "MAYONESA", "CUAJADA", "OLIVADA", "HUM", "VINAGRE"];
+          
+
 
     //constructor(id: number = -1, nombre: string, coste: number, tengo: number, almacen: string, materiaPrima: boolean, cantidadInicial: number, fabrica: string ) 
     constructor(datos: Partial<TareaModel>) 
@@ -52,12 +55,23 @@ export class TareaModel
         return "Lecheria.png";
       if (this.palabrasMiel.some(palabra => productoMay.includes(palabra)))
         return "Miel.png";
+      if (this.palabrasPuestoSalsas.some(palabra => productoMay.includes(palabra)))
+        return "Salsas.jpg";
       else if (productoMay.includes("SALE"))
         return "Sale.png";
+      else if (productoMay.includes("AZ") && productoMay.includes("CAR"))
+        return "Azucarera.png";
       else
         return "";
 
     }
+
+    public tamanoLetra(): number
+    {
+      return 10;
+    }
+
+
 
 
 }

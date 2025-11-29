@@ -68,6 +68,7 @@ export class Tarea
     this.tareaServicio.modificarHoras(tarea.id!, tarea.hInicio, tarea.hDuracion, tarea.hFinal);
   }
 
+  // TODO Pasar este método a TareaModel
   clasePara(aPara: string): string
   {
     switch (aPara.toUpperCase())  
@@ -86,6 +87,8 @@ export class Tarea
         return 'tommy';
       case 'PASE':
         return 'pase';
+      case 'BARCO':
+        return 'barco';
       default:
         if (aPara.startsWith('80'))
           return 'feria'
@@ -173,5 +176,7 @@ onTareaChanged(tarea: TareaModel, campo: string, valor: any) {
   {
     this.bMostrarBotonesEspeciales = !this.bMostrarBotonesEspeciales;
   }
+
+
 
 }

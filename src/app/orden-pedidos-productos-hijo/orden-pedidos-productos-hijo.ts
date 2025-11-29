@@ -5,10 +5,11 @@ import { IngredienteService } from '../ingrediente/ingrediente-service';
 import { ProductoService } from '../producto/producto.service';
 import { IngredienteFaltaModel } from '../orden-pedidos-productos-hijo/ingredienteFalta.model';
 import { ProductoModel } from '../producto/producto.model';
+import { CdkAutofill } from "@angular/cdk/text-field";
 
 @Component({
   selector: 'app-orden-pedidos-productos-hijo',
-  imports: [],
+  imports: [CdkAutofill],
   templateUrl: './orden-pedidos-productos-hijo.html',
   styleUrl: './orden-pedidos-productos-hijo.css'
 })
@@ -67,5 +68,25 @@ export class OrdenPedidosProductosHijo
           
         });
       });
+  }
+
+  mostrarCoste(): void
+  {
+    console.log("ANTES Coste del producto", this.productoDePedido.nombreProducto, ":", this.productoDePedido.coste);    
+    if (this.productoDePedido.coste == -1)
+    {
+      console.log("  - Coste no disponible");
+      this.productoServicio.obtenerCosteProductoPorId(this.productoDePedido.poductoId).then( costeObtenido =>
+      {
+        console.log("  - Coste obtenido:", costeObtenido);
+        this.productoDePedido.coste = costeObtenido;
+      });
+    }
+    console.log("DESPUÉS Coste del producto", this.productoDePedido.nombreProducto, ":", this.productoDePedido.coste);    
+
+  }
+  ocultarCoste(): void
+  {
+    console.log("Ocultar coste del producto", this.productoDePedido.nombreProducto);    
   }
 }
