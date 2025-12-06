@@ -1,0 +1,149 @@
+import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions } from "firebase/firestore";
+
+export class HerramientaModel 
+{
+    id?: string; // Firestore document ID
+    nombre: string = "";
+    tengo: number = 0;
+    ampliarTerreno: number = 0;
+    estacion: number = 0;	
+    ayuntamiento: number = 0;
+    silo: number = 0;
+    granero: number = 0;
+    restaurante: number = 0;
+    supermercado: number = 0;
+    cine: number = 0;
+    hostal: number = 0;
+    spa: number = 0;
+    chiringuito: number = 0;
+    tiendaDeRegalos: number = 0;
+
+    necesidadesTerreno: string[] = ["Escrituras", "Maza", "Estaca de marcar"];
+    necesidadesEstacion: string[] = [];
+    necesidadesAyuntamiento: string[] = ["Bloques de piedra", "martillo", "pintura"];
+    necesidadesSilo: string[] = ["Clavos", "Paneles de ma", "Tornillo"];
+    necesidadesGranero: string[] = ["Perno", "Tabla", "Cinta Adh"];
+    necesidadesRestaurante: string[] = ["Tabla", "Tornillo", "Pintura"];
+    necesidadesSupermercado: string[] = ["Perno", "Cinta Adh", "Bloques de piedra"];
+    necesidadesCine: string[] = ["Clavos", "Paneles de ma", "Martillo"];
+    necesidadesHostal: string[] = ["Berbiquí", "Ladrillos", "Pintura"];
+    necesidaesSpa: string[] = ["Alquitrán", "Berbiquí", "Ladrillos"];
+    necesidadesChiringuito: string[] = ["Berbiquí", "Alquitrán", "Martillo"];
+    necesidadesTiendaDeRegalos: string[] = ["Bloques de piedra", "Alquitrán", "Martillo"];
+
+
+    //constructor(id: number = -1, nombre: string, coste: number, tengo: number, almacen: string, materiaPrima: boolean, cantidadInicial: number, fabrica: string ) 
+    constructor(datos: Partial<HerramientaModel>) 
+    {
+      this.id = datos.id;
+      this.nombre = datos.nombre ?? "";
+      this.tengo = datos.tengo ?? 0;
+      this.ampliarTerreno = datos.ampliarTerreno ?? 0;
+      this.estacion = datos.estacion ?? 0;
+      this.ayuntamiento = datos.ayuntamiento ?? 0;
+      this.silo = datos.silo ?? 0;
+      this.granero = datos.granero ?? 0;
+      this.restaurante = datos.restaurante ?? 0;
+      this.supermercado = datos.supermercado ?? 0;
+      this.cine = datos.cine ?? 0;
+      this.hostal = datos.hostal ?? 0;
+      this.spa = datos.spa ?? 0;
+      this.chiringuito = datos.chiringuito ?? 0;
+      this.tiendaDeRegalos = datos.tiendaDeRegalos ?? 0;
+    }
+
+    haceFalta(): number
+    {
+      return this.ampliarTerreno + this.estacion + this.ayuntamiento + this.silo + this.granero + this.supermercado + this.cine + this.hostal + this.spa + this.chiringuito + this.tiendaDeRegalos - this.tengo;
+    }
+
+    fondoFalta(): string
+    {
+      if (this.tengo < this.haceFalta())
+        return "fondo-falta";
+      else if (this.tengo > this.haceFalta())
+        return "fondo-sobra";
+      else
+        return "";
+    }
+
+    puedeSerNegrita(campo: string): string
+    {
+      if (campo == "ampliarTerreno" && this.necesidadesTerreno.includes(this.nombre))
+        return "negrita";
+      else if (campo == "estacion" && this.necesidadesEstacion.includes(this.nombre))
+        return "negrita";
+      else if (campo == "ayuntamiento" && this.necesidadesAyuntamiento.includes(this.nombre))
+        return "negrita";
+      else if (campo == "silo" && this.necesidadesSilo.includes(this.nombre))
+        return "negrita";
+      else if (campo == "granero" && this.necesidadesGranero.includes(this.nombre))
+        return "negrita";
+      else if (campo == "restaurante" && this.necesidadesRestaurante.includes(this.nombre))
+        return "negrita";
+      else if (campo == "supermercado" && this.necesidadesSupermercado.includes(this.nombre))
+        return "negrita";
+      else if (campo == "cine" && this.necesidadesCine.includes(this.nombre))
+        return "negrita";
+      else if (campo == "hostal" && this.necesidadesHostal.includes(this.nombre))
+        return "negrita";
+      else if (campo == "spa" && this.necesidaesSpa.includes(this.nombre))
+        return "negrita";
+      else if (campo == "chiringuito" && this.necesidadesChiringuito.includes(this.nombre))
+        return "negrita";
+      else if (campo == "tiendaDeRegalos" && this.necesidadesTiendaDeRegalos.includes(this.nombre))
+        return "negrita";
+      else
+        return "";
+    }
+}
+
+// 2. Create a FirestoreDataConverter for your Producto class
+export const herramientaConverter: FirestoreDataConverter<HerramientaModel> = 
+{
+  // Converts an Pedido object to a plain JavaScript object for Firestore
+  toFirestore: (herramienta: HerramientaModel): DocumentData => {
+    return {
+            nombre : herramienta.nombre,
+            tengo : herramienta.tengo,
+            ampliarTerreno : herramienta.ampliarTerreno,
+            estacion : herramienta.estacion,
+            ayuntamiento : herramienta.ayuntamiento,
+            silo : herramienta.silo,
+            granero : herramienta.granero,
+            supermercado : herramienta.supermercado,
+            cine : herramienta.cine,
+            hostal : herramienta.hostal,
+            spa : herramienta.spa,
+            chiringuito : herramienta.chiringuito,
+            tiendaDeRegalos : herramienta.tiendaDeRegalos
+    };
+  },
+
+  // Converts a Firestore DocumentData snapshot back into an Pedido object
+  fromFirestore: (snapshot: QueryDocumentSnapshot,options: SnapshotOptions): HerramientaModel => 
+  {
+    const data = snapshot.data(options);
+
+    return new HerramientaModel(
+      {     'id':             snapshot.id,
+            'nombre': data['nombre'],
+            'tengo': data['tengo'],
+            'ampliarTerreno': data['ampliarTerreno'],
+            'estacion': data['estacion'],
+            'ayuntamiento': data['ayuntamiento'],
+            'silo': data['silo'],
+            'granero': data['granero'],
+            'supermercado': data['supermercado'],
+            'cine': data['cine'],
+            'hostal': data['hostal'],
+            'spa': data['spa'],
+            'chiringuito': data['chiringuito'],
+            'tiendaDeRegalos': data['tiendaDeRegalos']
+        }
+    );
+  }
+
+}
+
+

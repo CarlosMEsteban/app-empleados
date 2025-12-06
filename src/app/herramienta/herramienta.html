@@ -1,0 +1,72 @@
+@if (! bMostrarBotonesEspeciales)
+{
+  <img src="/mas.png" alt="Pedido Image" height="20" width="20"(click)="mostrarOcultarBotonesEspeciales()"/>
+}
+@if (bMostrarBotonesEspeciales)
+{
+  <img src="/menos.png" alt="Pedido Image" height="20" width="20"(click)="mostrarOcultarBotonesEspeciales()"/>
+  <button (click)="crearHerramientas()">
+    Crear Herramientas
+  </button>
+}
+
+
+
+<div style="padding: 20px;">
+  <h2>Herramientas</h2>
+
+  <table class="herramientas-table" style="margin-top:12px; font-family: Arial, sans-serif;">
+    <thead style="background:#007bff; color:#fff;">
+      <tr>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">Nombre</th>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">Tengo</th>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">Terreno</th>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">Estación</th>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">Ayuntamiento</th>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">Silo</th>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">Granero</th>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">Restaurante</th>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">Supermercado</th>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">Cine</th>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">Hostal</th>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">Spa</th>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">Chiringuito</th>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">Regalos</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (herramienta of lHerramientas; track herramienta.id) {
+        <tr>
+          <td style="border:1px solid #ddd; padding:8px;">
+            @if (herramienta.haceFalta() > 0)
+            {
+              ({{herramienta.haceFalta()}}) 
+            }
+            {{ herramienta.nombre }}
+          </td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [class]="herramienta.fondoFalta()" [(ngModel)]="herramienta.tengo" (ngModelChange)="cambiarCampoHerramienta(herramienta, 'tengo', $event)"/></td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [class]="herramienta.puedeSerNegrita('ampliarTerreno')" [(ngModel)]="herramienta.ampliarTerreno" (ngModelChange)="cambiarCampoHerramienta(herramienta, 'ampliarTerreno', $event)"/></td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [class]="herramienta.puedeSerNegrita('estacion')" [(ngModel)]="herramienta.estacion" (ngModelChange)="cambiarCampoHerramienta(herramienta, 'estacion', $event)"/></td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [class]="herramienta.puedeSerNegrita('ayuntamiento')" [(ngModel)]="herramienta.ayuntamiento" (ngModelChange)="cambiarCampoHerramienta(herramienta, 'ayuntamiento', $event)"/></td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [class]="herramienta.puedeSerNegrita('silo')" [(ngModel)]="herramienta.silo" (ngModelChange)="cambiarCampoHerramienta(herramienta, 'silo', $event)"/></td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [class]="herramienta.puedeSerNegrita('granero')" [(ngModel)]="herramienta.granero" (ngModelChange)="cambiarCampoHerramienta(herramienta, 'granero', $event)"/></td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [class]="herramienta.puedeSerNegrita('restaurante')" [(ngModel)]="herramienta.restaurante" (ngModelChange)="cambiarCampoHerramienta(herramienta, 'restaurante', $event)"/></td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [class]="herramienta.puedeSerNegrita('supermercado')" [(ngModel)]="herramienta.supermercado" (ngModelChange)="cambiarCampoHerramienta(herramienta, 'supermercado', $event)"/></td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [class]="herramienta.puedeSerNegrita('cine')" [(ngModel)]="herramienta.cine" (ngModelChange)="cambiarCampoHerramienta(herramienta, 'cine', $event)"/></td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [class]="herramienta.puedeSerNegrita('hostal')" [(ngModel)]="herramienta.hostal" (ngModelChange)="cambiarCampoHerramienta(herramienta, 'hostal', $event)"/></td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [class]="herramienta.puedeSerNegrita('spa')" [(ngModel)]="herramienta.spa" (ngModelChange)="cambiarCampoHerramienta(herramienta, 'spa', $event)"/></td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [class]="herramienta.puedeSerNegrita('chiringuito')" [(ngModel)]="herramienta.chiringuito" (ngModelChange)="cambiarCampoHerramienta(herramienta, 'chiringuito', $event)"/></td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [class]="herramienta.puedeSerNegrita('tiendaDeRegalos')" [(ngModel)]="herramienta.tiendaDeRegalos" (ngModelChange)="cambiarCampoHerramienta(herramienta, 'tiendaDeRegalos', $event)"/></td> 
+       </tr>
+      }
+      @if (lHerramientas.length === 0) {
+        <tr>
+          <td colspan="6" style="border:1px solid #ddd; padding:12px; text-align:center; color:#666;">
+            No hay herramientas.
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+<!-- ...existing code... -->  

@@ -60,11 +60,11 @@ export class TareaService {
   async listarTareas(): Promise<TareaModel[]>
   {
     const querySnapshot = await getDocs(this.tareaCollectionRef);
-    const pedidos: TareaModel[] = [];
+    const tareas: TareaModel[] = [];
     querySnapshot.forEach((document) => {
-      pedidos.push(document.data());
+      tareas.push(document.data());
     }); 
-    return pedidos;
+    return tareas;
   }
   
 

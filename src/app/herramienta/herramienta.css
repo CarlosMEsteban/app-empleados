@@ -1,0 +1,48 @@
+.herramientas-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* fuerza anchos fijos y columnas estrechas */
+  font-family: Arial, sans-serif;
+}
+
+.herramientas-table th,
+.herramientas-table td {
+  border: 1px solid #ddd;
+  padding: 6px;              /* menos padding = columnas más estrechas */
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* primera columna más ancha, el resto estrechas */
+.herramientas-table th:first-child,
+.herramientas-table td:first-child {
+  width: 5%;
+}
+.herramientas-table th:not(:first-child),
+.herramientas-table td:not(:first-child) {
+  width: calc(80% / 13); /* ajusta 13 según número de columnas restantes */
+}
+
+/* inputs ocupan todo el ancho de la celda pero la celda es estrecha */
+.herramientas-table input[type="number"],
+.herramientas-table input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 4px;
+  font-size: 0.85rem;
+}
+
+.fondo-falta {
+  background-color: #ffcccc; /* color de fondo rojo claro para indicar falta */
+}
+
+.fondo-sobra {
+  background-color: #ccffcc; /* color de fondo verde claro para indicar sobra */
+}
+.negrita {
+  font-weight: bold;
+  background-color: #f7eaea;
+  
+}
