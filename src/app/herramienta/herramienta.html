@@ -38,9 +38,9 @@
       @for (herramienta of lHerramientas; track herramienta.id) {
         <tr>
           <td style="border:1px solid #ddd; padding:8px;">
-            @if (herramienta.haceFalta() > 0)
+            @if (herramienta.haceFalta() < 0)
             {
-              ({{herramienta.haceFalta()}}) 
+              ({{-herramienta.haceFalta()}}) 
             }
             {{ herramienta.nombre }}
           </td>
