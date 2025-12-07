@@ -8,6 +8,7 @@ import { ProductosDePedido } from './productos-de-pedido/productos-de-pedido';
 import { OrdenPedidos } from './orden-pedidos/orden-pedidos';
 import { Tarea } from './tarea/tarea';
 import { Herramienta } from './herramienta/herramienta';
+import { Avance } from './avance/avance';
 
 
 export const routes: Routes = [
@@ -18,6 +19,7 @@ export const routes: Routes = [
   {path:'productosDePedido', component: ProductosDePedido},
   {path:'herramienta', component: Herramienta},
   {path:'ordenPedidos', component: OrdenPedidos},
+  {path:'avance', component: Avance},
   {path:'tarea', component: Tarea},
   {path:'**', component: ErrorPersonalizado}
 ];

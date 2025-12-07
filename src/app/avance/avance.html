@@ -1,0 +1,52 @@
+@if (! bMostrarBotonesEspeciales)
+{
+  <img src="/mas.png" alt="Pedido Image" height="20" width="20"(click)="mostrarOcultarBotonesEspeciales()"/>
+}
+@if (bMostrarBotonesEspeciales)
+{
+  <img src="/menos.png" alt="Pedido Image" height="20" width="20"(click)="mostrarOcultarBotonesEspeciales()"/>
+  <button (click)="crearAvances()">
+    Crear Avances iniciales
+  </button>
+}
+
+
+
+<div style="padding: 20px;">
+  <h2>Avance</h2>
+
+  <table class="avances-table" style="margin-top:12px; font-family: Arial, sans-serif;">
+    <thead style="background:#007bff; color:#fff;">
+      <tr>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">Fecha</th>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">Oro</th>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">Gasto</th>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">Ganancia</th>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">Estrellas</th>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">Estrellas obj</th>
+        <th style="border:1px solid #ddd; padding:8px; text-align:left;">%</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (avance of lAvances; track avance.id; let i = $index) {
+        <tr>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;">{{avance.fecha}} <input type="date" [(ngModel)]="avance.fecha" (ngModelChange)="cambiarCampoAvance(avance, 'fecha', $event)"/></td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [(ngModel)]="avance.oro" (ngModelChange)="cambiarCampoAvance(avance, 'oro', $event)"/></td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [(ngModel)]="avance.gasto" (ngModelChange)="cambiarCampoAvance(avance, 'gasto', $event)"/></td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;">{{ganancia(i)}}</td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [(ngModel)]="avance.estrellas" (ngModelChange)="cambiarCampoAvance(avance, 'estrellas', $event)"/></td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [(ngModel)]="avance.estrellasObjetivo" (ngModelChange)="cambiarCampoAvance(avance, 'estrellasObjetivo', $event)"/></td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;">{{avance.conseguido()}}</td>
+       </tr>
+      }
+      @if (lAvances.length === 0) {
+        <tr>
+          <td colspan="6" style="border:1px solid #ddd; padding:12px; text-align:center; color:#666;">
+            No hay avances.
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+<!-- ...existing code... -->  
