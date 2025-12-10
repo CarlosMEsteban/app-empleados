@@ -6,7 +6,7 @@ export class AvanceModel
     id?: string; // Firestore document ID
     fecha: string = "";
     oro: number = -1;
-    gasto: number = -1;
+    gasto: number = 0;
     estrellas: number = -1;
     estrellasObjetivo: number = -1;
 
@@ -15,7 +15,7 @@ export class AvanceModel
       this.id = datos.id;
       this.fecha = datos.fecha || "";
       this.oro = datos.oro || -1;
-      this.gasto = datos.gasto || -1;
+      this.gasto = datos.gasto || 0;
       this.estrellas = datos.estrellas || -1;
       this.estrellasObjetivo = datos.estrellasObjetivo || -1;
     }
@@ -38,6 +38,47 @@ export class AvanceModel
       const partes = this.fecha.split('/'); 
       const fechaOrdenar = new Date(parseInt(partes[2], 10), parseInt(partes[1], 10) - 1, parseInt(partes[0], 10));
       return fechaOrdenar.getTime();
+    }
+
+    oroTXT()
+    {
+      return  new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0 }).format(this.oro);
+    }
+
+    gastoTXT()
+    {
+      return  new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0 }).format(this.gasto);
+    }
+
+    estrellasTXT()
+    {
+      return  new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0 }).format(this.estrellas);
+    }
+
+    estrellasObjetivoTXT()
+    {
+      return  new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0 }).format(this.estrellasObjetivo);
+    }  
+    
+    colorFondoProcentaje(): string
+    {
+      const a: number = this.redWithDarknessRgb(this.conseguido());
+      return `rgb(${a}, 0, 0)`;
+    }
+
+    colorTextoProcentaje(): string
+    {
+      const a: number = this.redWithDarknessRgb(this.conseguido());
+      const b: number = 255 - a;
+      return `rgb(${b}, 0, 0)`;
+    }
+
+
+   redWithDarknessRgb(darkness: number): number 
+   {
+    const d = Math.min(100, Math.max(0, Math.round(darkness)));
+    return Math.round(255 * (1 - d / 100));
+    
     }
 
 }

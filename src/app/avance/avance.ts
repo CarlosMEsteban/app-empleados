@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { AvanceService } from './avance.service';
 import { AvanceModel } from './avance.model';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-avance',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './avance.html',
   styleUrl: './avance.css'
 })
@@ -14,6 +15,7 @@ export class Avance {
   avanceServicio: AvanceService;
   bMostrarBotonesEspeciales: boolean = false;
 
+  nuevoAvance: AvanceModel = new AvanceModel({fecha: ""});
   lAvances: AvanceModel[] = [];
 
   constructor(avanceServicio: AvanceService)
@@ -61,16 +63,35 @@ export class Avance {
     this.avanceServicio.crearAvancesIniciales();
   }
 
-  ganancia(index: number | undefined): number
+  ganancia(index: number | undefined): String
   {
-    if (index === undefined) return 0;
-    else if (index === this.lAvances.length) return 0;
+    if (index === undefined) return "";
+    else if (index === this.lAvances.length) return "";
     else
     {
       const avanceAnterior: AvanceModel = this.lAvances[index + 1];
-      return this.lAvances[index].oro - avanceAnterior.oro;
+      let ganancia = this.lAvances[index].oro - avanceAnterior.oro;
+      return  new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0 }).format(ganancia);
     }
   }
 
+  agregarAvance()
+  {
+    this.avanceServicio.insertarAvance(this.nuevoAvance).then((id) => 
+    {
+      this.nuevoAvance.id = id ?? undefined;
+      this.lAvances.push(this.nuevoAvance);
+      this.nuevoAvance = new AvanceModel({fecha: "", oro: -1, estrellas: -1, estrellasObjetivo: -1});
+      
+    });
+  }
+
+  eliminar(id: string)
+  {
+    this.avanceServicio.eliminarAvance(id).then(() => 
+    {
+      this.lAvances = this.lAvances.filter(avance => avance.id !== id); // Actualiza la lista local después de eliminar
+    });
+  }
   
 }

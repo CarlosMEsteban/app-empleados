@@ -110,4 +110,10 @@ new AvanceModel({"fecha": "01/07/2025", "oro": 4293976, "estrellas": 180520	, "e
       });
     });
   }
+
+  eliminarAvance(id: string)
+  {
+    const docRef = doc(this.db, 'avance', id);
+    return deleteDoc(docRef);
+  }  
 }

@@ -10,10 +10,22 @@
   </button>
 }
 
+<div style="padding: 20px;">
+  <h2>NUevo Avance</h2>
+    Fecha: <input type="text" [(ngModel)]="nuevoAvance.fecha" size="10"/>
+    Oro: <input type="text" [(ngModel)]="nuevoAvance.oro" size="8"/>
+    Gasto: <input type="text" [(ngModel)]="nuevoAvance.gasto"  size="10"/>
+    Estrellas: <input type="text" [(ngModel)]="nuevoAvance.estrellas"  size="10"/>
+    Estrellas Obj.: <input type="text" [(ngModel)]="nuevoAvance.estrellasObjetivo"  size="10"/>
+    <button (click)="agregarAvance()">
+      Agregar Avance
+    </button>
+</div>
+
 
 
 <div style="padding: 20px;">
-  <h2>Avance</h2>
+  <h2>Avances</h2>
 
   <table class="avances-table" style="margin-top:12px; font-family: Arial, sans-serif;">
     <thead style="background:#007bff; color:#fff;">
@@ -30,13 +42,17 @@
     <tbody>
       @for (avance of lAvances; track avance.id; let i = $index) {
         <tr>
-<td style="border:1px solid #ddd; padding:8px; text-align:right;">{{avance.fecha}} <input type="date" [(ngModel)]="avance.fecha" (ngModelChange)="cambiarCampoAvance(avance, 'fecha', $event)"/></td>
-<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [(ngModel)]="avance.oro" (ngModelChange)="cambiarCampoAvance(avance, 'oro', $event)"/></td>
-<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [(ngModel)]="avance.gasto" (ngModelChange)="cambiarCampoAvance(avance, 'gasto', $event)"/></td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;">{{avance.fecha}}</td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;">{{avance.oroTXT()}}</td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;">{{avance.gastoTXT()}}</td>
 <td style="border:1px solid #ddd; padding:8px; text-align:right;">{{ganancia(i)}}</td>
-<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [(ngModel)]="avance.estrellas" (ngModelChange)="cambiarCampoAvance(avance, 'estrellas', $event)"/></td>
-<td style="border:1px solid #ddd; padding:8px; text-align:right;"><input type="number" [(ngModel)]="avance.estrellasObjetivo" (ngModelChange)="cambiarCampoAvance(avance, 'estrellasObjetivo', $event)"/></td>
-<td style="border:1px solid #ddd; padding:8px; text-align:right;">{{avance.conseguido()}}</td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;">{{avance.estrellasTXT()}}</td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;">{{avance.estrellasObjetivoTXT()}}</td>
+<td style="border:1px solid #ddd; padding:8px; text-align:right;" [bgColor]="avance.colorFondoProcentaje()">
+  <p [style.color]="avance.colorTextoProcentaje()">  {{avance.conseguido()}}
+  <img src="/equis.png" alt="Pedido Image" height="20" width="20"(click)="eliminar(avance.id!)"/>
+  </p>
+</td>
        </tr>
       }
       @if (lAvances.length === 0) {

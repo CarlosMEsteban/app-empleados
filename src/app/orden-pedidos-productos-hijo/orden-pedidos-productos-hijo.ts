@@ -57,7 +57,7 @@ export class OrdenPedidosProductosHijo
               let iFM: IngredienteFaltaModel = new IngredienteFaltaModel();
               iFM.cProductoId = ingrediente.cProductoNecesitadoId;
               iFM.nombre = productoConTodosLosDatos.nombre;
-              iFM.cantidad = ingrediente.cantidad * this.productoDePedido.cantidad;
+              iFM.cantidad = ingrediente.cantidad * (this.productoDePedido.cantidad - this.productoDePedido.tengo);
               iFM.tengo = productoConTodosLosDatos.tengo;
               this.lIngredientesFaltantes.push(iFM);
               console.log("  - IngredienteFaltaModel añadido:", iFM);
