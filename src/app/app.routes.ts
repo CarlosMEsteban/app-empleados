@@ -9,6 +9,7 @@ import { OrdenPedidos } from './orden-pedidos/orden-pedidos';
 import { Tarea } from './tarea/tarea';
 import { Herramienta } from './herramienta/herramienta';
 import { Avance } from './avance/avance';
+import { BarcoYFundicion } from './barco-yfundicion/barco-yfundicion';
 
 
 export const routes: Routes = [
@@ -21,5 +22,6 @@ export const routes: Routes = [
   {path:'ordenPedidos', component: OrdenPedidos},
   {path:'avance', component: Avance},
   {path:'tarea', component: Tarea},
+  {path:'barcoYFundicion', component: BarcoYFundicion},
   {path:'**', component: ErrorPersonalizado}
 ];

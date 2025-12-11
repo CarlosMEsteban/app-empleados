@@ -1,0 +1,18 @@
+<p>barco-yfundicion works!</p>
+<div style="padding: 20px;">
+  <h2>BARCO</h2>
+    Cajones: <input type="number" [(ngModel)]="barcoCajones" size="8" (ngModelChange)="calcularBarco()"/>
+    Oro: <input type="number" [(ngModel)]="barcoOro" size="8" (ngModelChange)="calcularBarco()"/>
+    Ganancia Oro: {{barcoGananciaOro}}
+    Estrellas: <input type="number" [(ngModel)]="barcoEstrellasCajon" size="8" (ngModelChange)="calcularBarco()"/>    
+    Estr.General: <input type="number" [(ngModel)]="barcoEstrellasGeneral" size="8" (ngModelChange)="calcularBarco()"/>
+    Ganacia Estrellas: {{barcoGananciaEstrellas}}
+</div>
+<div style="padding: 20px;">
+  <h2>FUNDICIÓN</h2>
+    Dinamita: <input type="number" [(ngModel)]="dinamita" size="8" (ngModelChange)="calcularFundicion()"/>
+    TNT: <input type="number" [(ngModel)]="TNT" size="8" (ngModelChange)="calcularFundicion()"/>
+    Pala: <input type="number" [(ngModel)]="pala" size="8" (ngModelChange)="calcularFundicion()"/>    
+    Pico: <input type="number" [(ngModel)]="pico" size="8" (ngModelChange)="calcularFundicion()"/>
+    Total: {{fundicionTotal}}
+</div>
