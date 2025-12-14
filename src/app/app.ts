@@ -17,6 +17,7 @@ import { ContactoComponent } from './contacto-component/contacto-component';
 import { QuienesComponent } from './quienes-component/quienes-component';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { TitleService } from './services/title.service';
 import { anadirEmpleado, db, getEmpleados, quitarEmpleado } from './DataServices.service';
 
 
@@ -34,8 +35,8 @@ import { anadirEmpleado, db, getEmpleados, quitarEmpleado } from './DataServices
 })
 export class App {
   
+  public titulo = 'APP';
   
-
 
   protected operacion = "";
   readonly alta = "A";
@@ -43,11 +44,13 @@ export class App {
 
   empleados: Empleado[] = []
 
-  constructor(private miServicio: ServicioEmpleados, private empleadosService: EmpleadosService) 
+  constructor(private miServicio: ServicioEmpleados, 
+            private empleadosService: EmpleadosService, 
+            private titleServicio: TitleService) 
   {
     console.log("App component cargado.");
-    
-     this.empleados = this.empleadosService.empleados;
+    this.titleServicio.setTitle(this.titulo);
+    this.empleados = this.empleadosService.empleados;
    }
 
   

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TitleService } from '../services/title.service';
 
 @Component({
   selector: 'app-barco-yfundicion',
@@ -20,6 +21,11 @@ export class BarcoYFundicion {
   pala: number = 0;
   pico: number = 0;
   fundicionTotal: number = 0; // Calculado
+
+  constructor(private titleServicio: TitleService)  
+  {
+    titleServicio.setTitle("Barco y Fundición");
+  }
 
   calcularBarco() 
   {

@@ -9,6 +9,7 @@ import { IngredienteService } from '../ingrediente/ingrediente-service';
 import { IngredienteModel } from '../ingrediente/ingrediente.model';
 import { OrdenPedidosHijo } from '../orden-pedidos-hijo/orden-pedidos-hijo';
 import { NgFor } from '@angular/common';
+import { TitleService } from '../services/title.service';
 
 @Component({
   selector: 'app-orden-pedidos',
@@ -33,8 +34,10 @@ export class OrdenPedidos
   constructor(pedidoServicio: PedidoService, 
               productoServicio: ProductoService,
               productosDePedidoServicio: ProductoDePedidoService,
-            IngredienteServicio: IngredienteService) 
+            IngredienteServicio: IngredienteService,
+          private titleServicio: TitleService) 
   {
+    this.titleServicio.setTitle("Orden de Pedidos");
     this.pedidoServicio = pedidoServicio;
     this.productoServicio = productoServicio;
     this.productosDePedidoServicio = productosDePedidoServicio;

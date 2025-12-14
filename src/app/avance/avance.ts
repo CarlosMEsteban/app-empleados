@@ -3,6 +3,7 @@ import { AvanceService } from './avance.service';
 import { AvanceModel } from './avance.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TitleService } from '../services/title.service';
 
 @Component({
   selector: 'app-avance',
@@ -18,8 +19,10 @@ export class Avance {
   nuevoAvance: AvanceModel = new AvanceModel({fecha: ""});
   lAvances: AvanceModel[] = [];
 
-  constructor(avanceServicio: AvanceService)
+  constructor(avanceServicio: AvanceService, 
+              private titleServicio: TitleService)
   {
+    titleServicio.setTitle("Gestión de Avances");
     this.avanceServicio = avanceServicio;
     this.avanceServicio.todosAvance().then((avances) => {
       this.lAvances = avances;

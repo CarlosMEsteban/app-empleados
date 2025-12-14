@@ -59,29 +59,8 @@ export class AvanceModel
     {
       return  new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0 }).format(this.estrellasObjetivo);
     }  
-    
-    colorFondoProcentaje(): string
-    {
-      const a: number = this.redWithDarknessRgb(this.conseguido());
-
-      return "'#" + a.toString(16).padStart(2, '0') + "0000'";
-    }
-
-    colorTextoProcentaje(): string
-    {
-      const a: number = this.redWithDarknessRgb(this.conseguido());
-      const b: number = 255 - a;
-      return "'#" + b.toString(16).padStart(2, '0') + "fbfb'";
-      /*return `rgb(${b}, 0, 0)`;*/
-    }
 
 
-   redWithDarknessRgb(darkness: number): number 
-   {
-    const d = Math.min(100, Math.max(0, Math.round(darkness)));
-    return Math.round(255 * (1 - d / 100));
-    
-    }
 
 }
 

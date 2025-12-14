@@ -10,6 +10,7 @@ import { ProductoDePedidoAl } from "../producto-de-pedido-al/producto-de-pedido-
 import { ProductoDePedidoService } from '../producto-de-pedido/producto-de-pedido.service';
 import { ProductoService } from '../producto/producto.service';
 import { ProductoModel } from '../producto/producto.model';
+import { TitleService } from '../services/title.service';
 
 
 @Component({
@@ -31,8 +32,10 @@ export class Pedido {
 
   constructor(pedidoServicio: PedidoService, 
               productosDePedidoServicio: ProductoDePedidoService, 
-              productoServicio: ProductoService)
+              productoServicio: ProductoService,
+            private titleServicio: TitleService)
   {
+    this.titleServicio.setTitle("Pedidos");
     this.pedidoServicio = pedidoServicio;
     this.productosDePedidoServicio = productosDePedidoServicio;
     this.productoServicio = productoServicio;

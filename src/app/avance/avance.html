@@ -48,10 +48,8 @@
           <td style="border:1px solid #ddd; padding:8px; text-align:right;">{{ganancia(i)}}</td>
           <td style="border:1px solid #ddd; padding:8px; text-align:right;">{{avance.estrellasTXT()}}</td>
           <td style="border:1px solid #ddd; padding:8px; text-align:right;">{{avance.estrellasObjetivoTXT()}}</td>
-          <td style="border:1px solid #ddd; padding:8px; text-align:right;" [bgColor]="avance.colorFondoProcentaje()">
-            <p [style.color]="avance.colorTextoProcentaje()">  {{avance.conseguido()}}- {{avance.colorTextoProcentaje()}}
+          <td style="border:1px solid #ddd; padding:8px; text-align:right;" >{{avance.conseguido()}}%
             <img src="/equis.png" alt="Pedido Image" height="20" width="20"(click)="eliminar(avance.id!)"/>
-            </p>
           </td>
        </tr>
       }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HerramientaService } from './herramienta.service';
 import { HerramientaModel } from './herramienta.model';
 import { FormsModule } from '@angular/forms';
+import { TitleService } from '../services/title.service';
 
 @Component({
   selector: 'app-herramienta',
@@ -17,8 +18,9 @@ export class Herramienta
 
   lHerramientas: HerramientaModel[] = [];
 
-  constructor(herramientaServicio: HerramientaService)
+  constructor(herramientaServicio: HerramientaService, private titleServicio: TitleService)
   {
+    titleServicio.setTitle("Herramientas");
     this.herramientaServicio = herramientaServicio;
     this.herramientaServicio.listarHerramients().then((herramientas) => {
       this.lHerramientas = herramientas;

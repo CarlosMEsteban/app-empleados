@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { TareaModel } from './tarea.model';
 import { TareaService } from './tarea.service';
 import { FormsModule } from '@angular/forms';
+import { appConfig } from '../app.config';
+import { TitleService } from '../services/title.service';
 
 
 @Component({
@@ -14,15 +16,18 @@ export class Tarea
 {
   private _saveTimers: Map<string, any> = new Map<string, any>();
   lTareas: TareaModel[] = [];
+  
 
   bMostrarBotonesEspeciales: boolean = false;
 
   nuevaTarea: TareaModel = new TareaModel({bFija: false, hInicio: "", hDuracion: "", dTarea: "", aPara: ""});
 
   tareaServicio: TareaService;
-  constructor(tareaServicio: TareaService) 
+  constructor(tareaServicio: TareaService, private titleServicio: TitleService) 
   {
     this.tareaServicio = tareaServicio;
+    titleServicio.setTitle("Tareas");
+    appConfig
   }
   
 

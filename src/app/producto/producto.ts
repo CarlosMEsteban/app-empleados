@@ -6,6 +6,7 @@ import { ProductoHijo } from '../producto-hijo/producto-hijo';
 import { IngredienteService } from '../ingrediente/ingrediente-service';
 import { IngredienteModel } from '../ingrediente/ingrediente.model';
 import { PedidoService } from '../pedido/pedido-service';
+import { TitleService } from '../services/title.service';
 
 @Component({
   selector: 'app-producto',
@@ -25,8 +26,10 @@ export class Producto {
 
   constructor(productoServicio: ProductoService, 
               ingredienteServicio: IngredienteService,
-              pedidoServicio: PedidoService)
+              pedidoServicio: PedidoService,
+            private titleServicio: TitleService)
   { 
+    titleServicio.setTitle("Productos");
     this.productoServicio = productoServicio;
     this.ingredienteServicio = ingredienteServicio;
     this.pedidoServicio = pedidoServicio;
