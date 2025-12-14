@@ -121,18 +121,37 @@ export class Tarea
       return 'tarde';
   }
 
-  agregarTarea()
+  async agregarTarea()
   {
+    this.encadenar(false);
+  }
+
+  cadena()
+  {
+    this.encadenar(true)
+  }
+
+  encadenar(bEncadenar: boolean)
+  {
+    let tareaAntigua = this.nuevaTarea.clonar();
+    
     this.nuevaTarea.bFija = false;
     this.nuevaTarea.hFinal = this.calcularHFinal(this.nuevaTarea.hInicio, this.nuevaTarea.hDuracion);
+    tareaAntigua.hInicio = this.calcularHFinal(this.nuevaTarea.hFinal, "00:01");
+    if (tareaAntigua.nOrden > 0 )
+      tareaAntigua.nOrden++;
     this.tareaServicio.insertarTarea(this.nuevaTarea).then((id) => 
     {
       this.nuevaTarea.id = id;
       this.lTareas.push(this.nuevaTarea);
       this.nuevaTarea = new TareaModel({bFija: false, hInicio: "", hDuracion: "", dTarea: "", aPara: ""});
       this.ordenarTareas();
+      if (bEncadenar)
+        this.nuevaTarea = tareaAntigua;
       
-    });
+
+    });    
+    
   }
 
   eliminar(id: string)

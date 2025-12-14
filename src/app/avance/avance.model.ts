@@ -63,14 +63,16 @@ export class AvanceModel
     colorFondoProcentaje(): string
     {
       const a: number = this.redWithDarknessRgb(this.conseguido());
-      return `rgb(${a}, 0, 0)`;
+
+      return "'#" + a.toString(16).padStart(2, '0') + "0000'";
     }
 
     colorTextoProcentaje(): string
     {
       const a: number = this.redWithDarknessRgb(this.conseguido());
       const b: number = 255 - a;
-      return `rgb(${b}, 0, 0)`;
+      return "'#" + b.toString(16).padStart(2, '0') + "fbfb'";
+      /*return `rgb(${b}, 0, 0)`;*/
     }
 
 

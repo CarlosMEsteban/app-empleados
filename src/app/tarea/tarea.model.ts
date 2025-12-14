@@ -92,7 +92,22 @@ export class TareaModel
       }
     }
 
-
+    clonar(): TareaModel
+    {
+      return new TareaModel(
+        { 
+                    'id':             this.id,
+                    'bFija':       this.bFija,
+                    'hInicio':       this.hInicio,
+                    'hDuracion':       this.hDuracion,
+                    'hFinal':       this.hFinal,
+                    'dTarea':       this.dTarea,
+                    'nOrden':       this.nOrden,
+                    'nTotal':       this.nTotal, 
+                    'aPara':       this.aPara,
+                     }
+      );
+    }
 
 
 }

@@ -122,7 +122,12 @@ export class OrdenPedidos
       this.pedidos.sort((a, b) => b.bfo - a.bfo);
   }
 
-
+  borrarPedidosTratados()
+  {
+    confirm("¿Seguro que quieres borrar los pedidos tratados?")
+    this.pedidoServicio.borrarPedidosTratados();
+    this.calcularBfoDeTodosLosPedidos();
+  }
 
 
 }

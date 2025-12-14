@@ -30,7 +30,13 @@ export class PedidoModel {
     }
   
 
-
+  icono(): string | null
+  {
+    if (this.orden < 10 )
+      return "/camioneta.jpg";
+    else 
+      return null;
+  }
 
 }
 

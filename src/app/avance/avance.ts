@@ -70,8 +70,13 @@ export class Avance {
     else
     {
       const avanceAnterior: AvanceModel = this.lAvances[index + 1];
-      let ganancia = this.lAvances[index].oro - avanceAnterior.oro;
-      return  new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0 }).format(ganancia);
+      if (avanceAnterior === undefined) 
+        return "";
+      else
+      {
+        let ganancia = this.lAvances[index].oro - avanceAnterior.oro;
+        return  new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0 }).format(ganancia);
+      }
     }
   }
 

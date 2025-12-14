@@ -196,4 +196,15 @@ export class PedidoService {
     deleteDoc(doc(this.db, 'pedido', cPedidoId));
   }
 
+  borrarPedidosTratados()
+  {
+    this.lPedidos.forEach(pedido =>
+      {
+        if (pedido.estrellas == -1 && pedido.oro == -1)
+        {
+          this.eliminarPedido(pedido.id);
+        }
+      });
+  }
+
 }
