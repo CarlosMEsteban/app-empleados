@@ -89,6 +89,8 @@ export class Tarea
         return 'pase';
       case 'BARCO':
         return 'barco';
+      case 'VALLE':
+        return 'valle';
       default:
         if (aPara.startsWith('80'))
           return 'feria'

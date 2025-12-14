@@ -18,6 +18,10 @@
     color:aqua;
 }
 
+.valle  {
+  background:  #DEB887;
+  color: white; /* para que el texto contraste */
+}
 .barco  {
   background: radial-gradient(circle, #13658b 0%, #DEB887 100%);
   color: white; /* para que el texto contraste */

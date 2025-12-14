@@ -58,11 +58,15 @@
             {
               <img src="poner.png" alt="" height="25" width="25"/>
             }
+            @if (tarea.dTarea.toUpperCase().includes("LLEGA")) 
+            {
+              <img src="LlegaPedido.png" alt="" height="25" width="25"/>
+            }
             
           </td>
           <td class="casilla"><input type="time" [(ngModel)]="tarea.hInicio" (ngModelChange)="onTareaChanged(tarea, 'hInicio', $event)"/></td>
           <td class="casilla"><input type="time" [(ngModel)]="tarea.hDuracion" (ngModelChange)="onTareaChanged(tarea, 'hDuracion', $event)"/></td>
-          <td class="casilla">            <input  type="text" [(ngModel)]="tarea.dTarea" [attr.size]="tarea.dTarea.length" (ngModelChange)="onTareaChanged(tarea, 'dTarea', $event)"/></td>
+          <td class="casilla"><input  type="text" [(ngModel)]="tarea.dTarea" [attr.size]="tarea.dTarea.length" (ngModelChange)="onTareaChanged(tarea, 'dTarea', $event)"/></td>
           <td class="casilla"><input [class]="claseCantidades(tarea.nOrden)" type="number" [(ngModel)]="tarea.nOrden" (ngModelChange)="onTareaChanged(tarea, 'nOrden', $event)"/></td>
           <td class="casilla"><input [class]="claseCantidades(tarea.nTotal)" type="number" [(ngModel)]="tarea.nTotal" (ngModelChange)="onTareaChanged(tarea, 'nTotal', $event)"/></td>
           <td class="casilla">
