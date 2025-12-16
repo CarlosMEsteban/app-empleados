@@ -34,6 +34,8 @@ export class PedidoModel {
   {
     if (this.orden < 10 )
       return "/camioneta.jpg";
+    else if (this.orden > 900)
+      return "/Barco.jpg";
     else 
       return null;
   }

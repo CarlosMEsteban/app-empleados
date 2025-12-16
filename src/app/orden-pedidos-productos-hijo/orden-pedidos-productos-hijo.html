@@ -8,7 +8,7 @@
         @for (ingredienteFalta of lIngredientesFaltantes; track $index) 
         {
             <div style="background-color: rgb(241, 206, 206); padding: 10px; margin-top: 5px;">
-                - Ingrediente: {{ ingredienteFalta.nombre }} - Tengo: {{ ingredienteFalta.tengo }} - Necesito: {{ ingredienteFalta.cantidad }}
+                - Ingrediente: {{ ingredienteFalta.nombre }} - Tengo: {{ ingredienteFalta.tengoMenosUnoACero() }} - Necesito: {{ ingredienteFalta.cantidad }}
             </div>
         }
 }

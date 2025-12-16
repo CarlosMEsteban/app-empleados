@@ -27,6 +27,11 @@
   color: white; /* para que el texto contraste */
   border: none;
 }
+.derby  {
+  background: radial-gradient(circle, #0b5f16 0%, #b91446 100%);
+  color: white; /* para que el texto contraste */
+  border: none;
+}
 
 .greg  {
   background: radial-gradient(circle, #0000FF 0%, #87CEFA 100%);

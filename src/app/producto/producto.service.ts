@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { getAnalytics } from 'firebase/analytics';
 import { initializeApp } from 'firebase/app';
-import { addDoc, collection, doc, DocumentSnapshot, getDoc, getDocs, getFirestore, limit, or, orderBy, query, QuerySnapshot, updateDoc, where, writeBatch } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, DocumentSnapshot, getDoc, getDocs, getFirestore, limit, or, orderBy, query, QuerySnapshot, updateDoc, where, writeBatch } from 'firebase/firestore';
 import { productoConverter, ProductoModel } from './producto.model';
 import { Producto } from './producto';
 import {firebaseConfig} from '../CONSTANTES';
@@ -575,6 +575,12 @@ await addDoc(this.productosCollectionRef, new ProductoModel({"id": 423, "nombre"
       console.log("No such document!");
       return -1;
     }
+  }
+
+  async eliminar(id: string)
+  {
+    const docRef = doc(this.productosCollectionRef, id);
+    deleteDoc(docRef);
   }
 }
 

@@ -1009,7 +1009,13 @@ new IngredienteModel({cProductoNecesitaId: "Zumo de Zanahoria", cProductoNecesit
   }
 
 
+  async anadirIngredienteDeProducto(cProductoNecesitaId: string, cProductoNecesitado: string, cantidad: number) 
+  {
+    const productoRef = doc(this.db, "producto", cProductoNecesitaId);
+    const ingredienteSubcoleccionRef = collection(productoRef, "ingrediente");
+    await addDoc(ingredienteSubcoleccionRef, {cProductoNecesitadoId: cProductoNecesitado, cantidad: cantidad});
 
+  }
 
   
 }

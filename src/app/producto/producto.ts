@@ -49,42 +49,23 @@ export class Producto {
           3,
           "Fabric"
       );*/
-      const nuevoProducto2 = new ProductoModel(
+  /*    const nuevoProducto2 = new ProductoModel(
         {
-          "id": 999,
-          "nombre": "Prueba",
-          "coste": 1,
-          "tengo": 2,
-          "almacen": "Alamacenenro",
+          
+          "nombre": "R.de Lunares",
+          "coste": 10,
+          "tengo": -1,
+          "almacen": "Granero",
           "materiaPrima": false,
-          "cantidadInicial": 3,
-          "fabrica": "Fabric"
+          "cantidadInicial": -1,
+          "fabrica": "Regalos"
         }
-      )
-      const nuevoProducto = new ProductoModel(
-        {
-          "id": 999,
-          "nombre": "Prueba",
-          "coste": 5,
-          "tengo": 2,
-          "almacen": "Alamacenenro",
-          "materiaPrima": true,
-          "cantidadInicial": 3,
-          "fabrica": "Fabric"
-        }
-      )
-
-  
-
-//constructor(id: number = -1, 
-// nombre: string, 
-// coste: number, 
-// tengo: number, 
-// almacen: string, 
-// materiaPrima: boolean, 
-// cantidadInicial: number, 
-// fabrica: string )           
-    this.productoServicio.agregarService(nuevoProducto);
+      )    
+    this.productoServicio.agregarService(nuevoProducto2);
+*/
+    /*this.ingredienteServicio.anadirIngredienteDeProducto("cpPQkN2mwCMLj4VNBu5R", "FHMtWFCC6Hs0FC0k7YJ6", 5)
+    this.ingredienteServicio.anadirIngredienteDeProducto("cpPQkN2mwCMLj4VNBu5R", "BEjYT4ZwoaMpI37J5Yn8", 3)
+    this.ingredienteServicio.anadirIngredienteDeProducto("cpPQkN2mwCMLj4VNBu5R", "T0OBj8KFgBimQn8EJwhV", 1)*/
   }
 
   cargarTodosProdutos()
@@ -275,4 +256,7 @@ export class Producto {
 
   }   
 
+  agregarProducto() {
+    this.anadirProducto();
+  }
 }
