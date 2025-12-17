@@ -1,3 +1,4 @@
+import { numberAttribute } from "@angular/core";
 import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions } from "firebase/firestore";
 
 export class TareaModel 
@@ -108,6 +109,15 @@ export class TareaModel
                      }
       );
     }
+
+  horaActual()
+  {
+    const ahora = new Date();
+    const horas = ahora.getHours().toString().padStart(2, '0');
+    const nMinutos = ahora.getMinutes() + 1;
+    const minutos = nMinutos.toString().padStart(2, '0');
+    this.hInicio = `${horas}:${minutos}`;
+  }
 
 
 }

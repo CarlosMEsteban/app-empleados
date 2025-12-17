@@ -2,7 +2,7 @@
 
 <div style="padding: 20px;">
   <h2>Tareas</h2>
-    H.Inicio: <input type="time" [(ngModel)]="nuevaTarea.hInicio" />
+    H.Inicio: <input type="time" [(ngModel)]="nuevaTarea.hInicio" (dblclick)="nuevaTarea.horaActual()" />
     H.Duración: <input type="time" [(ngModel)]="nuevaTarea.hDuracion" />
     Descripción: <input type="text" [(ngModel)]="nuevaTarea.dTarea" />
     Orden: <input type="number" [(ngModel)]="nuevaTarea.nOrden" />

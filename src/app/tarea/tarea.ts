@@ -171,7 +171,7 @@ export class Tarea
     });
   }
 
-onTareaChanged(tarea: TareaModel, campo: string, valor: any) {
+  onTareaChanged(tarea: TareaModel, campo: string, valor: any) {
     // el ngModel ya habrá actualizado tarea, pero aseguramos el valor si hace falta:
     (tarea as any)[campo] = valor;
 
@@ -204,6 +204,7 @@ onTareaChanged(tarea: TareaModel, campo: string, valor: any) {
   {
     this.bMostrarBotonesEspeciales = !this.bMostrarBotonesEspeciales;
   }
+
 
 
 
