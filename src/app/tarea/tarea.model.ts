@@ -117,6 +117,29 @@ export class TareaModel
     const nMinutos = ahora.getMinutes() + 1;
     const minutos = nMinutos.toString().padStart(2, '0');
     this.hInicio = `${horas}:${minutos}`;
+    this.hFinal = this.calcularHFinal(this.hInicio, this.hDuracion);
+    
+
+  }
+   calcularHFinal(hInicio: string, hDuracion: string): string
+  {
+    const partesInicio = hInicio.split(':');
+    const partesDuracion = hDuracion.split(':');
+
+    const horasInicio = parseInt(partesInicio[0], 10);
+    const minutosInicio = parseInt(partesInicio[1], 10);
+    const horasDuracion = parseInt(partesDuracion[0], 10);
+    const minutosDuracion = parseInt(partesDuracion[1], 10);
+
+    let minutosFinal = horasInicio * 60 + minutosInicio + horasDuracion * 60 + minutosDuracion;
+    const horasFinal = Math.floor(minutosFinal / 60);
+    minutosFinal = minutosFinal % 60;
+
+    let resultado = `${horasFinal}:${minutosFinal.toString().padStart(2, '0')}`;
+
+    if (resultado.length == 4)
+      resultado = "0" + resultado;
+    return resultado;
   }
 
 

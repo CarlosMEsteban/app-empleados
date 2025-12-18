@@ -46,6 +46,7 @@ export class Tarea
     this.tareaServicio.agregarTareasFijas();
   }
 
+  // TODO Pasar este método a TareaModel
   calcularHFinal(hInicio: string, hDuracion: string): string
   {
     const partesInicio = hInicio.split(':');
