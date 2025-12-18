@@ -74,7 +74,23 @@ export class Tarea
     this.tareaServicio.modificarHoras(tarea.id!, tarea.hInicio, tarea.hDuracion, tarea.hFinal);
   }
 
-  // TODO Pasar este método a TareaModel
+  horaActual(indice: string | undefined)
+  {
+    if (indice != undefined)
+    {
+      const ahora = new Date();
+      const horas = ahora.getHours().toString().padStart(2, '0');
+      const nMinutos = ahora.getMinutes() + 1;
+      const minutos = nMinutos.toString().padStart(2, '0');
+      let tarea: TareaModel = this.lTareas.find(t => t.id === indice)!;
+      tarea.hInicio = `${horas}:${minutos}`;
+      this.calcularModifHFinal(tarea);
+    }
+    
+
+  }  
+
+  
   clasePara(aPara: string): string
   {
     switch (aPara.toUpperCase())  
