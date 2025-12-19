@@ -4,18 +4,14 @@ import { RouterModule, RouterOutlet, Routes } from '@angular/router';
 import { Empleado } from '../empleado.model';
 import { NgFor, NgIf } from '@angular/common';
 import { CommonModule } from '@angular/common';
-import { EmpleadoHijoC } from "../empleado-hijo-c/empleado-hijo-c";
 import { ServicioEmpleados } from '../servicio-empleados';
 import { EmpleadosService } from '../empleados.service';
 
-import { Contacto } from '../contacto/contacto';
-import { Proyectos } from '../proyectos/proyectos';
-import { QuienesSomos } from '../quienes-somos/quienes-somos';
 import { anadirEmpleado, buscarEmpleadoPorNombre, cambiarEmpleado, db, getEmpleados, quitarEmpleado } from '../DataServices.service';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterOutlet, FormsModule, NgFor, NgIf, EmpleadoHijoC],
+  imports: [RouterOutlet, FormsModule, NgFor, NgIf],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
