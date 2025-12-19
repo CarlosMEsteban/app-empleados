@@ -79,6 +79,7 @@ export class Pedido {
   {
     this.pedido = new PedidoModel({orden: -1, estrellas: -1, oro: -1  });
     this.lProductos = [];
+    
   }
 
   bNuevo(): boolean

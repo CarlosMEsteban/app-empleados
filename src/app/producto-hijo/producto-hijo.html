@@ -1,5 +1,5 @@
     <div class="col-md-4" id="listaDeProductos" style="border: 2px solid #007bff; padding: 15px; border-radius: 8px;">
-      <p>{{productoDeLista.cProductoId}}){{indice+1}}.-{{ productoDeLista.nombre }} Tengo: 
+      <p><!--{{productoDeLista.cProductoId}})-->{{indice+1}}.-{{ productoDeLista.nombre }} Tengo: 
         <input type="number" [(ngModel)]="productoDeLista.tengo" class="form-control" style="width: 100px; display: inline-block;" (change)="cambiarTengo()"/>
         <input type="checkbox" [(ngModel)]="aEliminar"/>
         @if ( aEliminar) 
