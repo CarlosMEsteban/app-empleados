@@ -66,6 +66,23 @@ export class Avance {
     this.avanceServicio.crearAvancesIniciales();
   }
 
+  fechaActual()
+  {
+    const hoy = new Date();
+    const dia = String(hoy.getDate()).padStart(2, '0');
+    const mes = String(hoy.getMonth() + 1).padStart(2, '0');
+    const anio = hoy.getFullYear();
+    this.nuevoAvance.fecha = `${dia}/${mes}/${anio}`;
+  }
+
+  objetivoAnterior()
+  {
+    if (this.lAvances.length > 0)
+    {
+      this.nuevoAvance.estrellasObjetivo = this.lAvances[0].estrellasObjetivo;
+    }
+  }
+
   ganancia(index: number | undefined): String
   {
     if (index === undefined) return "";

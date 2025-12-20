@@ -12,11 +12,11 @@
 
 <div style="padding: 20px;">
   <h2>NUevo Avance</h2>
-    Fecha: <input type="text" [(ngModel)]="nuevoAvance.fecha" size="10"/>
+    Fecha: <input type="text" [(ngModel)]="nuevoAvance.fecha" (dblclick)="fechaActual()" size="10"/>
     Oro: <input type="text" [(ngModel)]="nuevoAvance.oro" size="8"/>
     Gasto: <input type="text" [(ngModel)]="nuevoAvance.gasto"  size="10"/>
     Estrellas: <input type="text" [(ngModel)]="nuevoAvance.estrellas"  size="10"/>
-    Estrellas Obj.: <input type="text" [(ngModel)]="nuevoAvance.estrellasObjetivo"  size="10"/>
+    Estrellas Obj.: <input type="text" [(ngModel)]="nuevoAvance.estrellasObjetivo" (dblclick)="objetivoAnterior()" size="10"/>
     <button (click)="agregarAvance()">
       Agregar Avance
     </button>
