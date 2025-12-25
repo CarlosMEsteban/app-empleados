@@ -112,14 +112,20 @@ export class TareaModel
 
   horaActual()
   {
-    const ahora = new Date();
+    let ahora = new Date();
+
     let horas = ahora.getHours().toString().padStart(2, '0');
     let nMinutos = ahora.getMinutes();
     if (nMinutos == 59)
     {
-      horas = horas + 1;
+      if (horas == "23")
+        horas = "00";
+      else
+        horas = horas + 1;
       nMinutos = 0;
     }
+    else
+      nMinutos = nMinutos + 1;
     const minutos = nMinutos.toString().padStart(2, '0');
     this.hInicio = `${horas}:${minutos}`;
     

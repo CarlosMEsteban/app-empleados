@@ -78,9 +78,21 @@ export class Tarea
   {
     if (indice != undefined)
     {
-      const ahora = new Date();
-      const horas = ahora.getHours().toString().padStart(2, '0');
-      const nMinutos = ahora.getMinutes() + 1;
+      let ahora = new Date();
+      let horas = ahora.getHours().toString().padStart(2, '0');
+      let nMinutos = ahora.getMinutes();
+      if (nMinutos == 59)
+      {
+        if (horas == "23")
+          horas = "00";
+        else
+          horas = horas + 1;
+        nMinutos = 0;
+      }
+      else
+        nMinutos = nMinutos + 1;
+
+
       const minutos = nMinutos.toString().padStart(2, '0');
       let tarea: TareaModel = this.lTareas.find(t => t.id === indice)!;
       tarea.hInicio = `${horas}:${minutos}`;
