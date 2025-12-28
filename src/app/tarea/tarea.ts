@@ -235,6 +235,9 @@ export class Tarea
   }
 
 
-
+  nuevaTareaHora(hora: string)
+  {
+    this.nuevaTarea.hInicio = this.calcularHFinal(hora, "00:01");
+  }
 
 }

@@ -49,7 +49,7 @@
       @for (tarea of lTareas; track tarea.id) {
         <tr style="border: 1px solid #ddd;">
           <td class="casilla">
-            <input [class]="tarea.pasadoOFuturo()" size="10" type="text" readonly="true" [(ngModel)]="tarea.hFinal"/>
+            <input [class]="tarea.pasadoOFuturo()" size="10" type="text" readonly="true" [(ngModel)]="tarea.hFinal" (dblclick)="nuevaTareaHora(tarea.hFinal)"/>
             @if (tarea.icono() !== "") 
             {
               <img src={{tarea.icono()}} alt="" height="25" width="25"/>
