@@ -102,6 +102,9 @@ await addDoc(this.productosCollectionRef, new ProductoModel({"id": 38, "nombre":
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 39, "nombre": "Pastel de bayas", "coste": 51, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 40, "nombre": "Lingote de plata", "coste": 480, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 41, "nombre": "Pastel de Queso", "coste": 204, "almacen": "", "materiaPrima": false, "fabrica": ""}));
+
+await addDoc(this.productosCollectionRef, new ProductoModel({"id": 41, "nombre": "Pastel de queso y arándanos", "coste": 240, "almacen": "", "materiaPrima": false, "fabrica": ""}));
+
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 42, "nombre": "Palomitas con chile", "coste": 102, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 43, "nombre": "Chile", "coste": 240, "almacen": "SILO", "materiaPrima": true, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 44, "nombre": "Lingote de platino", "coste": 960, "almacen": "", "materiaPrima": false, "fabrica": ""}));
@@ -168,7 +171,6 @@ await addDoc(this.productosCollectionRef, new ProductoModel({"id": 105, "nombre"
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 106, "nombre": "Tarta de manzana y miel", "coste": 200, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 108, "nombre": "Brocheta de langosta", "coste": 34, "almacen": "", "materiaPrima": false, "fabrica": "Barbacoa"}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 109, "nombre": "Panal", "coste": 30, "almacen": "", "materiaPrima": true, "fabrica": ""}));
-await addDoc(this.productosCollectionRef, new ProductoModel({"id": 110, "nombre": "Pastel de manzana y miel", "coste": 170, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 112, "nombre": "Bufanda roja", "coste": 127, "almacen": "", "materiaPrima": false, "fabrica": "Telar"}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 113, "nombre": "Sopa de calabaza", "coste": 102, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 114, "nombre": "Palomitas con miel", "coste": 76, "almacen": "", "materiaPrima": false, "fabrica": ""}));
@@ -254,7 +256,6 @@ await addDoc(this.productosCollectionRef, new ProductoModel({"id": 205, "nombre"
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 206, "nombre": "Pasta carbonara", "coste": 150, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 207, "nombre": "Uva", "coste": 150, "almacen": "SILO", "materiaPrima": true, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 208, "nombre": "Zumo de uva", "coste": 127, "almacen": "", "materiaPrima": false, "fabrica": ""}));
-await addDoc(this.productosCollectionRef, new ProductoModel({"id": 209, "nombre": "Helado de melocotón", "coste": 153, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 210, "nombre": "Ensalada veraniega", "coste": 153, "almacen": "", "materiaPrima": false, "fabrica": "Ensaladas"}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 211, "nombre": "Mermelada de uva", "coste": 331, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 212, "nombre": "Corona de flores", "coste": 102, "almacen": "", "materiaPrima": false, "fabrica": "Sombrererï¿½a"}));
@@ -414,7 +415,6 @@ await addDoc(this.productosCollectionRef, new ProductoModel({"id": 376, "nombre"
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 377, "nombre": "G.con frutos rojos", "coste": 35, "almacen": "", "materiaPrima": false, "fabrica": "Gofrera"}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 378, "nombre": "Ramo colorido", "coste": 20, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 379, "nombre": "Gofres con chocolate", "coste": 40, "almacen": "", "materiaPrima": false, "fabrica": "Gofrera"}));
-await addDoc(this.productosCollectionRef, new ProductoModel({"id": 380, "nombre": "Gofres frutos rojos", "coste": 35, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 381, "nombre": "Ensalada de naranja", "coste": 38, "almacen": "", "materiaPrima": false, "fabrica": "Ensaladas"}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 384, "nombre": "Cerdo de chocolate", "coste": 60, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 385, "nombre": "Cabra de chocolate", "coste": 90, "almacen": "", "materiaPrima": false, "fabrica": ""}));
@@ -449,7 +449,10 @@ await addDoc(this.productosCollectionRef, new ProductoModel({"id": 419, "nombre"
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 420, "nombre": "Difusor relajante", "coste": 25, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 421, "nombre": "Perfume cítrico", "coste": 15, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 422, "nombre": "Arándanos", "coste": 840, "almacen": "", "materiaPrima": true, "fabrica": ""}));
-await addDoc(this.productosCollectionRef, new ProductoModel({"id": 423, "nombre": "G.de Arándanos", "coste": 42, "almacen": "", "materiaPrima": false, "fabrica": ""}));console.log("S'acabó");    
+await addDoc(this.productosCollectionRef, new ProductoModel({"id": 423, "nombre": "G.de Arándanos", "coste": 42, "almacen": "", "materiaPrima": false, "fabrica": ""}));
+await addDoc(this.productosCollectionRef, new ProductoModel({"id": 423, "nombre": "Magdalena de Arándanos", "coste": 45, "almacen": "", "materiaPrima": false, "fabrica": ""}));
+console.log("S'acabó");    
+
   }
 
   /** Devuelve todos los productos */

@@ -99,7 +99,8 @@ export class TareaService {
         new TareaModel({bFija: true, hFinal: "07:29", hInicio: "00:00", hDuracion: 	"07:29", dTarea:	"Pajarería", aPara:		"Pajarería"}),
         new TareaModel({bFija: true, hFinal: "07:00", hInicio: "07:00", hDuracion: 	"00:00", dTarea:	"Visitar", aPara:		"Greg"}),
         new TareaModel({bFija: true, hFinal: "08:00", hInicio: "08:00", hDuracion: 	"00:00", dTarea:	"tienda de diamonds", aPara:		"tienda de diamonds"}),
-        new TareaModel({bFija: true, hFinal: "09:00", hInicio: "09:00", hDuracion: 	"00:00", dTarea:	"tirar", aPara:		"Ruleta"})
+        new TareaModel({bFija: true, hFinal: "09:00", hInicio: "09:00", hDuracion: 	"00:00", dTarea:	"tirar", aPara:		"Ruleta"}),
+        new TareaModel({bFija: true, hFinal: "08:00", hInicio: "08:00", hDuracion: 	"08:00", dTarea:	"Pajarera", aPara:		"Pajarera"})
       ];
 
     tareasFijas.forEach((tarea) => 
