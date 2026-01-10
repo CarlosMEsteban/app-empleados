@@ -584,6 +584,11 @@ console.log("S'acabó");
     const docRef = doc(this.productosCollectionRef, id);
     deleteDoc(docRef);
   }
+
+  async cargarUnProductoEIngredientes(nuevoroducto: ProductoModel)
+  {
+    await addDoc(this.productosCollectionRef, nuevoroducto);
+  }
 }
 
   

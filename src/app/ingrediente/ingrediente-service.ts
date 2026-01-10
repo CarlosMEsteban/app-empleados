@@ -25,9 +25,14 @@ export class IngredienteService
 
     async anadirTodoIngredientes()
     {
+      await this.anadirIngredientes(this.todosIngredientes);
+    }
+
+    public async anadirIngredientes(lIngredientes: IngredienteModel[])
+    {
       console.log("entramos");
       //const ingredienteSubcoleccionRef = collection(productoRef, "ingrediente");
-      for (const ingrediente of this.todosIngredientes)
+      for (const ingrediente of lIngredientes)
       // Recorremos todos los ingredientes
       {
         //console.log(ingrediente);

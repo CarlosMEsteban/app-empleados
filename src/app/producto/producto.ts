@@ -259,4 +259,16 @@ export class Producto {
   agregarProducto() {
     this.anadirProducto();
   }
+
+  cargarUnProductoEIngredientes() 
+  {
+    let nuevoProducto: ProductoModel = new ProductoModel({"id": 425, "nombre": "BORRAME", "coste": 204, "almacen": "", "materiaPrima": false, "fabrica": ""});
+    this.productoServicio.cargarUnProductoEIngredientes(nuevoProducto);
+    const lIngredientes: IngredienteModel[] = [
+      new IngredienteModel({cProductoNecesitaId: "BORRAME", cProductoNecesitadoId: "Mayonesa", cantidad: 1}),
+      ]
+    this.ingredienteServicio.anadirIngredientes(lIngredientes);
+
+  }
+
 }
