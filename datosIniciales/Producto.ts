@@ -351,7 +351,7 @@ docRef = await addDoc(this.productosCollectionRef, new Producto(378,"Ramo colori
 docRef = await addDoc(this.productosCollectionRef, new Producto(379,"Gofres con chocolate",40,,,,,"Gofrera"
 docRef = await addDoc(this.productosCollectionRef, new Producto(380,"Gofres frutos rojos",35,,,,,
 docRef = await addDoc(this.productosCollectionRef, new Producto(381,"Ensalada de naranja",38,,,,,"Ensaladas"
-docRef = await addDoc(this.productosCollectionRef, new Producto(384,"Cerdo de chocolate",60,,,,,
+
 docRef = await addDoc(this.productosCollectionRef, new Producto(385,"Cabra de chocolate",90,,,,,
 docRef = await addDoc(this.productosCollectionRef, new Producto(386,"G.de huevos con bacon",45,,,,,"Gofrera"
 docRef = await addDoc(this.productosCollectionRef, new Producto(387,"Aceite esencial de limón",10,,,,,"Aceites esenciales"

@@ -164,7 +164,7 @@ console.log("Mostrando productos de pedido para el pedido con id: " + this.pedid
         //this.pedido.productos = this.lProductos;
 
         //this.lProductos = new Array<ProductosDePedidoModel>() ;
-        //this.lProductos.push(new ProductosDePedidoModel({poductoId: "Cabra de chocolate", cantidad: 2}));
+        
       }
       else
       { console.log("No hay pedidos"); }

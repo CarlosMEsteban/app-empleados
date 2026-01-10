@@ -89,4 +89,37 @@ export class OrdenPedidosProductosHijo
   {
     console.log("Ocultar coste del producto", this.productoDePedido.nombreProducto);    
   }
+
+  copyToClipboard(text: string): void {
+    if (!text && text !== '') {
+      return;
+    }
+    const normalized = String(text);
+    if (navigator && 'clipboard' in navigator) {
+      navigator.clipboard.writeText(normalized).then(() => {
+        console.log('Texto copiado al portapapeles:', normalized);
+      }).catch(err => {
+        console.warn('Fallo al usar Clipboard API, fallback:', err);
+        this.fallbackCopyText(normalized);
+      });
+    } else {
+      this.fallbackCopyText(normalized);
+    }
+  }
+
+  private fallbackCopyText(text: string) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.left = '-9999px';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      const ok = document.execCommand('copy');
+      console.log('Fallback copy result:', ok);
+    } catch (err) {
+      console.error('Fallback: no se pudo copiar', err);
+    }
+    document.body.removeChild(textarea);
+  }
 }

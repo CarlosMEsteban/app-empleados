@@ -416,8 +416,6 @@ await addDoc(this.productosCollectionRef, new ProductoModel({"id": 377, "nombre"
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 378, "nombre": "Ramo colorido", "coste": 20, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 379, "nombre": "Gofres con chocolate", "coste": 40, "almacen": "", "materiaPrima": false, "fabrica": "Gofrera"}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 381, "nombre": "Ensalada de naranja", "coste": 38, "almacen": "", "materiaPrima": false, "fabrica": "Ensaladas"}));
-await addDoc(this.productosCollectionRef, new ProductoModel({"id": 384, "nombre": "Cerdo de chocolate", "coste": 60, "almacen": "", "materiaPrima": false, "fabrica": ""}));
-await addDoc(this.productosCollectionRef, new ProductoModel({"id": 385, "nombre": "Cabra de chocolate", "coste": 90, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 386, "nombre": "G.de huevos con bacon", "coste": 45, "almacen": "", "materiaPrima": false, "fabrica": "Gofrera"}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 387, "nombre": "Aceite esencial de limón", "coste": 10, "almacen": "", "materiaPrima": false, "fabrica": "Aceites esenciales"}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 388, "nombre": "Aceite esencial de menta", "coste": 15, "almacen": "", "materiaPrima": false, "fabrica": "Aceites esenciales"}));
@@ -450,7 +448,8 @@ await addDoc(this.productosCollectionRef, new ProductoModel({"id": 420, "nombre"
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 421, "nombre": "Perfume cítrico", "coste": 15, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 422, "nombre": "Arándanos", "coste": 840, "almacen": "", "materiaPrima": true, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 423, "nombre": "G.de Arándanos", "coste": 42, "almacen": "", "materiaPrima": false, "fabrica": ""}));
-await addDoc(this.productosCollectionRef, new ProductoModel({"id": 423, "nombre": "Magdalena de Arándanos", "coste": 45, "almacen": "", "materiaPrima": false, "fabrica": ""}));
+await addDoc(this.productosCollectionRef, new ProductoModel({"id": 424, "nombre": "Magdalena de Arándanos", "coste": 45, "almacen": "", "materiaPrima": false, "fabrica": ""}));
+await addDoc(this.productosCollectionRef, new ProductoModel({"id": 425, "nombre": "Chutney de Arándanos", "coste": 204, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 console.log("S'acabó");    
 
   }

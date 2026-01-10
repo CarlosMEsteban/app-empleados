@@ -1,5 +1,5 @@
 <div [style.backgroundColor]="claseSegunFalta()">
-    <p (mouseover)="mostrarCoste()" (mouseout)="ocultarCoste()">
+    <p (mouseover)="mostrarCoste()" (mouseout)="ocultarCoste()" (dblclick)="copyToClipboard(productoDePedido.nombreProducto)">
     - Producto: {{ productoDePedido.nombreProducto }} - Tengo: {{productoDePedido.tengo }} - Necesito: {{ productoDePedido.cantidad }} Coste({{productoDePedido.costeTXT()}})
     </p>
     @if (productoDePedido.tengo < productoDePedido.cantidad) 
