@@ -17,7 +17,7 @@ export class ProductoService {
   db = getFirestore(this.app);
 
   productosCollectionRef = collection(this.db, 'producto').withConverter(productoConverter);
-  
+
   async agregarService(producto: ProductoModel) 
   {
     try 
@@ -60,8 +60,7 @@ export class ProductoService {
   }
 
   async cargarTodosProdutos()
-  {
-    
+  {   
     console.log("Empezamos la carga masiva");
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 1, "nombre": "Azúcar Moreno", "coste": 17, "almacen": "", "materiaPrima": false, "fabrica": "Azucarera"}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 2, "nombre": "Pan", "coste": 4, "almacen": "", "materiaPrima": false, "fabrica": ""}));
@@ -589,6 +588,8 @@ console.log("S'acabó");
   {
     await addDoc(this.productosCollectionRef, nuevoroducto);
   }
+
+
 }
 
   

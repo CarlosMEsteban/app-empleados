@@ -101,7 +101,16 @@ export class Tarea
     
 
   }  
-
+  
+  poner2359(indice: string | undefined)
+  {
+    if (indice != undefined)
+    {
+      let tarea: TareaModel = this.lTareas.find(t => t.id === indice)!;
+      tarea.hDuracion = "23:59";
+      this.calcularModifHFinal(tarea);
+    }
+  }
   
   clasePara(aPara: string): string
   {
@@ -171,6 +180,8 @@ export class Tarea
 
   encadenar(bEncadenar: boolean)
   {
+    if (this.nuevaTarea.hDuracion == "")
+      this.nuevaTarea.hDuracion = "00:00";
     let tareaAntigua = this.nuevaTarea.clonar();
     
     this.nuevaTarea.bFija = false;

@@ -131,6 +131,11 @@ export class TareaModel
     
 
   }
+
+  poner0000()
+  {
+    this.hDuracion = "00:00";
+  }
    
 
 
