@@ -42,13 +42,13 @@
         <th class="casilla">Orden</th>
         <th class="casilla">Total</th>
         <th class="casilla">Para</th>
-        <th class="casilla">Operación</th>
+        <th class="casilla">Borr</th>
       </tr>
     </thead>
     <tbody>
       @for (tarea of lTareas; track tarea.id) {
         <tr style="border: 1px solid #ddd;">
-          <td class="casilla">
+          <td class="casilla hfinal-cell">
             <input [class]="tarea.pasadoOFuturo()" size="10" type="text" readonly="true" [(ngModel)]="tarea.hFinal" (dblclick)="nuevaTareaHora(tarea.hFinal)"/>
             @if (tarea.icono() !== "") 
             {
@@ -64,11 +64,11 @@
             }
             
           </td>
-          <td class="casilla"><input type="time" [(ngModel)]="tarea.hInicio" (dblclick)="horaActual(tarea.id)" (ngModelChange)="onTareaChanged(tarea, 'hInicio', $event)"/></td>
-          <td class="casilla"><input type="time" [(ngModel)]="tarea.hDuracion" (dblclick)="poner2359(tarea.id)" (ngModelChange)="onTareaChanged(tarea, 'hDuracion', $event)"/></td>
+          <td class="casilla hfinal-cell"><input type="time" [(ngModel)]="tarea.hInicio" (dblclick)="horaActual(tarea.id)" (ngModelChange)="onTareaChanged(tarea, 'hInicio', $event)"/></td>
+          <td class="casilla hfinal-cell"><input type="time" [(ngModel)]="tarea.hDuracion" (dblclick)="poner2359(tarea.id)" (ngModelChange)="onTareaChanged(tarea, 'hDuracion', $event)"/></td>
           <td class="casilla"><input  type="text" [(ngModel)]="tarea.dTarea" [attr.size]="tarea.dTarea.length" (ngModelChange)="onTareaChanged(tarea, 'dTarea', $event)"/></td>
-          <td class="casilla"><input [class]="claseCantidades(tarea.nOrden)" type="number" [(ngModel)]="tarea.nOrden" (ngModelChange)="onTareaChanged(tarea, 'nOrden', $event)"/></td>
-          <td class="casilla"><input [class]="claseCantidades(tarea.nTotal)" type="number" [(ngModel)]="tarea.nTotal" (ngModelChange)="onTareaChanged(tarea, 'nTotal', $event)"/></td>
+          <td class="casilla hfinal-cell"><input [class]="claseCantidades(tarea.nOrden)" type="number" [(ngModel)]="tarea.nOrden" (ngModelChange)="onTareaChanged(tarea, 'nOrden', $event)"/></td>
+          <td class="casilla hfinal-cell"><input [class]="claseCantidades(tarea.nTotal)" type="number" [(ngModel)]="tarea.nTotal" (ngModelChange)="onTareaChanged(tarea, 'nTotal', $event)"/></td>
           <td class="casilla">
             <input [class]="clasePara(tarea.aPara)" type="text" [(ngModel)]="tarea.aPara" (ngModelChange)="onTareaChanged(tarea, 'aPara', $event)"/>
             @if (tarea.icono() !== "") 
@@ -77,7 +77,7 @@
             }
 
           </td>
-          <td class="casilla">
+          <td class="casilla hfinal-cell">
             <img src="/equis.png" alt="Pedido Image" height="20" width="20"(click)="eliminar(tarea.id!)"/>
           </td>
         </tr>
