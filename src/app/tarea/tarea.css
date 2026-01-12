@@ -50,6 +50,12 @@
   color: white; /* para que el texto contraste */
   border: none;
 }
+
+.arce  {
+  background: radial-gradient(circle, #FFA500 0%, #1900ff 100%);
+  color: wheat; /* para que el texto contraste */
+  border: none;
+}
 .pase {
     background-color: #d6f0d6;
 }
