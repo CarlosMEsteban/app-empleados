@@ -91,11 +91,11 @@
 
 /* Más estrecha para la celda que muestra la hora final */
 .hfinal-cell{
-  width: 120px;
-  max-width: 120px;
+  width: 130px;
+  max-width: 130px;
   white-space: nowrap;
 }
 .hfinal-cell input{
-  width: 64px; /* ajustar a la anchura deseada */
+  width: 75px; /* ajustar a la anchura deseada */
   box-sizing: border-box;
 }
