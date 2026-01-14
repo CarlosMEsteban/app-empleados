@@ -1,5 +1,6 @@
 import { numberAttribute } from "@angular/core";
 import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions } from "firebase/firestore";
+import { Fechas } from "../util/fechas";
 
 export class TareaModel 
 {
@@ -110,33 +111,17 @@ export class TareaModel
       );
     }
 
-  horaActual()
-  {
-    let ahora = new Date();
 
-    let horas = ahora.getHours().toString().padStart(2, '0');
-    let nMinutos = ahora.getMinutes();
-    if (nMinutos == 59)
-    {
-      if (horas == "23")
-        horas = "00";
-      else
-        horas = horas + 1;
-      nMinutos = 0;
-    }
-    else
-      nMinutos = nMinutos + 1;
-    const minutos = nMinutos.toString().padStart(2, '0');
-    this.hInicio = `${horas}:${minutos}`;
-    
-
-  }
 
   poner0000()
   {
     this.hDuracion = "00:00";
   }
-   
+
+  horaActual()
+  {
+    this.hInicio = Fechas.obtenerHoraActualMasUno();
+  }
 
 
 }
