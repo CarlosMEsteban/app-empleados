@@ -4,7 +4,7 @@
   <h2>Tareas</h2>
     H.Inicio: <input type="time" [(ngModel)]="nuevaTarea.hInicio" (dblclick)="nuevaTarea.horaActual()" />
     H.Duración: <input type="time" (dblclick)="nuevaTarea.poner0000()" [(ngModel)]="nuevaTarea.hDuracion" />
-    Descripción: <input type="text" [(ngModel)]="nuevaTarea.dTarea" />
+    Descripción: <input type="text" [(ngModel)]="nuevaTarea.dTarea" (blur)="ponerTiempos()"/>
     Orden: <input type="number" [(ngModel)]="nuevaTarea.nOrden" />
     Total: <input type="number" [(ngModel)]="nuevaTarea.nTotal" />
     Para: <input type="text" [(ngModel)]="nuevaTarea.aPara" />
@@ -66,7 +66,7 @@
           </td>
           <td class="casilla hfinal-cell"><input type="time" [(ngModel)]="tarea.hInicio" (dblclick)="horaActual(tarea.id)" (ngModelChange)="onTareaChanged(tarea, 'hInicio', $event)"/></td>
           <td class="casilla hfinal-cell"><input type="time" [(ngModel)]="tarea.hDuracion" (dblclick)="poner2359(tarea.id)" (ngModelChange)="onTareaChanged(tarea, 'hDuracion', $event)"/></td>
-          <td class="casilla"><input  type="text" [(ngModel)]="tarea.dTarea" [attr.size]="tarea.dTarea.length" (ngModelChange)="onTareaChanged(tarea, 'dTarea', $event)"/></td>
+          <td class="casilla"><input  type="text" [(ngModel)]="tarea.dTarea" [attr.size]="tarea.dTarea.length" (ngModelChange)="onTareaChanged(tarea, 'dTarea', $event)" /></td>
           <td class="casilla hfinal-cell"><input [class]="claseCantidades(tarea.nOrden)" type="number" [(ngModel)]="tarea.nOrden" (ngModelChange)="onTareaChanged(tarea, 'nOrden', $event)"/></td>
           <td class="casilla hfinal-cell"><input [class]="claseCantidades(tarea.nTotal)" type="number" [(ngModel)]="tarea.nTotal" (ngModelChange)="onTareaChanged(tarea, 'nTotal', $event)"/></td>
           <td class="casilla">

@@ -4,6 +4,7 @@ import { TareaService } from './tarea.service';
 import { FormsModule } from '@angular/forms';
 import { appConfig } from '../app.config';
 import { TitleService } from '../services/title.service';
+import { Fechas } from '../util/fechas';
 
 
 @Component({
@@ -242,6 +243,7 @@ export class Tarea
     }, 600)); // 600 ms debounce
   }
 
+  
   mostrarBotonesEspeciales()
   {
     this.bMostrarBotonesEspeciales = !this.bMostrarBotonesEspeciales;
@@ -251,6 +253,18 @@ export class Tarea
   nuevaTareaHora(hora: string)
   {
     this.nuevaTarea.hInicio = this.calcularHFinal(hora, "00:01");
+  }
+
+  ponerTiempos()
+  {
+    const dTarea = this.nuevaTarea.dTarea.toUpperCase();
+    if (dTarea == "LLEGA PEDIDO")
+    {
+      this.nuevaTarea.hDuracion = "00:30";
+      this.nuevaTarea.hInicio = Fechas.obtenerHoraActualMasUno();
+    }
+
+    
   }
 
 }
