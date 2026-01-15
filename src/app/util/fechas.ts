@@ -30,7 +30,7 @@ export class Fechas {
     else
       nMinutos = nMinutos + 1;
 
-    return `${nHoras}:${nMinutos.toString().padStart(2, '0')}`;
+    return `${nHoras.toString().padStart(2, '0')}:${nMinutos.toString().padStart(2, '0')}`;
   }
 
   
