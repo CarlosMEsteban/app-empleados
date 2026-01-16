@@ -2,9 +2,9 @@
 
 <div style="padding: 20px;">
   <h2>Tareas</h2>
+    Descripción: <input type="text" [(ngModel)]="nuevaTarea.dTarea" (blur)="ponerTiempos()"/>
     H.Inicio: <input type="time" [(ngModel)]="nuevaTarea.hInicio" (dblclick)="nuevaTarea.horaActual()" />
     H.Duración: <input type="time" (dblclick)="nuevaTarea.poner0000()" [(ngModel)]="nuevaTarea.hDuracion" />
-    Descripción: <input type="text" [(ngModel)]="nuevaTarea.dTarea" (blur)="ponerTiempos()"/>
     Orden: <input type="number" [(ngModel)]="nuevaTarea.nOrden" />
     Total: <input type="number" [(ngModel)]="nuevaTarea.nTotal" />
     Para: <input type="text" [(ngModel)]="nuevaTarea.aPara" />
