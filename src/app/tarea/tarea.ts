@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { appConfig } from '../app.config';
 import { TitleService } from '../services/title.service';
 import { Fechas } from '../util/fechas';
+import { ProductoService } from '../producto/producto.service';
+import { ProductoModel } from '../producto/producto.model';
 
 
 @Component({
@@ -17,6 +19,8 @@ export class Tarea
 {
   private _saveTimers: Map<string, any> = new Map<string, any>();
   lTareas: TareaModel[] = [];
+  lProductos: ProductoModel[] = [];
+
   
 
   bMostrarBotonesEspeciales: boolean = false;
@@ -24,9 +28,14 @@ export class Tarea
   nuevaTarea: TareaModel = new TareaModel({bFija: false, hInicio: "", hDuracion: "", dTarea: "", aPara: ""});
 
   tareaServicio: TareaService;
-  constructor(tareaServicio: TareaService, private titleServicio: TitleService) 
+  productoServicio: ProductoService;
+  constructor(tareaServicio: TareaService, 
+              productoServicio: ProductoService,
+              private titleServicio: TitleService) 
   {
     this.tareaServicio = tareaServicio;
+    this.productoServicio = productoServicio;
+    this.productoServicio.listarProductos(new ProductoModel({})).then((productos) =>this.lProductos = productos);
     titleServicio.setTitle("Tareas");
     appConfig
   }
@@ -260,13 +269,25 @@ export class Tarea
 
   ponerTiempos()
   {
+    console.log("Tamaño lista productos: " + this.lProductos.length );
     const dTarea = this.nuevaTarea.dTarea.toUpperCase();
     if (dTarea == "LLEGA PEDIDO")
     {
       this.nuevaTarea.hDuracion = "00:30";
       this.nuevaTarea.hInicio = Fechas.obtenerHoraActualMasUno();
     }
-
+    else
+    {
+      for (let producto of this.lProductos)
+      {
+        const nombreProducto = producto.getNombre().toUpperCase();
+        if (dTarea.includes(nombreProducto))
+        {
+          this.nuevaTarea.hDuracion = Fechas.minutosAString(producto.getCoste());
+          this.nuevaTarea.hInicio = Fechas.obtenerHoraActualMasUno();
+        }
+      }
+    }
     
   }
 

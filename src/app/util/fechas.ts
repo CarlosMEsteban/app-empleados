@@ -33,5 +33,11 @@ export class Fechas {
     return `${nHoras.toString().padStart(2, '0')}:${nMinutos.toString().padStart(2, '0')}`;
   }
 
+  static minutosAString(minutosTotales: number): string
+  {
+    let horas = Math.floor(minutosTotales / 60);
+    let minutos = minutosTotales % 60;
+    return `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;
+  }
   
 }
