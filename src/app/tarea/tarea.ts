@@ -283,8 +283,10 @@ export class Tarea
         const nombreProducto = producto.getNombre().toUpperCase();
         if (dTarea.includes(nombreProducto))
         {
-          this.nuevaTarea.hDuracion = Fechas.minutosAString(producto.getCoste());
-          this.nuevaTarea.hInicio = Fechas.obtenerHoraActualMasUno();
+          if (this.nuevaTarea.hDuracion == "")
+            this.nuevaTarea.hDuracion = Fechas.minutosAString(producto.getCoste());
+          if (this.nuevaTarea.hInicio == "")    
+            this.nuevaTarea.hInicio = Fechas.obtenerHoraActualMasUno();
         }
       }
     }
