@@ -9,6 +9,7 @@ import { ProductoService } from '../producto/producto.service';
 import { ProductoModel } from '../producto/producto.model';
 
 
+
 @Component({
   selector: 'app-tarea',
   imports: [FormsModule],
@@ -269,28 +270,49 @@ export class Tarea
 
   ponerTiempos()
   {
-    console.log("Tamaño lista productos: " + this.lProductos.length );
     const dTarea = this.nuevaTarea.dTarea.toUpperCase();
-    if (dTarea == "LLEGA PEDIDO")
+    if (! dTarea.includes("PONER") && dTarea != "")
     {
-      this.nuevaTarea.hDuracion = "00:30";
-      this.nuevaTarea.hInicio = Fechas.obtenerHoraActualMasUno();
-    }
-    else
-    {
-      for (let producto of this.lProductos)
+      if (this.nuevaTarea.hInicio == "")
+        this.nuevaTarea.hInicio = Fechas.obtenerHoraActualMasUno();
+
+      console.log("Tamaño lista productos: " + this.lProductos.length );
+      
+      if (dTarea == "LLEGA PEDIDO")
       {
-        const nombreProducto = producto.getNombre().toUpperCase();
-        if (dTarea.includes(nombreProducto))
+        this.nuevaTarea.hDuracion = "00:30";
+        
+      }
+      else
+      {
+        if (this.nuevaTarea.hDuracion == "")
         {
-          if (this.nuevaTarea.hDuracion == "")
-            this.nuevaTarea.hDuracion = Fechas.minutosAString(producto.getCoste());
-          if (this.nuevaTarea.hInicio == "")    
-            this.nuevaTarea.hInicio = Fechas.obtenerHoraActualMasUno();
+          let costeMasProbable = -1;
+          let encontrado = false;
+
+          for (let producto of this.lProductos)
+          {
+            if (! encontrado)
+            {
+              const nombreProducto = producto.getNombre().toUpperCase();
+              if (nombreProducto == dTarea)
+              {
+                costeMasProbable = producto.getCoste();
+                encontrado = true;
+              }
+              else if (nombreProducto.includes(dTarea) || dTarea.includes(nombreProducto))
+              {
+                // Aquí puedes implementar lógica adicional si es necesario
+                costeMasProbable = producto.getCoste();
+              }
+            }
+              
+          }
+          if (costeMasProbable >= 0)
+            this.nuevaTarea.hDuracion = Fechas.minutosAString(costeMasProbable);
         }
       }
+      
     }
-    
   }
-
 }

@@ -1,4 +1,4 @@
-docRef = await addDoc(this.productosCollectionRef, new Producto(1,"Azúcar Moreno",17,1,,,,"Azucarera");
+docRef = await addDoc(this.productosCollectionRef, new Producto(1,"Azúcar Moreno",17,1,,,,"Azucarera"));
 docRef = await addDoc(this.productosCollectionRef, new Producto(2,"pan",4,0,,,,
 docRef = await addDoc(this.productosCollectionRef, new Producto(3,"Nata",17,0,,,,
 docRef = await addDoc(this.productosCollectionRef, new Producto(4,"Mantequilla",25,,,,,
@@ -109,7 +109,7 @@ docRef = await addDoc(this.productosCollectionRef, new Producto(113,"Sopa de cal
 docRef = await addDoc(this.productosCollectionRef, new Producto(114,"Palomitas con miel",76,,,,,
 docRef = await addDoc(this.productosCollectionRef, new Producto(115,"algodón",150,9,"SILO","S",9,
 docRef = await addDoc(this.productosCollectionRef, new Producto(116,"Mermelada de fresa",382,1,,,,
-docRef = await addDoc(this.productosCollectionRef, new Producto(119,"Cera de abejas",45,1,,,,"Miel"
+docRef = await addDoc(this.productosCollectionRef, new Producto(119,"Cera de abejas",38,1,,,,"Miel"
 docRef = await addDoc(this.productosCollectionRef, new Producto(121,"Vela de fresa",102,,,,,
 docRef = await addDoc(this.productosCollectionRef, new Producto(123,"Vela de frambuesa",89,,,,,
 docRef = await addDoc(this.productosCollectionRef, new Producto(124,"Manzana caramelizada",102,3,,,,

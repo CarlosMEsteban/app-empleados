@@ -14,7 +14,7 @@ export class TareaModel
     nTotal: number = -1;
     aPara: string = ""; // Para qué es la tarea Camioneta, barco... etc
 
-    palabrasLecheria = ["LECHE", "NATA", "QUESO", "MANTEQUILLA"];
+    palabrasLecheria = ["NATA", "QUESO", "MANTEQUILLA"];
     palabrasMiel = ["MIEL", "CERA"];
     palabrasPuestoSalsas = ["ACEITE", "SALSA", "MAYONESA", "CUAJADA", "OLIVADA", "HUM", "VINAGRE"];
           
