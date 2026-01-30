@@ -30,50 +30,64 @@ export class IngredienteService
 
     public async anadirIngredientes(lIngredientes: IngredienteModel[])
     {
-      console.log("entramos");
+      console.log("CARGA DE INGREDIENTES");
       //const ingredienteSubcoleccionRef = collection(productoRef, "ingrediente");
+      let ingredienteNecesita: string = "";
+      let ingredienteNecesitado: string = "";
+/*
+lIngredientes = [
+  new IngredienteModel({cProductoNecesitaId: "Chutney de arándanos", cProductoNecesitadoId: "Arándanos", cantidad: 3}),
+]
+  */
       for (const ingrediente of lIngredientes)
       // Recorremos todos los ingredientes
       {
-        //console.log(ingrediente);
-        //console.log(ingrediente.cProductoNecesitaId + "-" + ingrediente.cProductoNecesitadoId);
-        // Obtengo el producto que necesita
-        let cNecesitaId: string = "";
-//console.log("Aquí sí llega");
-        let q = query(this.productosCollectionRef, where('nombre', '==', ingrediente.getCProductoNecesitaId()));
-//console.log("Aquí no llega");
-        let querySnapshot = await getDocs(q);
-        for (const producto of querySnapshot.docs) 
+        try
         {
-          cNecesitaId = producto.id;
-        }
-        
-        // Obtengo el producto necesitado
-        let cNecesitadoId: string = "";
-        q = query(this.productosCollectionRef, where('nombre', '==', ingrediente.getCProductoNecesitadoId()));
-        querySnapshot = await getDocs(q);
-        for (const producto of querySnapshot.docs) 
+        ingredienteNecesita = ingrediente.cProductoNecesitaId;
+        ingredienteNecesitado = ingrediente.cProductoNecesitadoId;
+          //console.log(ingrediente);
+          //console.log(ingrediente.cProductoNecesitaId + "-" + ingrediente.cProductoNecesitadoId);
+          // Obtengo el producto que necesita
+          let cNecesitaId: string = "";
+  
+          let q = query(this.productosCollectionRef, where('nombre', '==', ingrediente.getCProductoNecesitaId()));
+          let querySnapshot = await getDocs(q);
+          for (const producto of querySnapshot.docs) 
+          {
+            cNecesitaId = producto.id;
+          }
+          
+          // Obtengo el producto necesitado
+          let cNecesitadoId: string = "";
+          q = query(this.productosCollectionRef, where('nombre', '==', ingrediente.getCProductoNecesitadoId()));
+          querySnapshot = await getDocs(q);
+          for (const producto of querySnapshot.docs) 
+          {
+            cNecesitadoId = producto.id;
+          }
+
+          //console.log("Producto necesita: " + cNecesitaId + " - Producto necesitado: " + cNecesitadoId);
+
+          if (cNecesitaId == "" )
+            console.log("Nombre necesita: " + ingrediente.cProductoNecesitaId + "-Producto necesita: " + cNecesitaId);
+          if (cNecesitadoId == "")
+            console.log("Nombre necesitado: " + ingrediente.cProductoNecesitadoId + "-Producto necesitado: " + cNecesitadoId);
+
+
+          // Obtengo referencia al producto que necesita
+          const productoRef = doc(this.db, "producto", cNecesitaId);
+          const ingredienteSubcoleccionRef = collection(productoRef, "ingrediente");
+          await addDoc(ingredienteSubcoleccionRef, {cProductoNecesitadoId: cNecesitadoId, cantidad: ingrediente.cantidad});
+          //console.log("Añadido: necesita: " + ingrediente.cProductoNecesitaId + "-Nombre necesitado: " + ingrediente.cProductoNecesitadoId );
+    }      catch (error)
         {
-          cNecesitadoId = producto.id;
+          console.error("Error con el ingrediente necesita: " + ingredienteNecesita + "- necesitado: " + ingredienteNecesitado);
+          console.error("Error añadiendo ingrediente: ", error);
         }
-
-        //console.log("Producto necesita: " + cNecesitaId + " - Producto necesitado: " + cNecesitadoId);
-
-        if (cNecesitaId == "" )
-          console.log("Nombre necesita: " + ingrediente.cProductoNecesitaId + "-Producto necesita: " + cNecesitaId);
-        if (cNecesitadoId == "")
-          console.log("Nombre necesitado: " + ingrediente.cProductoNecesitadoId + "-Producto necesitado: " + cNecesitadoId);
-
-
-        // Obtengo referencia al producto que necesita
-        const productoRef = doc(this.db, "producto", cNecesitaId);
-        const ingredienteSubcoleccionRef = collection(productoRef, "ingrediente");
-        await addDoc(ingredienteSubcoleccionRef, {cProductoNecesitadoId: cNecesitadoId, cantidad: ingrediente.cantidad});
-        console.log("Añadido: necesita: " + ingrediente.cProductoNecesitaId + "-Nombre necesitado: " + ingrediente.cProductoNecesitadoId );
-        
       }
 
-      console.log("------------------------------Terminamos----------------------------");
+      console.log("------------------------------Terminamos CARGAR INGREDIENTES----------------------------");
 
       
           
@@ -969,6 +983,15 @@ new IngredienteModel({cProductoNecesitaId: "Zumo de sandía", cProductoNecesitad
 new IngredienteModel({cProductoNecesitaId: "Zumo de tomate", cProductoNecesitadoId: "Tomate", cantidad: 3}),
 new IngredienteModel({cProductoNecesitaId: "Zumo de uva", cProductoNecesitadoId: "Uva", cantidad: 2}),
 new IngredienteModel({cProductoNecesitaId: "Zumo de Zanahoria", cProductoNecesitadoId: "Zanahorias", cantidad: 3}),
+new IngredienteModel({cProductoNecesitaId: "Crema de frijoles", cProductoNecesitadoId: "Frijoles negros", cantidad: 3}),
+new IngredienteModel({cProductoNecesitaId: "Crema de frijoles", cProductoNecesitadoId: "Tomate", cantidad: 1}),
+new IngredienteModel({cProductoNecesitaId: "Crema de frijoles", cProductoNecesitadoId: "Chile", cantidad: 1}),
+new IngredienteModel({cProductoNecesitaId: "Ensalada de frijoles", cProductoNecesitadoId: "Frijoles negros", cantidad: 3}),
+new IngredienteModel({cProductoNecesitaId: "Ensalada de frijoles", cProductoNecesitadoId: "Tomate", cantidad: 1}),
+new IngredienteModel({cProductoNecesitaId: "Ensalada de frijoles", cProductoNecesitadoId: "Lechuga", cantidad: 2}),
+new IngredienteModel({cProductoNecesitaId: "Ensalada de frijoles", cProductoNecesitadoId: "Maíz", cantidad: 1}),
+new IngredienteModel({cProductoNecesitaId: "Taco de frijoles picante", cProductoNecesitadoId: "Frijoles negros", cantidad: 2}),
+new IngredienteModel({cProductoNecesitaId: "Taco de frijoles picante", cProductoNecesitadoId: "Taco", cantidad: 1}),
 
   ];
 

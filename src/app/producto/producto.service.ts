@@ -340,7 +340,7 @@ await addDoc(this.productosCollectionRef, new ProductoModel({"id": 298, "nombre"
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 299, "nombre": "Sopa de col", "coste": 76, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 300, "nombre": "Lirios", "coste": 90, "almacen": "Silo", "materiaPrima": true, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 301, "nombre": "Galleta de jengibre", "coste": 25, "almacen": "", "materiaPrima": false, "fabrica": "PanaderÃ­a"}));
-await addDoc(this.productosCollectionRef, new ProductoModel({"id": 302, "nombre": "Dï¿½nut relleno", "coste": 35, "almacen": "", "materiaPrima": false, "fabrica": "Donuterï¿½a"}));
+await addDoc(this.productosCollectionRef, new ProductoModel({"id": 302, "nombre": "Dónut relleno", "coste": 35, "almacen": "", "materiaPrima": false, "fabrica": "Donutería"}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 303, "nombre": "Rollo de chocolate", "coste": 76, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 304, "nombre": "Cacahuetes garrapiñados", "coste": 34, "almacen": "", "materiaPrima": false, "fabrica": "Caramelos"}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 305, "nombre": "Kinchi", "coste": 255, "almacen": "", "materiaPrima": false, "fabrica": ""}));
@@ -447,8 +447,13 @@ await addDoc(this.productosCollectionRef, new ProductoModel({"id": 420, "nombre"
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 421, "nombre": "Perfume cítrico", "coste": 15, "almacen": "", "materiaPrima": false, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 422, "nombre": "Arándanos", "coste": 840, "almacen": "", "materiaPrima": true, "fabrica": ""}));
 await addDoc(this.productosCollectionRef, new ProductoModel({"id": 423, "nombre": "G.de Arándanos", "coste": 42, "almacen": "", "materiaPrima": false, "fabrica": ""}));
-await addDoc(this.productosCollectionRef, new ProductoModel({"id": 424, "nombre": "Magdalena de Arándanos", "coste": 45, "almacen": "", "materiaPrima": false, "fabrica": ""}));
-await addDoc(this.productosCollectionRef, new ProductoModel({"id": 425, "nombre": "Chutney de Arándanos", "coste": 204, "almacen": "", "materiaPrima": false, "fabrica": ""}));
+await addDoc(this.productosCollectionRef, new ProductoModel({"id": 424, "nombre": "Magdalena de arándanos", "coste": 45, "almacen": "", "materiaPrima": false, "fabrica": ""}));
+await addDoc(this.productosCollectionRef, new ProductoModel({"id": 425, "nombre": "Chutney de arándanos", "coste": 204, "almacen": "", "materiaPrima": false, "fabrica": ""}));
+await addDoc(this.productosCollectionRef, new ProductoModel({"id": 426, "nombre": "Frijoles negros", "coste": 10, "almacen": "SILO", "materiaPrima": true, "fabrica": ""}));
+await addDoc(this.productosCollectionRef, new ProductoModel({"id": 427, "nombre": "Crema de frijoles", "coste": 34, "almacen": "", "materiaPrima": false, "fabrica": ""}));
+await addDoc(this.productosCollectionRef, new ProductoModel({"id": 428, "nombre": "Ensalada de frijoles", "coste": 51, "almacen": "", "materiaPrima": false, "fabrica": ""}));
+await addDoc(this.productosCollectionRef, new ProductoModel({"id": 429, "nombre": "Taco de frijoles picante", "coste": 120, "almacen": "", "materiaPrima": false, "fabrica": ""}));
+
 console.log("S'acabó");    
 
   }
