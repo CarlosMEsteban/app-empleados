@@ -36,6 +36,9 @@
     </thead>
     <tbody>
       @for (herramienta of lHerramientas; track herramienta.id) {
+        @if (herramienta.nombre != "Mapa") {
+          <tr style="background-color: #f9f9f9; font-weight: bold;">
+        
         <tr>
           <td style="border:1px solid #ddd; padding:8px;">
             @if (herramienta.haceFalta() < 0)
@@ -65,6 +68,7 @@
             No hay herramientas.
           </td>
         </tr>
+      }
       }
     </tbody>
   </table>

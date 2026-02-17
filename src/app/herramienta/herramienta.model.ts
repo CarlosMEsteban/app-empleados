@@ -20,16 +20,16 @@ export class HerramientaModel
 
     necesidadesTerreno: string[] = ["Escrituras", "Maza", "Estaca de marcar"];
     necesidadesEstacion: string[] = [];
-    necesidadesAyuntamiento: string[] = ["Bloques de piedra", "martillo", "pintura"];
+    necesidadesAyuntamiento: string[] = ["Bloques de piedra", "martillo", "Pintura"];
     necesidadesSilo: string[] = ["Clavos", "Paneles de ma", "Tornillo"];
     necesidadesGranero: string[] = ["Perno", "Tabla", "Cinta Adh"];
     necesidadesRestaurante: string[] = ["Tabla", "Tornillo", "Pintura"];
     necesidadesSupermercado: string[] = ["Perno", "Cinta Adh", "Bloques de piedra"];
-    necesidadesCine: string[] = ["Clavos", "Paneles de ma", "Martillo"];
+    necesidadesCine: string[] = ["Clavos", "Paneles de ma", "martillo"];
     necesidadesHostal: string[] = ["Berbiquí", "Ladrillos", "Pintura"];
     necesidaesSpa: string[] = ["Alquitrán", "Berbiquí", "Ladrillos"];
-    necesidadesChiringuito: string[] = ["Berbiquí", "Alquitrán", "Martillo"];
-    necesidadesTiendaDeRegalos: string[] = ["Bloques de piedra", "Alquitrán", "Martillo"];
+    necesidadesChiringuito: string[] = ["Berbiquí", "Alquitrán", "martillo"];
+    necesidadesTiendaDeRegalos: string[] = ["Bloques de piedra", "Alquitrán", "martillo"];
 
 
     //constructor(id: number = -1, nombre: string, coste: number, tengo: number, almacen: string, materiaPrima: boolean, cantidadInicial: number, fabrica: string ) 
