@@ -67,4 +67,22 @@ export class Herramienta
     this.bMostrarBotonesEspeciales = !this.bMostrarBotonesEspeciales;
   }
 
+  faltaOSobra(campo: string): string
+  {
+    let totalNecesario = 0;
+    let tengo = 0;
+    for (let herramienta of this.lHerramientas) 
+    {
+      if ((herramienta as any)[campo] > 0)
+      {
+        if ((herramienta as any)["tengo"] > (herramienta as any)[campo])
+          tengo += (herramienta as any)[campo] ?? 0;
+        else      
+         tengo += herramienta.tengo ?? 0;
+      }  
+      totalNecesario += (herramienta as any)[campo] ?? 0;
+    }
+    //return "Tengo " + tengo + ", necesito " + totalNecesario + ", me " + (tengo - totalNecesario < 0 ? "falta" : "sobra") + " " + Math.abs(tengo - totalNecesario);
+    return "(" + tengo + "-" + totalNecesario + "=" + (tengo - totalNecesario) + ")";
+  }
 }

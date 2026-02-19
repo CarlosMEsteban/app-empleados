@@ -123,7 +123,8 @@ export const herramientaConverter: FirestoreDataConverter<HerramientaModel> =
             hostal : herramienta.hostal,
             spa : herramienta.spa,
             chiringuito : herramienta.chiringuito,
-            tiendaDeRegalos : herramienta.tiendaDeRegalos
+            tiendaDeRegalos : herramienta.tiendaDeRegalos,
+            restaurante: herramienta.restaurante
     };
   },
 
@@ -146,7 +147,8 @@ export const herramientaConverter: FirestoreDataConverter<HerramientaModel> =
             'hostal': data['hostal'],
             'spa': data['spa'],
             'chiringuito': data['chiringuito'],
-            'tiendaDeRegalos': data['tiendaDeRegalos']
+            'tiendaDeRegalos': data['tiendaDeRegalos'],
+            'restaurante': data['restaurante']
         }
     );
   }

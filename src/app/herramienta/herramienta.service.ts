@@ -87,7 +87,7 @@ export class HerramientaService {
             new HerramientaModel({nombre: "Tornillo", tengo: 0,	ampliarTerreno: 0,	estacion: 0,	ayuntamiento: 0,	silo: 0,	granero: 0,	restaurante: 0,	supermercado: 0,	cine: 0,	hostal: 0,	spa: 0,	chiringuito: 0,	tiendaDeRegalos: 0}),
             new HerramientaModel({nombre: "Escrituras", tengo: 0,	ampliarTerreno: 0,	estacion: 0,	ayuntamiento: 0,	silo: 0,	granero: 0,	restaurante: 0,	supermercado: 0,	cine: 0,	hostal: 0,	spa: 0,	chiringuito: 0,	tiendaDeRegalos: 0}),
             new HerramientaModel({nombre: "Estaca de marcar", tengo: 0,	ampliarTerreno: 0,	estacion: 0,	ayuntamiento: 0,	silo: 0,	granero: 0,	restaurante: 0,	supermercado: 0,	cine: 0,	hostal: 0,	spa: 0,	chiringuito: 0,	tiendaDeRegalos: 0}),
-            new HerramientaModel({nombre: "Mapa", tengo: 0,	ampliarTerreno: 0,	estacion: 0,	ayuntamiento: 0,	silo: 0,	granero: 0,	restaurante: 0,	supermercado: 0,	cine: 0,	hostal: 0,	spa: 0,	chiringuito: 0,	tiendaDeRegalos: 0}),
+            //new HerramientaModel({nombre: "Mapa", tengo: 0,	ampliarTerreno: 0,	estacion: 0,	ayuntamiento: 0,	silo: 0,	granero: 0,	restaurante: 0,	supermercado: 0,	cine: 0,	hostal: 0,	spa: 0,	chiringuito: 0,	tiendaDeRegalos: 0}),
             new HerramientaModel({nombre: "Maza", tengo: 0,	ampliarTerreno: 0,	estacion: 0,	ayuntamiento: 0,	silo: 0,	granero: 0,	restaurante: 0,	supermercado: 0,	cine: 0,	hostal: 0,	spa: 0,	chiringuito: 0,	tiendaDeRegalos: 0})
     ];
 
