@@ -64,7 +64,8 @@ export class HerramientaService {
             hostal : herramienta.hostal,
             spa : herramienta.spa,
             chiringuito : herramienta.chiringuito,
-            tiendaDeRegalos : herramienta.tiendaDeRegalos
+            tiendaDeRegalos : herramienta.tiendaDeRegalos,
+            restaurante: herramienta.restaurante
     });
      
   }

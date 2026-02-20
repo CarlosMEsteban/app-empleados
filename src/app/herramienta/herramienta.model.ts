@@ -59,15 +59,15 @@ export class HerramientaModel
 
     fondoFalta(): string
     {
-console.log(this.nombre + ". Tengo: " + this.tengo + ". HaceFalta: " + this.haceFalta());
+//console.log(this.nombre + ". Tengo: " + this.tengo + ". HaceFalta: " + this.haceFalta());
       if (this.haceFalta() < 0)
       {
-console.log(this.nombre + ". No tengo suficiente");
+//console.log(this.nombre + ". No tengo suficiente");
        return "fondo-falta";
       }
       else if (this.haceFalta() > 0)
       {
-console.log(this.nombre + ". Me sobra");
+//console.log(this.nombre + ". Me sobra");
         return "fondo-sobra";
       }
       else

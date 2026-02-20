@@ -51,7 +51,7 @@ export class Herramienta
         if (this.herramientaServicio && typeof this.herramientaServicio.modificar === 'function') 
         {
           await this.herramientaServicio.modificar(herramienta);
-          console.log('herramienta guardada', herramienta.id);
+          //console.log('herramienta guardada', herramienta.id, herramienta.nombre, campo, valor);
         }
       } catch (err) {
         console.error('Error guardando herramienta', err);
