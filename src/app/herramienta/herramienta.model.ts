@@ -27,7 +27,7 @@ export class HerramientaModel
     necesidadesSupermercado: string[] = ["Perno", "Cinta Adh", "Bloques de piedra"];
     necesidadesCine: string[] = ["Clavos", "Paneles de ma", "martillo"];
     necesidadesHostal: string[] = ["Berbiquí", "Ladrillos", "Pintura"];
-    necesidaesSpa: string[] = ["Alquitrán", "Berbiquí", "Ladrillos"];
+    necesidadesSpa: string[] = ["Alquitrán", "Berbiquí", "Ladrillos"];
     necesidadesChiringuito: string[] = ["Berbiquí", "Alquitrán", "martillo"];
     necesidadesTiendaDeRegalos: string[] = ["Bloques de piedra", "Alquitrán", "martillo"];
 
@@ -94,7 +94,7 @@ export class HerramientaModel
         return "negrita";
       else if (campo == "hostal" && this.necesidadesHostal.includes(this.nombre))
         return "negrita";
-      else if (campo == "spa" && this.necesidaesSpa.includes(this.nombre))
+      else if (campo == "spa" && this.necesidadesSpa.includes(this.nombre))
         return "negrita";
       else if (campo == "chiringuito" && this.necesidadesChiringuito.includes(this.nombre))
         return "negrita";
@@ -103,6 +103,37 @@ export class HerramientaModel
       else
         return "";
     }
+
+    tdBgColor(campo: string): string
+    {
+      
+      if (campo == "ampliarTerreno" && this.tengo > 0 && this.ampliarTerreno > 0 && this.necesidadesTerreno.includes(this.nombre) && this.tengo >= this.ampliarTerreno)
+        return "green";
+      else if (campo == "estacion" && this.tengo > 0 && this.estacion > 0  && this.necesidadesEstacion.includes(this.nombre) && this.tengo >= this.estacion)
+        return "green";
+      else if (campo == "ayuntamiento" && this.tengo > 0 && this.ayuntamiento > 0 && this.necesidadesAyuntamiento.includes(this.nombre) && this.tengo >= this.ayuntamiento)
+        return "green";
+      else if (campo == "silo" && this.tengo > 0 && this.silo > 0  && this.necesidadesSilo.includes(this.nombre) && this.tengo >= this.silo)
+        return "green";
+      else if (campo == "granero" && this.tengo > 0 && this.granero > 0  && this.necesidadesGranero.includes(this.nombre) && this.tengo >= this.granero)
+        return "green";
+      else if (campo == "restaurante" && this.tengo > 0 && this.restaurante > 0  && this.necesidadesRestaurante.includes(this.nombre) && this.tengo >= this.restaurante)
+        return "green";
+      else if (campo == "supermercado" && this.tengo > 0 && this.supermercado > 0 && this.necesidadesSupermercado.includes(this.nombre) && this.tengo >= this.supermercado)
+        return "green";
+      else if (campo == "cine" && this.tengo > 0 && this.cine > 0 && this.necesidadesCine.includes(this.nombre) && this.tengo >= this.cine)
+        return "green";
+      else if (campo == "hostal" && this.tengo > 0 && this.hostal > 0 && this.necesidadesHostal.includes(this.nombre) && this.tengo >= this.hostal)
+        return "green";
+      if (campo == "spa" && this.tengo > 0 && this.spa > 0 && this.necesidadesSpa.includes(this.nombre) && this.tengo >= this.spa)
+        return "green";
+      else if (campo == "chiringuito" && this.tengo > 0 && this.chiringuito > 0 && this.necesidadesChiringuito.includes(this.nombre) && this.tengo >= this.chiringuito)
+        return "green";
+      else if (campo == "tiendaDeRegalos" && this.tengo > 0 && this.tiendaDeRegalos > 0 && this.necesidadesTiendaDeRegalos.includes(this.nombre) && this.tengo >= this.tiendaDeRegalos)
+        return "green";
+      else
+        return "";
+    }    
 }
 
 // 2. Create a FirestoreDataConverter for your Producto class
