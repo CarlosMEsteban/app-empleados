@@ -54,7 +54,7 @@ export class HerramientaModel
 
     haceFalta(): number
     {
-      return this.tengo - (this.ampliarTerreno + this.estacion + this.ayuntamiento + this.silo + this.granero + this.supermercado + this.cine + this.hostal + this.spa + this.chiringuito + this.tiendaDeRegalos);
+      return this.tengo - (this.ampliarTerreno + this.estacion + this.ayuntamiento + this.silo + this.granero + this.restaurante + this.supermercado + this.cine + this.hostal + this.spa + this.chiringuito + this.tiendaDeRegalos);
     }
 
     fondoFalta(): string
