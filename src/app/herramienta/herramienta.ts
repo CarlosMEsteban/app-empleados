@@ -83,6 +83,10 @@ export class Herramienta
       totalNecesario += (herramienta as any)[campo] ?? 0;
     }
     //return "Tengo " + tengo + ", necesito " + totalNecesario + ", me " + (tengo - totalNecesario < 0 ? "falta" : "sobra") + " " + Math.abs(tengo - totalNecesario);
-    return "(" + tengo + "-" + totalNecesario + "=" + (tengo - totalNecesario) + ")";
+console.log("Campo: " + campo + ". Tengo: " + tengo + ". Necesito: " + totalNecesario);
+    if (totalNecesario - tengo  <= 0)
+      return "";
+    else
+      return "(" + tengo + "-" + totalNecesario + "=" + (tengo - totalNecesario) + ")";
   }
 }

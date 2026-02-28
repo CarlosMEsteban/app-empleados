@@ -27,7 +27,7 @@ export class HerramientaModel
     necesidadesSupermercado: string[] = ["Perno", "Cinta Adh", "Bloques de piedra"];
     necesidadesCine: string[] = ["Clavos", "Paneles de ma", "martillo"];
     necesidadesHostal: string[] = ["Berbiquí", "Ladrillos", "Pintura"];
-    necesidadesSpa: string[] = ["Alquitrán", "Berbiquí", "Ladrillos"];
+    necesidadesSpa: string[] = ["Alquitrán", "Bloques de piedra", "Ladrillos"];
     necesidadesChiringuito: string[] = ["Berbiquí", "Alquitrán", "martillo"];
     necesidadesTiendaDeRegalos: string[] = ["Bloques de piedra", "Alquitrán", "martillo"];
 
