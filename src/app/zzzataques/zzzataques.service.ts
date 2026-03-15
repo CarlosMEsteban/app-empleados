@@ -1,0 +1,360 @@
+import { Injectable } from '@angular/core';
+import { getAnalytics } from 'firebase/analytics';
+import { initializeApp } from 'firebase/app';
+import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, updateDoc, writeBatch, limit, query } from 'firebase/firestore';
+import { AtaqueModel, ataqueModelConverter } from './zzzataques.model';
+import { firebaseConfig } from '../CONSTANTES';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ZZZAtaquesService {
+
+  app = initializeApp(firebaseConfig);
+  analytics = getAnalytics(this.app);
+
+  db = getFirestore(this.app);
+
+  ataquesCollectionRef = collection(this.db, 'ataques').withConverter(ataqueModelConverter);
+
+  async agregarAtaque(ataque: AtaqueModel) {
+    try {
+      const docRef = await addDoc(this.ataquesCollectionRef, ataque);
+      console.log("Ataque agregado con ID:", docRef.id);
+      return docRef.id;
+    } catch (e) {
+      console.error("Error al agregar ataque: ", e);
+      throw e;
+    }
+  }
+
+  async obtenerAtaques(): Promise<AtaqueModel[]> {
+    try {
+      const snapshot = await getDocs(this.ataquesCollectionRef);
+      const ataques: AtaqueModel[] = [];
+      snapshot.forEach(doc => {
+        ataques.push(doc.data());
+      });
+      return ataques;
+    } catch (e) {
+      console.error("Error al obtener ataques: ", e);
+      throw e;
+    }
+  }
+
+  async eliminarAtaque(id: string) {
+    try {
+      const docRef = doc(this.db, 'ataques', id);
+      await deleteDoc(docRef);
+      console.log("Ataque eliminado con ID:", id);
+    } catch (e) {
+      console.error("Error al eliminar ataque: ", e);
+      throw e;
+    }
+  }
+
+  async actualizarAtaque(id: string, datosActualizados: Partial<AtaqueModel>) {
+    try {
+      const docRef = doc(this.db, 'ataques', id).withConverter(ataqueModelConverter);
+      await updateDoc(docRef, datosActualizados);
+      console.log("Ataque actualizado con ID:", id);
+    } catch (e) {
+      console.error("Error al actualizar ataque: ", e);
+      throw e;
+    }
+  }
+
+  /** Elimina todos los documentos de la colección 'ataques' en lotes de hasta 500 */
+  async eliminarTodosAtaques(): Promise<number> {
+    const BATCH_SIZE = 500;
+    let totalDeleted = 0;
+
+    while (true) {
+      const q = query(this.ataquesCollectionRef, limit(BATCH_SIZE));
+      const snapshot = await getDocs(q);
+      if (snapshot.empty) break;
+
+      const batch = writeBatch(this.db);
+      snapshot.docs.forEach(docSnap => {
+        const docRef = doc(this.ataquesCollectionRef, docSnap.id);
+        batch.delete(docRef);
+      });
+
+      await batch.commit();
+      totalDeleted += snapshot.docs.length;
+    }
+
+    console.log(`Eliminados ${totalDeleted} ataques.`);
+    return totalDeleted;
+  }
+
+  async cargarAtaques()
+  {
+    console.log("Carga inicial de ataques");
+    const ataquesIniciales: AtaqueModel[] = [
+new AtaqueModel("A Bocajarro", "Lucha", 43.5),
+new AtaqueModel("Abrecaminos", "Planta", 54.44),
+new AtaqueModel("Ácido", "Veneno", 11.3),
+new AtaqueModel("Acoso", "Bicho", 9.1),
+new AtaqueModel("Acua Cola", "Agua", 26.3),
+new AtaqueModel("Acua Jet", "Agua", 17.3),
+new AtaqueModel("Aerochorro", "Volador", 80),
+new AtaqueModel("Agarre", "Normal", 18.4),
+new AtaqueModel("Agua Lodosa", "Agua", 22.7),
+new AtaqueModel("Aguijón Letal", "Bicho", 22.7),
+new AtaqueModel("Aire Afilado", "Volador", 22.2),
+new AtaqueModel("Ala de Acero", "Acero", 13.8),
+new AtaqueModel("Alarido", "Siniestro", 10.9),
+new AtaqueModel("Alud", "Hielo", 33.3),
+new AtaqueModel("Anillo Ígneo", "Fuego", 33.3),
+new AtaqueModel("Antiaéreo", "Roca", 13.3),
+new AtaqueModel("Arañazo", "Normal", 12),
+new AtaqueModel("Arenas Ardientes", "Tierra", 30),
+new AtaqueModel("Ascuas", "Fuego", 10),
+new AtaqueModel("Ataque Aéreo", "Volador", 40),
+new AtaqueModel("Ataque Ala", "Volador", 10),
+new AtaqueModel("Ataque Arena", "Tierra", 8),
+new AtaqueModel("Ataque Rápido", "Normal", 10),
+new AtaqueModel("Avalancha", "Roca", 29.6),
+new AtaqueModel("Beso Drenaje", "Hada", 23.1),
+new AtaqueModel("Bofetón Lodo", "Tierra", 12.9),
+new AtaqueModel("Bola Sombra", "Fantasma", 33.3),
+new AtaqueModel("Bomba Ácida", "Veneno", 6.7),
+new AtaqueModel("Bomba Fango", "Tierra", 23.9),
+new AtaqueModel("Bomba Germen", "Planta", 26.2),
+new AtaqueModel("Bomba Imán", "Acero", 25),
+new AtaqueModel("Bomba Lodo", "Veneno", 34.8),
+new AtaqueModel("Bostezo", "Normal", 0),
+new AtaqueModel("Brillo Mágico", "Hada", 28.6),
+new AtaqueModel("Bucle Arena", "Tierra", 15),
+new AtaqueModel("Burbuja", "Agua", 10),
+new AtaqueModel("Cabeza de Hierro", "Acero", 31.6),
+new AtaqueModel("Cabezazo", "Normal", 41.9),
+new AtaqueModel("Cabezazo Zen", "Psíquico", 10.9),
+new AtaqueModel("Calcinación", "Fuego", 13),
+new AtaqueModel("Canto Helado", "Hielo", 10),
+new AtaqueModel("Carantoña", "Hada", 31),
+new AtaqueModel("Carga Parábola", "Eléctrico", 23.2),
+new AtaqueModel("Cascada", "Agua", 13.3),
+new AtaqueModel("Chispa", "Eléctrico", 8.6),
+new AtaqueModel("Chispazo", "Eléctrico", 26),
+new AtaqueModel("Chupavidas", "Bicho", 0),
+new AtaqueModel("Ciclón", "Dragón", 16.1),
+new AtaqueModel("Ciclón de Hojas", "Planta", 14.5),
+new AtaqueModel("Cola Dragón", "Dragón", 13.6),
+new AtaqueModel("Cola Férrea", "Acero", 13.6),
+new AtaqueModel("Colmillo Hielo", "Hielo", 8),
+new AtaqueModel("Colmillo Ígneo", "Fuego", 13.3),
+new AtaqueModel("Colmillo Rayo", "Eléctrico", 10),
+new AtaqueModel("Colmillo Veneno", "Veneno", 20.6),
+new AtaqueModel("Combate", "Normal", 15.9),
+new AtaqueModel("Cometa Draco", "Dragón", 41.7),
+new AtaqueModel("Concha Filo", "Agua", 37),
+new AtaqueModel("Confusión", "Psíquico", 12.5),
+new AtaqueModel("Constricción", "Normal", 20.7),
+new AtaqueModel("Contraataque", "Lucha", 13.3),
+new AtaqueModel("Cornada", "Normal", 21.6),
+new AtaqueModel("Corte", "Normal", 10),
+new AtaqueModel("Corte Furia", "Bicho", 7.5),
+new AtaqueModel("Corte Vacío", "Dragón", 77),
+new AtaqueModel("Cuerpo Pesado", "Acero", 33.3),
+new AtaqueModel("Danza pluma", "Volador", 12.5),
+new AtaqueModel("Demolición", "Lucha", 25),
+new AtaqueModel("Derribo", "Normal", 6.7),
+new AtaqueModel("Desenrrollar", "Roca", 15.52),
+new AtaqueModel("Deseo Oculto", "Acero", 41.2),
+new AtaqueModel("Destructor", "Normal", 11.7),
+new AtaqueModel("Disparo Espejo", "Acero", 20.8),
+new AtaqueModel("Disparo Lodo", "Tierra", 8.3),
+new AtaqueModel("Doble Patada", "Lucha", 12),
+new AtaqueModel("Doble Rayo", "Bicho", 25.9),
+new AtaqueModel("Dragoaliento", "Dragón", 12),
+new AtaqueModel("Electrocañón", "Eléctrico", 37.8),
+new AtaqueModel("Encanto", "Hada", 13.3),
+new AtaqueModel("Energibola", "Planta", 23.1),
+new AtaqueModel("Enfado", "Dragón", 28.2),
+new AtaqueModel("Escaldar", "Agua", 21.6),
+new AtaqueModel("Esfera Aural", "Lucha", 50),
+new AtaqueModel("Espada Santa", "Lucha", 45.8),
+new AtaqueModel("Estoicismo", "Bicho", 10),
+new AtaqueModel("Excavar", "Tierra", 21.3),
+new AtaqueModel("Fijar Blanco", "Normal", 3.3),
+new AtaqueModel("Filo del Abismo", "Tierra", 76.5),
+new AtaqueModel("Finta", "Siniestro", 11.1),
+new AtaqueModel("Fisura", "Tierra", 0),
+new AtaqueModel("Foco Resplandor", "Acero", 37),
+new AtaqueModel("Follaje", "Planta", 4.1),
+new AtaqueModel("Frustración", "Normal", 5),
+new AtaqueModel("Fuerza Bruta", "Lucha", 28.3),
+new AtaqueModel("Fuerza Equina", "Tierra", 68.8),
+new AtaqueModel("Fuerza Lunar", "Hada", 33.3),
+new AtaqueModel("Furia natural", "Hada", 45),
+new AtaqueModel("Garra Brutal", "Normal", 0),
+new AtaqueModel("Garra Dragón", "Dragón", 29.4),
+new AtaqueModel("Garra Metal", "Acero", 11.4),
+new AtaqueModel("Garra Umbría", "Fantasma", 12.9),
+new AtaqueModel("Gigaimpacto", "Normal", 42.6),
+new AtaqueModel("Giro Bola", "Acero", 24.2),
+new AtaqueModel("Giro Fuego", "Fuego", 12.7),
+new AtaqueModel("Giro vil", "Siniestro", 34.2),
+new AtaqueModel("Golpe Aéreo", "Volador", 22.9),
+new AtaqueModel("Golpe Bajo", "Siniestro", 10),
+new AtaqueModel("Golpe Cuerpo", "Normal", 26.3),
+new AtaqueModel("Golpe Kárate", "Lucha", 10),
+new AtaqueModel("Golpe Roca", "Lucha", 11.5),
+new AtaqueModel("Hidroariete", "Agua", 23.3),
+new AtaqueModel("Hidrobomba", "Agua", 39.4),
+new AtaqueModel("Hidrocañón", "Agua", 47.4),
+new AtaqueModel("Hidropulso", "Agua", 21.9),
+new AtaqueModel("Hierba Lazo", "Planta", 34.6),
+new AtaqueModel("Hipercolmillo", "Normal", 32),
+new AtaqueModel("Hiperrayo", "Normal", 39.5),
+new AtaqueModel("Hoja Afilada", "Planta", 13),
+new AtaqueModel("Hoja Aguda", "Planta", 29.2),
+new AtaqueModel("Hoja mágica", "Planta", 11.43),
+new AtaqueModel("Hueso Palo", "Tierra", 25),
+new AtaqueModel("Hueso Sombrío", "Fantasma", 0),
+new AtaqueModel("Impactrueno", "Eléctrico", 8.3),
+new AtaqueModel("Impresionar", "Fantasma", 7.3),
+new AtaqueModel("Infortunio", "Fantasma", 8.3),
+new AtaqueModel("Joya de Luz", "Roca", 27.6),
+new AtaqueModel("Juego Sucio", "Siniestro", 35),
+new AtaqueModel("Lanzallamas", "Fuego", 31.8),
+new AtaqueModel("Lanzamugre", "Veneno", 41.9),
+new AtaqueModel("Lanzarrocas", "Roca", 13.3),
+new AtaqueModel("Latigazo", "Planta", 34.6),
+new AtaqueModel("Látigo Cepa", "Planta", 11.7),
+new AtaqueModel("Lengüetazo", "Fantasma", 10),
+new AtaqueModel("Llamarada", "Fuego", 33.3),
+new AtaqueModel("Lluevehojas", "Planta", 52),
+new AtaqueModel("Manto Espejo", "Psíquico", 23.1),
+new AtaqueModel("Martillazo", "Agua", 44.7),
+new AtaqueModel("Megacuerno", "Bicho", 50),
+new AtaqueModel("Meteorobola Agua", "Agua", 34.4),
+new AtaqueModel("Meteorobola Fuego", "Fuego", 34.4),
+new AtaqueModel("Meteorobola Hielo", "Hielo", 34.4),
+new AtaqueModel("Meteorobola Roca", "Roca", 34.4),
+new AtaqueModel("Mordisco", "Siniestro", 12),
+new AtaqueModel("Nieve Polvo", "Hielo", 6),
+new AtaqueModel("Nitrocarga", "Fuego", 18.4),
+new AtaqueModel("Obstrucción", "Siniestro", 12),
+new AtaqueModel("Onda Certera", "Lucha", 40),
+new AtaqueModel("Onda Ígnea", "Fuego", 31.7),
+new AtaqueModel("Onda mental", "Psíquico", 20),
+new AtaqueModel("Onda Tóxica", "Veneno", 34.4),
+new AtaqueModel("Pájaro Osado", "Volador", 45),
+new AtaqueModel("Paranormal", "Psíquico", 10.9),
+new AtaqueModel("Patada Baja", "Lucha", 10),
+new AtaqueModel("Patada Ígnea", "Fuego", 37.5),
+new AtaqueModel("Pedrada", "Roca", 23.8),
+new AtaqueModel("Perforador", "Normal", 0),
+new AtaqueModel("Picadura", "Bicho", 10),
+new AtaqueModel("Pico Taladro", "Volador", 26.1),
+new AtaqueModel("Picotazo", "Volador", 10),
+new AtaqueModel("Picotazo Veneno", "Veneno", 8.3),
+new AtaqueModel("Pirotecnia", "Fuego", 26.9),
+new AtaqueModel("Pisotón", "Normal", 32.4),
+new AtaqueModel("Pistola Agua", "Agua", 10),
+new AtaqueModel("Placaje", "Normal", 10),
+new AtaqueModel("Plancha", "Bicho", 0),
+new AtaqueModel("Plancha voladora", "Lucha", 47.8),
+new AtaqueModel("Planta Feroz", "Planta", 38.5),
+new AtaqueModel("Poder Oculto", "Normal", 10),
+new AtaqueModel("Poder Pasado", "Roca", 20),
+new AtaqueModel("Premonición", "Psíquico", 44.4),
+new AtaqueModel("Presente", "Normal", 3.8),
+new AtaqueModel("Psicoataque", "Psíquico", 17.5),
+new AtaqueModel("Psicocarga", "Psíquico", 24.1),
+new AtaqueModel("Psicocolmillo", "Psíquico", 25),
+new AtaqueModel("Psicocorte", "Psíquico", 8.3),
+new AtaqueModel("Psicoonda", "Psíquico", 8),
+new AtaqueModel("Psicorrayo", "Psíquico", 21.9),
+new AtaqueModel("Psíquico", "Psíquico", 32.1),
+new AtaqueModel("Psychic Fangs", "Psíquico", 25),
+new AtaqueModel("Pulpocañón", "Agua", 21.7),
+new AtaqueModel("Pulso Dragón", "Dragón", 25),
+new AtaqueModel("Pulso Primigenio", "Agua", 76.5),
+new AtaqueModel("Pulso Umbrío", "Siniestro", 26.7),
+new AtaqueModel("Puntapié", "Lucha", 21.1),
+new AtaqueModel("Puño Bala", "Acero", 10),
+new AtaqueModel("Puño Dinámico", "Lucha", 33.3),
+new AtaqueModel("Puño Drenaje", "Lucha", 8.3),
+new AtaqueModel("Puño Fuego", "Fuego", 25),
+new AtaqueModel("Puño Hielo", "Hielo", 26.3),
+new AtaqueModel("Puño Incremento", "Lucha", 25),
+new AtaqueModel("Puño Meteoro", "Acero", 38.5),
+new AtaqueModel("Puño Sombra", "Fantasma", 23.5),
+new AtaqueModel("Puño Trueno", "Eléctrico", 25),
+new AtaqueModel("Puya Nociva", "Veneno", 12.5),
+new AtaqueModel("Rapidez", "Normal", 21.4),
+new AtaqueModel("Rayo", "Eléctrico", 32),
+new AtaqueModel("Rayo Aurora", "Hielo", 22.5),
+new AtaqueModel("Rayo Burbuja", "Agua", 23.7),
+new AtaqueModel("Rayo Carga", "Eléctrico", 7.3),
+new AtaqueModel("Rayo Hielo", "Hielo", 27.3),
+new AtaqueModel("Rayo Meteórico", "Roca", 73.7),
+new AtaqueModel("Rayo Solar", "Planta", 36.7),
+new AtaqueModel("Residuos", "Veneno", 23.8),
+new AtaqueModel("Retribución", "Normal", 50),
+new AtaqueModel("Roca Afilada", "Roca", 43.5),
+new AtaqueModel("Romperrocas", "Roca", 30.56),
+new AtaqueModel("Rueda Fuego", "Fuego", 22.2),
+new AtaqueModel("Salmuera", "Agua", 26.1),
+new AtaqueModel("Salpicadura", "Agua", 0),
+new AtaqueModel("Semilladora", "Planta", 7.3),
+new AtaqueModel("Shuriken de agua", "Agua", 9.09),
+new AtaqueModel("Sincrorruido", "Psíquico", 30.8),
+new AtaqueModel("Sofoco", "Fuego", 40),
+new AtaqueModel("Sombra Vil", "Fantasma", 17.2),
+new AtaqueModel("Sumisión", "Lucha", 27.3),
+new AtaqueModel("Surf", "Agua", 38.2),
+new AtaqueModel("Tajo Aéreo", "Volador", 11.7),
+new AtaqueModel("Tajo Cruzado", "Lucha", 33.3),
+new AtaqueModel("Tajo Umbrío", "Siniestro", 22.7),
+new AtaqueModel("Taladradora", "Tierra", 28.6),
+new AtaqueModel("Tecno Shock Agua", "Agua", 60),
+new AtaqueModel("Tecno Shock Eléctrico", "Eléctrico", 60),
+new AtaqueModel("Tecno Shock Fuego", "Fuego", 60),
+new AtaqueModel("Tecno Shock Hielo", "Hielo", 60),
+new AtaqueModel("Tecno Shock Normal", "Normal", 60),
+new AtaqueModel("Terratemblor", "Tierra", 22.9),
+new AtaqueModel("Terremoto", "Tierra", 38.9),
+new AtaqueModel("Tierra Viva", "Tierra", 27.8),
+new AtaqueModel("Tijera X", "Bicho", 28.1),
+new AtaqueModel("Tinieblas", "Fantasma", 23.1),
+new AtaqueModel("Tormenta Floral", "Planta", 42.3),
+new AtaqueModel("Tornado", "Volador", 13),
+new AtaqueModel("Transformación", "Normal", 0),
+new AtaqueModel("Triataque", "Normal", 48),
+new AtaqueModel("Triple Axel", "Hielo", 36),
+new AtaqueModel("Triturar", "Siniestro", 21.9),
+new AtaqueModel("Trueno", "Eléctrico", 41.7),
+new AtaqueModel("Tumba Rocas", "Roca", 21.9),
+new AtaqueModel("Última Baza", "Normal", 31),
+new AtaqueModel("V de fuego", "Fuego", 33.9),
+new AtaqueModel("Vaho Gélido", "Hielo", 11.1),
+new AtaqueModel("Vasto Impacto", "Dragón", 62.5),
+new AtaqueModel("Vendaval", "Volador", 40.7),
+new AtaqueModel("Vendetta", "Siniestro", 46),
+new AtaqueModel("Veneno X", "Veneno", 26.7),
+new AtaqueModel("Ventisca", "Hielo", 41.9),
+new AtaqueModel("Viento Aciago", "Fantasma", 21.7),
+new AtaqueModel("Viento Feérico", "Hada", 11.13),
+new AtaqueModel("Viento Hielo", "Hielo", 18.2),
+new AtaqueModel("Viento Plata", "Bicho", 18.9),
+new AtaqueModel("Voltio Cruel", "Eléctrico", 34.6),
+new AtaqueModel("Voltiocambio", "Eléctrico", 8.8),
+new AtaqueModel("Voz Cautivadora", "Hada", 17.9),
+new AtaqueModel("Vuelo", "Volador", 44.4),
+new AtaqueModel("Weather Ball Normal", "Normal", 34.4),
+new AtaqueModel("Zumbido", "Bicho", 24.3)
+    ];
+
+    for (const ataque of ataquesIniciales) {
+      await this.agregarAtaque(ataque);
+    } 
+    
+    console.log("Carga de ataques finalizada");
+
+  }
+}

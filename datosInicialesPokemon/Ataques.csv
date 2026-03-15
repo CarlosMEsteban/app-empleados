@@ -1,0 +1,257 @@
+﻿Movimiento;TipoAtaque;DPS
+A Bocajarro;Lucha;43,5
+Abrecaminos;Planta;54,44
+Ácido;Veneno;11,3
+Acoso;Bicho;9,1
+Acua Cola;Agua;26,3
+Acua Jet;Agua;17,3
+Aerochorro;Volador;80
+Agarre;Normal;18,4
+Agua Lodosa;Agua;22,7
+Aguijón Letal;Bicho;22,7
+Aire Afilado;Volador;22,2
+Ala de Acero;Acero;13,8
+Alarido;Siniestro;10,9
+Alud;Hielo;33,3
+Anillo Ígneo;Fuego;33,3
+Antiaéreo;Roca;13,3
+Arañazo;Normal;12
+Arenas Ardientes;Tierra;30
+Ascuas;Fuego;10
+Ataque Aéreo;Volador;40
+Ataque Ala;Volador;10
+Ataque Arena;Tierra;8
+Ataque Rápido;Normal;10
+Avalancha;Roca;29,6
+Beso Drenaje;Hada;23,1
+Bofetón Lodo;Tierra;12,9
+Bola Sombra;Fantasma;33,3
+Bomba Ácida;Veneno;6,7
+Bomba Fango;Tierra;23,9
+Bomba Germen;Planta;26,2
+Bomba Imán;Acero;25
+Bomba Lodo;Veneno;34,8
+Bostezo;Normal;0
+Brillo Mágico;Hada;28,6
+Bucle Arena;Tierra;15
+Burbuja;Agua;10
+Cabeza de Hierro;Acero;31,6
+Cabezazo;Normal;41,9
+Cabezazo Zen;Psíquico;10,9
+Calcinación;Fuego;13
+Canto Helado;Hielo;10
+Carantoña;Hada;31
+Carga Parábola;Eléctrico;23,2
+Cascada;Agua;13,3
+Chispa;Eléctrico;8,6
+Chispazo;Eléctrico;26
+Chupavidas;Bicho;0
+Ciclón;Dragón;16,1
+Ciclón de Hojas;Planta;14,5
+Cola Dragón;Dragón;13,6
+Cola Férrea;Acero;13,6
+Colmillo Hielo;Hielo;8
+Colmillo Ígneo;Fuego;13,3
+Colmillo Rayo;Eléctrico;10
+Colmillo Veneno;Veneno;20,6
+Combate;Normal;15,9
+Cometa Draco;Dragón;41,7
+Concha Filo;Agua;37
+Confusión;Psíquico;12,5
+Constricción;Normal;20,7
+Contraataque;Lucha;13,3
+Cornada;Normal;21,6
+Corte;Normal;10
+Corte Furia;Bicho;7,5
+Corte Vacío;Dragón;77
+Cuerpo Pesado;Acero;33,3
+Danza pluma;Volador;12,5
+Demolición;Lucha;25
+Derribo;Normal;6,7
+Desenrrollar;Roca;15,52
+Deseo Oculto;Acero;41,2
+Destructor;Normal;11,7
+Disparo Espejo;Acero;20,8
+Disparo Lodo;Tierra;8,3
+Doble Patada;Lucha;12
+Doble Rayo;Bicho;25,9
+Dragoaliento;Dragón;12
+Electrocañón;Eléctrico;37,8
+Encanto;Hada;13,3
+Energibola;Planta;23,1
+Enfado;Dragón;28,2
+Escaldar;Agua;21,6
+Esfera Aural;Lucha;50
+Espada Santa;Lucha;45,8
+Estoicismo;Bicho;10
+Excavar;Tierra;21,3
+Fijar Blanco;Normal;3,3
+Filo del Abismo;Tierra;76,5
+Finta;Siniestro;11,1
+Fisura;Tierra;0
+Foco Resplandor;Acero;37
+Follaje;Planta;4,1
+Frustración;Normal;5
+Fuerza Bruta;Lucha;28,3
+Fuerza Equina;Tierra;68,8
+Fuerza Lunar;Hada;33,3
+Furia natural;Hada;45
+Garra Brutal;Normal;0
+Garra Dragón;Dragón;29,4
+Garra Metal;Acero;11,4
+Garra Umbría;Fantasma;12,9
+Gigaimpacto;Normal;42,6
+Giro Bola;Acero;24,2
+Giro Fuego;Fuego;12,7
+Giro vil;Siniestro;34,2
+Golpe Aéreo;Volador;22,9
+Golpe Bajo;Siniestro;10
+Golpe Cuerpo;Normal;26,3
+Golpe Kárate;Lucha;10
+Golpe Roca;Lucha;11,5
+Hidroariete;Agua;23,3
+Hidrobomba;Agua;39,4
+Hidrocañón;Agua;47,4
+Hidropulso;Agua;21,9
+Hierba Lazo;Planta;34,6
+Hipercolmillo;Normal;32
+Hiperrayo;Normal;39,5
+Hoja Afilada;Planta;13
+Hoja Aguda;Planta;29,2
+Hoja mágica;Planta;11,43
+Hueso Palo;Tierra;25
+Hueso Sombrío;Fantasma;0
+Impactrueno;Eléctrico;8,3
+Impresionar;Fantasma;7,3
+Infortunio;Fantasma;8,3
+Joya de Luz;Roca;27,6
+Juego Sucio;Siniestro;35
+Lanzallamas;Fuego;31,8
+Lanzamugre;Veneno;41,9
+Lanzarrocas;Roca;13,3
+Latigazo;Planta;34,6
+Látigo Cepa;Planta;11,7
+Lengüetazo;Fantasma;10
+Llamarada;Fuego;33,3
+Lluevehojas;Planta;52
+Manto Espejo;Psíquico;23,1
+Martillazo;Agua;44,7
+Megacuerno;Bicho;50
+Meteorobola Agua;Agua;34,4
+Meteorobola Fuego;Fuego;34,4
+Meteorobola Hielo;Hielo;34,4
+Meteorobola Roca;Roca;34,4
+Mordisco;Siniestro;12
+Nieve Polvo;Hielo;6
+Nitrocarga;Fuego;18,4
+Obstrucción;Siniestro;12
+Onda Certera;Lucha;40
+Onda Ígnea;Fuego;31,7
+Onda mental;Psíquico;20
+Onda Tóxica;Veneno;34,4
+Pájaro Osado;Volador;45
+Paranormal;Psíquico;10,9
+Patada Baja;Lucha;10
+Patada Ígnea;Fuego;37,5
+Pedrada;Roca;23,8
+Perforador;Normal;0
+Picadura;Bicho;10
+Pico Taladro;Volador;26,1
+Picotazo;Volador;10
+Picotazo Veneno;Veneno;8,3
+Pirotecnia;Fuego;26,9
+Pisotón;Normal;32,4
+Pistola Agua;Agua;10
+Placaje;Normal;10
+Plancha;Bicho;0
+Plancha voladora;Lucha;47,8
+Planta Feroz;Planta;38,5
+Poder Oculto;Normal;10
+Poder Pasado;Roca;20
+Premonición;Psíquico;44,4
+Presente;Normal;3,8
+Psicoataque;Psíquico;17,5
+Psicocarga;Psíquico;24,1
+Psicocolmillo;Psíquico;25
+Psicocorte;Psíquico;8,3
+Psicoonda;Psíquico;8
+Psicorrayo;Psíquico;21,9
+Psíquico;Psíquico;32,1
+Psychic Fangs;Psíquico;25
+Pulpocañón;Agua;21,7
+Pulso Dragón;Dragón;25
+Pulso Primigenio;Agua;76,5
+Pulso Umbrío;Siniestro;26,7
+Puntapié;Lucha;21,1
+Puño Bala;Acero;10
+Puño Dinámico;Lucha;33,3
+Puño Drenaje;Lucha;8,3
+Puño Fuego;Fuego;25
+Puño Hielo;Hielo;26,3
+Puño Incremento;Lucha;25
+Puño Meteoro;Acero;38,5
+Puño Sombra;Fantasma;23,5
+Puño Trueno;Eléctrico;25
+Puya Nociva;Veneno;12,5
+Rapidez;Normal;21,4
+Rayo;Eléctrico;32
+Rayo Aurora;Hielo;22,5
+Rayo Burbuja;Agua;23,7
+Rayo Carga;Eléctrico;7,3
+Rayo Hielo;Hielo;27,3
+Rayo Meteórico;Roca;73,7
+Rayo Solar;Planta;36,7
+Residuos;Veneno;23,8
+Retribución;Normal;50
+Roca Afilada;Roca;43,5
+Romperrocas;Roca;30,56
+Rueda Fuego;Fuego;22,2
+Salmuera;Agua;26,1
+Salpicadura;Agua;0
+Semilladora;Planta;7,3
+Shuriken de agua;Agua;9,09
+Sincrorruido;Psíquico;30,8
+Sofoco;Fuego;40
+Sombra Vil;Fantasma;17,2
+Sumisión;Lucha;27,3
+Surf;Agua;38,2
+Tajo Aéreo;Volador;11,7
+Tajo Cruzado;Lucha;33,3
+Tajo Umbrío;Siniestro;22,7
+Taladradora;Tierra;28,6
+Tecno Shock Agua;Agua;60
+Tecno Shock Eléctrico;Eléctrico;60
+Tecno Shock Fuego;Fuego;60
+Tecno Shock Hielo;Hielo;60
+Tecno Shock Normal;Normal;60
+Terratemblor;Tierra;22,9
+Terremoto;Tierra;38,9
+Tierra Viva;Tierra;27,8
+Tijera X;Bicho;28,1
+Tinieblas;Fantasma;23,1
+Tormenta Floral;Planta;42,3
+Tornado;Volador;13
+Transformación;Normal;0
+Triataque;Normal;48
+Triple Axel;Hielo;36
+Triturar;Siniestro;21,9
+Trueno;Eléctrico;41,7
+Tumba Rocas;Roca;21,9
+Última Baza;Normal;31
+V de fuego;Fuego;33,9
+Vaho Gélido;Hielo;11,1
+Vasto Impacto;Dragón;62,5
+Vendaval;Volador;40,7
+Vendetta;Siniestro;46
+Veneno X;Veneno;26,7
+Ventisca;Hielo;41,9
+Viento Aciago;Fantasma;21,7
+Viento Feérico;Hada;11,13
+Viento Hielo;Hielo;18,2
+Viento Plata;Bicho;18,9
+Voltio Cruel;Eléctrico;34,6
+Voltiocambio;Eléctrico;8,8
+Voz Cautivadora;Hada;17,9
+Vuelo;Volador;44,4
+Weather Ball Normal;Normal;34,4
+Zumbido;Bicho;24,3

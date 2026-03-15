@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore, collection, getDocs, Firestore, addDoc, deleteDoc, doc, updateDoc, query, where } from 'firebase/firestore/lite';
 import { Empleado, empleadoConverter } from "./empleado.model";
+import { ProductoModel, productoConverter } from "./producto/producto.model";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -36,6 +37,8 @@ export async function getCities(db: Firestore){
 
 // 3. How to use it to add a document to Firestore
 const empleadosCollectionRef = collection(db, 'empleados').withConverter(empleadoConverter);
+
+const productosCollectionRef = collection(db, 'producto').withConverter(productoConverter);
 
 
 export async function anadirEmpleado(empleado: Empleado, db: Firestore) 
@@ -157,6 +160,31 @@ console.log("Hemos encontrado al menos 1 1 1");
 
   
 
+}
+
+export async function cargarProductosDesdeCSV(csvContent: string) {
+  const lines = csvContent.split('\n');
+  for (let i = 1; i < lines.length; i++) { // skip header
+    const cols = lines[i].split(';').map(col => col.replace(/"/g, '').trim());
+    if (cols.length >= 8 && cols[0]) {
+      const producto = new ProductoModel({
+        id: parseInt(cols[0]) || 0,
+        nombre: cols[1] || '',
+        coste: parseInt(cols[2]) || 0,
+        tengo: parseInt(cols[3]) || 0,
+        almacen: cols[4] || '',
+        materiaPrima: cols[5] === 'S',
+        cantidadInicial: parseInt(cols[6]) || 0,
+        fabrica: cols[7] || ''
+      });
+      try {
+        await addDoc(productosCollectionRef, producto);
+        console.log(`Producto ${producto.nombre} agregado`);
+      } catch (error) {
+        console.error('Error al agregar producto:', error);
+      }
+    }
+  }
 }
 
 
