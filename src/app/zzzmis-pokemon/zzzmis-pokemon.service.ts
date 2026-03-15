@@ -1,4 +1,87 @@
-﻿new MisPokemonModel("Landorus", true,3000, 2122, 132, "lanzarrocas", 13, true, "Tierra Viva", 33, false, 2785, true, 2622),
+import { Injectable } from '@angular/core';
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc, query, where } from 'firebase/firestore';
+import { firebaseConfig } from '../CONSTANTES';
+import { MisPokemonModel, mejoresAtaqueModelConverter } from './zzzmisPokemon.model';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class MisPokemonService {
+
+  private app = initializeApp(firebaseConfig);
+  private db = getFirestore(this.app);
+  private misPokemonCollection = collection(this.db, 'misPokemon').withConverter(mejoresAtaqueModelConverter);
+
+  constructor() { }
+
+  // Alta: Agregar un nuevo MisPokemon
+  async agregarMisPokemon(misPokemon: MisPokemonModel): Promise<void> {
+    try {
+      await addDoc(this.misPokemonCollection, misPokemon);
+      console.log('MisPokemon agregado exitosamente');
+    } catch (error) {
+      console.error('Error al agregar MisPokemon:', error);
+      throw error;
+    }
+  }
+
+  // Baja: Eliminar un MisPokemon por ID
+  async eliminarMisPokemon(id: string): Promise<void> {
+    try {
+      const docRef = doc(this.db, 'misPokemon', id);
+      await deleteDoc(docRef);
+      console.log('MisPokemon eliminado exitosamente');
+    } catch (error) {
+      console.error('Error al eliminar MisPokemon:', error);
+      throw error;
+    }
+  }
+
+  // Modificación: Actualizar un MisPokemon por ID
+  async modificarMisPokemon(id: string, misPokemon: Partial<MisPokemonModel>): Promise<void> {
+    try {
+      const docRef = doc(this.db, 'misPokemon', id);
+      await updateDoc(docRef, misPokemon);
+      console.log('MisPokemon modificado exitosamente');
+    } catch (error) {
+      console.error('Error al modificar MisPokemon:', error);
+      throw error;
+    }
+  }
+
+  // Obtener todos los MisPokemon
+  async obtenerMisPokemon(): Promise<MisPokemonModel[]> {
+    try {
+      const querySnapshot = await getDocs(this.misPokemonCollection);
+      return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    } catch (error) {
+      console.error('Error al obtener MisPokemon:', error);
+      throw error;
+    }
+  }
+
+  // Obtener un MisPokemon por ID
+  async obtenerMisPokemonPorId(id: string): Promise<MisPokemonModel | null> {
+    try {
+      const docRef = doc(this.db, 'misPokemon', id).withConverter(mejoresAtaqueModelConverter);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        return docSnap.data();
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error('Error al obtener MisPokemon por ID:', error);
+      throw error;
+    }
+  }
+
+  async cargarMisPokemon()
+  {
+    console.log("Cargando mis Pokemon...");
+     const misPokemonIniciales: MisPokemonModel[] = [
+      new MisPokemonModel("Landorus", true,3000, 2122, 132, "lanzarrocas", 13, true, "Tierra Viva", 33, false, 2785, true, 2622),
 new MisPokemonModel("Vaporeon", false,9000, 2868, 221, "Pistola Agua", 12, true, "Hidrobomba", 47, true, 3254, false, 3561),
 new MisPokemonModel("Crobat", false,9000, 2471, 161, "Tajo Aéreo", 14, true, "Bomba Lodo", 42, true, 2815, false, 3080),
 new MisPokemonModel("Darkrai", true,3000, 2207, 113, "Finta", 13, true, "onda certera", 40, true, 2817, true, 2637),
@@ -757,3 +840,11 @@ new MisPokemonModel("Zoroark", false,5000, 2104, 114, "Garra Umbría", 13, true,
 new MisPokemonModel("Ninetales", false,8000, 2036, 143, "Finta", 11, false, "Onda Ígnea", 32, false, 2521, false, 2521),
 new MisPokemonModel("Ursaring", false,6000, 2428, 161, "Garra Metal", 11, true, "Abrecaminos", 54, false, 3167, false, 3116),
 new MisPokemonModel("Ursaring", false,5000, 2423, 161, "Contraataque", 13, true, "Abrecaminos", 54, false, 3203, false, 3126),
+     ]
+         for (const miPokemon of misPokemonIniciales) {
+      await this.agregarMisPokemon(miPokemon);
+    } 
+    
+    console.log("Carga de mis Pokemon finalizada");
+  }
+}
