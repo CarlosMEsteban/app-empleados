@@ -17,3 +17,20 @@ export class comoGastoModel {
 
 
 }
+
+// Firestore converter for comoGastoModel
+export const comoGastoConverter: FirestoreDataConverter<comoGastoModel> = {
+  toFirestore: (model: comoGastoModel): DocumentData => {
+    return {
+      nombre: model.nombre,
+      cuantoGasto: model.cuantoGasto,
+    };
+  },
+  fromFirestore: (snapshot: QueryDocumentSnapshot<DocumentData>, options?: SnapshotOptions): comoGastoModel => {
+    const data = snapshot.data(options);
+    return new comoGastoModel({
+      nombre: data['nombre'],
+      cuantoGasto: data['cuantoGasto'],
+    });
+  }
+};

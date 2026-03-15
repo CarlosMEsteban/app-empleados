@@ -11,6 +11,7 @@ import { Herramienta } from './herramienta/herramienta';
 import { Avance } from './avance/avance';
 import { BarcoYFundicion } from './barco-yfundicion/barco-yfundicion';
 import { ZZZAtaquesComponent } from './zzzataques/zzzataques.component';
+import { ZzzmejoresAtaques } from './zzzmejores-ataques/zzzmejores-ataques';
 
 
 export const routes: Routes = [
@@ -25,5 +26,7 @@ export const routes: Routes = [
   {path:'tarea', component: Tarea},
   {path:'barcoYFundicion', component: BarcoYFundicion},
   {path:'zzzataques', component: ZZZAtaquesComponent},
+  {path:'zzzmejoresAtaques', component: ZzzmejoresAtaques},
   {path:'**', component: ErrorPersonalizado}
+  
 ];
