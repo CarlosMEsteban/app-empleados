@@ -1,4 +1,9 @@
-﻿new PokemonTipoPokemonModel("Abomasnow", "Hielo"),
+import { PokemonTipoPokemonModel } from './zzzpokemon-tipo-pokemon.model';
+
+export class PokemonTipoPokemonIniciales {
+
+misPokemonTipoPokemonIniciales: PokemonTipoPokemonModel[] = [
+    new PokemonTipoPokemonModel("Abomasnow", "Hielo"),
 new PokemonTipoPokemonModel("Abomasnow", "Planta"),
 new PokemonTipoPokemonModel("Absol", "Siniestro"),
 new PokemonTipoPokemonModel("Accelgor", "Bicho"),
@@ -494,3 +499,9 @@ new PokemonTipoPokemonModel("Zekrom", "Dragón"),
 new PokemonTipoPokemonModel("Zekrom", "Eléctrico"),
 new PokemonTipoPokemonModel("Zoroark", "Siniestro"),
 new PokemonTipoPokemonModel("Zoroark - Blanco", "Siniestro")
+
+];
+
+constructor() {
+}
+}

@@ -13,6 +13,9 @@ import { BarcoYFundicion } from './barco-yfundicion/barco-yfundicion';
 import { ZZZAtaquesComponent } from './zzzataques/zzzataques.component';
 import { ZzzmejoresAtaques } from './zzzmejores-ataques/zzzmejores-ataques';
 import { ZzzmultiplicadorPolvos } from './zzzmultiplicador-polvos/zzzmultiplicador-polvos';
+import { ZzzpokemonTipoPokemon } from './zzzpokemon-tipo-pokemon/zzzpokemon-tipo-pokemon';
+import { Zzzpokemon } from './zzzpokemon/zzzpokemon';
+import { ZzztipoPokemon } from './zzztipo-pokemon/zzztipo-pokemon';
 
 
 export const routes: Routes = [
@@ -29,6 +32,9 @@ export const routes: Routes = [
   {path:'zzzataques', component: ZZZAtaquesComponent},
   {path:'zzzmejoresAtaques', component: ZzzmejoresAtaques},
   {path:'zzzmultiplicadorPolvos', component: ZzzmultiplicadorPolvos},
+  {path:'zzzpokemonTipoPokemon', component: ZzzpokemonTipoPokemon},
+  {path:'zzzpokemon', component: Zzzpokemon},
+  {path:'zzztipoPokemon', component: ZzztipoPokemon},
   {path:'**', component: ErrorPersonalizado}
   
 ];

@@ -1,4 +1,9 @@
-﻿new TipoPokemonModel("Acero", "HaHiR"),
+import { TipoPokemonModel } from './zzztipo-pokemon.model';
+
+export class TipoPokemonIniciales {
+
+tipoPokemonIniciales: TipoPokemonModel[] = [
+    new TipoPokemonModel("Acero", "HaHiR"),
 new TipoPokemonModel("Agua", "FuRT"),
 new TipoPokemonModel("Bicho", "PlPsS"),
 new TipoPokemonModel("Dragón", "D"),
@@ -16,3 +21,8 @@ new TipoPokemonModel("Siniestro", "FaHaPs"),
 new TipoPokemonModel("Tierra", "AcERVe"),
 new TipoPokemonModel("Veneno", "Pl"),
 new TipoPokemonModel("Volador", "BLPl")
+];
+
+constructor() {
+}
+}

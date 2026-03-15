@@ -26,4 +26,5 @@ new MultiplicadorPolvosModel(12000, 0.4)
 ];
 
 constructor() {
-}}
+}
+}
