@@ -1,0 +1,18 @@
+<div class="carga-inicial">
+  <h2>Carga inicial Pok</h2>
+  <p>Selecciona qué datos quieres cargar (todos están marcados por defecto):</p>
+
+  <div class="checkbox-group">
+    <label><input type="checkbox" [(ngModel)]="cargarAtaques" /> Ataques</label><br/>    
+    <label><input type="checkbox" [(ngModel)]="cargarMejoresAtaques" /> Mejores ataques</label><br/>
+    <label><input type="checkbox" [(ngModel)]="cargarMisPokemon" /> Mis Pokemon</label><br/>
+    <label><input type="checkbox" [(ngModel)]="cargarMultiplicadorPolvos" /> Multiplicador polvos</label><br/>
+    <label><input type="checkbox" [(ngModel)]="cargarPokemon" /> Pokemon</label><br/>
+    <label><input type="checkbox" [(ngModel)]="cargarPokemonTipoPokemon" /> Pokemon_TipoPokemon</label><br/>
+    <label><input type="checkbox" [(ngModel)]="cargarTipoPokemon" /> Tipo pokemon</label>
+  </div>
+
+  <button (click)="cargarInicial()" [disabled]="cargando">Cargar inicial</button>
+
+  <p *ngIf="mensaje" class="mensaje">{{ mensaje }}</p>
+</div>

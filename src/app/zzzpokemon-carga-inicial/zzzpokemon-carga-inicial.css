@@ -1,0 +1,13 @@
+.carga-inicial {
+  padding: 1rem;
+}
+
+.carga-inicial button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+.carga-inicial .mensaje {
+  margin-top: 0.75rem;
+  font-weight: bold;
+}

@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc, writeBatch, limit, query } from 'firebase/firestore';
 import { firebaseConfig } from '../CONSTANTES';
 import { PokemonTipoPokemonModel, pokemonTipoPokemonModelConverter } from './zzzpokemon-tipo-pokemon.model';
-import { MultiplicadorPolvosIniciales } from '../zzzmultiplicador-polvos/zzzmultiplicador-Polvos-Iniciales';
-import { PokemonTipoPokemonIniciales } from './zzzpokemon-tipo-pokemon-Iniciales';
+import { PokemonTipoPokemonIniciales } from './zzzpokemon-tipo-pokemon.iniciales';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +37,31 @@ export class PokemonTipoPokemonService {
       console.error('Error al eliminar Pokemon Tipo Pokemon:', error);
       throw error;
     }
+  }
+
+  /** Elimina todos los documentos de la colección 'pokemonTipoPokemon' en lotes de hasta 500 */
+  async eliminarTodosPokemonTipoPokemon(): Promise<number> {
+    const BATCH_SIZE = 500;
+    let totalDeleted = 0;
+
+    while (true) {
+      const colRef = collection(this.db, 'pokemonTipoPokemon').withConverter(pokemonTipoPokemonModelConverter);
+      const q = query(colRef, limit(BATCH_SIZE));
+      const snapshot = await getDocs(q);
+      if (snapshot.empty) break;
+
+      const batch = writeBatch(this.db);
+      snapshot.docs.forEach(docSnap => {
+        const docRef = doc(this.db, 'pokemonTipoPokemon', docSnap.id);
+        batch.delete(docRef);
+      });
+
+      await batch.commit();
+      totalDeleted += snapshot.docs.length;
+    }
+
+    console.log(`Eliminados ${totalDeleted} pokemon-tipo-pokemon.`);
+    return totalDeleted;
   }
 
   // Modificación
@@ -79,6 +103,11 @@ export class PokemonTipoPokemonService {
   }
   async cargarIniciales(): Promise<void> {
     try {
+    console.log("Eliminando pokemon-tipopokemon existentes...");
+    await this.eliminarTodosPokemonTipoPokemon();
+    console.log("pokemon-tipopokemon eliminados. Comenzando carga de pokemon-tipopokemon iniciales...");
+
+
       const iniciales = new PokemonTipoPokemonIniciales();
       const multiplicadores = iniciales.misPokemonTipoPokemonIniciales;
 

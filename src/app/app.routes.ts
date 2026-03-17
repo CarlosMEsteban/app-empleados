@@ -15,6 +15,7 @@ import { ZzzmejoresAtaques } from './zzzmejores-ataques/zzzmejores-ataques';
 import { ZzzmultiplicadorPolvos } from './zzzmultiplicador-polvos/zzzmultiplicador-polvos';
 import { ZzzpokemonTipoPokemon } from './zzzpokemon-tipo-pokemon/zzzpokemon-tipo-pokemon';
 import { Zzzpokemon } from './zzzpokemon/zzzpokemon';
+import { ZzzPokemonCargaInicial } from './zzzpokemon-carga-inicial/zzzpokemon-carga-inicial';
 import { ZzztipoPokemon } from './zzztipo-pokemon/zzztipo-pokemon';
 
 
@@ -34,6 +35,7 @@ export const routes: Routes = [
   {path:'zzzmultiplicadorPolvos', component: ZzzmultiplicadorPolvos},
   {path:'zzzpokemonTipoPokemon', component: ZzzpokemonTipoPokemon},
   {path:'zzzpokemon', component: Zzzpokemon},
+  {path:'zzzPokemonCargaInicial', component: ZzzPokemonCargaInicial},
   {path:'zzztipoPokemon', component: ZzztipoPokemon},
   {path:'**', component: ErrorPersonalizado}
   

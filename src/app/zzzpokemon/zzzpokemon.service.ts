@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc, writeBatch, limit, query } from 'firebase/firestore';
 import { firebaseConfig } from '../CONSTANTES';
 import { PokemonModel, pokemonModelConverter } from './zzzpokemon.model';
-import { PokemonIniciales } from './zzzpokemon-Iniciales';
+import { PokemonIniciales } from './zzzpokemon.iniciales';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +37,31 @@ export class PokemonService {
       console.error('Error al eliminar Pokémon:', error);
       throw error;
     }
+  }
+
+  /** Elimina todos los documentos de la colección 'pokemon' en lotes de hasta 500 */
+  async eliminarTodosPokemon(): Promise<number> {
+    const BATCH_SIZE = 500;
+    let totalDeleted = 0;
+
+    while (true) {
+      const colRef = collection(this.db, 'pokemon').withConverter(pokemonModelConverter);
+      const q = query(colRef, limit(BATCH_SIZE));
+      const snapshot = await getDocs(q);
+      if (snapshot.empty) break;
+
+      const batch = writeBatch(this.db);
+      snapshot.docs.forEach(docSnap => {
+        const docRef = doc(this.db, 'pokemon', docSnap.id);
+        batch.delete(docRef);
+      });
+
+      await batch.commit();
+      totalDeleted += snapshot.docs.length;
+    }
+
+    console.log(`Eliminados ${totalDeleted} pokémon.`);
+    return totalDeleted;
   }
 
   // Modificación
@@ -80,6 +105,11 @@ export class PokemonService {
 
   async cargarPokemonIniciales(): Promise<void> {
     try {
+    console.log("Eliminando pokémon existentes...");
+    await this.eliminarTodosPokemon();
+    console.log("Pokémon existentes eliminados. Comenzando carga de pokémon iniciales...");
+
+      
       const iniciales = new PokemonIniciales();
       const pokemonIniciales = iniciales.pokemonIniciales;
 
@@ -87,9 +117,9 @@ export class PokemonService {
         await this.agregarPokemon(pokemon);
       }
 
-      console.log('Todos los tipos de cada pokemon iniciales han sido cargados correctamente');
+      console.log('Todos los Pokemon iniciales han sido cargados correctamente');
     } catch (error) {
-      console.error('Error al cargar tipos de cada pokemon iniciales:', error);
+      console.error('Error al cargar Pokemon iniciales:', error);
       throw error;
     }
   }   

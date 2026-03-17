@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc, writeBatch, limit, query } from 'firebase/firestore';
 import { firebaseConfig } from '../CONSTANTES';
 import { MultiplicadorPolvosModel, multiplicadorPolvosModelConverter } from './multiplicadorPolvos.model';
-import { MultiplicadorPolvosIniciales } from './zzzmultiplicador-Polvos-Iniciales';
+import { MultiplicadorPolvosIniciales } from './zzzmultiplicador-Polvos.iniciales';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +37,31 @@ export class MultiplicadorPolvosService {
       console.error('Error al eliminar multiplicador de polvos:', error);
       throw error;
     }
+  }
+
+  /** Elimina todos los documentos de la colección 'multiplicadorPolvos' en lotes de hasta 500 */
+  async eliminarTodosMultiplicadores(): Promise<number> {
+    const BATCH_SIZE = 500;
+    let totalDeleted = 0;
+
+    while (true) {
+      const colRef = collection(this.db, 'multiplicadorPolvos').withConverter(multiplicadorPolvosModelConverter);
+      const q = query(colRef, limit(BATCH_SIZE));
+      const snapshot = await getDocs(q);
+      if (snapshot.empty) break;
+
+      const batch = writeBatch(this.db);
+      snapshot.docs.forEach(docSnap => {
+        const docRef = doc(this.db, 'multiplicadorPolvos', docSnap.id);
+        batch.delete(docRef);
+      });
+
+      await batch.commit();
+      totalDeleted += snapshot.docs.length;
+    }
+
+    console.log(`Eliminados ${totalDeleted} multiplicadores de polvos.`);
+    return totalDeleted;
   }
 
   // Modificación
@@ -77,8 +102,14 @@ export class MultiplicadorPolvosService {
     }
   }
 
+
+
   async cargarMultiplicadoresIniciales(): Promise<void> {
     try {
+    console.log("Eliminando multiplicadores existentes...");
+    await this.eliminarTodosMultiplicadores();
+    console.log("Multiplicadores existentes eliminados. Comenzando carga de multiplicadores iniciales...");
+
       const iniciales = new MultiplicadorPolvosIniciales();
       const multiplicadores = iniciales.misMultiplicadoresIniciales;
 

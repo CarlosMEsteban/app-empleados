@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc, writeBatch, limit, query } from 'firebase/firestore';
 import { firebaseConfig } from '../CONSTANTES';
 import { TipoPokemonModel, tipoPokemonModelConverter } from './zzztipo-pokemon.model';
-import { TipoPokemonIniciales } from './zzztipo-pokemon-Iniciales';
+import { TipoPokemonIniciales } from './zzztipo-pokemon.iniciales';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +37,31 @@ export class TipoPokemonService {
       console.error('Error al eliminar Tipo Pokémon:', error);
       throw error;
     }
+  }
+
+  /** Elimina todos los documentos de la colección 'tipoPokemon' en lotes de hasta 500 */
+  async eliminarTodosTiposPokemon(): Promise<number> {
+    const BATCH_SIZE = 500;
+    let totalDeleted = 0;
+
+    while (true) {
+      const colRef = collection(this.db, 'tipoPokemon').withConverter(tipoPokemonModelConverter);
+      const q = query(colRef, limit(BATCH_SIZE));
+      const snapshot = await getDocs(q);
+      if (snapshot.empty) break;
+
+      const batch = writeBatch(this.db);
+      snapshot.docs.forEach(docSnap => {
+        const docRef = doc(this.db, 'tipoPokemon', docSnap.id);
+        batch.delete(docRef);
+      });
+
+      await batch.commit();
+      totalDeleted += snapshot.docs.length;
+    }
+
+    console.log(`Eliminados ${totalDeleted} tipos pokemon.`);
+    return totalDeleted;
   }
 
   // Modificación
@@ -79,6 +104,12 @@ export class TipoPokemonService {
 
    async cargarIniciales(): Promise<void> {
       try {
+
+    console.log("Eliminando tipo-pokemon existentes...");
+    await this.eliminarTodosTiposPokemon();
+    console.log("tipo-pokemon eliminados. Comenzando carga de tipo-pokemon iniciales...");
+
+        
         const iniciales = new TipoPokemonIniciales();
         const tiposPokemon = iniciales.tipoPokemonIniciales;
   
@@ -86,9 +117,9 @@ export class TipoPokemonService {
           await this.agregarTipoPokemon(tipo);
         }
   
-        console.log('Todos los tipos de cada pokemon iniciales han sido cargados correctamente');
+        console.log('Todos los tipos de pokemon iniciales han sido cargados correctamente');
       } catch (error) {
-        console.error('Error al cargar tipos de cada pokemon iniciales:', error);
+        console.error('Error al cargar tipos de pokemon iniciales:', error);
         throw error;
       }
     } 
