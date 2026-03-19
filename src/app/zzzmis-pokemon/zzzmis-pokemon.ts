@@ -1,25 +1,134 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NgFor, NgIf, CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { MisPokemonService } from './zzzmis-pokemon.service';
+import { MisPokemonModel } from './zzzmisPokemon.model';
 
 @Component({
   selector: 'app-zzzmis-pokemon',
-  imports: [],
+  standalone: true,
+  imports: [NgFor, NgIf, CommonModule, FormsModule],
   templateUrl: './zzzmis-pokemon.html',
   styleUrl: './zzzmis-pokemon.css'
 })
-export class ZzzmisPokemon {
+export class ZzzmisPokemon implements OnInit {
   misPokemonServicio: MisPokemonService;
-    constructor(misPokemonServicio: MisPokemonService) {
-      this.misPokemonServicio = misPokemonServicio;
-    }
-  async cargarMisPokemon() {
-    // Aquí puedes implementar la lógica para cargar los mejores ataques desde un archivo CSV
-    console.log("Cargando mis Pokémon desde CSV...");
-try {
-      await this.misPokemonServicio.cargarMisPokemon();
+  listaGeneral: Array<MisPokemonModel & { id: string }> = [];
+  filtroBusqueda: string = '';
+  cargando = false;
+  mensaje = '';
+  
+  // Variables para formulario
+  nuevoMisPokemon: MisPokemonModel = new MisPokemonModel(
+    '', false, 0, 0, 0, '', 0, false, '', 0, false, 0, false, 0
+  );
+  editandoId: string | null = null;
+  mostrarFormulario = false;
+
+  constructor(misPokemonServicio: MisPokemonService) {
+    this.misPokemonServicio = misPokemonServicio;
+  }
+
+  ngOnInit() {
+    this.obtenerTodos();
+  }
+
+  async obtenerTodos() {
+    this.cargando = true;
+    try {
+      this.listaGeneral = await this.misPokemonServicio.obtenerMisPokemon();
+      this.mensaje = `Cargados ${this.listaGeneral.length} misPokemon`;
     } catch (error) {
-      console.error('Error al cargar mis Pokémon:', error);
-      alert('Error al cargar mis Pokémon.');
-    }    
+      console.error('Error al obtener misPokemon:', error);
+      this.mensaje = 'Error al cargar misPokemon';
+    } finally {
+      this.cargando = false;
+    }
+  }
+
+  limpiarFormulario() {
+    this.nuevoMisPokemon = new MisPokemonModel(
+      '', false, 0, 0, 0, '', 0, false, '', 0, false, 0, false, 0
+    );
+    this.editandoId = null;
+    this.mostrarFormulario = false;
+  }
+
+  abrirFormulario() {
+    this.limpiarFormulario();
+    this.mostrarFormulario = true;
+  }
+
+  async guardarMisPokemon() {
+    try {
+      if (!this.nuevoMisPokemon.nombre.trim()) {
+        this.mensaje = 'El nombre es requerido';
+        return;
+      }
+
+      if (this.editandoId) {
+        await this.misPokemonServicio.modificarMisPokemon(this.editandoId, this.nuevoMisPokemon);
+        this.mensaje = 'MisPokemon actualizado correctamente';
+      } else {
+        await this.misPokemonServicio.agregarMisPokemon(this.nuevoMisPokemon);
+        this.mensaje = 'MisPokemon agregado correctamente';
+      }
+      this.limpiarFormulario();
+      await this.obtenerTodos();
+    } catch (error) {
+      console.error('Error al guardar:', error);
+      this.mensaje = 'Error al guardar misPokemon';
+    }
+  }
+
+  editarMisPokemon(misPokemon: MisPokemonModel & { id: string }) {
+    this.nuevoMisPokemon = { ...misPokemon };
+    this.editandoId = misPokemon.id;
+    this.mostrarFormulario = true;
+  }
+
+  async eliminarMisPokemon(id: string) {
+    if (confirm('¿Estás seguro de que quieres eliminar este MisPokemon?')) {
+      try {
+        await this.misPokemonServicio.eliminarMisPokemon(id);
+        this.mensaje = 'MisPokemon eliminado correctamente';
+        await this.obtenerTodos();
+      } catch (error) {
+        console.error('Error al eliminar:', error);
+        this.mensaje = 'Error al eliminar misPokemon';
+      }
+    }
+  }
+
+  async cargarMisPokemonIniciales() {
+    this.cargando = true;
+    this.mensaje = 'Cargando misPokemon iniciales...';
+
+    try {
+      await this.misPokemonServicio.cargarMisPokemon();
+      this.mensaje = 'Carga inicial completada.';
+      await this.obtenerTodos();
+    } catch (error) {
+      console.error('Error al cargar inicial:', error);
+      this.mensaje = 'Error al cargar los misPokemon iniciales.';
+    } finally {
+      this.cargando = false;
+    }
+  }
+
+  get listaFiltrada() {
+    if (!this.filtroBusqueda.trim()) {
+      return this.listaGeneral;
+    }
+    const filtro = this.filtroBusqueda.toLowerCase();
+    return this.listaGeneral.filter((mp: MisPokemonModel & { id: string }) => 
+      mp.nombre.toLowerCase().includes(filtro) ||
+      mp.AtaqueRapido.toLowerCase().includes(filtro) ||
+      mp.AtaqueCargado.toLowerCase().includes(filtro)
+    );
+  }
+
+  cancelarEdicion() {
+    this.limpiarFormulario();
   }
 }

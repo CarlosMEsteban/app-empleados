@@ -10,13 +10,8 @@ import { Tarea } from './tarea/tarea';
 import { Herramienta } from './herramienta/herramienta';
 import { Avance } from './avance/avance';
 import { BarcoYFundicion } from './barco-yfundicion/barco-yfundicion';
-import { ZZZAtaquesComponent } from './zzzataques/zzzataques.component';
-import { ZzzmejoresAtaques } from './zzzmejores-ataques/zzzmejores-ataques';
-import { ZzzmultiplicadorPolvos } from './zzzmultiplicador-polvos/zzzmultiplicador-polvos';
-import { ZzzpokemonTipoPokemon } from './zzzpokemon-tipo-pokemon/zzzpokemon-tipo-pokemon';
-import { Zzzpokemon } from './zzzpokemon/zzzpokemon';
+import { ZzzmisPokemon } from './zzzmis-pokemon/zzzmis-pokemon';
 import { ZzzPokemonCargaInicial } from './zzzpokemon-carga-inicial/zzzpokemon-carga-inicial';
-import { ZzztipoPokemon } from './zzztipo-pokemon/zzztipo-pokemon';
 
 
 export const routes: Routes = [
@@ -30,13 +25,8 @@ export const routes: Routes = [
   {path:'avance', component: Avance},
   {path:'tarea', component: Tarea},
   {path:'barcoYFundicion', component: BarcoYFundicion},
-  {path:'zzzataques', component: ZZZAtaquesComponent},
-  {path:'zzzmejoresAtaques', component: ZzzmejoresAtaques},
-  {path:'zzzmultiplicadorPolvos', component: ZzzmultiplicadorPolvos},
-  {path:'zzzpokemonTipoPokemon', component: ZzzpokemonTipoPokemon},
-  {path:'zzzpokemon', component: Zzzpokemon},
+  {path:'MisPokemon', component: ZzzmisPokemon},
   {path:'zzzPokemonCargaInicial', component: ZzzPokemonCargaInicial},
-  {path:'zzztipoPokemon', component: ZzztipoPokemon},
   {path:'**', component: ErrorPersonalizado}
   
 ];

@@ -77,7 +77,7 @@ export class MisPokemonService {
   }
 
   // Obtener todos los MisPokemon
-  async obtenerMisPokemon(): Promise<MisPokemonModel[]> {
+  async obtenerMisPokemon(): Promise<Array<MisPokemonModel & { id: string }>> {
     try {
       const querySnapshot = await getDocs(this.misPokemonCollection);
       return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
