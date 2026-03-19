@@ -56,7 +56,7 @@
       <div class="form-row">
         <div class="form-group">
           <label>Ataque Rápido</label>
-          <select [(ngModel)]="nuevoMisPokemon.AtaqueRapido" name="ataqueRapido" (change)="calcularCadena()">
+          <select [(ngModel)]="nuevoMisPokemon.AtaqueRapido" name="ataqueRapido" (change)="calculos()">
             <option value="">-- Selecciona un ataque --</option>
             <option *ngFor="let ataque of listaAtaques" [value]="ataque.movimiento">
               {{ ataque.movimiento }}
@@ -78,7 +78,7 @@
       <div class="form-row">
         <div class="form-group">
           <label>Ataque Cargado</label>
-          <select [(ngModel)]="nuevoMisPokemon.AtaqueCargado" name="ataqueCargado" (change)="calcularCadena()">
+          <select [(ngModel)]="nuevoMisPokemon.AtaqueCargado" name="ataqueCargado" (change)="calculos()">
             <option value="">-- Selecciona un ataque --</option>
             <option *ngFor="let ataque of listaAtaques" [value]="ataque.movimiento">
               {{ ataque.movimiento }}
@@ -100,7 +100,7 @@
       <div class="form-row">
         <div class="form-group">
           <label>Valor con Multiplicador</label>
-          <input type="number" [(ngModel)]="nuevoMisPokemon.ValorConMultiplicador" name="valorConMulti" />
+          <input type="number" [(ngModel)]="nuevoMisPokemon.ValorConMultiplicador" name="valorConMulti" disabled="true"/>
         </div>
         <div class="form-group checkbox">
           <label>
@@ -110,7 +110,7 @@
         </div>
         <div class="form-group">
           <label>Valor sin Multiplicador</label>
-          <input type="number" [(ngModel)]="nuevoMisPokemon.ValorSinMultiplicador" name="valorSinMulti" />
+          <input type="number" [(ngModel)]="nuevoMisPokemon.ValorSinMultiplicador" name="valorSinMulti"  disabled="true"/>
         </div>
         <div class="form-group checkbox">
           <label>

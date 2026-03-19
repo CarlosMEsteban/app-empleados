@@ -139,7 +139,7 @@ export class ZzzmisPokemon implements OnInit {
     this.nuevoMisPokemon = { ...misPokemon };
     this.editandoId = misPokemon.id;
     this.mostrarFormulario = true;
-    this.calcularCadena();
+    this.calculos();
   }
 
   async eliminarMisPokemon(id: string) {
@@ -187,6 +187,11 @@ export class ZzzmisPokemon implements OnInit {
     this.limpiarFormulario();
   }
 
+  calculos(){
+    this.calcularCadena();
+    this.calcularValores();
+  }
+
   calcularCadena() {
     console.log('Pokémon seleccionado:', this.nuevoMisPokemon.nombre);
     this.nuevoMisPokemon.cadena = "";
@@ -212,6 +217,44 @@ export class ZzzmisPokemon implements OnInit {
       });
     }
 
+
+  }
+
+  calcularValores() {
+    const multiplicador = this.listaMultiplicadorPolvos.find(m => m.polvos === this.nuevoMisPokemon.Polvos);
+    const ataqueCargado = this.listaAtaques.find(a => a.movimiento === this.nuevoMisPokemon.AtaqueCargado);
+    const ataqueRapido = this.listaAtaques.find(a => a.movimiento === this.nuevoMisPokemon.AtaqueRapido);
+    if (multiplicador && ataqueCargado && ataqueRapido) 
+    {
+      let dpsCargadoREsultante = ataqueCargado.DPS;
+      let dpsRapidoResultante = ataqueRapido.DPS;
+      const tipoAtaqueCargado = ataqueCargado.tipoAtaque;
+      const tipoAtaqueRapido = ataqueRapido.tipoAtaque;
+      let stabCargado = 1;
+      let stabRapido = 1;
+      this.pokemonTipoPokemonServicio.listarTiposPorPokemon(this.nuevoMisPokemon.nombre).then(tipos => {
+        (tipos || []).forEach(tipo => {
+          if (tipo.tipoPokemon === tipoAtaqueCargado) {
+            stabCargado = 1.2;
+          }
+          if (tipo.tipoPokemon === tipoAtaqueRapido) {
+            stabRapido = 1.2;
+          }
+        });
+        dpsCargadoREsultante *= stabCargado;
+        dpsRapidoResultante *= stabRapido;
+        this.nuevoMisPokemon.ValorConMultiplicador = Math.round(this.nuevoMisPokemon.PC * multiplicador.multiplicador +
+                                                     this.nuevoMisPokemon.Salud * multiplicador.multiplicador +
+                                                     dpsCargadoREsultante * 8 +
+                                                     dpsRapidoResultante * 8);
+
+        this.nuevoMisPokemon.ValorSinMultiplicador = Math.round(this.nuevoMisPokemon.PC +
+                                                     this.nuevoMisPokemon.Salud +
+                                                     dpsCargadoREsultante * 8 +
+                                                     dpsRapidoResultante * 8);
+
+      });
+    }
 
   }
 }
