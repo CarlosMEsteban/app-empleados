@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc, writeBatch, limit, query } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc, writeBatch, limit, query, where } from 'firebase/firestore';
 import { firebaseConfig } from '../CONSTANTES';
 import { PokemonTipoPokemonModel, pokemonTipoPokemonModelConverter } from './zzzpokemon-tipo-pokemon.model';
 import { PokemonTipoPokemonIniciales } from './zzzpokemon-tipo-pokemon.iniciales';
@@ -87,6 +87,20 @@ export class PokemonTipoPokemonService {
     }
   }
 
+// Nuevo método: Obtener por nombre de Pokemon
+  async listarTiposPorPokemon(pokemon: string): Promise<PokemonTipoPokemonModel[]> {
+    try {
+      const q = query(this.pokemonTipoCollection, where('pokemon', '==', pokemon));
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        return querySnapshot.docs.map(doc => doc.data());
+      }
+      return [];
+    } catch (error) {
+      console.error('Error al obtener Pokemon Tipo Pokemon por pokemon:', error);
+      throw error;
+    }
+  }  
   // Obtener por ID
   async obtenerPokemonTipoPokemonPorId(id: string): Promise<PokemonTipoPokemonModel | null> {
     try {

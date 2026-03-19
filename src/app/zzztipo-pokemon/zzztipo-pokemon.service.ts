@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc, writeBatch, limit, query } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc, writeBatch, limit, query, where } from 'firebase/firestore';
 import { firebaseConfig } from '../CONSTANTES';
 import { TipoPokemonModel, tipoPokemonModelConverter } from './zzztipo-pokemon.model';
 import { TipoPokemonIniciales } from './zzztipo-pokemon.iniciales';
@@ -100,6 +100,34 @@ export class TipoPokemonService {
       console.error('Error al obtener Tipo Pokémon por ID:', error);
       throw error;
     }
+  }
+
+  async obtenerTpoPokemonPorTipo(tipo: string): Promise<TipoPokemonModel | null> {
+    try {
+      const q = query(this.tipoPokemonCollection, where('tipo', '==', tipo)); 
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        return querySnapshot.docs[0].data(); // Asumiendo que hay uno por tipo
+      }
+      return null;
+    } catch (error) {
+      console.error('Error al obtener Tipo Pokémon por tipo:', error);
+      throw error;
+    }
+  }
+
+  async obtenerCadenaPorTipo(tipo: string): Promise<string> {
+    //console.log("Obteniendo cadena por tipo:", tipo);
+    let resultado = "";
+    const tipoP = await this.obtenerTpoPokemonPorTipo(tipo);
+    if (tipoP) {
+      console.log("Tipo encontrado:", tipoP);
+        console.log("Devolvemos:", tipoP.cadena);
+        resultado = tipoP.cadena;
+      } else {
+        resultado = "";
+      }
+    return resultado;
   }
 
    async cargarIniciales(): Promise<void> {

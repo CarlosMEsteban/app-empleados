@@ -15,6 +15,7 @@ export class MisPokemonModel {
     public ValorConMultiplicador: number = 0;
     public BUnico: boolean = false;
     public ValorSinMultiplicador: number = 0;
+    public cadena: string = ""; 
 
     constructor(
         nombre: string,
