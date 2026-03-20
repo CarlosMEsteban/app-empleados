@@ -188,7 +188,7 @@ export class ZzzmisPokemon implements OnInit {
   }
 
   calculos(){
-    //this.calcularCadena();
+    this.calcularCadena();
     this.calcularValores();
   }
 
