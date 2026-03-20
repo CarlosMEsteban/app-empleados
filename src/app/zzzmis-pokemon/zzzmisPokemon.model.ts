@@ -48,6 +48,25 @@ export class MisPokemonModel {
         this.BUnico = BUnico;
         this.ValorSinMultiplicador = ValorSinMultiplicador;
     }
+
+ public static multiSort(fields: { field: string, dir: 'asc' | 'desc' }[]): (a: any, b: any) => number {
+  return (a: any, b: any) => {
+    for (let { field, dir } of fields) {
+      let result = 0;
+
+      if (typeof a[field] === "string") {
+        result = a[field].localeCompare(b[field]);
+      } else {
+        result = a[field] - b[field];
+      }
+
+      if (result !== 0) {
+        return dir === 'asc' ? result : -result;
+      }
+    }
+    return 0;
+  };
+}    
 }
 
 
@@ -94,5 +113,10 @@ export const mejoresAtaqueModelConverter: FirestoreDataConverter<MisPokemonModel
       data['ValorSinMultiplicador']
     );
   }
+
+
+  
+
+
 };
 

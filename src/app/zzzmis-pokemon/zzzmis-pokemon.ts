@@ -28,7 +28,7 @@ export class ZzzmisPokemon implements OnInit {
   ataquesServicio: ZZZAtaquesService;
   pokemonTipoPokemonServicio: PokemonTipoPokemonService;
   tipoPokemonServicio: TipoPokemonService;
-  listaGeneral: Array<MisPokemonModel & { id: string }> = [];
+  listaMisPokemones: Array<MisPokemonModel & { id: string }> = [];
   listaPokemones: Array<PokemonModel & { id: string }> = [];
   listaMultiplicadorPolvos: Array<MultiplicadorPolvosModel & { id: string }> = [];
   listaAtaques: AtaqueModel[] = [];
@@ -57,7 +57,7 @@ export class ZzzmisPokemon implements OnInit {
     await this.cargarPokemones();
     await this.cargarMultiplicadorPolvos();
     await this.cargarAtaques();
-    await this.obtenerTodos();
+    await this.misPokemones();
   }
 
   async cargarPokemones() {
@@ -90,11 +90,11 @@ export class ZzzmisPokemon implements OnInit {
     }
   }
 
-  async obtenerTodos() {
+  async misPokemones() {
     this.cargando = true;
     try {
-      this.listaGeneral = await this.misPokemonServicio.obtenerMisPokemon();
-      this.mensaje = `Cargados ${this.listaGeneral.length} misPokemon`;
+      this.listaMisPokemones = await this.misPokemonServicio.obtenerMisPokemon();
+      this.mensaje = `Cargados ${this.listaMisPokemones.length} misPokemon`;
     } catch (error) {
       console.error('Error al obtener misPokemon:', error);
       this.mensaje = 'Error al cargar misPokemon';
@@ -131,7 +131,7 @@ export class ZzzmisPokemon implements OnInit {
         this.mensaje = 'MisPokemon agregado correctamente';
       }
       this.limpiarFormulario();
-      await this.obtenerTodos();
+      await this.misPokemones();
     } catch (error) {
       console.error('Error al guardar:', error);
       this.mensaje = 'Error al guardar misPokemon';
@@ -150,7 +150,7 @@ export class ZzzmisPokemon implements OnInit {
       try {
         await this.misPokemonServicio.eliminarMisPokemon(id);
         this.mensaje = 'MisPokemon eliminado correctamente';
-        await this.obtenerTodos();
+        await this.misPokemones();
       } catch (error) {
         console.error('Error al eliminar:', error);
         this.mensaje = 'Error al eliminar misPokemon';
@@ -165,7 +165,7 @@ export class ZzzmisPokemon implements OnInit {
     try {
       await this.misPokemonServicio.cargarMisPokemon();
       this.mensaje = 'Carga inicial completada.';
-      await this.obtenerTodos();
+      await this.misPokemones();
     } catch (error) {
       console.error('Error al cargar inicial:', error);
       this.mensaje = 'Error al cargar los misPokemon iniciales.';
@@ -176,10 +176,10 @@ export class ZzzmisPokemon implements OnInit {
 
   get listaFiltrada() {
     if (!this.filtroBusqueda.trim()) {
-      return this.listaGeneral;
+      return this.listaMisPokemones;
     }
     const filtro = this.filtroBusqueda.toLowerCase();
-    return this.listaGeneral.filter((mp: MisPokemonModel & { id: string }) => 
+    return this.listaMisPokemones.filter((mp: MisPokemonModel & { id: string }) => 
       mp.nombre.toLowerCase().includes(filtro) ||
       mp.AtaqueRapido.toLowerCase().includes(filtro) ||
       mp.AtaqueCargado.toLowerCase().includes(filtro)
