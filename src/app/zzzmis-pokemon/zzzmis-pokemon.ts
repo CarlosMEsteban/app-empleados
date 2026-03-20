@@ -63,6 +63,7 @@ export class ZzzmisPokemon implements OnInit {
   async cargarPokemones() {
     try {
       this.listaPokemones = await this.pokemonServicio.obtenerPokemons();
+      this.listaPokemones.sort((a, b) => a.nombre.localeCompare(b.nombre));
     } catch (error) {
       console.error('Error al cargar pokémon:', error);
       this.mensaje = 'Error al cargar la lista de pokémon';
@@ -72,6 +73,7 @@ export class ZzzmisPokemon implements OnInit {
   async cargarMultiplicadorPolvos() {
     try {
       this.listaMultiplicadorPolvos = await this.multiplicadorPolvosServicio.obtenerMultiplicadores();
+      this.listaMultiplicadorPolvos.sort((a, b) => a.polvos - b.polvos);
     } catch (error) {
       console.error('Error al cargar multiplicadores de polvos:', error);
       this.mensaje = 'Error al cargar los valores de polvos';
@@ -81,6 +83,7 @@ export class ZzzmisPokemon implements OnInit {
   async cargarAtaques() {
     try {
       this.listaAtaques = await this.ataquesServicio.obtenerAtaques();
+      this.listaAtaques.sort((a, b) => a.movimiento.localeCompare(b.movimiento));
     } catch (error) {
       console.error('Error al cargar ataques:', error);
       this.mensaje = 'Error al cargar la lista de ataques';
