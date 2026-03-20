@@ -188,32 +188,32 @@ export class ZzzmisPokemon implements OnInit {
   }
 
   calculos(){
-    this.calcularCadena();
+    //this.calcularCadena();
     this.calcularValores();
   }
 
   calcularCadena() {
-    console.log('Pokémon seleccionado:', this.nuevoMisPokemon.nombre);
+    //console.log('Pokémon seleccionado:', this.nuevoMisPokemon.nombre);
     this.nuevoMisPokemon.cadena = "";
 
     const ataqueCargado = this.listaAtaques.find(a => a.movimiento === this.nuevoMisPokemon.AtaqueCargado);
-    console.log('Ataque cargado seleccionado:', ataqueCargado);
+    //console.log('Ataque cargado seleccionado:', ataqueCargado);
     if (ataqueCargado) 
     {
       
       this.tipoPokemonServicio.obtenerCadenaPorTipo(ataqueCargado.tipoAtaque).then(cadena => {
         this.nuevoMisPokemon.cadena += cadena;
-        console.log('Cadena ataque cargado (async):', cadena);
+        //console.log('Cadena ataque cargado (async):', cadena);
       });
       
     }
     const ataqueRapido = this.listaAtaques.find(a => a.movimiento === this.nuevoMisPokemon.AtaqueRapido);
-    console.log('Ataque rápido seleccionado:', ataqueRapido);
+    //console.log('Ataque rápido seleccionado:', ataqueRapido);
     if (ataqueRapido) 
     {
       this.tipoPokemonServicio.obtenerCadenaPorTipo(ataqueRapido.tipoAtaque).then(cadena => {
         this.nuevoMisPokemon.cadena += cadena;
-        console.log('Cadena ataque rápido (async):', cadena);
+        //console.log('Cadena ataque rápido (async):', cadena);
       });
     }
 
@@ -221,11 +221,17 @@ export class ZzzmisPokemon implements OnInit {
   }
 
   calcularValores() {
-    const multiplicador = this.listaMultiplicadorPolvos.find(m => m.polvos === this.nuevoMisPokemon.Polvos);
-    const ataqueCargado = this.listaAtaques.find(a => a.movimiento === this.nuevoMisPokemon.AtaqueCargado);
-    const ataqueRapido = this.listaAtaques.find(a => a.movimiento === this.nuevoMisPokemon.AtaqueRapido);
+    console.log('Lista Multiplicadores de Polvos:', this.listaMultiplicadorPolvos);
+    console.log('Polvos buscados', this.nuevoMisPokemon.Polvos);
+    const multiplicador = this.listaMultiplicadorPolvos.find(m => m.polvos == this.nuevoMisPokemon.Polvos);
+    console.log('Multiplicador encontrado:', multiplicador);
+    const ataqueCargado = this.listaAtaques.find(a => a.movimiento == this.nuevoMisPokemon.AtaqueCargado);
+    console.log('Ataque cargado encontrado:', ataqueCargado);
+    const ataqueRapido = this.listaAtaques.find(a => a.movimiento == this.nuevoMisPokemon.AtaqueRapido);
+    console.log('Ataque rápido encontrado:', ataqueRapido);
     if (multiplicador && ataqueCargado && ataqueRapido) 
     {
+      console.log('Calculando valores');
       let dpsCargadoREsultante = ataqueCargado.DPS;
       let dpsRapidoResultante = ataqueRapido.DPS;
       const tipoAtaqueCargado = ataqueCargado.tipoAtaque;
@@ -247,12 +253,12 @@ export class ZzzmisPokemon implements OnInit {
                                                      this.nuevoMisPokemon.Salud * multiplicador.multiplicador +
                                                      dpsCargadoREsultante * 8 +
                                                      dpsRapidoResultante * 8);
-
+console.log('Valor con multiplicador calculado:', this.nuevoMisPokemon.ValorConMultiplicador);
         this.nuevoMisPokemon.ValorSinMultiplicador = Math.round(this.nuevoMisPokemon.PC +
                                                      this.nuevoMisPokemon.Salud +
                                                      dpsCargadoREsultante * 8 +
                                                      dpsRapidoResultante * 8);
-
+console.log('Valor sin multiplicador calculado:', this.nuevoMisPokemon.ValorSinMultiplicador);
       });
     }
 
