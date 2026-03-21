@@ -5,6 +5,8 @@ import { MisPokemonService } from '../zzzmis-pokemon/zzzmis-pokemon.service';
 import { MisPokemonModel } from '../zzzmis-pokemon/zzzmisPokemon.model';
 import { PokemonTipoPokemonService } from '../zzzpokemon-tipo-pokemon/zzzpokemon-tipo-pokemon.service';
 import { PokemonTipoPokemonModel } from '../zzzpokemon-tipo-pokemon/zzzpokemon-tipo-pokemon.model';
+import { MultiplicadorPolvosService } from '../zzzmultiplicador-polvos/zzzmultiplicador-polvos.service';
+import { MultiplicadorPolvosModel } from '../zzzmultiplicador-polvos/multiplicadorPolvos.model';
 
 
 @Component({
@@ -16,23 +18,28 @@ import { PokemonTipoPokemonModel } from '../zzzpokemon-tipo-pokemon/zzzpokemon-t
 export class ZzzmasPoder implements OnInit {
   misPokemonServicio: MisPokemonService;
   pokemonTipoPokemonServicio: PokemonTipoPokemonService;
+  multiplicadorPolvosServicio: MultiplicadorPolvosService;
   listaMisPokemones: Array<MisPokemonModel & { id: string }> = [];
   listaPokemonTipoPokemon: Array<PokemonTipoPokemonModel & { id: string }> = [];
+  listaMultiplicadorPolvos: Array<MultiplicadorPolvosModel & { id: string }> = [];
   filtroBusqueda = '';
   mensaje = '';
   cargando = false;
   iAumentarPoder = -1;
   nuevoPoderPC = -1;
   nuevoPoderSalud = -1;
+  nuevoPoderPolvos = -1;
 
-constructor(misPokemonServicio: MisPokemonService, pokemonTipoPokemonServicio: PokemonTipoPokemonService) {
+constructor(misPokemonServicio: MisPokemonService, pokemonTipoPokemonServicio: PokemonTipoPokemonService, multiplicadorPolvosServicio: MultiplicadorPolvosService) {
     this.misPokemonServicio = misPokemonServicio;
     this.pokemonTipoPokemonServicio = pokemonTipoPokemonServicio;
+    this.multiplicadorPolvosServicio = multiplicadorPolvosServicio;
   }  
 
    async ngOnInit() {
     this.listaPokemonTipoPokemon = await this.pokemonTipoPokemonServicio.obtenerPokemonTipoPokemon()
     await this.misPokemones();
+    await this.cargarMultiplicadorPolvos();
    }
 
   async misPokemones() {
@@ -53,6 +60,16 @@ constructor(misPokemonServicio: MisPokemonService, pokemonTipoPokemonServicio: P
     }
   }
 
+  async cargarMultiplicadorPolvos() {
+    try {
+      this.listaMultiplicadorPolvos = await this.multiplicadorPolvosServicio.obtenerMultiplicadores();
+      this.listaMultiplicadorPolvos.sort((a, b) => a.polvos - b.polvos);
+    } catch (error) {
+      console.error('Error al cargar multiplicadores de polvos:', error);
+      this.mensaje = 'Error al cargar los valores de polvos';
+    }
+  }
+
   get listaFiltrada() {
     if (!this.filtroBusqueda.trim()) {
       return this.listaMisPokemones;
@@ -70,12 +87,14 @@ constructor(misPokemonServicio: MisPokemonService, pokemonTipoPokemonServicio: P
     this.iAumentarPoder = i;
     this.nuevoPoderPC = misPok.PC;
     this.nuevoPoderSalud = misPok.Salud;
+    this.nuevoPoderPolvos = misPok.Polvos;
   }
 
-  confirmarAumentoPoder(misPok: MisPokemonModel, i: number)
+  async confirmarAumentoPoder(id: string, i: number)
   {
-    this.misPokemonServicio.aumentarPoder(misPok.AtaqueRapido, misPok.PC, misPok.Salud);
+    this.misPokemonServicio.aumentarPoder(id, this.nuevoPoderPC, this.nuevoPoderSalud, this.nuevoPoderPolvos);
     this.iAumentarPoder = -1;
+    await this.misPokemones();
   }
 
   cancelarAumentoPoder()
@@ -83,5 +102,6 @@ constructor(misPokemonServicio: MisPokemonService, pokemonTipoPokemonServicio: P
     this.iAumentarPoder = -1;
     this.nuevoPoderPC = -1;
     this.nuevoPoderSalud = -1;
+    this.nuevoPoderPolvos = -1;
   }
 }

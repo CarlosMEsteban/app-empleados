@@ -38,10 +38,18 @@
             @if (iAumentarPoder == i)
             {
               <label>PC</label>
-              <input type="number" [(ngModel)]="nuevoPoderPC" name="pc" />
+              <input type="number" [(ngModel)]="nuevoPoderPC" name="pc" size="5"/>
               <label>Salud</label>
-              <input type="number" [(ngModel)]="nuevoPoderSalud" name="salud" />
-              <button (click)="confirmarAumentoPoder(misPok, i)" class="btn-success">
+              <input type="number" [(ngModel)]="nuevoPoderSalud" name="salud" size="5" />
+              <label>Polvos</label>
+              <select [(ngModel)]="nuevoPoderPolvos" name="polvos" >
+                <option value="">-- Selecciona polvos --</option>
+                <option *ngFor="let multipolvos of listaMultiplicadorPolvos" [value]="multipolvos.polvos">
+                  {{ multipolvos.polvos }}
+                </option>
+              </select>
+
+              <button (click)="confirmarAumentoPoder(misPok.id, i)" class="btn-success">
                 ✅
               </button>
               <button (click)="cancelarAumentoPoder()" class="btn-danger">
@@ -51,7 +59,7 @@
             @else
             {
               <button (click)="editarPoder(misPok, i)" class="btn-primary">
-                💪
+                💪{{i}}
               </button>
             }
           </td>

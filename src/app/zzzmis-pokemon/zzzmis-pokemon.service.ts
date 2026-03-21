@@ -127,12 +127,15 @@ export class MisPokemonService {
   
   }
 
-  async aumentarPoder(id: string, nuevoPC: number, nuevoSalud: number)
+  async aumentarPoder(id: string, nuevoPC: number, nuevoSalud: number, polvos: number)
   {
+    console.log(`Aumentando poder de MisPokemon con ID ${id}: nuevo PC = ${nuevoPC}, nueva Salud = ${nuevoSalud}, nuevos Polvos = ${polvos}`);
     const docRef = doc(this.db, 'misPokemon', id);
+    console.log(`Referencia al documento obtenida: ${docRef.path}`);
     await updateDoc(docRef, {
       PC: nuevoPC,
-      Salud: nuevoSalud
+      Salud: nuevoSalud,
+      Polvos: polvos
     });
   }
 }
