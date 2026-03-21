@@ -1,0 +1,59 @@
+<div class="mas-poder-container">
+  <h2>Lista Pokemon que no han evolucionado</h2>
+
+  <!-- Nuevo Pokemon -->
+  <div class="barra-herramientas">
+    <input type="text" [(ngModel)]="nuevoSinEvolucionar.pokemon" name="pokemon" placeholder="Nombre del Pokémon" />
+    <input type="text" [(ngModel)]="nuevoSinEvolucionar.totCaramelos" name="totCaramelos" placeholder="Total de Caramelos" />
+    <input type="number" [(ngModel)]="nuevoSinEvolucionar.caramelos" name="caramelos" placeholder="Caramelos" />
+    <input type="number" [(ngModel)]="nuevoSinEvolucionar.kms" name="kms" placeholder="Kilómetros" />
+    <input type="text" [(ngModel)]="nuevoSinEvolucionar.observaciones" name="observaciones" placeholder="Observaciones" />
+    Caramelos faltan: {{nuevoSinEvolucionar.totCaramelos - nuevoSinEvolucionar.caramelos}}
+    Kms faltan: {{(nuevoSinEvolucionar.totCaramelos - nuevoSinEvolucionar.caramelos) * nuevoSinEvolucionar.kms}}
+    <button (click)="agregarSinEvolucionar()" class="btn-success">
+      Agregar
+    </button>
+    
+
+  </div>
+
+  <!-- Tabla de Pokemon que no han evolucionado -->
+  <div class="tabla-container">
+    <h3>Lista de MisPokemon que no han evolucionado({{ listaSinEvolucionar.length }})</h3>
+    <table *ngIf="listaSinEvolucionar.length > 0" class="tabla-misPokemon">
+      <thead>
+        <tr>
+          <th>Pokemon</th>
+          <th>Tot.Caramelos</th>
+          <th>TEngo</th>
+          <th>Observaciones</th>
+          <th>Caramelos Faltan</th>
+          <th>Kms Faltan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pok of listaSinEvolucionar let i = index">
+            <td class="col-nombre">{{ pok.pokemon }}</td>
+            <td class="col-numero" align="center">{{ pok.totCaramelos }}</td>
+            <td class="col-numero" align="center">{{ pok.caramelos }}</td>
+            <td class="col-numero">{{ pok.observaciones }}</td>
+            <td class="col-numero" align="center">{{ pok.totCaramelos - pok.caramelos }}</td>
+            <td class="col-numero" align="center">{{ (pok.totCaramelos - pok.caramelos) * pok.kms }}</td>
+            
+            <td class="col-numero">
+                <button (click)="eliminarSinEvolucionar(pok.id)" >
+                    ❌
+                </button>            
+            </td>
+        </tr>
+      </tbody>
+    </table> 
+
+    <div *ngIf="listaSinEvolucionar.length === 0" class="sin-datos">
+      <p>No hay misPokemon para mostrar</p>
+    </div>
+
+  </div>
+</div>
+
+

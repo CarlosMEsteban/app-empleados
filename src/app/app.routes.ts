@@ -14,6 +14,7 @@ import { ZzzmisPokemon } from './zzzmis-pokemon/zzzmis-pokemon';
 import { ZzzmasPoder } from './zzzmas-poder/zzzmas-poder';
 import { Zzzevolucionar} from './zzzevolucionar/zzzevolucionar';
 import { Zzzavance } from './zzzavance/zzzavance';
+import { ZzzsinEvolucionar } from './zzzsin-evolucionar/zzzsin-evolucionar';
 import { ZzzPokemonCargaInicial } from './zzzpokemon-carga-inicial/zzzpokemon-carga-inicial';
 
 
@@ -32,6 +33,7 @@ export const routes: Routes = [
   {path:'MasPoder', component: ZzzmasPoder},
   {path:'evolucionar', component: Zzzevolucionar},
   {path:'avancePokemonGo', component: Zzzavance},
+  {path:'sinEvolucionar', component: ZzzsinEvolucionar},
   {path:'zzzPokemonCargaInicial', component: ZzzPokemonCargaInicial},
   {path:'**', component: ErrorPersonalizado}
   
