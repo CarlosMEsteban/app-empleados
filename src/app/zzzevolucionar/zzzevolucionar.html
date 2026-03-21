@@ -1,0 +1,57 @@
+<div class="mas-poder-container">
+  <h2>Lista Pokemon para evolucionar</h2>
+
+  <!-- Nuevo Pokemon -->
+  <div class="barra-herramientas">
+    <input type="text" [(ngModel)]="nuevoAEvolucionar.pokemon" name="pokemon" placeholder="Nombre del Pokémon" />
+    <input type="text" [(ngModel)]="nuevoAEvolucionar.observaciones" name="observaciones" placeholder="Observaciones" />
+    <input type="checkbox" [(ngModel)]="nuevoAEvolucionar.bPosible" name="bPosible" /> Posible
+    <input type="checkbox" [(ngModel)]="nuevoAEvolucionar.bNuevo" name="bNuevo" /> Nuevo
+
+    <button (click)="agregarAEvolucionar()" class="btn-success">
+      Agregar
+    </button>
+    
+
+  </div>
+
+  <!-- Tabla de Pokemon a evolucionar -->
+  <div class="tabla-container">
+    <h3>Lista de MisPokemon para evolucionar({{ listaAEvolucionar.length }})</h3>
+    <table *ngIf="listaAEvolucionar.length > 0" class="tabla-misPokemon">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Observciones</th>
+          <th>Posible</th>
+          <th>Nuevo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pok of listaAEvolucionar let i = index" [class.favorito]="pok.bNuevo" >
+          <td class="col-nombre">{{ pok.pokemon }}</td>
+          @if (pok.bPosible) {
+            <td class="col-numero" style="color: green;">{{ pok.observaciones }}</td>
+          } @else {
+            <td class="col-numero" style="color: red;">{{ pok.observaciones }}</td>
+          
+          }
+          <td class="col-numero">{{ pok.bPosible ? 'Sí' : 'No' }}</td>
+          <td class="col-numero">{{ pok.bNuevo ? 'Sí' : 'No' }}</td>
+          <td class="col-numero">
+            <button (click)="eliminarAEvolucionar(pok.id)" >
+                ❌
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table> 
+
+    <div *ngIf="listaAEvolucionar.length === 0" class="sin-datos">
+      <p>No hay misPokemon para mostrar</p>
+    </div>
+
+  </div>
+</div>
+
+

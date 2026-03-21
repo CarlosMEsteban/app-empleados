@@ -12,6 +12,7 @@ import { Avance } from './avance/avance';
 import { BarcoYFundicion } from './barco-yfundicion/barco-yfundicion';
 import { ZzzmisPokemon } from './zzzmis-pokemon/zzzmis-pokemon';
 import { ZzzmasPoder } from './zzzmas-poder/zzzmas-poder';
+import { Zzzevolucionar} from './zzzevolucionar/zzzevolucionar';
 import { ZzzPokemonCargaInicial } from './zzzpokemon-carga-inicial/zzzpokemon-carga-inicial';
 
 
@@ -28,6 +29,7 @@ export const routes: Routes = [
   {path:'barcoYFundicion', component: BarcoYFundicion},
   {path:'MisPokemon', component: ZzzmisPokemon},
   {path:'MasPoder', component: ZzzmasPoder},
+  {path:'evolucionar', component: Zzzevolucionar},
   {path:'zzzPokemonCargaInicial', component: ZzzPokemonCargaInicial},
   {path:'**', component: ErrorPersonalizado}
   
