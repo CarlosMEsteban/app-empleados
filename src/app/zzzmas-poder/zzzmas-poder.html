@@ -21,16 +21,40 @@
           <th>Polvos</th>
           <th>Valor</th>
           <th>Nombre</th>
+          <th>Tipos</th>
           <th>PC</th>
+          <th>Op</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let misPok of listaFiltrada" [class.favorito]="misPok.BFavorito">
+        <tr *ngFor="let misPok of listaFiltrada let i = index" [class.favorito]="misPok.BFavorito" >
           <td class="col-favorito">{{ misPok.BFavorito ? '⭐' : '' }}</td>
           <td class="col-numero">{{ misPok.Polvos }}</td>
           <td class="col-numero">{{ misPok.ValorConMultiplicador }}</td>
           <td class="col-nombre">{{ misPok.nombre }}</td>
+          <td class="col-numero">{{ misPok.cadenaTipoPokemon }}</td>
           <td class="col-numero">{{ misPok.PC }}</td>
+          <td class="col-op">
+            @if (iAumentarPoder == i)
+            {
+              <label>PC</label>
+              <input type="number" [(ngModel)]="nuevoPoderPC" name="pc" />
+              <label>Salud</label>
+              <input type="number" [(ngModel)]="nuevoPoderSalud" name="salud" />
+              <button (click)="confirmarAumentoPoder(misPok, i)" class="btn-success">
+                ✅
+              </button>
+              <button (click)="cancelarAumentoPoder()" class="btn-danger">
+                ❌
+              </button>
+            }
+            @else
+            {
+              <button (click)="editarPoder(misPok, i)" class="btn-primary">
+                💪
+              </button>
+            }
+          </td>
         </tr>
       </tbody>
     </table>

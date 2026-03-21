@@ -135,4 +135,6 @@ export class PokemonTipoPokemonService {
       throw error;
     }
   } 
+
+  
 }

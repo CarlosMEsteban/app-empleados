@@ -4,6 +4,7 @@ import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDocs, g
 import { firebaseConfig } from '../CONSTANTES';
 import { MisPokemonModel, mejoresAtaqueModelConverter } from './zzzmisPokemon.model';
 import { MisPokemonIniciales } from './zzzmis-pokemon.iniciales';
+import { PokemonTipoPokemonModel } from '../zzzpokemon-tipo-pokemon/zzzpokemon-tipo-pokemon.model';
 
 @Injectable({
   providedIn: 'root'
@@ -115,5 +116,23 @@ export class MisPokemonService {
     } 
     
     console.log("Carga de mis Pokemon finalizada");
+  }
+
+  calcularCadenaTipoPokemon(misPokemones: Array<MisPokemonModel & { id: string }>, tiposPokemon: Array<PokemonTipoPokemonModel & { id: string }>) 
+  {
+    misPokemones.forEach(mp => {
+      const tipos = tiposPokemon.filter(tp => tp.pokemon === mp.nombre).map(tp => tp.tipoPokemon);
+      mp['cadenaTipoPokemon'] = tipos.join(' / ');
+    });
+  
+  }
+
+  async aumentarPoder(id: string, nuevoPC: number, nuevoSalud: number)
+  {
+    const docRef = doc(this.db, 'misPokemon', id);
+    await updateDoc(docRef, {
+      PC: nuevoPC,
+      Salud: nuevoSalud
+    });
   }
 }
