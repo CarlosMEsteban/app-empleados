@@ -13,6 +13,7 @@ import { ZzzpokemonTipoPokemon } from '../zzzpokemon-tipo-pokemon/zzzpokemon-tip
 import { PokemonTipoPokemonService } from '../zzzpokemon-tipo-pokemon/zzzpokemon-tipo-pokemon.service';
 import { ZzztipoPokemon } from '../zzztipo-pokemon/zzztipo-pokemon';
 import { TipoPokemonService } from '../zzztipo-pokemon/zzztipo-pokemon.service';
+import { MejoresAtaquesService } from '../zzzmejores-ataques/mejores-ataques.service';
 
 @Component({
   selector: 'app-zzzmis-pokemon',
@@ -28,6 +29,7 @@ export class ZzzmisPokemon implements OnInit {
   ataquesServicio: ZZZAtaquesService;
   pokemonTipoPokemonServicio: PokemonTipoPokemonService;
   tipoPokemonServicio: TipoPokemonService;
+  mejoresAtaquesServicio: MejoresAtaquesService;
   listaMisPokemones: Array<MisPokemonModel & { id: string }> = [];
   listaPokemones: Array<PokemonModel & { id: string }> = [];
   listaMultiplicadorPolvos: Array<MultiplicadorPolvosModel & { id: string }> = [];
@@ -43,13 +45,21 @@ export class ZzzmisPokemon implements OnInit {
   editandoId: string | null = null;
   mostrarFormulario = false;
 
-  constructor(misPokemonServicio: MisPokemonService, pokemonServicio: PokemonService, multiplicadorPolvosServicio: MultiplicadorPolvosService, ataquesServicio: ZZZAtaquesService, pokemonTipoPokemonServicio: PokemonTipoPokemonService, tipoPokemonServicio: TipoPokemonService) {
+  constructor(misPokemonServicio: MisPokemonService, 
+              pokemonServicio: PokemonService, 
+              multiplicadorPolvosServicio: MultiplicadorPolvosService, 
+              ataquesServicio: ZZZAtaquesService, 
+              pokemonTipoPokemonServicio: PokemonTipoPokemonService, 
+              tipoPokemonServicio: TipoPokemonService,
+              mejoresAtaquesServicio: MejoresAtaquesService) {
+
     this.misPokemonServicio = misPokemonServicio;
     this.pokemonServicio = pokemonServicio;
     this.multiplicadorPolvosServicio = multiplicadorPolvosServicio;
     this.ataquesServicio = ataquesServicio;
     this.pokemonTipoPokemonServicio = pokemonTipoPokemonServicio;
     this.tipoPokemonServicio = tipoPokemonServicio;
+    this.mejoresAtaquesServicio = mejoresAtaquesServicio;
 
   }
 
@@ -193,6 +203,7 @@ export class ZzzmisPokemon implements OnInit {
   calculos(){
     this.calcularCadena();
     this.calcularValores();
+    this.calcularCadenaMejoresAtaques();
   }
 
   calcularCadena() {
@@ -266,4 +277,16 @@ console.log('Valor sin multiplicador calculado:', this.nuevoMisPokemon.ValorSinM
     }
 
   }
+
+  calcularCadenaMejoresAtaques() {
+    this.nuevoMisPokemon.cadenaMejoresAtaques = "";
+    this.mejoresAtaquesServicio.getMejoresAtaquesByPokemon(this.nuevoMisPokemon.nombre).then(mejoresAtaques => {
+      (mejoresAtaques || []).forEach(ma => {
+        this.nuevoMisPokemon.cadenaMejoresAtaques += ' - ' + `${ma.ataque}`;
+      });
+    });
+  }
+
+      
+      
 }

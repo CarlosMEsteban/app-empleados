@@ -17,6 +17,8 @@ export class MisPokemonModel {
     public ValorSinMultiplicador: number = 0;
     public cadena: string = ""; 
     public cadenaTipoPokemon: string = "";
+    public cadenaMejoresAtaques: string = "";
+
 
     constructor(
         nombre: string,

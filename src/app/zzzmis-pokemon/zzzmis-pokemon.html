@@ -63,10 +63,7 @@
             </option>
           </select>
         </div>
-        <div class="form-group">
-          <label>DPS ETB Ataque Rápido</label>
-          <input type="number" [(ngModel)]="nuevoMisPokemon.DPSETBAtaqueRapido" name="dpsRapido" />
-        </div>
+       
         <div class="form-group checkbox">
           <label>
             <input type="checkbox" [(ngModel)]="nuevoMisPokemon.BNOPuedeMejorarRapido" name="noPuedeMejorarRapido" />
@@ -85,9 +82,18 @@
             </option>
           </select>
         </div>
+        <div class="form-group checkbox">
+          <label>
+            <input type="checkbox" [(ngModel)]="nuevoMisPokemon.BNOPuedeMejorarCargado" name="noPuedeMejorarCargado" />
+            No puede mejorar cargado
+          </label>
+        </div>
+      </div>
+
+      <div class="form-row">
         <div class="form-group">
-          <label>DPS ETB Ataque Cargado</label>
-          <input type="number" [(ngModel)]="nuevoMisPokemon.DPSETBAtaqueCargado" name="dpsCargado" />
+          <label>Mejores ataques</label>
+          {{nuevoMisPokemon.cadenaMejoresAtaques}}
         </div>
         <div class="form-group checkbox">
           <label>
