@@ -39,5 +39,15 @@ export class Fechas {
     let minutos = minutosTotales % 60;
     return `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;
   }
+
+   static aFormatoEspanol(fecha: string): string
+   {
+    const partes = fecha.split('-');
+    if (partes.length === 3) {
+      const [anio, mes, dia] = partes;
+      return `${dia}/${mes}/${anio}`;
+    }
+    return fecha; // Devuelve la fecha original si no tiene el formato esperado
+   }
   
 }

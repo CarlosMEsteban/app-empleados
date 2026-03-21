@@ -1,0 +1,56 @@
+<div class="mas-poder-container">
+  <h2>Lista Avances</h2>
+
+  <!-- Nuevo Avance -->
+  <div class="barra-herramientas">
+    <input type="date" [(ngModel)]="nuevoAvance.fecha" name="fecha" placeholder="Fecha"/>
+    <input type="time" [(ngModel)]="nuevoAvance.hora" name="hora" placeholder="Hora" />
+    Px Iniciales
+    <input type="number" [(ngModel)]="nuevoAvance.pxIniciales" name="pxIniciales" placeholder="Puntos Iniciales" />
+    Px Finales
+    <input type="number" [(ngModel)]="nuevoAvance.pxFinales" name="pxFinales" placeholder="Puntos Finales" />
+
+    <button (click)="agregarAvance()" class="btn-success">
+      Agregar
+    </button>
+    
+
+  </div>
+
+  <!-- Tabla de Avances -->
+  <div class="tabla-container">
+    <h3>Lista de Avances({{ listaAvances.length }})</h3>
+    <table *ngIf="listaAvances.length > 0" class="tabla-misPokemon">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Puntos Iniciales</th>
+          <th>Puntos Finales</th>
+          <th>Mejora</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let avance of listaAvances; let i = index">
+          <td class="col-nombre">{{ avance.fecha }}</td>
+          <td class="col-numero">{{ avance.hora }}</td>
+          <td class="col-numero" align="center">{{ avance.pxIniciales  | number:'1.0-0'}}</td>
+          <td class="col-numero" align="center">{{ avance.pxFinales  | number:'1.0-0'}}</td>
+          <td class="col-numero" align="center">{{ avance.pxFinales - avance.pxIniciales | number:'1.0-0' }}</td>
+          <td class="col-numero">
+            <button (click)="eliminarAvance(avance.id)" >
+                ❌
+            </button>            
+          </td>
+        </tr>
+      </tbody>
+    </table> 
+
+    <div *ngIf="listaAvances.length === 0" class="sin-datos">
+      <p>No hay avances para mostrar</p>
+    </div>
+
+  </div>
+</div>
+
+
