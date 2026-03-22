@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc, query, where, writeBatch, limit } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc, query, where, writeBatch, limit, orderBy } from 'firebase/firestore';
 import { firebaseConfig } from '../CONSTANTES';
 import { MisPokemonModel, mejoresAtaqueModelConverter } from './zzzmisPokemon.model';
 import { MisPokemonIniciales } from './zzzmis-pokemon.iniciales';
@@ -88,6 +88,18 @@ export class MisPokemonService {
     }
   }
 
+    // Obtener todos los MisPokemon ordenados por DPSETBAtaqueCargado de forma ascendente
+  async obtenerMisPokemonPorDPSETBCargadoNoPuedeMejorar(): Promise<Array<MisPokemonModel & { id: string }>> {
+    try {
+      const q = query(this.misPokemonCollection, orderBy("DPSETBAtaqueCargado", "asc"));
+      const querySnapshot = await getDocs(q);
+      return querySnapshot.docs.map(doc => ({id: doc.id,  ...doc.data()}));
+    } catch (error) {
+      console.error('Error al obtener MisPokemon:', error);
+      throw error;
+    }
+  }  
+
   // Obtener un MisPokemon por ID
   async obtenerMisPokemonPorId(id: string): Promise<MisPokemonModel | null> {
     try {
@@ -137,5 +149,9 @@ export class MisPokemonService {
       Salud: nuevoSalud,
       Polvos: polvos
     });
+
+
   }
+
+
 }

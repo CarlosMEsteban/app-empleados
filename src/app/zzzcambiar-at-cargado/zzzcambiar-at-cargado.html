@@ -1,0 +1,79 @@
+<div class="cambiar-at-cargado-container">
+  <h2>Lista para cambiar el ataque cargado</h2>
+
+  <!-- Barra de herramientas -->
+  <div class="barra-herramientas">
+    <input 
+      type="text" 
+      [(ngModel)]="filtroBusqueda" 
+      placeholder="Buscar por nombre, ataque rápido o ataque cargado..."
+      class="input-busqueda"
+    />
+  </div>
+
+  <!-- Tabla de misPokemon -->
+  <div class="tabla-container">
+    <h3>Lista de MisPokemon para cambiar ataque cargado({{ listaMisPokemones.length }})</h3>
+    <table *ngIf="listaMisPokemones.length > 0" class="tabla-misPokemon">
+      <thead>
+        <tr>
+          <th>⭐</th>
+          <th>Nombre</th>
+          <th>PC</th>
+          <th>Ataque Cargado</th>          
+          <th>Op</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let misPok of listaMisPokemones let i = index" >
+          <td class="col-favorito">{{ misPok.BFavorito ? '⭐' : '' }}</td>
+          <td class="col-nombre">{{ misPok.nombre }}</td>
+          <td class="col-numero">{{ misPok.PC }}</td>
+          <td class="col-nombre">{{ misPok.AtaqueCargado }}</td>
+          <td class="col-nombre">{{ misPok.DPSETBAtaqueCargado }}</td>
+          <td class="col-nombre">{{ misPok.DPSETBAtaqueRapido }}</td>
+          <td class="col-op">
+            @if (iCambiarAtaque == i)
+            {
+          <select [(ngModel)]="nuevoAtaqueCargado" name="ataqueCargado" (change)="calculos()">
+            <option value="">-- Selecciona un ataque --</option>
+            <option *ngFor="let ataque of listaAtaques" [value]="ataque.movimiento">
+              {{ ataque.movimiento }}
+            </option>
+          </select>
+          <label>DPS ETB Cargado</label>
+          <input type="number" [(ngModel)]="nuevoDPSETBAtaqueCargado" name="dpsEtbCargado" disabled="true"/>
+          <label>
+            <input type="checkbox" [(ngModel)]="nuevoBNOPuedeMejorarCargado" name="noPuedeMejorarCargado" />
+            No puede mejorar cargado
+          </label>
+        <!--
+                <button (click)="guardarCAmbioAtaqueCargado(misPok, i)" class="btn-success">
+                    💾 Guardar
+                </button>
+                <button (click)="cancelarEdicionAtaqueCargado()" class="btn-secondary">
+                    ❌ Cancelar
+                </button>
+              -->
+            }
+            @else
+            {
+              <button (click)="editarAtaqueCargado(misPok, i)" class="btn-primary">
+                💪{{i}}
+              </button>
+            }
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="listaMisPokemones.length === 0 && !cargando" class="sin-datos">
+      <p>No hay misPokemon para mostrar</p>
+    </div>
+
+    <div *ngIf="cargando" class="cargando">
+      <p>Cargando...</p>
+    </div>
+  </div>
+</div>
+
