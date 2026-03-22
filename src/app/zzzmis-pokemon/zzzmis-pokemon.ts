@@ -203,7 +203,7 @@ export class ZzzmisPokemon implements OnInit {
   calculos(){
     this.calcularCadena();
     this.calcularValores();
-    this.calcularCadenaMejoresAtaques();
+    this.calcularCadenaMejoresAtaques();    
   }
 
   calcularCadena() {
@@ -263,6 +263,8 @@ export class ZzzmisPokemon implements OnInit {
         });
         dpsCargadoREsultante *= stabCargado;
         dpsRapidoResultante *= stabRapido;
+        this.nuevoMisPokemon.DPSETBAtaqueCargado = Math.round(dpsCargadoREsultante);
+        this.nuevoMisPokemon.DPSETBAtaqueRapido = Math.round(dpsRapidoResultante);
         this.nuevoMisPokemon.ValorConMultiplicador = Math.round(this.nuevoMisPokemon.PC * multiplicador.multiplicador +
                                                      this.nuevoMisPokemon.Salud * multiplicador.multiplicador +
                                                      dpsCargadoREsultante * 8 +
