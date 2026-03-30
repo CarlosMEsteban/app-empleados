@@ -49,5 +49,20 @@ export class Fechas {
     }
     return fecha; // Devuelve la fecha original si no tiene el formato esperado
    }
+
+
+  static parsearFecha(fecha: string): Date {
+    const [dia, mes, anio] = fecha.split('/').map(Number);
+    return new Date(anio, mes - 1, dia);
+  }
+
+  static obtenerFechaActual(): string {
+    const fechaActual = new Date();
+    const dia = fechaActual.getDate().toString().padStart(2, '0');
+    const mes = (fechaActual.getMonth() + 1).toString().padStart(2, '0');
+    const anio = fechaActual.getFullYear();
+    return `${dia}/${mes}/${anio}`;
+  } 
+
   
 }

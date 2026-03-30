@@ -1,0 +1,24 @@
+  <!-- Tabla de valores históricos -->
+  <div class="tabla-container">
+    <h3>Lista de Valores Históricos({{ listaValorHistorico.length }})</h3>
+    <table *ngIf="listaValorHistorico.length > 0" class="tabla-misPokemon">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let valor of listaValorHistorico; let i = index">
+          <td class="col-nombre">{{ valor.fecha }}</td>
+          <td class="col-numero">{{ valor.valorMedio | number:'1.0-0' }}</td>
+        </tr>
+      </tbody>
+    </table> 
+
+    <div *ngIf="listaValorHistorico.length === 0" class="sin-datos">
+      <p>No hay valores históricos para mostrar</p>
+    </div>
+
+  </div>
+

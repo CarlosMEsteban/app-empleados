@@ -167,5 +167,23 @@ export class MisPokemonService {
     console.log('Valor sin multiplicador calculado:', miPok.ValorSinMultiplicador);
   }  
 
+  async obtenerValorMedio(): Promise<number> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const misPokemones = await this.obtenerMisPokemon();
+        if (misPokemones.length === 0) {
+          resolve(0);
+          return;
+        }
+        const totalValor = misPokemones.reduce((sum, mp) => sum + mp.ValorSinMultiplicador, 0);
+        const valorMedio = totalValor / misPokemones.length;
+        resolve(valorMedio);  
+      } catch (error) {
+        console.error('Error al calcular valor medio:', error);
+        reject(error);
+      } 
+    });
+  }
+
 
 }
