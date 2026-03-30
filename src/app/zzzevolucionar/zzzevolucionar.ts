@@ -16,6 +16,7 @@ export class Zzzevolucionar implements OnInit{
   evolucionarServicio: EvolucionarService;
   listaAEvolucionar: Array<evolucionarModel & { id: string }> = [];
   nuevoAEvolucionar: evolucionarModel = new evolucionarModel('', '', false, false);
+  cuantosPosibles: number = 0;
 
   constructor(evolucionarServicio: EvolucionarService) {
     this.evolucionarServicio = evolucionarServicio;
@@ -28,6 +29,7 @@ export class Zzzevolucionar implements OnInit{
   async cargarAEvolucionar() {
     try {
       this.listaAEvolucionar = await this.evolucionarServicio.obtener();
+      this.cuantosPosibles = this.listaAEvolucionar.filter(pok => pok.bPosible).length;
     } catch (error) {
       console.error('Error al cargar pokémon para evolucionar:', error);
     }

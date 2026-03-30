@@ -69,7 +69,9 @@ export class MisPokemonModel {
     }
     return 0;
   };
-}    
+}  
+
+
 }
 
 

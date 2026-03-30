@@ -115,6 +115,24 @@ export class PokemonTipoPokemonService {
       throw error;
     }
   }
+
+
+  async obtenerPorPokemonYTipo(pokemon: string, tipo: string): Promise<PokemonTipoPokemonModel | null> {
+    try {
+      const q = query(this.pokemonTipoCollection, where('pokemon', '==', pokemon), where('tipo', '==', tipo));
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        return querySnapshot.docs[0].data();
+      }
+      return null;
+    } catch (error) {
+      console.error('Error al obtener Pokemon Tipo Pokemon por pokemon y tipo:', error);
+      throw error;
+    }
+  }
+
+
+  /******************************************************************************************************************* */
   async cargarIniciales(): Promise<void> {
     try {
     console.log("Eliminando pokemon-tipopokemon existentes...");

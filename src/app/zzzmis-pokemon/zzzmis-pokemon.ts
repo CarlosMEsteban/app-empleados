@@ -289,6 +289,6 @@ console.log('Valor sin multiplicador calculado:', this.nuevoMisPokemon.ValorSinM
     });
   }
 
-      
+  
       
 }

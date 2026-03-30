@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc, writeBatch, limit, query } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc, writeBatch, limit, query, where } from 'firebase/firestore';
 import { firebaseConfig } from '../CONSTANTES';
 import { MultiplicadorPolvosModel, multiplicadorPolvosModelConverter } from './multiplicadorPolvos.model';
 import { MultiplicadorPolvosIniciales } from './zzzmultiplicador-Polvos.iniciales';
+import { AtaqueModel } from '../zzzataques/zzzataques.model';
 
 @Injectable({
   providedIn: 'root'
@@ -102,7 +103,20 @@ export class MultiplicadorPolvosService {
     }
   }
 
-
+  /* NO FUNCIONA */
+  async obtenerMultiplicadorPorPolvos(polvos: number): Promise<MultiplicadorPolvosModel | null> {
+    try {
+      const q = query(this.multiplicadorCollection, where('polvos', '==', polvos));
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) 
+        return querySnapshot.docs[0].data();
+      else
+        return null;    
+    } catch (error) {
+      console.error('Error al obtener multiplicador de polvos por cantidad de polvos:', error);
+      throw error;
+    }
+  }
 
   async cargarMultiplicadoresIniciales(): Promise<void> {
     try {
@@ -123,5 +137,7 @@ export class MultiplicadorPolvosService {
       throw error;
     }
   } 
+
+   
 
 }

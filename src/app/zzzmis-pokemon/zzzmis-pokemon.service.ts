@@ -153,5 +153,19 @@ export class MisPokemonService {
 
   }
 
+  calcularCargado(miPok: MisPokemonModel, DPS : number, multiplicador : number, factor: number) {
+    miPok.DPSETBAtaqueCargado = Math.round(DPS * factor);
+    miPok.ValorConMultiplicador = Math.round(miPok.PC * multiplicador +
+                                                     miPok.Salud * multiplicador +
+                                                     miPok.DPSETBAtaqueCargado * 8 +
+                                                     miPok.DPSETBAtaqueRapido * 8);
+    console.log('Valor con multiplicador calculado:', miPok.ValorConMultiplicador);
+    miPok.ValorSinMultiplicador = Math.round(miPok.PC +
+                                                     miPok.Salud +
+                                                     miPok.DPSETBAtaqueCargado * 8 +
+                                                     miPok.DPSETBAtaqueRapido * 8);
+    console.log('Valor sin multiplicador calculado:', miPok.ValorSinMultiplicador);
+  }  
+
 
 }
