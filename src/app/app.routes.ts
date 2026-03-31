@@ -17,6 +17,7 @@ import { Zzzavance } from './zzzavance/zzzavance';
 import { ZzzsinEvolucionar } from './zzzsin-evolucionar/zzzsin-evolucionar';
 import { ZzzcambiarAtCargado } from './zzzcambiar-at-cargado/zzzcambiar-at-cargado';
 import { ZzzvalorHistorico } from './zzzvalor-historico/zzzvalor-historico';
+import { Zzzpokemon } from './zzzpokemon/zzzpokemon';
 import { ZzzPokemonCargaInicial } from './zzzpokemon-carga-inicial/zzzpokemon-carga-inicial';
 
 
@@ -38,6 +39,7 @@ export const routes: Routes = [
   {path:'sinEvolucionar', component: ZzzsinEvolucionar},
   {path:'cambiarAtCargado', component: ZzzcambiarAtCargado},
   {path:'avanceHistorico', component: ZzzvalorHistorico},
+  {path:'zzzPokemon', component: Zzzpokemon},
   {path:'zzzPokemonCargaInicial', component: ZzzPokemonCargaInicial},
   {path:'**', component: ErrorPersonalizado}
   

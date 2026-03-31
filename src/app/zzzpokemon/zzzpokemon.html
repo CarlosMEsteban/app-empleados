@@ -1,2 +1,67 @@
-<p>zzzpokemon works!</p>
-<button (click)="cargarPokemon()">Cargar los pokemon </button>
+
+ <!-- Formulario de agregación/edición -->
+  <div class="formulario-container">
+    <h3>Nuevo MisPokemon</h3>
+    
+    <form (ngSubmit)="guardarPokemon()">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre *</label>
+          <input type="text" [(ngModel)]="nuevoPokemon" name="nombre" required />
+        </div>
+        </div>
+
+      <div class="form-acciones">
+        <button type="submit" class="btn-primary">💾 Guardar</button>
+        <button type="button" (click)="cancelarEdicion()" class="btn-danger">❌ Cancelar</button>
+      </div>
+    </form>
+  </div>
+  @if (bMuestrarTipos)
+  {
+    <div class="tipos-container">
+        <h3>Nuevo Tipo para el Pokemon</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tipo *</label>
+            <select [(ngModel)]="nuevoTipoSeleccionado" name="tipo" required>
+              <option *ngFor="let tipo of listaTiposPokemon" [value]="tipo.tipoPokemon">{{ tipo.tipoPokemon }}</option>
+            </select>
+          </div>
+          <div class="form-acciones">
+            <button (click)="agregarTipoPokemon()" class="btn-primary">➕ Agregar Tipo</button>
+          </div>
+
+        </div>
+      <h4>Tipos del Pokémon</h4>
+      <ul>
+        <li *ngFor="let tipo of listaPokemonTipoPokemon">
+          {{ tipo.tipoPokemon }}
+        </li>
+      </ul>
+    </div>
+  }
+  @if (bmuestraMejoresAtaques)
+  {
+    <div class="mejores-ataques-container">
+        <h3>Nuevo Mejor Ataque para el Pokemon</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Mejor Ataque *</label>
+            <select [(ngModel)]="nuevoMejorAtaque" name="mejorAtaque" required>
+              <option *ngFor="let ataque of listaAtaques" [value]="ataque.movimiento">{{ ataque.movimiento }}</option>
+            </select>
+          </div>
+          <div class="form-acciones">
+            <button (click)="agregarMejorAtaque()" class="btn-primary">➕ Agregar Mejor Ataque</button>
+          </div>
+
+        </div>
+      <h4>Mejores Ataques del Pokémon</h4>
+      <ul>
+        <li *ngFor="let ataque of listaMejoresAtaques">
+          {{ ataque.ataque }}
+        </li>
+      </ul>
+    </div>
+  }

@@ -1,8 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { NgFor, NgIf, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PokemonModel } from '../zzzpokemon/zzzpokemon.model';
-import { PokemonService } from '../zzzpokemon/zzzpokemon.service';
 import { evolucionarModel } from './zzzevolucionar.model';
 import { EvolucionarService } from './zzzevolucionar.service';
 
