@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc, query, where, writeBatch, limit, orderBy } from 'firebase/firestore';
 import { firebaseConfig } from '../CONSTANTES';
-import { MisPokemonModel, mejoresAtaqueModelConverter } from './zzzmisPokemon.model';
+import { MisPokemonConverter, MisPokemonModel} from './zzzmisPokemon.model';
 import { MisPokemonIniciales } from './zzzmis-pokemon.iniciales';
 import { PokemonTipoPokemonModel } from '../zzzpokemon-tipo-pokemon/zzzpokemon-tipo-pokemon.model';
 
@@ -13,7 +13,7 @@ export class MisPokemonService {
 
   private app = initializeApp(firebaseConfig);
   private db = getFirestore(this.app);
-  private misPokemonCollection = collection(this.db, 'misPokemon').withConverter(mejoresAtaqueModelConverter);
+  private misPokemonCollection = collection(this.db, 'misPokemon').withConverter(MisPokemonConverter);
 
   constructor() { }
 
@@ -46,7 +46,7 @@ export class MisPokemonService {
     let totalDeleted = 0;
 
     while (true) {
-      const colRef = collection(this.db, 'misPokemon').withConverter(mejoresAtaqueModelConverter);
+      const colRef = collection(this.db, 'misPokemon').withConverter(MisPokemonConverter);
       const q = query(colRef, limit(BATCH_SIZE));
       const snapshot = await getDocs(q);
       if (snapshot.empty) break;
@@ -103,7 +103,7 @@ export class MisPokemonService {
   // Obtener un MisPokemon por ID
   async obtenerMisPokemonPorId(id: string): Promise<MisPokemonModel | null> {
     try {
-      const docRef = doc(this.db, 'misPokemon', id).withConverter(mejoresAtaqueModelConverter);
+      const docRef = doc(this.db, 'misPokemon', id).withConverter(MisPokemonConverter);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         return docSnap.data();

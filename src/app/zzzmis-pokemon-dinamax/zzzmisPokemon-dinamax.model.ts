@@ -1,6 +1,6 @@
 import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions } from "firebase/firestore";
 
-export class MisPokemonModel {
+export class MisPokemonDinamaxModel {
     public nombre: string = "";
     public BFavorito: boolean = false;
     public Polvos: number = 0;
@@ -15,9 +15,14 @@ export class MisPokemonModel {
     public ValorConMultiplicador: number = 0;
     public BUnico: boolean = false;
     public ValorSinMultiplicador: number = 0;
+    public nivelAtaqueMax: number = -1;
+    public nivelBarreraMax: number = -1;
+    public nivelSaludMax: number = -1;
+
     public cadena: string = ""; 
     public cadenaTipoPokemon: string = "";
     public cadenaMejoresAtaques: string = "";
+
 
 
     constructor(
@@ -34,7 +39,11 @@ export class MisPokemonModel {
         BNOPuedeMejorarCargado: boolean,
         ValorConMultiplicador: number,
         BUnico: boolean,
-        ValorSinMultiplicador: number
+        ValorSinMultiplicador: number,
+        nivelAtaqueMax: number,
+        nivelBarreraMax: number,
+        nivelSaludMax: number
+
     ) {
         this.nombre = nombre;
         this.BFavorito = BFavorito;
@@ -50,6 +59,9 @@ export class MisPokemonModel {
         this.ValorConMultiplicador = ValorConMultiplicador;
         this.BUnico = BUnico;
         this.ValorSinMultiplicador = ValorSinMultiplicador;
+        this.nivelAtaqueMax = nivelAtaqueMax;
+        this.nivelBarreraMax = nivelBarreraMax;
+        this.nivelSaludMax = nivelSaludMax;
     }
 
  public static multiSort(fields: { field: string, dir: 'asc' | 'desc' }[]): (a: any, b: any) => number {
@@ -75,9 +87,9 @@ export class MisPokemonModel {
 }
 
 
-// FirestoreDataConverter for MisPokemonModel
-export const MisPokemonConverter: FirestoreDataConverter<MisPokemonModel> = {
-  toFirestore: (pokemon: MisPokemonModel): DocumentData => {
+// FirestoreDataConverter for MisPokemonDinamaxModel
+export const MisPokemonDinamaxConverter: FirestoreDataConverter<MisPokemonDinamaxModel> = {
+  toFirestore: (pokemon: MisPokemonDinamaxModel): DocumentData => {
     return {
       nombre: pokemon.nombre,
       BFavorito: pokemon.BFavorito,
@@ -92,16 +104,19 @@ export const MisPokemonConverter: FirestoreDataConverter<MisPokemonModel> = {
       BNOPuedeMejorarCargado: pokemon.BNOPuedeMejorarCargado,
       ValorConMultiplicador: pokemon.ValorConMultiplicador,
       BUnico: pokemon.BUnico,
-      ValorSinMultiplicador: pokemon.ValorSinMultiplicador
+      ValorSinMultiplicador: pokemon.ValorSinMultiplicador,
+      nivelAtaqueMax: pokemon.nivelAtaqueMax,
+      nivelBarreraMax: pokemon.nivelBarreraMax,
+      nivelSaludMax: pokemon.nivelSaludMax
     };
   },
 
   fromFirestore: (
     snapshot: QueryDocumentSnapshot,
     options: SnapshotOptions
-  ): MisPokemonModel => {
+  ): MisPokemonDinamaxModel => {
     const data = snapshot.data(options);
-    return new MisPokemonModel(
+    return new MisPokemonDinamaxModel(
       data['nombre'],
       data['BFavorito'],
       data['Polvos'],
@@ -115,7 +130,10 @@ export const MisPokemonConverter: FirestoreDataConverter<MisPokemonModel> = {
       data['BNOPuedeMejorarCargado'],
       data['ValorConMultiplicador'],
       data['BUnico'],
-      data['ValorSinMultiplicador']
+      data['ValorSinMultiplicador'],
+      data['nivelAtaqueMax'],
+      data['nivelBarreraMax'],
+      data['nivelSaludMax']
     );
   }
 

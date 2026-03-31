@@ -1,34 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { NgFor, NgIf, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MisPokemonService } from './zzzmis-pokemon.service';
-import { MisPokemonModel } from './zzzmisPokemon.model';
+import { NgFor, NgIf, CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { PokemonService } from '../zzzpokemon/zzzpokemon.service';
-import { PokemonModel } from '../zzzpokemon/zzzpokemon.model';
-import { MultiplicadorPolvosService } from '../zzzmultiplicador-polvos/zzzmultiplicador-polvos.service';
-import { MultiplicadorPolvosModel } from '../zzzmultiplicador-polvos/multiplicadorPolvos.model';
-import { ZZZAtaquesService } from '../zzzataques/zzzataques.service';
-import { AtaqueModel } from '../zzzataques/zzzataques.model';
 import { PokemonTipoPokemonService } from '../zzzpokemon-tipo-pokemon/zzzpokemon-tipo-pokemon.service';
 import { TipoPokemonService } from '../zzztipo-pokemon/zzztipo-pokemon.service';
+import { MisPokemonDinamaxService } from './zzzmis-pokemon.dinamax.service';
+import { MisPokemonDinamaxModel } from './zzzmisPokemon-dinamax.model';
+import { PokemonModel } from '../zzzpokemon/zzzpokemon.model';
+import { MultiplicadorPolvosModel } from '../zzzmultiplicador-polvos/multiplicadorPolvos.model';
+import { MultiplicadorPolvosService } from '../zzzmultiplicador-polvos/zzzmultiplicador-polvos.service';
+import { ZZZAtaquesService } from '../zzzataques/zzzataques.service';
 import { MejoresAtaquesService } from '../zzzmejores-ataques/mejores-ataques.service';
+import { AtaqueModel } from '../zzzataques/zzzataques.model';
 
 @Component({
-  selector: 'app-zzzmis-pokemon',
-  standalone: true,
+  selector: 'app-zzzmis-pokemon-dinamax',
   imports: [NgFor, NgIf, CommonModule, FormsModule],
-  templateUrl: './zzzmis-pokemon.html',
-  styleUrl: './zzzmis-pokemon.css'
+  templateUrl: './zzzmis-pokemon-dinamax.html',
+  styleUrl: './zzzmis-pokemon-dinamax.css'
 })
-export class ZzzmisPokemon implements OnInit {
-  misPokemonServicio: MisPokemonService;
+export class ZzzmisPokemonDinamax {
+  misPokemonDinamaxServicio: MisPokemonDinamaxService;
   pokemonServicio: PokemonService;
   multiplicadorPolvosServicio: MultiplicadorPolvosService;
   ataquesServicio: ZZZAtaquesService;
   pokemonTipoPokemonServicio: PokemonTipoPokemonService;
   tipoPokemonServicio: TipoPokemonService;
   mejoresAtaquesServicio: MejoresAtaquesService;
-  listaMisPokemones: Array<MisPokemonModel & { id: string }> = [];
+  listaMisPokemones: Array<MisPokemonDinamaxModel & { id: string }> = [];
   listaPokemones: Array<PokemonModel & { id: string }> = [];
   listaMultiplicadorPolvos: Array<MultiplicadorPolvosModel & { id: string }> = [];
   listaAtaques: AtaqueModel[] = [];
@@ -37,13 +36,13 @@ export class ZzzmisPokemon implements OnInit {
   mensaje = '';
   
   // Variables para formulario
-  nuevoMisPokemon: MisPokemonModel = new MisPokemonModel(
-    '', false, 0, 0, 0, '', 0, false, '', 0, false, 0, false, 0
+  nuevoMisPokemon: MisPokemonDinamaxModel = new MisPokemonDinamaxModel(
+    '', false, 0, 0, 0, '', 0, false, '', 0, false, 0, false, 0, -1, -1, -1
   );
   editandoId: string | null = null;
   mostrarFormulario = false;
 
-  constructor(misPokemonServicio: MisPokemonService, 
+  constructor(misPokemonDinamaxServicio: MisPokemonDinamaxService, 
               pokemonServicio: PokemonService, 
               multiplicadorPolvosServicio: MultiplicadorPolvosService, 
               ataquesServicio: ZZZAtaquesService, 
@@ -51,7 +50,7 @@ export class ZzzmisPokemon implements OnInit {
               tipoPokemonServicio: TipoPokemonService,
               mejoresAtaquesServicio: MejoresAtaquesService) {
 
-    this.misPokemonServicio = misPokemonServicio;
+    this.misPokemonDinamaxServicio = misPokemonDinamaxServicio;
     this.pokemonServicio = pokemonServicio;
     this.multiplicadorPolvosServicio = multiplicadorPolvosServicio;
     this.ataquesServicio = ataquesServicio;
@@ -65,7 +64,7 @@ export class ZzzmisPokemon implements OnInit {
     await this.cargarPokemones();
     await this.cargarMultiplicadorPolvos();
     await this.cargarAtaques();
-    await this.misPokemones();
+    await this.misPokemonesDinamax();
   }
 
   async cargarPokemones() {
@@ -98,22 +97,22 @@ export class ZzzmisPokemon implements OnInit {
     }
   }
 
-  async misPokemones() {
+  async misPokemonesDinamax() {
     this.cargando = true;
     try {
-      this.listaMisPokemones = await this.misPokemonServicio.obtenerMisPokemon();
-      this.mensaje = `Cargados ${this.listaMisPokemones.length} misPokemon`;
+      this.listaMisPokemones = await this.misPokemonDinamaxServicio.obtener();
+      this.mensaje = `Cargados ${this.listaMisPokemones.length} misPokemonDinamax`;
     } catch (error) {
-      console.error('Error al obtener misPokemon:', error);
-      this.mensaje = 'Error al cargar misPokemon';
+      console.error('Error al obtener misPokemonDinamax:', error);
+      this.mensaje = 'Error al cargar misPokemonDinamax';
     } finally {
       this.cargando = false;
     }
   }
 
   limpiarFormulario() {
-    this.nuevoMisPokemon = new MisPokemonModel(
-      '', false, 0, 0, 0, '', 0, false, '', 0, false, 0, false, 0
+    this.nuevoMisPokemon = new MisPokemonDinamaxModel(
+      '', false, 0, 0, 0, '', 0, false, '', 0, false, 0, false, 0, -1, -1, -1
     );
     this.editandoId = null;
     this.mostrarFormulario = false;
@@ -132,21 +131,21 @@ export class ZzzmisPokemon implements OnInit {
       }
 
       if (this.editandoId) {
-        await this.misPokemonServicio.modificarMisPokemon(this.editandoId, this.nuevoMisPokemon);
-        this.mensaje = 'MisPokemon actualizado correctamente';
+        await this.misPokemonDinamaxServicio.modificar(this.editandoId, this.nuevoMisPokemon);
+        this.mensaje = 'MisPokemonDinamax actualizado correctamente';
       } else {
-        await this.misPokemonServicio.agregarMisPokemon(this.nuevoMisPokemon);
-        this.mensaje = 'MisPokemon agregado correctamente';
+        await this.misPokemonDinamaxServicio.agregar(this.nuevoMisPokemon);
+        this.mensaje = 'MisPokemonDinamax agregado correctamente';
       }
       this.limpiarFormulario();
-      await this.misPokemones();
+      await this.misPokemonesDinamax();
     } catch (error) {
       console.error('Error al guardar:', error);
-      this.mensaje = 'Error al guardar misPokemon';
+      this.mensaje = 'Error al guardar misPokemonDinamax';
     }
   }
 
-  editarMisPokemon(misPokemon: MisPokemonModel & { id: string }) {
+  editarMisPokemon(misPokemon: MisPokemonDinamaxModel & { id: string }) {
     this.nuevoMisPokemon = { ...misPokemon };
     this.editandoId = misPokemon.id;
     this.mostrarFormulario = true;
@@ -154,26 +153,26 @@ export class ZzzmisPokemon implements OnInit {
   }
 
   async eliminarMisPokemon(id: string) {
-    if (confirm('¿Estás seguro de que quieres eliminar este MisPokemon?')) {
+    if (confirm('¿Estás seguro de que quieres eliminar este MisPokemonDinamax?')) {
       try {
-        await this.misPokemonServicio.eliminarMisPokemon(id);
-        this.mensaje = 'MisPokemon eliminado correctamente';
-        await this.misPokemones();
+        await this.misPokemonDinamaxServicio.eliminar(id);
+        this.mensaje = 'MisPokemonDinamax eliminado correctamente';
+        await this.misPokemonesDinamax();
       } catch (error) {
         console.error('Error al eliminar:', error);
-        this.mensaje = 'Error al eliminar misPokemon';
+        this.mensaje = 'Error al eliminar misPokemonDinamax';
       }
     }
   }
 
   async cargarMisPokemonIniciales() {
     this.cargando = true;
-    this.mensaje = 'Cargando misPokemon iniciales...';
+    this.mensaje = 'Cargando misPokemonDinamax iniciales...';
 
     try {
-      await this.misPokemonServicio.cargarMisPokemon();
+      await this.misPokemonDinamaxServicio.cargar();
       this.mensaje = 'Carga inicial completada.';
-      await this.misPokemones();
+      await this.misPokemonesDinamax();
     } catch (error) {
       console.error('Error al cargar inicial:', error);
       this.mensaje = 'Error al cargar los misPokemon iniciales.';
@@ -187,7 +186,7 @@ export class ZzzmisPokemon implements OnInit {
       return this.listaMisPokemones;
     }
     const filtro = this.filtroBusqueda.toLowerCase();
-    return this.listaMisPokemones.filter((mp: MisPokemonModel & { id: string }) => 
+    return this.listaMisPokemones.filter((mp: MisPokemonDinamaxModel & { id: string }) => 
       mp.nombre.toLowerCase().includes(filtro) ||
       mp.AtaqueRapido.toLowerCase().includes(filtro) ||
       mp.AtaqueCargado.toLowerCase().includes(filtro)
@@ -289,4 +288,5 @@ console.log('Valor sin multiplicador calculado:', this.nuevoMisPokemon.ValorSinM
 
   
       
+
 }

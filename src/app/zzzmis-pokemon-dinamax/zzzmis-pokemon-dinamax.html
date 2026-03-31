@@ -1,0 +1,220 @@
+<div class="mis-pokemon-container">
+  <h2>Mantenimiento de Mis Pokémon DINAMAX</h2>
+
+  <!-- Barra de herramientas -->
+  <div class="barra-herramientas">
+    <button (click)="abrirFormulario()" [disabled]="cargando" class="btn-primary">
+      ➕ Nuevo MisPokemon
+    </button>
+    <input 
+      type="text" 
+      [(ngModel)]="filtroBusqueda" 
+      placeholder="Buscar por nombre, ataque rápido o ataque cargado..."
+      class="input-busqueda"
+    />
+  </div>
+
+  <!-- Mensaje de estado -->
+  @if (mensaje)
+  {
+    <div class="mensaje" [ngClass]="{'error': mensaje.includes('Error')}">
+      {{ mensaje }}
+    </div>
+  }
+
+  <!-- Formulario de agregación/edición -->
+   @if (mostrarFormulario)
+   {
+    <div class="formulario-container">
+      <h3>{{ editandoId ? 'Editar MisPokemon Dinamax' : 'Nuevo MisPokemon Dinamax' }}</h3>
+      
+      <form (ngSubmit)="guardarMisPokemon()">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre *</label>
+            <select [(ngModel)]="nuevoMisPokemon.nombre" name="nombre" required >
+              <option value="">-- Selecciona un Pokémon --</option>
+              <option *ngFor="let pok of listaPokemones" [value]="pok.nombre">
+                {{ pok.nombre }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Polvos</label>
+            <select [(ngModel)]="nuevoMisPokemon.Polvos" name="polvos">
+              <option value="">-- Selecciona polvos --</option>
+              <option *ngFor="let multipolvos of listaMultiplicadorPolvos" [value]="multipolvos.polvos">
+                {{ multipolvos.polvos }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>PC</label>
+            <input type="number" [(ngModel)]="nuevoMisPokemon.PC" name="pc" />
+          </div>
+          <div class="form-group">
+            <label>Salud</label>
+            <input type="number" [(ngModel)]="nuevoMisPokemon.Salud" name="salud" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ataque Rápido</label>
+            <select [(ngModel)]="nuevoMisPokemon.AtaqueRapido" name="ataqueRapido" (change)="calculos()">
+              <option value="">-- Selecciona un ataque --</option>
+              <option *ngFor="let ataque of listaAtaques" [value]="ataque.movimiento">
+                {{ ataque.movimiento }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>DPS ETB Rápido</label>
+            <input type="number" [(ngModel)]="nuevoMisPokemon.DPSETBAtaqueRapido" name="dpsEtbRapido" disabled="true"/>
+          </div>
+
+          <div class="form-group checkbox">
+            <label>
+              <input type="checkbox" [(ngModel)]="nuevoMisPokemon.BNOPuedeMejorarRapido" name="noPuedeMejorarRapido" />
+              No puede mejorar rápido
+            </label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ataque Cargado</label>
+            <select [(ngModel)]="nuevoMisPokemon.AtaqueCargado" name="ataqueCargado" (change)="calculos()">
+              <option value="">-- Selecciona un ataque --</option>
+              <option *ngFor="let ataque of listaAtaques" [value]="ataque.movimiento">
+                {{ ataque.movimiento }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>DPS ETB Cargado</label>
+            <input type="number" [(ngModel)]="nuevoMisPokemon.DPSETBAtaqueCargado" name="dpsEtbCargado" disabled="true"/>
+          </div>
+          <div class="form-group checkbox">
+            <label>
+              <input type="checkbox" [(ngModel)]="nuevoMisPokemon.BNOPuedeMejorarCargado" name="noPuedeMejorarCargado" />
+              No puede mejorar cargado
+            </label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Mejores ataques</label>
+            {{nuevoMisPokemon.cadenaMejoresAtaques}}
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Valor con Multiplicador</label>
+            <input type="number" [(ngModel)]="nuevoMisPokemon.ValorConMultiplicador" name="valorConMulti" disabled="true"/>
+          </div>
+          <div class="form-group checkbox">
+            <label>
+              <input type="checkbox" [(ngModel)]="nuevoMisPokemon.BUnico" name="unico" />
+              Único
+            </label>
+          </div>
+          <div class="form-group">
+            <label>Valor sin Multiplicador</label>
+            <input type="number" [(ngModel)]="nuevoMisPokemon.ValorSinMultiplicador" name="valorSinMulti"  disabled="true"/>
+          </div>
+          <div class="form-group checkbox">
+            <label>
+              <input type="checkbox" [(ngModel)]="nuevoMisPokemon.BFavorito" name="favorito" />
+              ⭐ Favorito
+            </label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Cadena</label>
+            <input type="char" [(ngModel)]="nuevoMisPokemon.cadena" name="cadena" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nivel Ataque</label>
+            <input type="number" [(ngModel)]="nuevoMisPokemon.nivelAtaqueMax" name="nivelAtaqueRapido" disabled="true"/>
+          </div>
+          <div class="form-group">
+            <label>Nivel Barrera</label>
+            <input type="number" [(ngModel)]="nuevoMisPokemon.nivelBarreraMax" name="nivelBarrera" disabled="true"/>
+          </div>
+          <div class="form-group">
+            <label>Nivel Salud</label>
+            <input type="number" [(ngModel)]="nuevoMisPokemon.nivelSaludMax" name="nivelSalud" disabled="true"/>
+          </div>
+        </div>
+
+        <div class="form-acciones">
+          <button type="submit" class="btn-primary">💾 Guardar</button>
+          <button type="button" (click)="cancelarEdicion()" class="btn-danger">❌ Cancelar</button>
+        </div>
+      </form>
+    </div>
+  }
+
+  <!-- Tabla de misPokemon Dinamax-->
+  <div class="tabla-container">
+    <h3>Lista de MisPokemon Dinamax ({{ listaFiltrada.length }})</h3>
+    @if (listaFiltrada.length > 0)
+    {
+      <table class="tabla-mis-pokemon">
+        <thead>
+          <tr>
+            <th>⭐</th>
+            <th>Nombre</th>
+            <th>PC</th>
+            <th>Salud</th>
+            <th>Polvos</th>
+            <th>Ataque Rápido</th>
+            <th>Ataque Cargado</th>
+            <th>Valor</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let misPok of listaFiltrada" [class.favorito]="misPok.BFavorito">
+            <td class="col-favorito">{{ misPok.BFavorito ? '⭐' : '' }}</td>
+            <td class="col-nombre">
+              <span (click)="editarMisPokemon(misPok)" style="cursor:pointer; color:#007bff; text-decoration:underline;">            
+                {{ misPok.nombre }}
+              </span>
+            </td>
+            <td class="col-numero">{{ misPok.PC }}</td>
+            <td class="col-numero">{{ misPok.Salud }}</td>
+            <td class="col-numero">{{ misPok.Polvos }}</td>
+            <td>{{ misPok.AtaqueRapido }} ({{ misPok.DPSETBAtaqueRapido }})</td>
+            <td>{{ misPok.AtaqueCargado }} ({{ misPok.DPSETBAtaqueCargado }})</td>
+            <td class="col-numero">{{ misPok.ValorConMultiplicador }}</td>
+            <td class="col-acciones">
+              <button (click)="editarMisPokemon(misPok)" class="btn-edit" title="Editar">✏️</button>
+              <button (click)="eliminarMisPokemon(misPok.id)" class="btn-delete" title="Eliminar">🗑️</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    } @else if (listaFiltrada.length === 0 && !cargando)
+    {
+      <div class="sin-datos">
+        <p>No hay misPokemon para mostrar</p>
+      </div>
+    }
+    @if (cargando)
+    {
+      <div class="cargando">
+        <p>Cargando...</p>
+      </div>
+    }
+  </div>
+</div>
+
