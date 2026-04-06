@@ -110,9 +110,14 @@ export class ZzzcambiarAtCargado implements OnInit {
                                                     AtaqueCargado: this.nuevoAtaqueCargado,
                                                     DPSETBAtaqueCargado: misPokemon.DPSETBAtaqueCargado,
                                                     ValorConMultiplicador: misPokemon.ValorConMultiplicador,
-                                                    ValorSinMultiplicador: misPokemon.ValorSinMultiplicador
+                                                    ValorSinMultiplicador: misPokemon.ValorSinMultiplicador,
+                                                    BNOPuedeMejorarCargado: this.nuevoBNOPuedeMejorarCargado
                                                   });
       this.cancelarEdicionAtaqueCargado();
+      this.listaMisPokemones = [];
+      await this.misPokemones();
+
+
       
     }
   }
