@@ -45,7 +45,7 @@ export class ZzzvalorHistorico {
       this.listaValorHistorico.sort((a, b) => {
         const fechaA = this.fechas.parsearFecha(a.fecha);
         const fechaB = this.fechas.parsearFecha(b.fecha);
-        return fechaA.getTime() - fechaB.getTime();
+        return fechaB.getTime() - fechaA.getTime();
       });
 
     } catch (error) {
