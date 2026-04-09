@@ -20,6 +20,7 @@ import { ZzzvalorHistorico } from './zzzvalor-historico/zzzvalor-historico';
 import { Zzzpokemon } from './zzzpokemon/zzzpokemon';
 import { ZzzmisPokemonDinamax } from './zzzmis-pokemon-dinamax/zzzmis-pokemon-dinamax';
 import { ZzzPokemonCargaInicial } from './zzzpokemon-carga-inicial/zzzpokemon-carga-inicial';
+import { ZzzcambiarAtRapido } from './zzzcambiar-at-rapido/zzzcambiar-at-rapido';
 
 
 export const routes: Routes = [
@@ -38,6 +39,7 @@ export const routes: Routes = [
   {path:'evolucionar', component: Zzzevolucionar},
   {path:'avancePokemonGo', component: Zzzavance},
   {path:'sinEvolucionar', component: ZzzsinEvolucionar},
+  {path:'cambiarAtRapido', component: ZzzcambiarAtRapido},
   {path:'cambiarAtCargado', component: ZzzcambiarAtCargado},
   {path:'avanceHistorico', component: ZzzvalorHistorico},
   {path:'zzzPokemon', component: Zzzpokemon},

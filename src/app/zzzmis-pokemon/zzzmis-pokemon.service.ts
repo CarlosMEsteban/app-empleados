@@ -89,7 +89,7 @@ export class MisPokemonService {
   }
 
     // Obtener todos los MisPokemon ordenados por DPSETBAtaqueCargado de forma ascendente
-  async obtenerMisPokemonPorDPSETBCargadoNoPuedeMejorar(): Promise<Array<MisPokemonModel & { id: string }>> {
+  async obtenerMisPokemonPorDPSETBCargado(): Promise<Array<MisPokemonModel & { id: string }>> {
     try {
       const q = query(this.misPokemonCollection, orderBy("DPSETBAtaqueCargado", "asc"));
       const querySnapshot = await getDocs(q);
@@ -99,6 +99,19 @@ export class MisPokemonService {
       throw error;
     }
   }  
+
+    // Obtener todos los MisPokemon ordenados por DPSETBAtaqueRapido de forma ascendente
+  async obtenerMisPokemonPorDPSETBRapido(): Promise<Array<MisPokemonModel & { id: string }>> {
+    try {
+      const q = query(this.misPokemonCollection, orderBy("DPSETBAtaqueRapido", "asc"));
+      const querySnapshot = await getDocs(q);
+      return querySnapshot.docs.map(doc => ({id: doc.id,  ...doc.data()}));
+    } catch (error) {
+      console.error('Error al obtener MisPokemon:', error);
+      throw error;
+    }
+  }  
+
 
   // Obtener un MisPokemon por ID
   async obtenerMisPokemonPorId(id: string): Promise<MisPokemonModel | null> {
@@ -155,6 +168,20 @@ export class MisPokemonService {
 
   calcularCargado(miPok: MisPokemonModel, DPS : number, multiplicador : number, factor: number) {
     miPok.DPSETBAtaqueCargado = Math.round(DPS * factor);
+    miPok.ValorConMultiplicador = Math.round(miPok.PC * multiplicador +
+                                                     miPok.Salud * multiplicador +
+                                                     miPok.DPSETBAtaqueCargado * 8 +
+                                                     miPok.DPSETBAtaqueRapido * 8);
+    console.log('Valor con multiplicador calculado:', miPok.ValorConMultiplicador);
+    miPok.ValorSinMultiplicador = Math.round(miPok.PC +
+                                                     miPok.Salud +
+                                                     miPok.DPSETBAtaqueCargado * 8 +
+                                                     miPok.DPSETBAtaqueRapido * 8);
+    console.log('Valor sin multiplicador calculado:', miPok.ValorSinMultiplicador);
+  }  
+
+    calcularRapido(miPok: MisPokemonModel, DPS : number, multiplicador : number, factor: number) {
+    miPok.DPSETBAtaqueRapido = Math.round(DPS * factor);
     miPok.ValorConMultiplicador = Math.round(miPok.PC * multiplicador +
                                                      miPok.Salud * multiplicador +
                                                      miPok.DPSETBAtaqueCargado * 8 +

@@ -9,14 +9,13 @@ import { AtaqueModel } from '../zzzataques/zzzataques.model';
 import { MultiplicadorPolvosService } from '../zzzmultiplicador-polvos/zzzmultiplicador-polvos.service';
 import { MultiplicadorPolvosModel } from '../zzzmultiplicador-polvos/multiplicadorPolvos.model';
 
-
 @Component({
-  selector: 'app-zzzcambiar-at-cargado',
+  selector: 'app-zzzcambiar-at-rapido',
   imports: [CommonModule, FormsModule, NgFor, NgIf],
-  templateUrl: './zzzcambiar-at-cargado.html',
-  styleUrl: './zzzcambiar-at-cargado.css'
+  templateUrl: './zzzcambiar-at-rapido.html',
+  styleUrl: './zzzcambiar-at-rapido.css'
 })
-export class ZzzcambiarAtCargado implements OnInit {
+export class ZzzcambiarAtRapido implements OnInit {
     misPokemonServicio: MisPokemonService;
     ataquesServicio: ZZZAtaquesService;
     pokemonTipoPokemonServicio: PokemonTipoPokemonService;
@@ -29,9 +28,9 @@ export class ZzzcambiarAtCargado implements OnInit {
     mensaje = '';
     editandoId: string | null = null;
     iCambiarAtaque: number | null = null;
-    nuevoAtaqueCargado: string = '';
-    nuevoDPSETBAtaqueCargado: number = 0;
-    nuevoBNOPuedeMejorarCargado: boolean = false;
+    nuevoAtaqueRapido: string = '';
+    nuevoDPSETBAtaqueRapido: number = 0;
+    nuevoBNOPuedeMejorarRapido: boolean = false;
   
   constructor(misPokemonServicio: MisPokemonService, ataquesServicio: ZZZAtaquesService, pokemonTipoPokemonServicio: PokemonTipoPokemonService  , multiplicadorServicio: MultiplicadorPolvosService) {
     this.misPokemonServicio = misPokemonServicio;
@@ -39,11 +38,12 @@ export class ZzzcambiarAtCargado implements OnInit {
     this.pokemonTipoPokemonServicio = pokemonTipoPokemonServicio;
     this.multiplicadorServicio = multiplicadorServicio;
   }
-  async ngOnInit(): Promise<void> {
+
+    async ngOnInit(): Promise<void> {
     this.calculos();
   }
 
-  async calculos()
+   async calculos()
   { 
     await this.cargarAtaques();
     await this.misPokemones();
@@ -63,10 +63,10 @@ export class ZzzcambiarAtCargado implements OnInit {
   async misPokemones() {
     this.cargando = true;
     try {
-      // Como no puedo ordenar y filtrar a la vez, obtengo los misPokemon ya ordenados por DPSETBAtaqueCargado y luego filtro por el que no pueden mejorar el ataque cargado
-      this.misPokemonServicio.obtenerMisPokemonPorDPSETBCargado().then(misPokemon => {
+      // Como no puedo ordenar y filtrar a la vez, obtengo los misPokemon ya ordenados por DPSETBAtaqueRapido y luego filtro por el que no pueden mejorar el ataque rápido
+      this.misPokemonServicio.obtenerMisPokemonPorDPSETBRapido().then(misPokemon => {
         (misPokemon).forEach(mp => {
-          if(! mp.BNOPuedeMejorarCargado)
+          if(! mp.BNOPuedeMejorarRapido)
           {
             this.listaMisPokemones.push(mp);
           }
@@ -91,29 +91,29 @@ export class ZzzcambiarAtCargado implements OnInit {
     }
   }
 
-  editarAtaqueCargado(misPokemon: MisPokemonModel & { id: string }, i: number)
+  editarAtaqueRapido(misPokemon: MisPokemonModel & { id: string }, i: number)
   {
     this.iCambiarAtaque = i;
-    this.nuevoAtaqueCargado = misPokemon.AtaqueCargado;
-    this.nuevoDPSETBAtaqueCargado = misPokemon.DPSETBAtaqueCargado;
-    this.nuevoBNOPuedeMejorarCargado = misPokemon.BNOPuedeMejorarCargado;
+    this.nuevoAtaqueRapido = misPokemon.AtaqueRapido;
+    this.nuevoDPSETBAtaqueRapido = misPokemon.DPSETBAtaqueRapido;
+    this.nuevoBNOPuedeMejorarRapido = misPokemon.BNOPuedeMejorarRapido;
     this.editandoId = misPokemon.id;
-    console.log(`Editando ataque cargado de ${misPokemon.nombre} (ID: ${misPokemon.id})`);
+    console.log(`Editando ataque rápido de ${misPokemon.nombre} (ID: ${misPokemon.id})`);
   }
 
-  async guardarCAmbioAtaqueCargado(misPokemon: MisPokemonModel & { id: string }, i: number)
+  async guardarCAmbioAtaqueRapido(misPokemon: MisPokemonModel & { id: string }, i: number)
   {
     if (this.editandoId === misPokemon.id) {
-      misPokemon.AtaqueCargado = this.nuevoAtaqueCargado;
-      this.calcularDPSETBAtaqueCargado(misPokemon);
+      misPokemon.AtaqueRapido = this.nuevoAtaqueRapido;
+      this.calcularDPSETBAtaqueRapido(misPokemon);
       await this.misPokemonServicio.modificarMisPokemon(misPokemon.id!, {
-                                                    AtaqueCargado: this.nuevoAtaqueCargado,
-                                                    DPSETBAtaqueCargado: misPokemon.DPSETBAtaqueCargado,
+                                                    AtaqueRapido: this.nuevoAtaqueRapido,
+                                                    DPSETBAtaqueRapido: misPokemon.DPSETBAtaqueRapido,
                                                     ValorConMultiplicador: misPokemon.ValorConMultiplicador,
                                                     ValorSinMultiplicador: misPokemon.ValorSinMultiplicador,
-                                                    BNOPuedeMejorarCargado: this.nuevoBNOPuedeMejorarCargado
+                                                    BNOPuedeMejorarRapido: this.nuevoBNOPuedeMejorarRapido
                                                   });
-      this.cancelarEdicionAtaqueCargado();
+      this.cancelarEdicionAtaqueRapido();
       this.listaMisPokemones = [];
       await this.misPokemones();
 
@@ -122,14 +122,14 @@ export class ZzzcambiarAtCargado implements OnInit {
     }
   }
 
-  cancelarEdicionAtaqueCargado()
+  cancelarEdicionAtaqueRapido()
   {
     this.iCambiarAtaque = null;
     this.editandoId = null;
-    console.log('Edición de ataque cargado cancelada');
+    console.log('Edición de ataque rápido cancelada');
   }
 
-  private async calcularDPSETBAtaqueCargado(miPokemon: MisPokemonModel)
+  private async calcularDPSETBAtaqueRapido(miPokemon: MisPokemonModel)
   {
     //const multiplicador = this.multiplicadorServicio.obtenerMultiplicadorPorPolvos(miPokemon.Polvos);
     const multiplicador = this.listaMultiplicadores.find(m => m.polvos == miPokemon.Polvos);
@@ -147,17 +147,19 @@ export class ZzzcambiarAtCargado implements OnInit {
     else
       console.log(`Multiplicador encontrado: ${multi}`);
 */
-    const ataque = this.listaAtaques.find(a => a.movimiento === this.nuevoAtaqueCargado);
+    const ataque = this.listaAtaques.find(a => a.movimiento === this.nuevoAtaqueRapido);
     if (multiplicador && ataque) {
-console.log(`Calculando DPSETBAtaqueCargado para ${miPokemon.nombre} con ataque ${ataque.movimiento} y multiplicador ${multiplicador.multiplicador}`);
+console.log(`Calculando DPSETBAtaqueRapido para ${miPokemon.nombre} con ataque ${ataque.movimiento} y multiplicador ${multiplicador.multiplicador}`);
       const pTP = await this.pokemonTipoPokemonServicio.obtenerPorPokemonYTipo(miPokemon.nombre, ataque.tipoAtaque);
       if (pTP) 
-        this.misPokemonServicio.calcularCargado(miPokemon, ataque.DPS, multiplicador.multiplicador, 1.2);
+        this.misPokemonServicio.calcularRapido(miPokemon, ataque.DPS, multiplicador.multiplicador, 1.2);
       else
         this.misPokemonServicio.calcularCargado(miPokemon, ataque.DPS, multiplicador.multiplicador, 1);
     }
     else
-      console.error(`No se encontró el ataque o el multiplicador para calcular DPSETBAtaqueCargado de ${miPokemon.nombre}`);
+      console.error(`No se encontró el ataque o el multiplicador para calcular DPSETBAtaqueRapido de ${miPokemon.nombre}`);
 
   }    
+
+
 }
