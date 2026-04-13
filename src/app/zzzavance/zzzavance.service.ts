@@ -40,7 +40,7 @@ export class AvancePokemonGoService {
 
 
   // Obtener todos
-  async obtener(): Promise<Array<avancePokemonGoModel & { id: string }>> {
+  async todos(): Promise<Array<avancePokemonGoModel & { id: string }>> {
     try {
       const querySnapshot = await getDocs(this.avanceCollection);
       return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));

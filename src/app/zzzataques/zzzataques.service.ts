@@ -29,7 +29,7 @@ export class ZZZAtaquesService {
     }
   }
 
-  async obtenerAtaques(): Promise<AtaqueModel[]> {
+  async todos(): Promise<AtaqueModel[]> {
     try {
       const snapshot = await getDocs(this.ataquesCollectionRef);
       const ataques: AtaqueModel[] = [];

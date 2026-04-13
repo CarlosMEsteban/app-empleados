@@ -90,7 +90,7 @@ export class ZzzmisPokemon implements OnInit {
 
   async cargarAtaques() {
     try {
-      this.listaAtaques = await this.ataquesServicio.obtenerAtaques();
+      this.listaAtaques = await this.ataquesServicio.todos();
       this.listaAtaques.sort((a, b) => a.movimiento.localeCompare(b.movimiento));
     } catch (error) {
       console.error('Error al cargar ataques:', error);

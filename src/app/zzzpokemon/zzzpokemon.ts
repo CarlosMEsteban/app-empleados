@@ -52,7 +52,7 @@ export class Zzzpokemon implements OnInit {
 
     async ngOnInit() {
       this.listaTiposPokemon = await this.tipoPokemonServicio.obtenerPokemonTipoPokemon();
-      this.listaAtaques = await this.ataquesService.obtenerAtaques();
+      this.listaAtaques = await this.ataquesService.todos();
     }
 
     async guardarPokemon() {

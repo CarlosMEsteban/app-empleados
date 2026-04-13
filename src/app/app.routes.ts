@@ -21,6 +21,7 @@ import { Zzzpokemon } from './zzzpokemon/zzzpokemon';
 import { ZzzmisPokemonDinamax } from './zzzmis-pokemon-dinamax/zzzmis-pokemon-dinamax';
 import { ZzzPokemonCargaInicial } from './zzzpokemon-carga-inicial/zzzpokemon-carga-inicial';
 import { ZzzcambiarAtRapido } from './zzzcambiar-at-rapido/zzzcambiar-at-rapido';
+import { ZzzdescargarTodo } from './zzzdescargar-todo/zzzdescargar-todo';
 
 
 export const routes: Routes = [
@@ -45,6 +46,7 @@ export const routes: Routes = [
   {path:'zzzPokemon', component: Zzzpokemon},
   {path:'zzzMisPokemonDinamax', component: ZzzmisPokemonDinamax},
   {path:'zzzPokemonCargaInicial', component: ZzzPokemonCargaInicial},
+  {path:'descargarTodo', component: ZzzdescargarTodo},
   {path:'**', component: ErrorPersonalizado}
   
 ];

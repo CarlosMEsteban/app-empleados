@@ -27,7 +27,7 @@ export class Zzzavance {
 
   async cargarAvances() {
     try {
-      this.listaAvances = await this.avanceServico.obtener();
+      this.listaAvances = await this.avanceServico.todos();
       this.listaAvances.sort((a, b) => { return b.pxIniciales - a.pxIniciales });
     } catch (error) {
       console.error('Error al cargar avances:', error);
