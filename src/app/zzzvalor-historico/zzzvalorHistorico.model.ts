@@ -1,5 +1,4 @@
 import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions } from "firebase/firestore";
-import { Fechas } from "../util/fechas";
 
 export class valorHistoricoModel {
     public fecha: string;
