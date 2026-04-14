@@ -35,9 +35,17 @@ export class Zzzevolucionar implements OnInit{
 
   async agregarAEvolucionar() {
     try {
-      await this.evolucionarServicio.agregar(this.nuevoAEvolucionar);
-      this.nuevoAEvolucionar = new evolucionarModel('', '', false, false);
-      await this.cargarAEvolucionar();
+      let pokemonExistente = this.listaAEvolucionar.find(pok => pok.pokemon.toLowerCase() === this.nuevoAEvolucionar.pokemon.toLowerCase());
+      if (pokemonExistente) {
+        alert('El pokémon ya está en la lista de evolución.');
+        return;
+      }
+      else
+      {
+        await this.evolucionarServicio.agregar(this.nuevoAEvolucionar);
+        this.nuevoAEvolucionar = new evolucionarModel('', '', false, false);
+        await this.cargarAEvolucionar();
+      }
     } catch (error) {
       console.error('Error al agregar pokémon para evolucionar:', error);
     } 
