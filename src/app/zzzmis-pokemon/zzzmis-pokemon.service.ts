@@ -88,6 +88,16 @@ export class MisPokemonService {
     }
   }
 
+  async obtenerNoUnicos(): Promise<Array<MisPokemonModel & { id: string }>> {
+    try {
+      const q = query(this.misPokemonCollection, where("BUnico", "==", false));
+      const querySnapshot = await getDocs(q);
+      return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    } catch (error) {
+      console.error('Error al obtener MisPokemon no únicos:', error);
+      throw error;
+    }
+  }
     // Obtener todos los MisPokemon ordenados por DPSETBAtaqueCargado de forma ascendente
   async obtenerMisPokemonPorDPSETBCargado(): Promise<Array<MisPokemonModel & { id: string }>> {
     try {

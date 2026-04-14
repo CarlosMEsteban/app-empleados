@@ -1,0 +1,55 @@
+<div class="mas-poder-container">
+  <h2>Lista para eliminar los PEORES Pokemon</h2>
+
+  <!-- Tabla de misPokemon -->
+  <div class="tabla-container">
+    <h3>Lista de MisPokemon para eliminar({{ listaMisPokemones.length }})</h3>
+    @if (listaMisPokemones.length > 0)
+    {
+        <table class="tabla-misPokemon">
+        <thead>
+            <tr>
+            <th>⭐</th>
+            <th>Valor</th>
+            <th>Nombre</th>
+            <th>Tipos</th>
+            <th>PC</th>
+            <th>Op</th>
+            </tr>
+        </thead>
+        <tbody>
+        @for (misPok of listaMisPokemones; track misPok.id; let i = $index) 
+        {
+            <tr [class.favorito]="misPok.BFavorito" >
+            <td class="col-favorito">{{ misPok.BFavorito ? '⭐' : '' }}</td>
+            <td class="col-numero">{{ misPok.ValorSinMultiplicador }}</td>
+            <td class="col-nombre">{{ misPok.nombre }}</td>
+            <td class="col-numero">{{ misPok.cadenaTipoPokemon }}</td>
+            <td class="col-numero">{{ misPok.PC }}</td>
+            <td class="col-op">
+                <button (click)="eliminar(i)" class="btn-danger">
+                    ❌
+                </button>
+
+            </td>
+            </tr>
+        }
+        </tbody>
+        </table>
+    }
+    @else
+    {
+      <div class="sin-datos">
+        <p>No hay misPokemon para mostrar</p>
+      </div>
+    }
+
+    @if (cargando)
+    {
+      <div class="cargando">
+        <p>Cargando...</p>
+      </div>
+    }
+  </div>
+</div>
+
