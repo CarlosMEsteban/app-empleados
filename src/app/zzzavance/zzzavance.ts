@@ -27,8 +27,13 @@ export class Zzzavance {
 
   async cargarAvances() {
     try {
+      let fechas = Fechas;
       this.listaAvances = await this.avanceServico.todos();
-      this.listaAvances.sort((a, b) => { return b.pxIniciales - a.pxIniciales });
+      this.listaAvances.sort((a, b) => { 
+        const fechaA = fechas.parsearFecha(a.fecha);
+        const fechaB = fechas.parsearFecha(b.fecha);
+        return fechaB.getTime() - fechaA.getTime();
+      });
     } catch (error) {
       console.error('Error al cargar avances:', error);
     }
