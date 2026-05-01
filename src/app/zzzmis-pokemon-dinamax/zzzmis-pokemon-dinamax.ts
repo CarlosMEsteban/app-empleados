@@ -101,7 +101,7 @@ export class ZzzmisPokemonDinamax {
     this.cargando = true;
     try {
       this.listaMisPokemones = await this.misPokemonDinamaxServicio.obtener();
-      this.listaMisPokemones.sort((a, b) => a.nombre.localeCompare(b.nombre));
+      this.listaMisPokemones.sort((a, b) => b.PC - a.PC);
       this.mensaje = `Cargados ${this.listaMisPokemones.length} misPokemonDinamax`;
     } catch (error) {
       console.error('Error al obtener misPokemonDinamax:', error);
