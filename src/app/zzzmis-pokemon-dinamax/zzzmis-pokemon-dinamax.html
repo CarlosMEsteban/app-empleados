@@ -178,7 +178,7 @@
             <th>Polvos</th>
             <th>Ataque Rápido</th>
             <th>Ataque Cargado</th>
-            <th>Valor</th>
+            <th>At.De.Vi</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -195,7 +195,7 @@
             <td class="col-numero">{{ misPok.Polvos }}</td>
             <td>{{ misPok.AtaqueRapido }} ({{ misPok.DPSETBAtaqueRapido }})</td>
             <td>{{ misPok.AtaqueCargado }} ({{ misPok.DPSETBAtaqueCargado }})</td>
-            <td class="col-numero">{{ misPok.ValorConMultiplicador }}</td>
+            <td class="col-numero" [title]="getMensajeNivelAtaque(misPok.nivelAtaqueMax)">{{ misPok.nivelAtaqueMax }}-{{ misPok.nivelBarreraMax }}-{{ misPok.nivelSaludMax }}</td>
             <td class="col-acciones">
               <button (click)="editarMisPokemon(misPok)" class="btn-edit" title="Editar">✏️</button>
               <button (click)="eliminarMisPokemon(misPok.id)" class="btn-delete" title="Eliminar">🗑️</button>

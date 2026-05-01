@@ -101,6 +101,7 @@ export class ZzzmisPokemonDinamax {
     this.cargando = true;
     try {
       this.listaMisPokemones = await this.misPokemonDinamaxServicio.obtener();
+      this.listaMisPokemones.sort((a, b) => a.nombre.localeCompare(b.nombre));
       this.mensaje = `Cargados ${this.listaMisPokemones.length} misPokemonDinamax`;
     } catch (error) {
       console.error('Error al obtener misPokemonDinamax:', error);
@@ -286,7 +287,18 @@ console.log('Valor sin multiplicador calculado:', this.nuevoMisPokemon.ValorSinM
     });
   }
 
-  
-      
+  getMensajeNivelAtaque(nivelAtaqueMax: number): string {
+    if (nivelAtaqueMax == null || nivelAtaqueMax < 0) {
+      return 'Nivel de ataque no definido';
+    }
 
+    if (nivelAtaqueMax == 1) {
+      return "600 polvos - +-100 caramelos";
+    }
+    if (nivelAtaqueMax == 2) {
+      return "800 polvos - +-45 caramelos++";
+    }
+    
+    return "Nivel de ataque máximo alcanzado";
+  }
 }
