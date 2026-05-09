@@ -12,6 +12,7 @@ import { NgFor } from '@angular/common';
 import { TitleService } from '../services/title.service';
 import { PedidoServiceCacheado } from '../pedido/pedido-service-cacheado';
 import { ProductoServiceCacheado } from '../producto/producto.service - cacheado';
+import { IngredienteFaltaModel } from '../orden-pedidos-productos-hijo/ingredienteFalta.model';
 
 @Component({
   selector: 'app-orden-pedidos-al-aire',
@@ -25,8 +26,8 @@ export class OrdenPedidosAlAire
   productoServicioCacheado: ProductoServiceCacheado;
 
   lProductos: ProductoModel[] = [];
-  lProductosDePedido: ProductosDePedidoModel[] = [];
-  lIngredientes: IngredienteModel[] = [];
+  
+  
   lPedidos: PedidoModel[] = [];
 
 
@@ -60,7 +61,7 @@ export class OrdenPedidosAlAire
 
     this.lProductos = await this.productoServicioCacheado.getProductos();
     console.log("Productos obtenidos: " + this.lProductos.length);
-    this.lIngredientes = await this.productoServicioCacheado.getIngredientes();
+    //this.lIngredientes = await this.productoServicioCacheado.getIngredientes();
     //console.log("Ingredientes obtenidos: " + this.lIngredientes.length);
 
     this.ponerDescProductosEnPedidos();
@@ -79,7 +80,7 @@ export class OrdenPedidosAlAire
               productoDePedido.nombreProducto = producto.nombre;
               productoDePedido.coste = producto.coste * productoDePedido.cantidad;
               productoDePedido.tengo = producto.tengo;
-              console.log("Producto de pedido " + productoDePedido.poductoId + " es " + productoDePedido.nombreProducto);
+              //console.log("Producto de pedido " + productoDePedido.poductoId + " es " + productoDePedido.nombreProducto);
             }
             else
               console.log("No se ha encontrado el producto " + productoDePedido.poductoId + " para el pedido " + pedido.id);
@@ -102,6 +103,39 @@ export class OrdenPedidosAlAire
     confirm("¿Seguro que quieres borrar los pedidos tratados?")
     this.pedidoServicioCacheado.borrarPedidosTratados();
     this.calcularBfoDeTodosLosPedidos();
+  }
+
+  public lIngredientesFaltantes(productoDePedido: ProductosDePedidoModel): IngredienteFaltaModel[]
+  {
+    let ingredientesFaltantes: IngredienteFaltaModel[] = [];
+    const producto = this.lProductos.find(p => p.cProductoId == productoDePedido.poductoId);
+    
+    if (producto)
+    {
+      console.log("Calculando ingredientes faltantes para el producto de pedido:", producto.nombre);
+      const ingredientes = producto.ingrediente.filter(i => i.cProductoNecesitaId == producto.cProductoId);
+      console.log("Ingredientes necesarios para el producto:", ingredientes.length);
+      ingredientes.forEach(ingrediente =>
+        {
+          const productoNecesitado = this.lProductos.find(p => p.cProductoId == ingrediente.cProductoNecesitadoId);
+          console.log("  - Ingrediente:", ingrediente, "Producto necesitado:", productoNecesitado);
+          if (productoNecesitado)
+          {
+            const cantidadNecesitada = ingrediente.cantidad * (productoDePedido.cantidad - productoDePedido.tengo);
+            console
+            if (cantidadNecesitada > productoNecesitado.tengo)
+            {
+              let ingredienteFalta: IngredienteFaltaModel = new IngredienteFaltaModel();
+              ingredienteFalta.cProductoId = ingrediente.cProductoNecesitadoId;
+              ingredienteFalta.nombre = productoNecesitado.nombre;
+              ingredienteFalta.cantidad = cantidadNecesitada;
+              ingredienteFalta.tengo = productoNecesitado.tengo;
+              ingredientesFaltantes.push(ingredienteFalta);
+            }
+          }
+        });
+    }
+    return ingredientesFaltantes;
   }
 
 

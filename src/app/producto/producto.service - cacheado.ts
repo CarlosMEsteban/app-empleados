@@ -64,7 +64,7 @@ export class ProductoServiceCacheado {
           //console.log("Obteniendo ingredientes de producto " + producto.cProductoId + ": " + ingredientes.length);
           ingredientes.forEach(ingrediente => {
             //console.log("Ingrediente obtenido: " + ingrediente.getCProductoNecesitaId() + " necesita " + ingrediente.getCantidad() + " de " + ingrediente.getCProductoNecesitadoId());
-            this.lIngredientes.push(ingrediente);
+            producto.ingrediente.push(ingrediente);
           });
         })
       }

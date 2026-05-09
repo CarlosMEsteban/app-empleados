@@ -32,6 +32,14 @@ export class ProductosDePedidoModel {
 
     }
 
+    claseSegunFalta(): string
+    {
+      if (this.cantidad > this.tengo)
+        return "coral";
+      else
+        return "aliceblue";
+  }
+
   
 }
 
