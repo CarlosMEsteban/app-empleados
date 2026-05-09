@@ -28,6 +28,36 @@ export class IngredienteService
       await this.anadirIngredientes(this.todosIngredientes);
     }
 
+
+  async ingredientesDeProducto(cProductoNecesitaId: string): Promise<IngredienteModel[]>
+  {
+    const ingredientesRef = collection(this.db, 'producto', cProductoNecesitaId, 'ingrediente');
+    const ingSnap = await getDocs(ingredientesRef);
+    let ingredientes = ingSnap.docs.map(d => d.data());
+
+      return ingredientes as IngredienteModel[];    
+    /*//console.log("************************************************");
+    //console.log("ingredientesDeProducto:" + cProductoNecesitaId);
+    const docRef = doc(this.productosCollectionRef, cProductoNecesitaId);
+    const docSnap = await getDoc(docRef); 
+    if (docSnap.exists()) 
+    {
+      //console.log("Hemos encontrado el documento de producto solicitado.");
+      const datosProducto = docSnap.data() as ProductoModel;
+      //console.log("Ingredientes:", datosProducto.ingredientes);
+      //console.log("************************************************");
+      return datosProducto.ingrediente;
+    } 
+    else 
+    {
+      //console.log("No such document!");
+      //console.log("************************************************");
+      return [];
+    }*/
+    
+  }
+
+
     public async anadirIngredientes(lIngredientes: IngredienteModel[])
     {
       console.log("CARGA DE INGREDIENTES");
@@ -995,34 +1025,6 @@ new IngredienteModel({cProductoNecesitaId: "Taco de frijoles picante", cProducto
 
   ];
 
-
-  async ingredientesDeProducto(cProductoNecesitaId: string): Promise<IngredienteModel[]>
-  {
-    const ingredientesRef = collection(this.db, 'producto', cProductoNecesitaId, 'ingrediente');
-    const ingSnap = await getDocs(ingredientesRef);
-    let ingredientes = ingSnap.docs.map(d => d.data());
-
-      return ingredientes as IngredienteModel[];    
-    /*//console.log("************************************************");
-    //console.log("ingredientesDeProducto:" + cProductoNecesitaId);
-    const docRef = doc(this.productosCollectionRef, cProductoNecesitaId);
-    const docSnap = await getDoc(docRef); 
-    if (docSnap.exists()) 
-    {
-      //console.log("Hemos encontrado el documento de producto solicitado.");
-      const datosProducto = docSnap.data() as ProductoModel;
-      //console.log("Ingredientes:", datosProducto.ingredientes);
-      //console.log("************************************************");
-      return datosProducto.ingrediente;
-    } 
-    else 
-    {
-      //console.log("No such document!");
-      //console.log("************************************************");
-      return [];
-    }*/
-    
-  }
 
 
   async anadirIngredienteDeProducto(cProductoNecesitaId: string, cProductoNecesitado: string, cantidad: number) 

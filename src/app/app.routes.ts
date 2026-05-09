@@ -23,6 +23,7 @@ import { ZzzPokemonCargaInicial } from './zzzpokemon-carga-inicial/zzzpokemon-ca
 import { ZzzcambiarAtRapido } from './zzzcambiar-at-rapido/zzzcambiar-at-rapido';
 import { ZzzdescargarTodo } from './zzzdescargar-todo/zzzdescargar-todo';
 import { Zzzeliminar } from './zzzeliminar/zzzeliminar';
+import { OrdenPedidosAlAire } from './orden-pedidos-al-aire/orden-pedidos-al-aire';
 
 
 export const routes: Routes = [
@@ -33,6 +34,7 @@ export const routes: Routes = [
   {path:'productosDePedido', component: ProductosDePedido},
   {path:'herramienta', component: Herramienta},
   {path:'ordenPedidos', component: OrdenPedidos},
+  {path:'ordenPedidosAlAire', component: OrdenPedidosAlAire},
   {path:'avance', component: Avance},
   {path:'tarea', component: Tarea},
   {path:'barcoYFundicion', component: BarcoYFundicion},

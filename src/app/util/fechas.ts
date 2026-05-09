@@ -64,5 +64,14 @@ export class Fechas {
     return `${dia}/${mes}/${anio}`;
   } 
 
+  static haceMucho(fecha: Date | null): boolean
+  {
+    if (fecha == null)
+      return true;
+    const ahora = new Date();
+    const diferenciaEnHoras = (ahora.getTime() - fecha.getTime()) / (1000 * 60 * 60);
+    return diferenciaEnHoras > 12; // Consideramos que hace mucho si ha pasado más de 12 hora
+  }
+
   
 }
