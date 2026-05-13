@@ -29,7 +29,7 @@
     
         @for (prodPedido of pedido.productos; track $index ) {
             <div id="prodDePedido" [style.backgroundColor]="prodPedido.claseSegunFalta()">
-                - {{ nombreProducto(prodPedido) }} - Tengo: {{ prodPedido.tengo }} - Cantidad: {{ prodPedido.cantidad }} - Coste: {{ costeTXT(prodPedido) }}
+                - {{ prodPedido.nombreProducto }} - Tengo: {{ prodPedido.tengo }} - Cantidad: {{ prodPedido.cantidad }} - Coste: {{ prodPedido.costeTXT() }}
                 @if (prodPedido.tengo < prodPedido.cantidad)     
                 {        
                     <button (click)="ponerIngredientesFaltan(prodPedido)">
@@ -39,11 +39,14 @@
                     
                 }
             </div>
-            @for (ingredienteFalta of lIngredientesFaltantes(prodPedido); track $index) 
+            @if (prodPedido.poductoId == cProductoSeleccionado && prodPedido.pedidoId == cPedidoSeleccionado)
             {
-                <div style="background-color: rgb(241, 206, 206); padding: 10px; margin-top: 5px;">
-                    - Ingrediente: {{ ingredienteFalta.nombre }} - Tengo: {{ ingredienteFalta.tengoMenosUnoACero() }} - Necesito: {{ ingredienteFalta.cantidad }}
-                </div>
+                @for (ingredienteFalta of lIngredientesFaltanDeUnProductoDePedido; track $index) 
+                {
+                    <div style="background-color: rgb(241, 206, 206); padding: 10px; margin-top: 5px;">
+                        - Ingrediente: {{ ingredienteFalta.nombre }} - Tengo: {{ ingredienteFalta.tengoMenosUnoACero() }} - Necesito: {{ ingredienteFalta.cantidad }}
+                    </div>
+                }
             }   
         }
     

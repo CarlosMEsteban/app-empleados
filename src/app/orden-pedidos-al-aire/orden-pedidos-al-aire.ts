@@ -30,6 +30,10 @@ export class OrdenPedidosAlAire
   
   lPedidos: PedidoModel[] = [];
 
+  lIngredientesFaltanDeUnProductoDePedido: IngredienteFaltaModel[] = []; // Lista de ingredientes que faltan de un producto para un pedido
+  cProductoSeleccionado: string = ""; // ID del producto seleccionado para mostrar sus ingredientes faltantes
+  cPedidoSeleccionado: string = ""; // ID del pedido seleccionado para mostrar sus productos e ingredientes faltantes
+
 
 
   constructor(pedidoServicioCacheado: PedidoServiceCacheado, 
@@ -113,76 +117,51 @@ export class OrdenPedidosAlAire
     this.calcularBfoDeTodosLosPedidos();
   }
 
-  public lIngredientesFaltantes(productoDePedido: ProductosDePedidoModel): IngredienteFaltaModel[]
-  {
-    let ingredientesFaltantes: IngredienteFaltaModel[] = [];
-    const producto = this.lProductos.find(p => p.cProductoId == productoDePedido.poductoId);
-    
-    if (producto)
-    {
-      //console.log("Calculando ingredientes faltantes para el producto de pedido:", producto.nombre);
-      const ingredientes = producto.ingrediente.filter(i => i.cProductoNecesitaId == producto.cProductoId);
-      //console.log("Ingredientes necesarios para el producto:", ingredientes.length);
-      ingredientes.forEach(ingrediente =>
-        {
-          const productoNecesitado = this.lProductos.find(p => p.cProductoId == ingrediente.cProductoNecesitadoId);
-          //console.log("  - Ingrediente:", ingrediente, "Producto necesitado:", productoNecesitado);
-          if (productoNecesitado)
-          {
-            const cantidadNecesitada = ingrediente.cantidad * (productoDePedido.cantidad - productoDePedido.tengo);
-            
-            if (cantidadNecesitada > productoNecesitado.tengo)
-            {
-              let ingredienteFalta: IngredienteFaltaModel = new IngredienteFaltaModel();
-              ingredienteFalta.cProductoId = ingrediente.cProductoNecesitadoId;
-              ingredienteFalta.nombre = productoNecesitado.nombre;
-              ingredienteFalta.cantidad = cantidadNecesitada;
-              ingredienteFalta.tengo = productoNecesitado.tengo;
-              ingredientesFaltantes.push(ingredienteFalta);
-            }
-          }
-        });
-    }
-    return ingredientesFaltantes;
-  }
+
 
   ponerIngredientesFaltan(pdp: ProductosDePedidoModel)
   {
     console.log("Empezando a poner ingredientes faltan para el producto de pedido: " + pdp.poductoId);
-    const ingredientesFaltantes = this.lIngredientesFaltantes(pdp);
-    ingredientesFaltantes.forEach(ingredienteFalta =>
-      {
-        console.log("ñññññPoniendo falta para el ingrediente: " + ingredienteFalta.nombre);
-        const producto = this.lProductos.find(p => p.cProductoId == ingredienteFalta.cProductoId);
-        if (producto)
-          console.log("Producto encontrado: " + producto.nombre + " tengo: " + producto.tengo);
-        else
-          console.log("Producto no encontrado para el ingrediente faltante: " + ingredienteFalta.cProductoId);
-      });
+    this.lIngredientesFaltanDeUnProductoDePedido = this.lIngredientesFaltantes(pdp);
+    this.cProductoSeleccionado = pdp.poductoId;
+    this.cPedidoSeleccionado = pdp.pedidoId;
+    console.log("Ingredientes faltantes calculados: " + this.lIngredientesFaltanDeUnProductoDePedido.length);
 
   }
 
-  costeTXT(prodPedido: ProductosDePedidoModel): string
+  public lIngredientesFaltantes(productoDePedido: ProductosDePedidoModel): IngredienteFaltaModel[]
   {
-    const producto = this.lProductos.find(p => p.cProductoId == prodPedido.poductoId);
+    console.clear();
+    const cuantoFalta = productoDePedido.cantidad - productoDePedido.tengo;
+    let ingredientesFaltantes: IngredienteFaltaModel[] = [];
+    const producto = this.lProductos.find(p => p.cProductoId == productoDePedido.poductoId);
     if (producto)
     {
-      let horas: number = Math.floor(producto.coste / 60);
-      let minutos: number = producto.coste % 60;
-      return `${horas}h ${minutos}m`;
+      console.log("Calculando ingredientes faltantes para el producto de pedido:", producto.nombre);
+      console.log("Este producto necesita los siguientes ingredientes:", producto.ingrediente.length);
+      //console.log("Ingredientes necesarios para el producto:", ingredientes.length);
+      producto.ingrediente.forEach(ingrediente =>
+        {
+          const productoNecesitado = this.lProductos.find(p => p.cProductoId == ingrediente.cProductoNecesitadoId);
+          console.log("  - Ingrediente:", ingrediente, "Producto necesitado:", productoNecesitado);
+          if (productoNecesitado)
+          {
+            let cantidadNecesitada = ingrediente.cantidad * (productoDePedido.cantidad - productoDePedido.tengo);
+            
+            if (cantidadNecesitada < productoNecesitado.tengo)
+              cantidadNecesitada = 0;
+            let ingredienteFalta: IngredienteFaltaModel = new IngredienteFaltaModel();
+            ingredienteFalta.cProductoId = ingrediente.cProductoNecesitadoId;
+            ingredienteFalta.nombre = productoNecesitado.nombre;
+            ingredienteFalta.cantidad = cantidadNecesitada;
+            ingredienteFalta.tengo = productoNecesitado.tengo;
+            ingredientesFaltantes.push(ingredienteFalta);
+          }
+        });
     }
-    else
-      return "";
-  }
+    return ingredientesFaltantes;
+  }  
 
-  nombreProducto(prodPedido: ProductosDePedidoModel): string
-  {
-    const producto = this.lProductos.find(p => p.cProductoId == prodPedido.poductoId);
-    if (producto)
-      return producto.nombre;
-    else
-      return "";
-  }
 
 
 }
