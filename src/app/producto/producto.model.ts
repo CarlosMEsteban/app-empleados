@@ -48,6 +48,10 @@ export class ProductoModel {
     setCantidadInicial(cantidadInicial: number){this.cantidadInicial = cantidadInicial;}
     setFabrica(fabrica: string){this.fabrica = fabrica;}
 
+    public esMateriaPrima(): boolean
+    {
+      return this.materiaPrima;
+    }
 
 }
 

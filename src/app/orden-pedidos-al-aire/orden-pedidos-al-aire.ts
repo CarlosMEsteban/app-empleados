@@ -8,7 +8,7 @@ import { ProductosDePedidoModel } from '../productos-de-pedido/productosDePedido
 import { IngredienteService } from '../ingrediente/ingrediente-service';
 import { IngredienteModel } from '../ingrediente/ingrediente.model';
 import { OrdenPedidosHijo } from '../orden-pedidos-hijo/orden-pedidos-hijo';
-import { NgFor } from '@angular/common';
+import { NgFor, NgClass } from '@angular/common';
 import { TitleService } from '../services/title.service';
 import { PedidoServiceCacheado } from '../pedido/pedido-service-cacheado';
 import { ProductoServiceCacheado } from '../producto/producto.service - cacheado';
@@ -16,7 +16,7 @@ import { IngredienteFaltaModel } from '../orden-pedidos-productos-hijo/ingredien
 
 @Component({
   selector: 'app-orden-pedidos-al-aire',
-  imports: [OrdenPedidosHijo, NgFor], 
+  imports: [OrdenPedidosHijo, NgFor, NgClass], 
   templateUrl: './orden-pedidos-al-aire.html',
   styleUrl: './orden-pedidos-al-aire.css'
 })
@@ -45,21 +45,12 @@ export class OrdenPedidosAlAire
     this.productoServicioCacheado = productoServicioCacheado;
   }
 
-  async calcularBfoDeTodosLosPedidos()
-  {
-    
-    await this.obtenerTodosLosDatos();
-    /*this.pedidoServicioCacheado.calcularBfoDeTodosLosPedidos(this.lProductosDePedido, 
-                                                              this.lIngredientes,
-                                                              this.lProductos);
-    await this.ordenarPorBfo();*/
-  }
 
   private async obtenerTodosLosDatos()
   {
     //console.log("Obteniendo datos...");
     this.lProductos = await this.productoServicioCacheado.getProductos();
-    console.log("Productos obtenidos: " + this.lProductos.length);
+    //console.log("Productos obtenidos: " + this.lProductos.length);
     //this.lIngredientes = await this.productoServicioCacheado.getIngredientes();
     //console.log("Ingredientes obtenidos: " + this.lIngredientes.length);
 
@@ -81,10 +72,10 @@ export class OrdenPedidosAlAire
       {
         //console.log("Procesando pedido: " + pedido.id);
         const productosDePedido = pedido.productos;
-        console.log("----Productos de pedido encontrados: " + productosDePedido.length);
+        //console.log("----Productos de pedido encontrados: " + productosDePedido.length);
         pedido.productos.forEach(productoDePedido =>
           {
-            console.log("  - Procesando producto de pedido: " + productoDePedido.poductoId);
+            //console.log("  - Procesando producto de pedido: " + productoDePedido.poductoId);
             const producto = this.lProductos.find(p => p.cProductoId == productoDePedido.poductoId);
             if (producto)
             { 
@@ -96,7 +87,7 @@ export class OrdenPedidosAlAire
             }
             else
               console.log("No se ha encontrado el producto " + productoDePedido.poductoId + " para el pedido " + pedido.id);
-          })
+      });
       }
     );
   }
@@ -121,11 +112,11 @@ export class OrdenPedidosAlAire
 
   ponerIngredientesFaltan(pdp: ProductosDePedidoModel)
   {
-    console.log("Empezando a poner ingredientes faltan para el producto de pedido: " + pdp.poductoId);
+    //console.log("Empezando a poner ingredientes faltan para el producto de pedido: " + pdp.poductoId);
     this.lIngredientesFaltanDeUnProductoDePedido = this.lIngredientesFaltantes(pdp);
     this.cProductoSeleccionado = pdp.poductoId;
     this.cPedidoSeleccionado = pdp.pedidoId;
-    console.log("Ingredientes faltantes calculados: " + this.lIngredientesFaltanDeUnProductoDePedido.length);
+    //console.log("Ingredientes faltantes calculados: " + this.lIngredientesFaltanDeUnProductoDePedido.length);
 
   }
 
@@ -162,6 +153,60 @@ export class OrdenPedidosAlAire
     return ingredientesFaltantes;
   }  
 
+  async calcularBfoDeTodosLosPedidos()
+  { 
+    await this.obtenerTodosLosDatos();
+    console.clear();
+    this.lPedidos.forEach(pedido =>
+    {
+      if (pedido.esTratado())
+      {
+        pedido.bfo = -1;
+      }
+      else
+      {
+        console.log("Calculando BFO para el pedido: " + pedido.orden);
+        pedido.costeAcumulado = 0;
+        pedido.productos.forEach(productoDePedido =>
+          {
+            const producto = this.lProductos.find(p => p.cProductoId == productoDePedido.poductoId);
+            console.log("  - Calculando coste para el producto de pedido: " + productoDePedido.nombreProducto);
+            if (producto && ! producto.esMateriaPrima())
+            {
+              const cuantoDeEsteProducto = productoDePedido.cantidad - productoDePedido.tengo;
+              if (cuantoDeEsteProducto > 0)
+                pedido.costeAcumulado += producto.coste * cuantoDeEsteProducto + this.coste(producto.ingrediente, cuantoDeEsteProducto);
+            }
+          });
+        pedido.bfo = 1000 * (pedido.oro + pedido.estrellas * 1.2) / pedido.costeAcumulado;
+        console.log("BFO calculado para el pedido " + pedido.orden + ": " + pedido.bfo + "(" + pedido.costeAcumulado + "))");
+      }
+    });
 
+    this.ordenarPorBfo();
+
+  }
+
+
+  coste(lIngredientes: IngredienteModel[], cuanto: number): number
+  {
+    
+    let coste = 0;
+    lIngredientes.forEach(ingrediente =>
+      {
+        const producto = this.lProductos.find(p => p.cProductoId == ingrediente.cProductoNecesitadoId);
+        if (producto && ! producto.esMateriaPrima())
+        {
+          let cuantoDeIngrediente = ingrediente.cantidad * cuanto - producto.tengo;
+          if (cuantoDeIngrediente < 0)
+            cuantoDeIngrediente = 0;
+          else
+          {
+            coste += cuantoDeIngrediente * producto.coste + this.coste(producto.ingrediente, cuantoDeIngrediente);
+          }
+        }
+      });
+    return coste;
+  }
 
 }

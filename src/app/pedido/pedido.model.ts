@@ -29,6 +29,11 @@ export class PedidoModel {
       }).format(this.bfo);
 
     }
+
+    public esTratado(): boolean
+    {
+      return this.estrellas < 0 || this.oro < 0;
+    }
   
 
   icono(): string | null
