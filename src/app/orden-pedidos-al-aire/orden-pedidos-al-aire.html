@@ -1,12 +1,12 @@
 <p>orden-pedidos-al-aire works!</p>
 <button (click)="calcularBfoDeTodosLosPedidos()">Calcular Bfo Productos</button>
 <button (click)="borrarPedidosTratados()">Borrar pedidos Tratados</button>
-@for (producto of lProductos; track $index) {
+<!--@for (producto of lProductos; track $index) {
     <p>{{ producto.id }}  -  {{ producto.cProductoId }} </p>
     @for (ingrediente of producto.ingrediente; track $index) {
-        <p style="margin-left: 20px;">- {{ ingrediente.cProductoNecesitaId }} - {{ ingrediente.cantidad }}</p>
+        <p style="margin-left: 20px;">-Ingrediente: {{ ingrediente.cProductoNecesitadoId }} - {{ ingrediente.cantidad }}</p>
     }
-}
+}-->
 @for (pedido of lPedidos; track $index) {
 <div class="col-md-4" id="listaDePedidos" style="width: 100%; border: 2px solid #007bff; padding: 15px; border-radius: 8px;">
     <p>
@@ -29,10 +29,14 @@
     
         @for (prodPedido of pedido.productos; track $index ) {
             <div id="prodDePedido" [style.backgroundColor]="prodPedido.claseSegunFalta()">
-                {{ prodPedido.nombreProducto }} - Tengo: {{ prodPedido.tengo }} - Cantidad: {{ prodPedido.cantidad }} - Coste: {{ prodPedido.costeTXT() }}
+                - {{ nombreProducto(prodPedido) }} - Tengo: {{ prodPedido.tengo }} - Cantidad: {{ prodPedido.cantidad }} - Coste: {{ costeTXT(prodPedido) }}
                 @if (prodPedido.tengo < prodPedido.cantidad)     
-                {
-                    <img src="/mas.png" alt="Pedido Image" height="20" width="20"/>
+                {        
+                    <button (click)="ponerIngredientesFaltan(prodPedido)">
+                        <img src="/mas.png" alt="Pedido Image" height="20" width="20"/>
+                    </button>
+
+                    
                 }
             </div>
             @for (ingredienteFalta of lIngredientesFaltantes(prodPedido); track $index) 

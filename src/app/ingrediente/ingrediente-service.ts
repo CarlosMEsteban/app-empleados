@@ -35,7 +35,7 @@ export class IngredienteService
     const ingSnap = await getDocs(ingredientesRef);
     let ingredientes = ingSnap.docs.map(d => d.data());
 
-      return ingredientes as IngredienteModel[];    
+    return ingredientes as IngredienteModel[];    
     /*//console.log("************************************************");
     //console.log("ingredientesDeProducto:" + cProductoNecesitaId);
     const docRef = doc(this.productosCollectionRef, cProductoNecesitaId);

@@ -1,12 +1,13 @@
 import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions } from "firebase/firestore";
-import { productosDePedidoConverter } from "../productos-de-pedido/productosDePedido.model";
+import { productosDePedidoConverter, ProductosDePedidoModel } from "../productos-de-pedido/productosDePedido.model";
+import { ProductosDePedido } from "../productos-de-pedido/productos-de-pedido";
 
 export class PedidoModel {
     id: string = "";
     orden: number = -1;
     estrellas: number = -1;
     oro: number = -1;
-    productos: any[] = [];
+    productos: ProductosDePedidoModel[] = [];
     costeAcumulado: number = -1;
     bfo: number = -1;
 

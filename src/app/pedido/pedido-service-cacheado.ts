@@ -37,6 +37,12 @@ export class PedidoServiceCacheado {
   {
     if (Fechas.haceMucho(this.fUltConsultaPedidos))
       await this.accederALaBD();      
+
+    this.lPedidos.forEach(pedido =>
+      {
+        const productosDePedido = pedido.productos;
+        console.log("----Productos de pedido encontrados: " + productosDePedido.length);
+      });
     return this.lPedidos;
   }
 
@@ -63,23 +69,25 @@ export class PedidoServiceCacheado {
     this.lPedidos = pedidos;
     this.fUltConsultaPedidos = new Date();
     
+    console.log("*** ANTES del forEach, this.lPedidos.length = " + this.lPedidos.length);
+    console.log("*** this.lPedidos = ", this.lPedidos);
+    console.log("*** typeof this.lPedidos = ", typeof this.lPedidos);
+    console.log("*** Array.isArray(this.lPedidos) = ", Array.isArray(this.lPedidos));
     
-    const tareas = this.lPedidos.map(pedido =>
-    {
-      this.productosDePedidoServicio.obtenerProductosDePedidoPorPedidoId(pedido.id).then(pdp => 
-        {
-          pdp.forEach(productoDePedido => {
-            productoDePedido.pedidoId = pedido.id;
-            pedido.productos.push(productoDePedido);
-            //console.log("Producto de pedido añadido al pedido: " + pedido.id + " producto: " + productoDePedido.poductoId);
-          });
-        })
-      }
-    );
+    const promesas = this.lPedidos.map(async (pedido) => {
+      console.log("*** DENTRO del forEach, pedido.id = " + pedido.id);
+      pedido.productos = await this.obtenerLosProductosDeUnPedido(pedido);
+    });
+    await Promise.all(promesas);
 
-    await Promise.all(tareas);
+    
     console.log("Ya tenemos todos los productos de pedido");
     console.log("********Pedidos obtenidos: " + this.lPedidos.length);
+  }
+
+  async obtenerLosProductosDeUnPedido(pedido: PedidoModel): Promise<ProductosDePedidoModel[]>
+  {
+    return await this.productosDePedidoServicio.obtenerProductosDePedidoPorPedidoId(pedido.id);
   }
 
   async listarPedidos(): Promise<PedidoModel[]>
