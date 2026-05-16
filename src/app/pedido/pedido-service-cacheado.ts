@@ -9,6 +9,7 @@ import { IngredienteModel } from '../ingrediente/ingrediente.model';
 import { ProductoModel } from '../producto/producto.model';
 import { Fechas } from '../util/fechas';
 import { ProductoDePedidoService } from '../producto-de-pedido/producto-de-pedido.service';
+import { ProductoServiceCacheado } from '../producto/producto.service - cacheado';
 @Injectable({
   providedIn: 'root'
 })
@@ -28,9 +29,13 @@ export class PedidoServiceCacheado {
   protected lProductos: ProductoModel[] = [];
 
   protected productosDePedidoServicio: ProductoDePedidoService;
+  protected productoServicioCacheado: ProductoServiceCacheado;
 
-  constructor(productosDePedidoServicio: ProductoDePedidoService) {
+  constructor(productosDePedidoServicio: ProductoDePedidoService,
+              productoServicioCacheado: ProductoServiceCacheado
+  ) {
     this.productosDePedidoServicio = productosDePedidoServicio;
+    this.productoServicioCacheado = productoServicioCacheado;
   }
 
   public async getPedidos(): Promise<PedidoModel[]>
@@ -260,4 +265,34 @@ export class PedidoServiceCacheado {
     this.lPedidos = this.lPedidos.filter(p => !(p.estrellas == -1 && p.oro == -1));
   }
 
+  tratarPedido(cPedidoId: string)
+  {
+    this.getPedidos();
+    let pedido = this.lPedidos.find(p => p.id == cPedidoId);
+    if (pedido == undefined)
+      throw new Error("Pedido no encontrado: '" + cPedidoId + "'");
+    else
+    {
+      pedido.productos.forEach(pdp =>
+      {
+        let faltabaDeEsteProducto = pdp.tengo - pdp.cantidad;
+        if (faltabaDeEsteProducto < 0)
+        // Hemos fabricado 'faltabaDeEsteProducto' de este producto
+        {
+          this.productoServicioCacheado.modificarTengo(pdp.poductoId, 0);
+          this.productoServicioCacheado.modificarTengoDeIngredientes(pdp.poductoId, -faltabaDeEsteProducto);
+          pdp.tengo = 0;
+        }
+        else
+        // Teníamos suficiente de este producto, así que ahora tenemos 'faltabaDeEsteProducto'
+        {
+          this.productoServicioCacheado.modificarTengo(pdp.poductoId, faltabaDeEsteProducto);
+          pdp.tengo = faltabaDeEsteProducto;
+        }
+      });
+      
+      this.aMenosUno(cPedidoId);
+    }
+
+  }
 }

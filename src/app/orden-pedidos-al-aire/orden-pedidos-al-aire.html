@@ -19,7 +19,7 @@
             <img src="/equis.png" alt="Pedido Image" height="8" width="8"/>
         }
         Orden: {{ pedido.orden }} - Estrellas: {{ pedido.estrellas }} - Oro: {{ pedido.oro }} - Bfo: {{ pedido.getBfoTXT() }}  
-<!--        <button (click)="tratarPedido()">Tratar Pedido</button> -->
+        <button (click)="tratarPedido(pedido)">Tratar Pedido</button> 
 <!--        <input type="checkbox" [(ngModel)]="aEliminar"/>
         <button *ngIf="aEliminar" (click)="eliminarFase2()">
           <img src="/equis.png" alt="Pedido Image" height="20" width="20"/>

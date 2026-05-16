@@ -101,6 +101,40 @@ export class ProductoServiceCacheado {
         return "";
     }
 
+    async modificarTengo(cProductoId: string, nuevoTengo: number)
+    {
+      const producto = this.lProductos.find(p => p.cProductoId === cProductoId);
+      if (producto)
+      {
+        producto.setTengo(nuevoTengo);
+        const productoDocRef = doc(this.db, 'producto', producto.cProductoId).withConverter(productoConverter);
+        updateDoc(productoDocRef, { tengo: nuevoTengo });
+      }
+    }
+
+  modificarTengoDeIngredientes(cProductoId: string, cantidad: number) 
+  {
+    const producto = this.lProductos.find(p => p.cProductoId === cProductoId);
+    if (producto && !producto.esMateriaPrima() && producto.ingrediente.length > 0)
+    // Hemos encontrado el producto, no es materia prima y tiene ingredientes, así que hay que restar lo que ha fabricado a lo que tenía y a lo que ha fabricado
+    {
+      let cantidadFabricada = cantidad - producto.getTengo();
+      if (cantidadFabricada <= 0)
+      // No ha hecho falta fabricar nada por que la lo tenía
+      {
+        this.modificarTengo(producto.cProductoId, producto.getTengo() - cantidad);
+      }
+      else      // Ha hecho falta fabricar algo, así que se lo restamos a lo que tenía y a lo que ha fabricado
+      {
+        producto.ingrediente.forEach(ingrediente => 
+          {
+            this.modificarTengoDeIngredientes(ingrediente.cProductoNecesitadoId, ingrediente.cantidad * cantidadFabricada);
+          });
+      }
+
+    }
+  }  
+
 }
 
   

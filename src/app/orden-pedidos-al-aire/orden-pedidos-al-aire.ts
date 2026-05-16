@@ -209,4 +209,13 @@ export class OrdenPedidosAlAire
     return coste;
   }
 
+  tratarPedido(pedido: PedidoModel)
+  {
+    if (confirm("¿Seguro que quieres tratar el pedido " + pedido.orden + "?"))
+    {
+      this.pedidoServicioCacheado.tratarPedido(pedido.id);
+      this.calcularBfoDeTodosLosPedidos();
+    }
+  }
+
 }
