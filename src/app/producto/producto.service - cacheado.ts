@@ -126,6 +126,7 @@ export class ProductoServiceCacheado {
       }
       else      // Ha hecho falta fabricar algo, así que se lo restamos a lo que tenía y a lo que ha fabricado
       {
+        this.modificarTengo(producto.cProductoId, 0);
         producto.ingrediente.forEach(ingrediente => 
           {
             this.modificarTengoDeIngredientes(ingrediente.cProductoNecesitadoId, ingrediente.cantidad * cantidadFabricada);

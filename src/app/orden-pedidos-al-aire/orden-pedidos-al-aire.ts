@@ -135,11 +135,11 @@ export class OrdenPedidosAlAire
         {
           const productoNecesitado = this.lProductos.find(p => p.cProductoId == ingrediente.cProductoNecesitadoId);
           console.log("  - Ingrediente:", ingrediente, "Producto necesitado:", productoNecesitado);
-          if (productoNecesitado)
+          if (productoNecesitado && ! productoNecesitado.esMateriaPrima())
           {
             let cantidadNecesitada = ingrediente.cantidad * (productoDePedido.cantidad - productoDePedido.tengo);
             
-            if (cantidadNecesitada < productoNecesitado.tengo)
+            if (cantidadNecesitada <= productoNecesitado.tengo)
               cantidadNecesitada = 0;
             let ingredienteFalta: IngredienteFaltaModel = new IngredienteFaltaModel();
             ingredienteFalta.cProductoId = ingrediente.cProductoNecesitadoId;
