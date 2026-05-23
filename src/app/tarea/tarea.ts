@@ -153,7 +153,7 @@ export class Tarea
       case 'ARCE':
         return 'arce';
       default:
-        if (aPara.startsWith('8'))
+        if (aPara.startsWith('8') && aPara.length > 1)
           return 'feria'
         else
           return '';
