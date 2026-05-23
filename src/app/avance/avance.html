@@ -63,16 +63,3 @@
     </tbody>
   </table>
 </div>
-
-<table>
-  @for (avance of lAvances; track avance.id; let i = $index) {
-  <tr>
-    <td bgcolor="avance.colorFondoProcentaje()"> 
-      <p [style.color]="'#ffc5c5'"> 
-        {{avance.conseguido()}}%
-      </p>
-    </td>
-  </tr>
-  }
-</table>
-<!-- ...existing code... -->  
