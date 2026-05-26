@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ProductoModel } from '../producto/producto.model';
 import { ProductoService } from '../producto/producto.service';
+import { IngredienteService } from '../ingrediente/ingrediente-service';
 
 @Component({
   selector: 'app-producto-mantenimiento',
   standalone: true,
-  imports: [FormsModule, NgFor, NgIf],
+  imports: [CommonModule, FormsModule],
   templateUrl: './producto-mantenimiento.html',
   styleUrl: './producto-mantenimiento.css',
 })
@@ -16,19 +17,29 @@ export class ProductoMantenimiento {
   productoSeleccionado: ProductoModel = new ProductoModel({});
   modoEdicion = false;
   mensaje: string = '';
+  ingredienteSeleccionadoId: string = '';
+  cantidadIngrediente: number = 1;
 
-  constructor(private productoService: ProductoService) {
+  constructor(
+    private productoService: ProductoService,
+    private ingredienteService: IngredienteService
+  ) {
     this.listarProductos();
   }
 
   async listarProductos() {
     this.productos = await this.productoService.listarProductos(new ProductoModel({}));
+    if (!this.ingredienteSeleccionadoId && this.productos.length > 0) {
+      this.ingredienteSeleccionadoId = this.productos[0].cProductoId ?? '';
+    }
     this.mensaje = `Productos cargados: ${this.productos.length}`;
   }
 
   nuevoProducto() {
     this.productoSeleccionado = new ProductoModel({});
     this.modoEdicion = false;
+    this.ingredienteSeleccionadoId = this.productos.length > 0 ? this.productos[0].cProductoId ?? '' : '';
+    this.cantidadIngrediente = 1;
     this.mensaje = 'Preparado para crear un nuevo producto.';
   }
 
@@ -46,7 +57,34 @@ export class ProductoMantenimiento {
       ingrediente: producto.ingrediente,
     });
     this.modoEdicion = true;
+    this.ingredienteSeleccionadoId = this.productos.find(p => p.cProductoId && p.cProductoId !== producto.cProductoId)?.cProductoId ?? '';
+    this.cantidadIngrediente = 1;
     this.mensaje = `Editando producto: ${producto.nombre}`;
+  }
+
+  get ingredientesDisponibles(): ProductoModel[] {
+    if (!this.productoSeleccionado.cProductoId) {
+      return this.productos;
+    }
+    return this.productos.filter(
+      producto => producto.cProductoId && producto.cProductoId !== this.productoSeleccionado.cProductoId
+    );
+  }
+
+  async anadirIngrediente() {
+    if (!this.modoEdicion || !this.productoSeleccionado.cProductoId || !this.ingredienteSeleccionadoId) {
+      this.mensaje = 'Selecciona un producto válido y un ingrediente para añadir.';
+      return;
+    }
+
+    await this.ingredienteService.anadirIngredienteDeProducto(
+      this.productoSeleccionado.cProductoId,
+      this.ingredienteSeleccionadoId,
+      this.cantidadIngrediente
+    );
+
+    this.mensaje = `Ingrediente añadido a ${this.productoSeleccionado.nombre}.`;
+    this.cantidadIngrediente = 1;
   }
 
   async guardarProducto(form: NgForm) {

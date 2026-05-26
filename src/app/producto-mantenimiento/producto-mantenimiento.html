@@ -6,14 +6,9 @@
     <button type="button" (click)="nuevoProducto()">Nuevo producto</button>
   </div>
 
-  @if (mensaje) {
-    <p class="mensaje">{{ mensaje }}</p>
-  }
-  @if (productos.length === 0) {
-    <p>No hay productos disponibles.</p>
-  }
-  @else {
-    <section class="formulario-producto">
+  <p class="mensaje" *ngIf="mensaje">{{ mensaje }}</p>
+
+  <section class="formulario-producto">
     <h3>{{ modoEdicion ? 'Editar producto' : 'Crear nuevo producto' }}</h3>
 
     <form #productoForm="ngForm" (ngSubmit)="guardarProducto(productoForm)">
@@ -71,8 +66,47 @@
         <button type="button" (click)="cancelar()">Cancelar</button>
       </div>
     </form>
+
+    <div class="ingrediente-edicion" *ngIf="modoEdicion && productoSeleccionado.cProductoId">
+      <h4>Añadir ingrediente</h4>
+      <div>
+        <label>
+          Producto ingrediente
+          <select
+            name="ingredienteSeleccionadoId"
+            [(ngModel)]="ingredienteSeleccionadoId"
+            required
+          >
+            <option value="" disabled>Seleccione un ingrediente</option>
+            <option
+              *ngFor="let producto of ingredientesDisponibles"
+              [value]="producto.cProductoId"
+            >
+              {{ producto.nombre }}
+            </option>
+          </select>
+        </label>
+      </div>
+
+      <div>
+        <label>
+          Cantidad
+          <input
+            name="cantidadIngrediente"
+            type="number"
+            min="1"
+            [(ngModel)]="cantidadIngrediente"
+          />
+        </label>
+      </div>
+
+      <div>
+        <button type="button" (click)="anadirIngrediente()">Añadir ingrediente</button>
+      </div>
+    </div>
   </section>
-  <section >
+
+  <section *ngIf="productos.length > 0">
     <table class="tabla-productos">
       <thead>
         <tr>
@@ -104,6 +138,5 @@
     </table>
   </section>
 
-  
-}
+  <p *ngIf="productos.length === 0">No hay productos disponibles.</p>
 </div>
