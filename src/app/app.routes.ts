@@ -24,11 +24,13 @@ import { ZzzcambiarAtRapido } from './zzzcambiar-at-rapido/zzzcambiar-at-rapido'
 import { ZzzdescargarTodo } from './zzzdescargar-todo/zzzdescargar-todo';
 import { Zzzeliminar } from './zzzeliminar/zzzeliminar';
 import { OrdenPedidosAlAire } from './orden-pedidos-al-aire/orden-pedidos-al-aire';
+import { ProductoMantenimiento } from './producto-mantenimiento/producto-mantenimiento';
 
 
 export const routes: Routes = [
   {path:'', component: Tarea},
   {path:'productos', component: Producto}, 
+  {path:'mantProductos', component: ProductoMantenimiento},
   {path:'pedido', component: Pedido}, 
   {path:'pruebaMaterial', component: PruebaMaterial},
   {path:'productosDePedido', component: ProductosDePedido},

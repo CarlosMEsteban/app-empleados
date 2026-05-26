@@ -22,7 +22,7 @@ export class ProductoService {
   {
     try 
     {
-      const docRef = await addDoc(this.productosCollectionRef, producto);
+      await addDoc(this.productosCollectionRef, producto);
       console.log("Documento escrito con ID:");
     }
     catch (e) 
@@ -30,6 +30,23 @@ export class ProductoService {
       console.error("Error al agregar documento: ", e);
     }
   }      
+
+  async actualizar(producto: ProductoModel) {
+    if (!producto.cProductoId) {
+      throw new Error('No se puede actualizar un producto sin cProductoId');
+    }
+    const docRef = doc(this.productosCollectionRef, producto.cProductoId);
+    await updateDoc(docRef, {
+      id: producto.id,
+      nombre: producto.nombre,
+      coste: producto.coste,
+      tengo: producto.tengo,
+      almacen: producto.almacen,
+      materiaPrima: producto.materiaPrima,
+      cantidadInicial: producto.cantidadInicial,
+      fabrica: producto.fabrica,
+    });
+  }
 
     /** Elimina todos los documentos de la colección 'producto' en lotes de hasta 500 */
   async eliminarTodosProductos(): Promise<number> {
