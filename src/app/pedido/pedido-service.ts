@@ -133,7 +133,7 @@ export class PedidoService {
     // Para cada pedido calculamos el beneficio
     this.lPedidos.forEach(p=>
     {
-      p.bfo = 1000 * (p.oro + p.estrellas * 1.2) / p.costeAcumulado;
+      p.bfo = 1000 * (p.oro * 0.2 + p.estrellas * 1.2) / p.costeAcumulado;
       // Grabamos el beneficio de cada pedido
       this.modificarBfo(p.id, p.bfo);
     });

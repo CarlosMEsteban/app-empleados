@@ -178,7 +178,7 @@ export class OrdenPedidosAlAire
                 pedido.costeAcumulado += producto.coste * cuantoDeEsteProducto + this.coste(producto.ingrediente, cuantoDeEsteProducto);
             }
           });
-        pedido.bfo = 1000 * (pedido.oro + pedido.estrellas * 1.2) / pedido.costeAcumulado;
+        pedido.bfo = 1000 * (pedido.oro * 0.2 + pedido.estrellas * 1.2) / pedido.costeAcumulado;
         console.log("BFO calculado para el pedido " + pedido.orden + ": " + pedido.bfo + "(" + pedido.costeAcumulado + "))");
       }
     });
