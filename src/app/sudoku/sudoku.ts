@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 export class Sudoku {
   sudoku: (number | null)[][] = Array(9).fill(null).map(() => Array(9).fill(null));
 
+  posiblesValores: String[][] = Array(9).fill("123456789").map(() => Array(9).fill("123456789"));
   // Ejemplo de sudoku fácil
   ejemploFacil: (number | null)[][] = [
     [5, 3, null, null, 7, null, null, null, null],
