@@ -27,11 +27,77 @@ export class Sudoku {
 
   cargarEjemplo() {
     this.sudoku = this.ejemploFacil.map(row => [...row]);
+
+    
+  }
+
+  cargarPosiblesValores() {
+    for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+        if (this.sudoku[i][j] === null) {
+          this.posiblesValores[i][j] = "123456789";
+        } else {
+          this.posiblesValores[i][j] = this.sudoku[i][j]!.toString();
+        }
+      }
+    }
   }
 
   resolver() {
     // Este método lo programarás tú
     console.log('Método resolver() listo para ser programado');
     // Aquí va tu lógica de resolución
+    this.cargarPosiblesValores();
+
+    let cambios: boolean = true;
+
+    while (cambios) {
+    // Damos una vuelta más
+      cambios = false;
+      for (let fila = 0; fila < 9; fila++) {
+        for (let col = 0; col < 9; col++) {
+          if (fila === 5 && col === 5) {
+            console.log('********************************Debug: fila 5, col 5');
+          }
+          if (this.sudoku[fila][col] === null)
+          // Esta celda no se ha resuleto 
+          {
+            let posibles = this.posiblesValores[fila][col];
+           
+            for (let otrasCol = 0; otrasCol < 9; otrasCol++)
+            // Recorremos la fila 
+            {
+              if (otrasCol !== col && this.sudoku[fila][otrasCol] !== null) {
+                // Eliminamos el valor de la celda de la fila
+                
+                this.posiblesValores[fila][col] = this.posiblesValores[fila][col].replace(this.sudoku[fila][otrasCol]!.toString(), '');
+              }
+            }
+            for (let otrasFila = 0; otrasFila < 9; otrasFila++)
+            // Recorremos la columna 
+            {
+              if (otrasFila !== fila && this.sudoku[otrasFila][col] !== null) {
+                // Eliminamos el valor de la celda de la columna
+                this.posiblesValores[fila][col] = this.posiblesValores[fila][col].replace(this.sudoku[otrasFila][col]!.toString(), '');
+              }
+            }
+            if (fila === 5 && col === 5)
+            {
+              console.log('Debug: posibles después de eliminar: ' + posibles);
+            }
+            if (posibles.length === 1) {
+              // Solo queda un valor posible, lo asignamos
+              this.sudoku[fila][col] = Number(posibles);
+              if (fila === 5 && col === 5)
+              {
+                console.log('Debug: asignando ' + posibles + ' a sudoku[5][5]');
+              }
+              cambios = true;
+            }
+          }
+        }
+      }
+
+    }
   }
 }

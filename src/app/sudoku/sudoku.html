@@ -6,19 +6,41 @@
     <button (click)="resolver()">Resolver</button>
   </div>
 
-  <div class="sudoku-grid">
-    <ng-container *ngFor="let row of [0,1,2,3,4,5,6,7,8]; let i = index">
-      <ng-container *ngFor="let col of [0,1,2,3,4,5,6,7,8]; let j = index">
-        <input 
-          type="number"
-          min="1"
-          max="9"
-          [(ngModel)]="sudoku[i][j]"
-          [class.filled]="sudoku[i][j] !== null"
-          [attr.data-row]="i"
-          [attr.data-col]="j"
-        />
-      </ng-container>
-    </ng-container>
+  <div class="sudoku-wrapper">
+    <div>
+      <h2>Sudoku Original</h2>
+      <div class="sudoku-grid">
+        <ng-container *ngFor="let row of [0,1,2,3,4,5,6,7,8]; let i = index">
+          <ng-container *ngFor="let col of [0,1,2,3,4,5,6,7,8]; let j = index">
+            <input 
+              type="number"
+              min="1"
+              max="9"
+              [(ngModel)]="sudoku[i][j]"
+              [class.filled]="sudoku[i][j] !== null"
+              [attr.data-row]="i"
+              [attr.data-col]="j"
+            />
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+
+    <div>
+      <h2>Posibles Valores</h2>
+      <div class="posibles-grid">
+        <ng-container *ngFor="let row of [0,1,2,3,4,5,6,7,8]; let i = index">
+          <ng-container *ngFor="let col of [0,1,2,3,4,5,6,7,8]; let j = index">
+            <div 
+              class="posible-cell"
+              [attr.data-row]="i"
+              [attr.data-col]="j"
+            >
+              {{ posiblesValores[i][j] }}
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
   </div>
 </div>

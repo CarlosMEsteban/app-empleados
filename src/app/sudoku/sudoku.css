@@ -11,6 +11,13 @@ h1 {
   color: #333;
 }
 
+h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #555;
+  font-size: 16px;
+}
+
 .botones {
   display: flex;
   gap: 10px;
@@ -34,6 +41,12 @@ button:hover {
 
 button:active {
   background-color: #004085;
+}
+
+.sudoku-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 .sudoku-grid {
@@ -95,3 +108,42 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+/* Grid de posibles valores */
+.posibles-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 60px);
+  grid-template-rows: repeat(9, 60px);
+  gap: 0;
+  border: 3px solid #666;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.posible-cell {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-family: monospace;
+  text-align: center;
+  padding: 2px;
+  box-sizing: border-box;
+  background-color: #fafafa;
+  overflow: hidden;
+  line-height: 1.2;
+  color: #666;
+}
+
+.posible-cell[data-col="2"],
+.posible-cell[data-col="5"] {
+  border-right: 3px solid #666;
+}
+
+.posible-cell[data-row="2"],
+.posible-cell[data-row="5"] {
+  border-bottom: 3px solid #666;
+}
+
