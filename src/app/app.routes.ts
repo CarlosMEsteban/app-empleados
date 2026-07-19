@@ -25,6 +25,8 @@ import { ZzzdescargarTodo } from './zzzdescargar-todo/zzzdescargar-todo';
 import { Zzzeliminar } from './zzzeliminar/zzzeliminar';
 import { OrdenPedidosAlAire } from './orden-pedidos-al-aire/orden-pedidos-al-aire';
 import { ProductoMantenimiento } from './producto-mantenimiento/producto-mantenimiento';
+import { Sudoku } from './sudoku/sudoku';
+
 
 
 export const routes: Routes = [
@@ -53,6 +55,7 @@ export const routes: Routes = [
   {path:'zzzeliminar', component: Zzzeliminar},
   {path:'zzzPokemonCargaInicial', component: ZzzPokemonCargaInicial},
   {path:'descargarTodo', component: ZzzdescargarTodo},
+  {path:'sudoku', component: Sudoku},
   {path:'**', component: ErrorPersonalizado}
   
 ];
