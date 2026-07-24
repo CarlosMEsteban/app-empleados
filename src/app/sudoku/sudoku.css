@@ -104,6 +104,20 @@ input.filled {
   color: #000;
 }
 
+/* Casillas cargadas originalmente */
+input.original {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  color: #000;
+  border-color: #444;
+}
+
+/* Casillas resueltas por el algoritmo */
+input.solved {
+  background-color: #e6f8e6;
+  color: #0b6623;
+}
+
 /* Eliminar spinner en inputs number */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

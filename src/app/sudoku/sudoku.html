@@ -3,6 +3,7 @@
   
   <div class="botones">
     <button (click)="cargarEjemplo()">Cargar Ejemplo Fácil</button>
+    <button (click)="cargarEjemploMedio()">Cargar Ejemplo Medio</button>
     <button (click)="resolver()">Resolver</button>
   </div>
 
@@ -18,6 +19,8 @@
               max="9"
               [(ngModel)]="sudoku[i][j]"
               [class.filled]="sudoku[i][j] !== null"
+              [class.original]="original[i][j]"
+              [class.solved]="solved[i][j]"
               [attr.data-row]="i"
               [attr.data-col]="j"
             />

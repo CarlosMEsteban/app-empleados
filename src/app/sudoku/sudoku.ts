@@ -10,8 +10,10 @@ import { CommonModule } from '@angular/common';
 })
 export class Sudoku {
   sudoku: (number | null)[][] = Array(9).fill(null).map(() => Array(9).fill(null));
-
   posiblesValores: String[][] = Array(9).fill("123456789").map(() => Array(9).fill("123456789"));
+  // Matrices para marcar celdas originales y las resueltas por el algoritmo
+  original: boolean[][] = Array(9).fill(false).map(() => Array(9).fill(false));
+  solved: boolean[][] = Array(9).fill(false).map(() => Array(9).fill(false));
   // Ejemplo de sudoku fácil
   ejemploFacil: (number | null)[][] = [
     [5, 3, null, null, 7, null, null, null, null],
@@ -25,12 +27,43 @@ export class Sudoku {
     [null, null, null, null, 8, null, null, 7, 9]
   ];
 
+  ejemploMedio: (number | null)[][] = [
+    [null, null, 3, null, 2, null, 6, null, null],
+    [9, null, null, 3, null, 5, null, null, 1],
+    [null, null, 1, 8, null, 6, 4, null, null],
+    [null, null, 8, 1, null, 2, 9, null, null],
+    [7, null, null, null, null, null, null, null, 8],
+    [null, null, 6, 7, null, 8, 2, null, null],
+    [null, null, 2, 6, null, 9, 5, null, null],
+    [8, null, null, 2, null, 3, null, null, 9],
+    [null, null, 5, null, 1, null, 3, null, null]
+  ];
+
   cargarEjemplo() {
     this.sudoku = this.ejemploFacil.map(row => [...row]);
+    // Marcar las celdas cargadas originalmente
+    for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+        this.original[i][j] = this.sudoku[i][j] !== null;
+        this.solved[i][j] = false;
+      }
+    }
 
-    
+    this.cargarPosiblesValores();
   }
 
+
+  cargarEjemploMedio() {
+    this.sudoku = this.ejemploMedio.map(row => [...row]);
+    // Marcar las celdas cargadas originalmente
+    for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+        this.original[i][j] = this.sudoku[i][j] !== null;
+        this.solved[i][j] = false;
+      }
+    }
+    this.cargarPosiblesValores();
+  }
   cargarPosiblesValores() {
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 9; j++) {
@@ -47,6 +80,13 @@ export class Sudoku {
 
     // Aquí va tu lógica de resolución
     this.cargarPosiblesValores();
+
+    // Reiniciar marcas de resueltas antes de empezar
+    for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+        this.solved[i][j] = false;
+      }
+    }
 
     let cambios: boolean = true;
 
@@ -110,6 +150,8 @@ export class Sudoku {
             if (this.posiblesValores[fila][col].length === 1) {
               // Solo queda un valor posible, lo asignamos
               this.sudoku[fila][col] = Number(this.posiblesValores[fila][col]);
+              // Marcamos como resuelta por el algoritmo
+              this.solved[fila][col] = true;
               if (fila === 5 && col === 5)
               {
                 console.log('Debug: asignando ' + this.posiblesValores[fila][col] + ' a sudoku[5][5]');
