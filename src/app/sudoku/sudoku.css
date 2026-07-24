@@ -45,8 +45,14 @@ button:active {
 
 .sudoku-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 30px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.sudoku-wrapper > div {
+  flex: 0 0 auto;
 }
 
 .sudoku-grid {
@@ -145,5 +151,12 @@ input[type=number] {
 .posible-cell[data-row="2"],
 .posible-cell[data-row="5"] {
   border-bottom: 3px solid #666;
+}
+
+@media (max-width: 1000px) {
+  .sudoku-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ComponentFactoryResolver } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -44,8 +44,7 @@ export class Sudoku {
   }
 
   resolver() {
-    // Este método lo programarás tú
-    console.log('Método resolver() listo para ser programado');
+
     // Aquí va tu lógica de resolución
     this.cargarPosiblesValores();
 
@@ -54,43 +53,66 @@ export class Sudoku {
     while (cambios) {
     // Damos una vuelta más
       cambios = false;
-      for (let fila = 0; fila < 9; fila++) {
-        for (let col = 0; col < 9; col++) {
+      let inicio = 0;
+      let final = 8;
+      for (let fila = inicio; fila < final  + 1; fila++) {
+        for (let col = inicio; col < final + 1; col++) {
           if (fila === 5 && col === 5) {
             console.log('********************************Debug: fila 5, col 5');
           }
           if (this.sudoku[fila][col] === null)
-          // Esta celda no se ha resuleto 
+          // Esta celda no se ha resuelto 
           {
-            let posibles = this.posiblesValores[fila][col];
-           
+            this.posiblesValores[fila][col];
+            console.log('Debug: posibles antes de eliminar: ' + this.posiblesValores[fila][col]);
+            console.log('FILAS');
             for (let otrasCol = 0; otrasCol < 9; otrasCol++)
             // Recorremos la fila 
             {
               if (otrasCol !== col && this.sudoku[fila][otrasCol] !== null) {
                 // Eliminamos el valor de la celda de la fila
-                
+                console.log('Debug: eliminando ' + this.sudoku[fila][otrasCol]!.toString() + ' de posibles');
+                console.log('Debug: posibles antes de eliminar: ' + this.posiblesValores[fila][col]);
                 this.posiblesValores[fila][col] = this.posiblesValores[fila][col].replace(this.sudoku[fila][otrasCol]!.toString(), '');
+                console.log('Debug: posibles después de eliminar: ' + this.posiblesValores[fila][col]);
               }
             }
+            console.log('COLUMNA');
             for (let otrasFila = 0; otrasFila < 9; otrasFila++)
             // Recorremos la columna 
             {
               if (otrasFila !== fila && this.sudoku[otrasFila][col] !== null) {
                 // Eliminamos el valor de la celda de la columna
+                console.log('Debug: eliminando ' + this.sudoku[otrasFila][col]!.toString() + ' de posibles');
                 this.posiblesValores[fila][col] = this.posiblesValores[fila][col].replace(this.sudoku[otrasFila][col]!.toString(), '');
               }
             }
             if (fila === 5 && col === 5)
             {
-              console.log('Debug: posibles después de eliminar: ' + posibles);
+              console.log('Debug: posibles después de eliminar: ' + this.posiblesValores[fila][col]);
             }
-            if (posibles.length === 1) {
+            console.log('CAJA 3x3');
+            // Comprobamos la caja 3x3
+            for (let boxFila = Math.floor(fila / 3) * 3; boxFila < Math.floor(fila / 3) * 3 + 3; boxFila++) {
+              for (let boxCol = Math.floor(col / 3) * 3; boxCol < Math.floor(col / 3) * 3 + 3; boxCol++) {
+                if ((boxFila !== fila || boxCol !== col) && this.sudoku[boxFila][boxCol] !== null) {  
+                  console.log('Debug: eliminando ' + this.sudoku[boxFila][boxCol]!.toString() + ' de posibles');
+                  this.posiblesValores[fila][col] = this.posiblesValores[fila][col].replace(this.sudoku[boxFila][boxCol]!.toString(), '');
+                }
+              } 
+            }
+            if (fila === 5 && col === 5)
+            {
+              console.log('Debug: posibles después de eliminar en la caja: ' + this.posiblesValores[fila][col]);
+            }
+
+
+            if (this.posiblesValores[fila][col].length === 1) {
               // Solo queda un valor posible, lo asignamos
-              this.sudoku[fila][col] = Number(posibles);
+              this.sudoku[fila][col] = Number(this.posiblesValores[fila][col]);
               if (fila === 5 && col === 5)
               {
-                console.log('Debug: asignando ' + posibles + ' a sudoku[5][5]');
+                console.log('Debug: asignando ' + this.posiblesValores[fila][col] + ' a sudoku[5][5]');
               }
               cambios = true;
             }
