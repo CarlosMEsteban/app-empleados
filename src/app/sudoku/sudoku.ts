@@ -39,6 +39,18 @@ export class Sudoku {
     [null, null, 5, null, 1, null, 3, null, null]
   ];
 
+  ejemploMuyDificil: (number | null)[][] = [
+    [null, null, null, 8, null, null, null, null, 3],
+    [null, 1, null, null, null, 2, null, null, null],
+    [2, null, null, null, 7, 5, null, null, null],
+    [null, null, null, null, null, null, 6, null, null],
+    [null, null, 1, null, null, null, 8, null, null],
+    [null, null, null, null, null, null, null, 4, null],
+    [null, null, null, null, 4, null, null, null, 6],
+    [null, null, null, 6, null, null, null, 1, null],
+    [5, null, null, null, null, 9, null, null, null]
+  ];
+
   cargarEjemplo() {
     this.sudoku = this.ejemploFacil.map(row => [...row]);
     // Marcar las celdas cargadas originalmente
@@ -56,6 +68,17 @@ export class Sudoku {
   cargarEjemploMedio() {
     this.sudoku = this.ejemploMedio.map(row => [...row]);
     // Marcar las celdas cargadas originalmente
+    for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+        this.original[i][j] = this.sudoku[i][j] !== null;
+        this.solved[i][j] = false;
+      }
+    }
+    this.cargarPosiblesValores();
+  }
+
+  cargarEjemploMuyDificil() {
+    this.sudoku = this.ejemploMuyDificil.map(row => [...row]);
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 9; j++) {
         this.original[i][j] = this.sudoku[i][j] !== null;
@@ -103,7 +126,7 @@ export class Sudoku {
           if (this.sudoku[fila][col] === null)
           // Esta celda no se ha resuelto 
           {
-            this.posiblesValores[fila][col];
+            
             console.log('Debug: posibles antes de eliminar: ' + this.posiblesValores[fila][col]);
             console.log('FILAS');
             for (let otrasCol = 0; otrasCol < 9; otrasCol++)
