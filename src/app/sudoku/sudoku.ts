@@ -285,4 +285,68 @@ export class Sudoku {
       
     }
   } 
+
+
+  valoresUnicosPorColumna() 
+  {
+    for (let col = 0; col < 9; col++) 
+    {
+      let posiblesValores = "123456789";
+      // Miramos a ver qué valores ya tenemos
+      for (let fila = 0; fila < 9; fila++)
+      {
+        if (this.sudoku[fila][col] !== null)
+          posiblesValores = posiblesValores.replace(this.sudoku[fila][col]!.toString(), '');
+      }
+
+      // Para cada uno de los posibles valores que quedan, miramos qué celdas pueden tener ese valor
+      for (let valor of posiblesValores)
+      {
+          let filasConElValor: string = "";
+           
+          for (let fila = 0; fila < 9; fila++)
+          {
+            if (this.sudoku[fila][col] === null
+               && this.posiblesValores[fila][col].includes(valor))
+               // El valor puede ir en esta columna
+               filasConElValor += fila.toString();        
+          }
+
+          if (filasConElValor.length === 0)
+            throw new Error("Error: no hay filas posibles para el valor " + valor + " en la columna " + col);
+          else if (filasConElValor.length === 1)
+          {
+            // Solo hay una fila posible para este valor, lo asignamos
+            let fila = parseInt(filasConElValor);
+            this.sudoku[fila][col] = parseInt(valor);
+            this.solved[fila][col] = true;
+            this.cambios = true;
+          }
+          else if (filasConElValor.length === 2 || filasConElValor.length === 3)
+          // Hay dos o tres filas posibles para este valor, miramos si están en la misma caja 3x3
+          {
+            let boxFila = Math.floor(col / 3);
+            let boxCol1 = Math.floor(parseInt(filasConElValor[0]) / 3);
+            let boxCol2 = Math.floor(parseInt(filasConElValor[1]) / 3);
+            let boxCol3 = filasConElValor.length === 3 ? Math.floor(parseInt(filasConElValor[2]) / 3) : -1;
+            if (boxCol1 === boxCol2 && (boxCol3 === -1 || boxCol1 === boxCol3))
+            // Todos los valores posibles están en la misma caja 3x3, podemos eliminar este valor de las otras celdas de la caja 
+            {
+              for (let boxFila2 = boxFila * 3; boxFila2 < boxFila * 3 + 3; boxFila2++)
+              {
+                for (let boxCol2 = boxCol1 * 3; boxCol2 < boxCol1 * 3 + 3; boxCol2++)
+                {
+                  if (boxFila2 !== col && !filasConElValor.includes(boxCol2.toString()) && this.sudoku[boxFila2][boxCol2] === null)
+                  {
+                    // Eliminamos el valor de esta celda
+                    this.posiblesValores[boxFila2][boxCol2] = this.posiblesValores[boxFila2][boxCol2].replace(valor, '');
+                  }
+                }
+              }
+            }
+          }
+      }
+      
+    }
+  }  
 }
