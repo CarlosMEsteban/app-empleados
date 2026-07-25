@@ -43,6 +43,19 @@ button:active {
   background-color: #004085;
 }
 
+button.resolver-button {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  border: 1px solid #922b21;
+}
+
+button.resolver-button:hover {
+  background: linear-gradient(135deg, #ff5b5b, #d93929);
+}
+
+button.resolver-button:active {
+  background: linear-gradient(135deg, #c0392b, #a32a22);
+}
+
 .sudoku-wrapper {
   display: flex;
   flex-direction: row;
