@@ -122,6 +122,10 @@ export class Sudoku {
       this.valoresUnicosPorCasilla();
 
       this.valoresUnicosPorFila();
+
+      this.valoresUnicosPorColumna();
+
+      this.valoresUnicosPorCaja();
   
       }
 
@@ -349,4 +353,49 @@ export class Sudoku {
       
     }
   }  
+
+  valoresUnicosPorCaja()
+  {
+    for (let boxFila = 0; boxFila < 3; boxFila++)
+    {
+      for (let boxCol = 0; boxCol < 3; boxCol++)
+      {
+        // Procesar cada caja 3x3
+        let posiblesValores = "123456789";
+        for (let fila = boxFila * 3; fila < boxFila * 3 + 3; fila++)
+        { 
+          for (let col = boxCol * 3; col < boxCol * 3 + 3; col++)
+          {
+            if (this.sudoku[fila][col] !== null)
+              posiblesValores = posiblesValores.replace(this.sudoku[fila][col]!.toString(), '');
+          }
+        }
+        // Para cada uno de los posibles valores que quedan, miramos qué celdas pueden tener ese valor
+        for (let valor of posiblesValores)
+        {
+          let celdasConElValor: string = "";
+          for (let fila = boxFila * 3; fila < boxFila * 3 + 3; fila++)
+          { 
+            for (let col = boxCol * 3; col < boxCol * 3 + 3; col++)
+            {
+              if (this.sudoku[fila][col] === null && this.posiblesValores[fila][col].includes(valor))
+                celdasConElValor += fila.toString() + col.toString();
+            }
+          }
+          if (celdasConElValor.length === 0)
+            throw new Error("Error: no hay celdas posibles para el valor " + valor + " en la caja " + boxFila + "," + boxCol);
+          else if (celdasConElValor.length === 2)
+          {
+            // Solo hay una celda posible para este valor, lo asignamos
+            let fila = parseInt(celdasConElValor[0]);
+            let col = parseInt(celdasConElValor[1]);
+            this.sudoku[fila][col] = parseInt(valor);
+            this.solved[fila][col] = true;
+            this.cambios = true;
+          }
+        } 
+      }
+
+    }
+  }
 }
