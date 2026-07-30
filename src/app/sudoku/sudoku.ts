@@ -138,44 +138,32 @@ export class Sudoku {
       let final = 8;
       for (let fila = inicio; fila < final  + 1; fila++) {
         for (let col = inicio; col < final + 1; col++) {
-          if (fila === 5 && col === 5) {
-            console.log('********************************Debug: fila 5, col 5');
-          }
+      
           if (this.sudoku[fila][col] === null)
           // Esta celda no se ha resuelto 
           {
            
-            console.log('Debug: posibles antes de eliminar: ' + this.posiblesValores[fila][col]);
-            console.log('FILAS');
+            //console.log('Debug: posibles antes de eliminar: ' + this.posiblesValores[fila][col]);
+            //console.log('FILAS');
             this.solucionarRecorrerFila(fila, col);
             
-            console.log('COLUMNA');
+            //console.log('COLUMNA');
             this.solucionarRecorrerColumna(fila, col);
             
-            if (fila === 5 && col === 5)
-            {
-              console.log('Debug: posibles después de eliminar: ' + this.posiblesValores[fila][col]);
-            }
-            console.log('CAJA 3x3');
+       
+            //console.log('CAJA 3x3');
 
             this.solucionarRecorrerCaja(fila, col);
-            
-            if (fila === 5 && col === 5)
-            {
-              console.log('Debug: posibles después de eliminar en la caja: ' + this.posiblesValores[fila][col]);
-            }
 
 
             if (this.posiblesValores[fila][col].length === 1) 
             {
               // Solo queda un valor posible, lo asignamos
               this.sudoku[fila][col] = Number(this.posiblesValores[fila][col]);
+              console.log('ValoresUnicosPorCasilla: asignando ' + this.sudoku[fila][col]!.toString() + ' a sudoku[' + fila + '][' + col + ']');
               // Marcamos como resuelta por el algoritmo
               this.solved[fila][col] = true;
-              if (fila === 5 && col === 5)
-              {
-                console.log('Debug: asignando ' + this.posiblesValores[fila][col] + ' a sudoku[5][5]');
-              }
+          
               this.cambios = true;
             }
 
@@ -192,10 +180,10 @@ export class Sudoku {
     {
       if (otrasCol !== col && this.sudoku[fila][otrasCol] !== null) {
         // Eliminamos el valor de la celda de la fila
-        console.log('Debug: eliminando ' + this.sudoku[fila][otrasCol]!.toString() + ' de posibles');
-        console.log('Debug: posibles antes de eliminar: ' + this.posiblesValores[fila][col]);
+        //console.log('Debug: eliminando ' + this.sudoku[fila][otrasCol]!.toString() + ' de posibles');
+        //console.log('Debug: posibles antes de eliminar: ' + this.posiblesValores[fila][col]);
         this.posiblesValores[fila][col] = this.posiblesValores[fila][col].replace(this.sudoku[fila][otrasCol]!.toString(), '');
-        console.log('Debug: posibles después de eliminar: ' + this.posiblesValores[fila][col]);
+        //console.log('Debug: posibles después de eliminar: ' + this.posiblesValores[fila][col]);
       }
     }
   }
@@ -207,7 +195,7 @@ export class Sudoku {
     {
       if (otrasFila !== fila && this.sudoku[otrasFila][col] !== null) {
         // Eliminamos el valor de la celda de la columna
-        console.log('Debug: eliminando ' + this.sudoku[otrasFila][col]!.toString() + ' de posibles');
+        //console.log('Debug: eliminando ' + this.sudoku[otrasFila][col]!.toString() + ' de posibles');
         this.posiblesValores[fila][col] = this.posiblesValores[fila][col].replace(this.sudoku[otrasFila][col]!.toString(), '');
       }
     }
@@ -220,7 +208,7 @@ export class Sudoku {
       {
       for (let boxCol = Math.floor(col / 3) * 3; boxCol < Math.floor(col / 3) * 3 + 3; boxCol++) {
         if ((boxFila !== fila || boxCol !== col) && this.sudoku[boxFila][boxCol] !== null) {  
-          console.log('Debug: eliminando ' + this.sudoku[boxFila][boxCol]!.toString() + ' de posibles');
+          //console.log('Debug: eliminando ' + this.sudoku[boxFila][boxCol]!.toString() + ' de posibles');
           this.posiblesValores[fila][col] = this.posiblesValores[fila][col].replace(this.sudoku[boxFila][boxCol]!.toString(), '');
         }
       } 
@@ -261,6 +249,8 @@ export class Sudoku {
             this.sudoku[fila][col] = parseInt(valor);
             this.solved[fila][col] = true;
             this.cambios = true;
+            this.posiblesValores[fila][col] = valor;  
+            console.log('ValoresUnicosPorFila: asignando ' + valor + ' a sudoku[' + fila + '][' + col + ']');
           }
           else if (columnasConElValor.length === 2 || columnasConElValor.length === 3)
           // Hay dos o tres columnas posibles para este valor, miramos si están en la misma caja 3x3
@@ -325,6 +315,8 @@ export class Sudoku {
             this.sudoku[fila][col] = parseInt(valor);
             this.solved[fila][col] = true;
             this.cambios = true;
+            this.posiblesValores[fila][col] = valor; // Actualizamos los posibles valores para reflejar la asignación
+            console.log('ValoresUnicosPorColumna: asignando ' + valor + ' a sudoku[' + fila + '][' + col + ']');
           }
           else if (filasConElValor.length === 2 || filasConElValor.length === 3)
           // Hay dos o tres filas posibles para este valor, miramos si están en la misma caja 3x3
@@ -392,6 +384,8 @@ export class Sudoku {
             this.sudoku[fila][col] = parseInt(valor);
             this.solved[fila][col] = true;
             this.cambios = true;
+            this.posiblesValores[fila][col] = valor; // Actualizamos los posibles valores para reflejar la asignación
+            console.log('ValoresUnicosPorCaja: asignando ' + valor + ' a sudoku[' + fila + '][' + col + ']');
           }
         } 
       }
