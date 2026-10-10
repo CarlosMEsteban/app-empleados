@@ -25,6 +25,8 @@ import { ZzzdescargarTodo } from './zzzdescargar-todo/zzzdescargar-todo';
 import { Zzzeliminar } from './zzzeliminar/zzzeliminar';
 import { OrdenPedidosAlAire } from './orden-pedidos-al-aire/orden-pedidos-al-aire';
 import { ProductoMantenimiento } from './producto-mantenimiento/producto-mantenimiento';
+import { Sudoku } from './sudoku/sudoku';
+import { GoogleMapComponent } from './google-map/google-map.component';
 
 
 export const routes: Routes = [
@@ -52,7 +54,10 @@ export const routes: Routes = [
   {path:'zzzMisPokemonDinamax', component: ZzzmisPokemonDinamax},
   {path:'zzzeliminar', component: Zzzeliminar},
   {path:'zzzPokemonCargaInicial', component: ZzzPokemonCargaInicial},
+  {path:'googleMap', component: GoogleMapComponent},
   {path:'descargarTodo', component: ZzzdescargarTodo},
+  {path:'sudoku', component: Sudoku},
+  {path:'map', component: GoogleMapComponent},
   {path:'**', component: ErrorPersonalizado}
   
 ];

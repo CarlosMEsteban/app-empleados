@@ -9,3 +9,6 @@ export const firebaseConfig = {
   appId: "1:438938499679:web:7911b47a81c60d8d7cb9ea",
   measurementId: "G-QQ3WXR9GYF"
 };
+
+// Google Maps API key placeholder - replace with your real key
+export const GOOGLE_MAPS_API_KEY = 'YOUR_GOOGLE_MAPS_API_KEY';
