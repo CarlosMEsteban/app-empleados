@@ -1,0 +1,189 @@
+.sudoku-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #555;
+  font-size: 16px;
+}
+
+.botones {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:active {
+  background-color: #004085;
+}
+
+button.resolver-button {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  border: 1px solid #922b21;
+}
+
+button.resolver-button:hover {
+  background: linear-gradient(135deg, #ff5b5b, #d93929);
+}
+
+button.resolver-button:active {
+  background: linear-gradient(135deg, #c0392b, #a32a22);
+}
+
+.sudoku-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.sudoku-wrapper > div {
+  flex: 0 0 auto;
+}
+
+.sudoku-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 50px);
+  grid-template-rows: repeat(9, 50px);
+  gap: 0;
+  border: 3px solid #000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+input {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ccc;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 0;
+  box-sizing: border-box;
+  transition: background-color 0.2s;
+}
+
+input:hover {
+  background-color: #f0f0f0;
+}
+
+input:focus {
+  outline: none;
+  background-color: #e3f2fd;
+  border-color: #007bff;
+}
+
+/* Bordes gruesos para las divisiones 3x3 */
+input[data-col="2"],
+input[data-col="5"] {
+  border-right: 3px solid #000;
+}
+
+input[data-row="2"],
+input[data-row="5"] {
+  border-bottom: 3px solid #000;
+}
+
+/* Números precargados */
+input.filled {
+  background-color: #f9f9f9;
+  font-weight: bold;
+  color: #000;
+}
+
+/* Casillas cargadas originalmente */
+input.original {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  color: #000;
+  border-color: #444;
+}
+
+/* Casillas resueltas por el algoritmo */
+input.solved {
+  background-color: #e6f8e6;
+  color: #0b6623;
+}
+
+/* Eliminar spinner en inputs number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Grid de posibles valores */
+.posibles-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 60px);
+  grid-template-rows: repeat(9, 60px);
+  gap: 0;
+  border: 3px solid #666;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.posible-cell {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-family: monospace;
+  text-align: center;
+  padding: 2px;
+  box-sizing: border-box;
+  background-color: #fafafa;
+  overflow: hidden;
+  line-height: 1.2;
+  color: #666;
+}
+
+.posible-cell[data-col="2"],
+.posible-cell[data-col="5"] {
+  border-right: 3px solid #666;
+}
+
+.posible-cell[data-row="2"],
+.posible-cell[data-row="5"] {
+  border-bottom: 3px solid #666;
+}
+
+@media (max-width: 1000px) {
+  .sudoku-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
