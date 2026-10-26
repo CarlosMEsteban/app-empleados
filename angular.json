@@ -22,6 +22,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "Indicaciones de Aeropuerto de Luxemburgo (LUX), Rue de Trèves, Luxemburgo a Friburgo de Brisgovia, Alemania.gpx",
+                "input": "src/app/viaje",
+                "output": "assets"
               }
             ],
             "styles": [

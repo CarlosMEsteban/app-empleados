@@ -27,6 +27,7 @@ import { OrdenPedidosAlAire } from './orden-pedidos-al-aire/orden-pedidos-al-air
 import { ProductoMantenimiento } from './producto-mantenimiento/producto-mantenimiento';
 import { GoogleMapComponent } from './google-map/google-map.component';
 import { Sudoku } from './sudoku/sudoku';
+import { Viaje } from './viaje/viaje';
 
 
 
@@ -59,6 +60,7 @@ export const routes: Routes = [
   {path:'descargarTodo', component: ZzzdescargarTodo},
 
   {path:'sudoku', component: Sudoku},
+  {path:'viaje', component: Viaje},
   {path:'map', component: GoogleMapComponent},
   {path:'**', component: ErrorPersonalizado}
   
