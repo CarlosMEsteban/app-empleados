@@ -25,7 +25,7 @@ import { ZzzdescargarTodo } from './zzzdescargar-todo/zzzdescargar-todo';
 import { Zzzeliminar } from './zzzeliminar/zzzeliminar';
 import { OrdenPedidosAlAire } from './orden-pedidos-al-aire/orden-pedidos-al-aire';
 import { ProductoMantenimiento } from './producto-mantenimiento/producto-mantenimiento';
-import { GoogleMapComponent } from './google-map/google-map.component';
+
 import { Sudoku } from './sudoku/sudoku';
 import { Viaje } from './viaje/viaje';
 
