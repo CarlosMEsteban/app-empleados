@@ -56,12 +56,12 @@ export const routes: Routes = [
   {path:'zzzMisPokemonDinamax', component: ZzzmisPokemonDinamax},
   {path:'zzzeliminar', component: Zzzeliminar},
   {path:'zzzPokemonCargaInicial', component: ZzzPokemonCargaInicial},
-  {path:'googleMap', component: GoogleMapComponent},
+  
   {path:'descargarTodo', component: ZzzdescargarTodo},
 
   {path:'sudoku', component: Sudoku},
   {path:'viaje', component: Viaje},
-  {path:'map', component: GoogleMapComponent},
+  
   {path:'**', component: ErrorPersonalizado}
   
 ];
