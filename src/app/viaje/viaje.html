@@ -1,9 +1,15 @@
+<button type="button" (click)="dibuja()" [disabled]="estaDibujando">
+  {{ estaDibujando ? 'Dibujando...' : 'Dibujar' }}
+</button>
+
 <div class="image-container">
   <img src="/ViajeAlemania.png" alt="Viaje a Alemania">
-  <span
-    class="red-dot"
-    [style.left.%]="x"
-    [style.top.%]="y"
-    aria-hidden="true"
-  ></span>
+  @for (point of drawnPoints; track $index) {
+    <span
+      class="red-dot"
+      [style.left.%]="point.x"
+      [style.top.%]="point.y"
+      aria-hidden="true"
+    ></span>
+  }
 </div>

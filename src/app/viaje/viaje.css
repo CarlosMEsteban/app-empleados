@@ -12,9 +12,8 @@
 
 .red-dot {
   position: absolute;
-  width: 16px;
-  height: 16px;
-  border: 1px solid #fff;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background-color: red;
   transform: translate(-50%, -50%);

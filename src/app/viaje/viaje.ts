@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-const GPX_FILE_NAME =
-  'Indicaciones de Aeropuerto de Luxemburgo (LUX), Rue de Trèves, Luxemburgo a Friburgo de Brisgovia, Alemania.gpx';
+const GPX_FILE_NAME ='Luxemburgo-Friburgo.gpx';
+  //'Indicaciones de Aeropuerto de Luxemburgo (LUX), Rue de Trèves, Luxemburgo a Friburgo de Brisgovia, Alemania.gpx';
+const DRAW_DELAY_MS = 1;
 
 interface TrackPoint {
   lat: number;
@@ -14,6 +15,15 @@ const yInicial = 3;
 const xFinal = 70;
 const yFinal = 90;
 
+const latInicial = 49.62637
+const lonInicial = 6.21393
+
+const latFinal = 47.99918
+const lonFinal = 7.8416
+
+const factorX = (xFinal - xInicial) / (lonFinal - lonInicial);
+const factorY = (yFinal - yInicial) / (latInicial - latFinal);
+
 
 
 
@@ -24,17 +34,51 @@ const yFinal = 90;
   styleUrl: './viaje.css'
 })
 export class Viaje implements OnInit {
-  x = xFinal;
-  y = yFinal;
   trackPoints: TrackPoint[] = [];
+  drawnPoints: { x: number; y: number }[] = [];
+  estaDibujando = false;
 
   ngOnInit(): void {
     void this.loadGpx();
   }
 
-  private async loadGpx(): Promise<void> {
-    const url = `/assets/${encodeURIComponent(GPX_FILE_NAME)}`;
+  public async dibuja(): Promise<void> {
+    if (this.estaDibujando) {
+      return;
+    }
 
+    this.estaDibujando = true;
+    this.drawnPoints = [];
+
+    try {
+      for (const [index, point] of this.trackPoints.entries()) {
+        this.drawnPoints.push({
+          x: this.latLonToX(point.lon),
+          y: this.latToY(point.lat)
+        });
+
+        if ((index + 1) % 10 === 0 && index < this.trackPoints.length - 1) {
+          await new Promise<void>(resolve => setTimeout(resolve, DRAW_DELAY_MS));
+        }
+      }
+    } finally {
+      this.estaDibujando = false;
+    }
+  }
+
+  // Devuelve la coordenada Y en el diubujo a partir de la latitud
+  private latToY(lat: number): number {
+    return yInicial + (latInicial - lat) * factorY;
+  }
+
+  // Devuelve la coordenada X en el dibujo a partir de la longitud
+  private latLonToX(lon: number): number{
+    return xInicial + (lon - lonInicial) * factorX;
+  }
+
+  private async loadGpx(): Promise<void> {
+    const url = `/assets/viajes/${encodeURIComponent(GPX_FILE_NAME)}`;
+console.log(`Cargando fichero GPX desde: ${url}`);
     try {
       // Leemeos el fichero GPX
       const response = await fetch(url);
