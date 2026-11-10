@@ -9,11 +9,11 @@ interface TrackPoint {
   lon: number;
 }
 
-const xInicial = 3;
-const yInicial = 3;
+const xInicial = 20;
+const yInicial = 12;
 
 const xFinal = 70;
-const yFinal = 90;
+const yFinal = 73;
 
 const latInicial = 49.62637
 const lonInicial = 6.21393
@@ -37,6 +37,7 @@ export class Viaje implements OnInit {
   trackPoints: TrackPoint[] = [];
   drawnPoints: { x: number; y: number }[] = [];
   estaDibujando = false;
+  posicionRaton: { x: number; y: number } | null = null;
 
   ngOnInit(): void {
     void this.loadGpx();
@@ -64,6 +65,19 @@ export class Viaje implements OnInit {
     } finally {
       this.estaDibujando = false;
     }
+  }
+
+  public actualizaPosicion(event: MouseEvent): void {
+    const imagen = event.currentTarget as HTMLElement;
+    const limites = imagen.getBoundingClientRect();
+    if (limites.width === 0 || limites.height === 0) {
+      return;
+    }
+
+    this.posicionRaton = {
+      x: Math.round(((event.clientX - limites.left) / limites.width) * 10000) / 100,
+      y: Math.round(((event.clientY - limites.top) / limites.height) * 10000) / 100
+    };
   }
 
   // Devuelve la coordenada Y en el diubujo a partir de la latitud

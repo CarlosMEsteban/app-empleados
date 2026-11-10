@@ -2,8 +2,18 @@
   {{ estaDibujando ? 'Dibujando...' : 'Dibujar' }}
 </button>
 
-<div class="image-container">
-  <img src="/ViajeAlemania.png" alt="Viaje a Alemania">
+<div
+  class="image-container"
+  (mousemove)="actualizaPosicion($event)"
+  (mouseleave)="posicionRaton = null"
+>
+  <img src="/MapaSinChinchetas.jpeg" alt="Viaje a Alemania">
+    <span
+      class="red-dot"
+      [style.left.%]="70"
+      [style.top.%]="73"
+      aria-hidden="true"
+    ></span>
   @for (point of drawnPoints; track $index) {
     <span
       class="red-dot"
@@ -12,4 +22,17 @@
       aria-hidden="true"
     ></span>
   }
+  <span
+      class="red-dot"
+      [style.left.%]="10"
+      [style.top.%]="10"
+      aria-hidden="true"
+    ></span>
 </div>
+<output class="mouse-position" aria-live="polite">
+    @if (posicionRaton; as posicion) {
+      Ratón: X {{ posicion.x }}% · Y {{ posicion.y }}%
+    } @else {
+      Mueve el ratón sobre la imagen para ver su posición.
+    }
+</output>

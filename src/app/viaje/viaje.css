@@ -10,10 +10,15 @@
   height: auto;
 }
 
+.mouse-position {
+  display: block;
+  margin-top: 0.5rem;
+}
+
 .red-dot {
   position: absolute;
-  width: 5px;
-  height: 5px;
+  width: 2px;
+  height: 2px;
   border-radius: 50%;
   background-color: red;
   transform: translate(-50%, -50%);

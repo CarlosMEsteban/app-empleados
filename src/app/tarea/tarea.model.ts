@@ -63,6 +63,8 @@ export class TareaModel
         return "Sale.png";
       else if (productoMay.includes("AZ") && productoMay.includes("CAR"))
         return "Azucarera.png";
+      else if (productoMay.includes("COMPR"))
+        return "Comprar.png";
       else
         return "";
 
