@@ -91,7 +91,7 @@ export class TareaService {
         new TareaModel({bFija: true, hFinal: "01:00", hInicio: "00:00", hDuracion: 	"01:00", dTarea:	"comida", aPara:		"burros"}),
         new TareaModel({bFija: true, hFinal: "01:40", hInicio: "00:00", hDuracion: 	"01:42", dTarea:	"Trampa", aPara:		"charca"}),
         new TareaModel({bFija: true, hFinal: "04:30", hInicio: "00:00", hDuracion: 	"04:30", dTarea:	"Recoger", aPara:		"tren vecindario"}),
-        new TareaModel({bFija: true, hFinal: "05:15", hInicio: "00:00", hDuracion: 	"05:15", dTarea:	"cacahutes"	, aPara:	"ardillas"}),
+        new TareaModel({bFija: true, hFinal: "05:15", hInicio: "00:00", hDuracion: 	"05:15", dTarea:	"cacahuetes"	, aPara:	"ardillas"}),
         new TareaModel({bFija: true, hFinal: "05:46", hInicio: "00:00", hDuracion: 	"05:46", dTarea:	"Aparca", aPara:		"tren"}),
         new TareaModel({bFija: true, hFinal: "07:00", hInicio: "07:00", hDuracion: 	"00:00", dTarea:	"cine", aPara:		"cine"}),
         new TareaModel({bFija: true, hFinal: "07:00", hInicio: "00:00", hDuracion: 	"07:00", dTarea:	"comida", aPara:		"mascotas"}),
@@ -101,7 +101,8 @@ export class TareaService {
         new TareaModel({bFija: true, hFinal: "07:00", hInicio: "07:00", hDuracion: 	"00:00", dTarea:	"Visitar", aPara:		"Greg"}),
         new TareaModel({bFija: true, hFinal: "08:00", hInicio: "08:00", hDuracion: 	"00:00", dTarea:	"tienda de diamonds", aPara:		"tienda de diamonds"}),
         new TareaModel({bFija: true, hFinal: "09:00", hInicio: "09:00", hDuracion: 	"00:00", dTarea:	"tirar", aPara:		"Ruleta"}),
-        new TareaModel({bFija: true, hFinal: "08:00", hInicio: "08:00", hDuracion: 	"08:00", dTarea:	"Pajarera", aPara:		"Pajarera"})
+        new TareaModel({bFija: true, hFinal: "08:00", hInicio: "08:00", hDuracion: 	"06:00", dTarea:	"Mejillón", aPara:		"Charca"})
+
       ];
 
     tareasFijas.forEach((tarea) => 

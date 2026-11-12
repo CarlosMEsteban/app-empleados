@@ -16,9 +16,12 @@ export class TareaModel
     bRecogido: boolean = false; // Indica si la tarea ya se ha recogido o no. Solo para tareas de recogida de productos
 
     palabrasLecheria = ["NATA", "QUESO", "MANTEQUILLA"];
+    palabrasNoLecheria = ["PASTEL DE NATA", "FONDUE DE QUESO", "PASTEL DE QUESO", "PASTEL DE QUESO Y ARÁNDANOS", "S.DE CEBOLLA Y QUESO", "TORTILLA DE QUESO", "TOSTADA DE QUESO DE CABRA", "PALOMITAS CON MANTEQUILLA"];
     palabrasMiel = ["MIEL", "CERA"];
+    palabrasNoMiel = ["JABÓN DE MIEL", "MASCARILLA DE MIEL", "PALOMITAS CON MIEL", "TARTA DE MANZANA Y MIEL", "TOSTADA CON MIEL", "TÉ CON MIEL"];
     palabrasPuestoSalsas = ["ACEITE", "SALSA", "MAYONESA", "CUAJADA", "OLIVADA", "HUM", "VINAGRE"];
-          
+    palabrasNoPuestoSalsas = ["ACEITE ESENCIAL", "FIDEOS CON SALSA DE CACAHUETE", "WRAP DE HUMUS"];
+
 
 
     //constructor(id: number = -1, nombre: string, coste: number, tengo: number, almacen: string, materiaPrima: boolean, cantidadInicial: number, fabrica: string ) 
@@ -55,11 +58,14 @@ export class TareaModel
     {
       const productoMay: String = this.dTarea.toUpperCase();
 
-      if (this.palabrasLecheria.some(palabra => productoMay.includes(palabra)))
+      if (this.palabrasLecheria.some(palabra => productoMay.includes(palabra)) && 
+            !this.palabrasNoLecheria.some(palabra => productoMay.includes(palabra)))
         return "Lecheria.png";
-      if (this.palabrasMiel.some(palabra => productoMay.includes(palabra)))
+      if (this.palabrasMiel.some(palabra => productoMay.includes(palabra)) &&
+    !this.palabrasNoMiel.some(palabra => productoMay.includes(palabra)))
         return "Miel.png";
-      if (this.palabrasPuestoSalsas.some(palabra => productoMay.includes(palabra)))
+      if (this.palabrasPuestoSalsas.some(palabra => productoMay.includes(palabra))
+    && !this.palabrasNoPuestoSalsas.some(palabra => productoMay.includes(palabra)))
         return "Salsas.jpg";
       else if (productoMay.includes("SALE"))
         return "Sale.png";
@@ -171,5 +177,3 @@ export const tareaConverter: FirestoreDataConverter<TareaModel> =
   }
 
 }
-
-
