@@ -68,10 +68,10 @@ export class TareaService {
   }
   
 
-  async modificar(datos: TareaModel)
+  async modificar(datos: TareaModel): Promise<void>
   {
     const docRef = doc(this.tareaCollectionRef, datos.id!);
-    updateDoc(docRef, {"bFija": datos.bFija,
+    await updateDoc(docRef, {"bFija": datos.bFija,
                       "hInicio": datos.hInicio,
                       "hDuracion": datos.hDuracion,
                       "hFinal": datos.hFinal,
@@ -79,6 +79,7 @@ export class TareaService {
                       "nOrden": datos.nOrden,
                       "nTotal": datos.nTotal,
                       "aPara": datos.aPara,
+                      "bRecogido": datos.bRecogido,
                       });
   }
 
@@ -127,8 +128,8 @@ export class TareaService {
     return deleteDoc(docRef);
   }
 
-  modificarTarea(tarea: TareaModel)
+  modificarTarea(tarea: TareaModel): Promise<void>
   {
-    this.modificar(tarea);
+    return this.modificar(tarea);
   }
 }

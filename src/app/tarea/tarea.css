@@ -99,3 +99,7 @@
   width: 75px; /* ajustar a la anchura deseada */
   box-sizing: border-box;
 }
+
+.hfinal-cell input[type="text"] {
+  width: 55px;
+}

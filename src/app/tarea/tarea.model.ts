@@ -13,6 +13,7 @@ export class TareaModel
     nOrden: number = -1;
     nTotal: number = -1;
     aPara: string = ""; // Para qué es la tarea Camioneta, barco... etc
+    bRecogido: boolean = false; // Indica si la tarea ya se ha recogido o no. Solo para tareas de recogida de productos
 
     palabrasLecheria = ["NATA", "QUESO", "MANTEQUILLA"];
     palabrasMiel = ["MIEL", "CERA"];
@@ -32,6 +33,7 @@ export class TareaModel
       this.nOrden = datos.nOrden ?? -1;
       this.nTotal = datos.nTotal ?? -1;
       this.aPara = datos.aPara ?? "";
+      this.bRecogido = datos.bRecogido ?? false;
     }
 
   public getHFInalNumero(): number
@@ -109,6 +111,7 @@ export class TareaModel
                     'nOrden':       this.nOrden,
                     'nTotal':       this.nTotal, 
                     'aPara':       this.aPara,
+                    'bRecogido':       this.bRecogido,
                      }
       );
     }
@@ -142,6 +145,7 @@ export const tareaConverter: FirestoreDataConverter<TareaModel> =
             nOrden: tarea.nOrden,
             nTotal: tarea.nTotal,
           aPara: tarea.aPara,
+          bRecogido: tarea.bRecogido,
     };
   },
 
@@ -161,6 +165,7 @@ export const tareaConverter: FirestoreDataConverter<TareaModel> =
                   'nOrden':       data['nOrden'],
                   'nTotal':       data['nTotal'], 
                   'aPara':       data['aPara'],
+                  'bRecogido':       data['bRecogido'],
                    }
     );
   }
