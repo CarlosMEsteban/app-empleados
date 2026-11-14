@@ -315,4 +315,50 @@ export class Tarea
       
     }
   }
+
+ponerTiemposLista(id?: string)
+  {
+    let tarea: TareaModel = this.lTareas.find(t => t.id === id)!;
+    const dTarea = tarea.dTarea.toUpperCase();
+    if (! dTarea.includes("PONER") && dTarea != "")
+    {
+      tarea.hInicio = Fechas.obtenerHoraActualMasUno();
+
+      
+      
+      if (dTarea == "LLEGA PEDIDO")
+      {
+        tarea.hDuracion = "00:30";        
+      }
+      else
+      {
+      
+          let costeMasProbable = -1;
+          let encontrado = false;
+
+          for (let producto of this.lProductos)
+          {
+            if (! encontrado)
+            {
+              const nombreProducto = producto.getNombre().toUpperCase();
+              if (nombreProducto == dTarea)
+              {
+                costeMasProbable = producto.getCoste();
+                encontrado = true;
+              }
+              else if (nombreProducto.includes(dTarea) || dTarea.includes(nombreProducto))
+              {
+                // Aquí puedes implementar lógica adicional si es necesario
+                costeMasProbable = producto.getCoste();
+              }
+            }
+              
+          }
+          if (costeMasProbable >= 0)
+            tarea.hDuracion = Fechas.minutosAString(costeMasProbable);
+        
+      }
+     this.calcularModifHFinal(tarea); 
+    }
+  }  
 }
