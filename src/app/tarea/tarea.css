@@ -85,6 +85,10 @@
     border: 1px solid #ddd; padding: 1px; text-align: left;
 }
 
+tbody tr:nth-child(even) {
+  background-color: #eee;
+}
+
 .poner{
   font-weight: bold;
 }
